@@ -47,7 +47,14 @@ display:
         // And if the hour is "zero", rotate that to 12 (midnight)
         if (hour == 0) hour = 12;
         // output with formatting that's always 5 characters long, padding minutes with zeros and the hour with space
-        it.printf(it.get_width()/2, 0, id(vt), TextAlign::TOP_CENTER, "%2d:%02d", hour, cur_time.minute);
+        // draw 3 times to force the : always in the same space, align the numbers against the center line
+        //it.printf((it.get_width()/2)-1, -1, id(vt), TextAlign::TOP_RIGHT, "%2d", hour);
+        //it.printf((it.get_width()/2)+0, -2, id(vt), TextAlign::TOP_CENTER, ":");
+        //it.printf((it.get_width()/2)+3, -1, id(vt), TextAlign::TOP_LEFT, "%02d", cur_time.minute);
+
+        // render in the middle, one "pixel" up to get true top alignment
+        it.printf(it.get_width()/2, -1, id(vt), TextAlign::TOP_CENTER, "%2d:%02d", hour, cur_time.minute);
+
       } else {
         it.print(0, 0, id(vt), "WIFI");
       }
