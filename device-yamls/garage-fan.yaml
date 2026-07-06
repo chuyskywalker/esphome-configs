@@ -84,23 +84,10 @@ script:
       - switch.turn_off: fan3
       - switch.turn_off: fan4
       - delay: 250ms
-      - if:
-          condition: 
-            - lambda: 'return speed == 1;'
-          then:
-            - switch.turn_on: fan1
-      - if:
-          condition: 
-            - lambda: 'return speed == 2;'
-          then:
-            - switch.turn_on: fan2
-      - if:
-          condition: 
-            - lambda: 'return speed == 3;'
-          then:
-            - switch.turn_on: fan3
-      - if:
-          condition: 
-            - lambda: 'return speed == 4;'
-          then:
-            - switch.turn_on: fan4
+      - lambda: |-
+          switch (speed) {
+            case 1: id(fan1).turn_on(); break;
+            case 2: id(fan2).turn_on(); break;
+            case 3: id(fan3).turn_on(); break;
+            case 4: id(fan4).turn_on(); break;
+          }
