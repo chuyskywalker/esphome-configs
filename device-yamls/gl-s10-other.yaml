@@ -9,8 +9,6 @@ esphome:
   on_boot:
     then:
       - output.turn_on: power_led
-  # includes:
-  #   - ble_helpers.h  # This adds #include <set> to the generated C++
 
 esp32:
   board: esp32doit-devkit-v1
