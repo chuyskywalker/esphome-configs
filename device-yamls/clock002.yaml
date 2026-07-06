@@ -69,7 +69,7 @@ button:
       - max7219digit.turn_on
 
 font:
-  - file: repet.ttf
+  - file: fonts/repet.ttf
     id: vt
     size: 10
 
