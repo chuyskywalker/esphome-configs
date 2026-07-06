@@ -49,7 +49,7 @@ display:
         // output with formatting that's always 5 characters long, padding minutes with zeros and the hour with space
         // draw 3 times to force the : always in the same space, align the numbers against the center line
         it.printf((it.get_width()/2)-2, it.get_height()-1, id(pixelmix), TextAlign::BOTTOM_RIGHT, "%2d", hour);
-        it.printf((it.get_width()/2)+1,   it.get_height()-1, id(pixelmix), TextAlign::BOTTOM_CENTER, ":");
+        it.printf((it.get_width()/2)+1, it.get_height()-1, id(pixelmix), TextAlign::BOTTOM_CENTER, ":");
         it.printf((it.get_width()/2)+4, it.get_height()-1, id(pixelmix), TextAlign::BOTTOM_LEFT, "%02d", cur_time.minute);
       } else {
         it.print(0, 0, id(pixelmix), "WIFI");
