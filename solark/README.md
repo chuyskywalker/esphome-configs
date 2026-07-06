@@ -1,4 +1,5 @@
 # solark-esphome
+
 An ESPHome configuration for reading SolArk inverter data over Modbus
 
 `doc.md` is a PDF-to-markdown version of the solark modbus documentation pdf (requested on 2025-01-15 over email, was told it's the latest). 
@@ -12,25 +13,9 @@ Wiring diagram, pinouts, and specific devices are not included at this time.
 Generation: I use a quick docker container to run these scripts:
 
 ```bash
-cd ~/your/checkout/directory
-docker run -ti --rm -v ./:/app python bash
-cd /app
+docker run -ti --rm -v ./:/app python python /app/solark/gen_sa_yaml.py sa1
+# or
+docker run -ti --rm -v ./:/app python python /app/solark/gen_sa_yaml.py sa2
 ```
 
-Then execute `python gen_sa_yaml.py sa1` or `python gen_sa_yaml.py sa2`, etc, etc.
-
-You can also install ESPHome to make the build/test cycle WAY faster
-
-```bash
-pip3 install esphome
-
-# for example
-# check the yaml
-esphome config sa1.yaml
-
-# connect to the running instance and stream logs
-esphome logs sa1.yaml
-
-# check the yaml, build it, upload it, stream log output after
-esphome run sa1.yaml
-```
+These commands will regenerate SA1 and SA2 with the updated details. This file structure is pretty specific to my setup holding all my other ESPHome configs, so grain-of-salt and all that.

@@ -13,7 +13,7 @@ if target not in ['sa1', 'sa2']:
 print(f"Generating to: {target}.yaml")
 
 # Open your log file (use 'w' to overwrite, or 'a' to append)
-sys.stdout = open(f"{target}.yaml", "w", encoding="utf-8")
+sys.stdout = open(f"/app/device-yamls/{target}.yaml", "w", encoding="utf-8")
 
 # SUBS:
 
