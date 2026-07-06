@@ -39,7 +39,7 @@ display:
     cs_pin: D8
     num_chips: 4
     lambda: |-
-      it.intensity(id(brightness).state);  
+      it.intensity(id(brightness).state);
       auto cur_time = id(hass_time).now();
       if (cur_time.is_valid()) {
         auto hour = cur_time.hour;

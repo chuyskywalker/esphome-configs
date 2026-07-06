@@ -38,7 +38,7 @@ display:
     cs_pin: D8
     num_chips: 4
     lambda: |-
-      it.intensity(atoi(id(habri).state.c_str()));      
+      it.intensity(id(brightness).state);
       auto cur_time = id(hass_time).now();
       if (cur_time.is_valid()) {
         auto hour = cur_time.hour;
@@ -61,7 +61,7 @@ button:
       - max7219digit.turn_on
 
 font:
-  - file: repet.ttf
+  - file: fonts/repet.ttf
     id: vt
     size: 10
 
@@ -71,8 +71,13 @@ time:
     update_interval: 15min
     timezone: "America/Los_Angeles"
 
-text_sensor:
-  - platform: homeassistant
-    name: "Clock 001 Brightness"
-    entity_id: input_number.clock_001_bri
-    id: habri
+number:
+  - platform: template
+    name: "Brightness"
+    id: brightness
+    min_value: 1
+    max_value: 15
+    step: 1
+    optimistic: True
+    initial_value: 5
+    restore_value: True
