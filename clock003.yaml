@@ -1,0 +1,80 @@
+esphome:
+  name: esphome-web-0d947d
+  friendly_name: Clock 003
+
+esp8266:
+  board: d1_mini_lite
+
+# Enable logging
+logger:
+  level: DEBUG
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret clock003_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret clock003_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esphome-Web-0D947D"
+    password: !secret fallback_ap_pass
+
+captive_portal:
+    
+spi:
+  clk_pin: D5
+  mosi_pin: D7
+
+display:
+  - platform: max7219digit
+    cs_pin: D8
+    num_chips: 4
+    lambda: |-
+      it.intensity(atoi(id(habri).state.c_str()));      
+      auto cur_time = id(hass_time).now();
+      if (cur_time.is_valid()) {
+        auto hour = cur_time.hour;
+        // If the hour is into the 13-23 range for military time, subtract 12 to get back to non-military
+        if (hour > 12) hour = hour - 12;
+        // And if the hour is "zero", rotate that to 12 (midnight)
+        if (hour == 0) hour = 12;
+        // output with formatting that's always 5 characters long, padding minutes with zeros and the hour with space
+        it.printf(it.get_width()/2, 0, id(vt), TextAlign::TOP_CENTER, "%2d:%02d", hour, cur_time.minute);
+      } else {
+        it.print(0, 0, id(vt), "WIFI");
+      }
+
+button:
+  - platform: template
+    name: "Reset MAX7219 Display"
+    on_press:
+      - max7219digit.turn_off
+      - delay: 500ms
+      - max7219digit.turn_on
+
+# seriously?!?!
+
+font:
+  - file: repet.ttf
+    id: vt
+    size: 10
+
+time:
+  - platform: homeassistant
+    id: hass_time
+    update_interval: 15min
+    timezone: "America/Los_Angeles"
+
+text_sensor:
+  - platform: homeassistant
+    name: "Clock 003 Brightness"
+    entity_id: input_number.clock_003_bri
+    id: habri

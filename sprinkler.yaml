@@ -1,0 +1,155 @@
+esphome:
+  name: esphome-web-68d5a4
+  friendly_name: Sprinkler
+
+esp32:
+  # board: sp32doit-devkit-v1
+  board: esp32dev
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret sprinkler_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret sprinkler_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Sprinkler Backup"
+    password: !secret fallback_ap_pass
+
+web_server:
+  port: 80
+  ota: False
+
+captive_portal:
+
+switch:
+  - platform: gpio
+    pin:  # RX2
+      number: 16
+      inverted: true
+    id: "relay1"
+    name: "Relay 1"
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+    - script.execute: auto_turn_off
+    
+  - platform: gpio
+    pin:  # TX2
+      number: 17
+      inverted: true
+    id: "relay2"
+    name: "Relay 2"
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+    - script.execute: auto_turn_off
+    
+  - platform: gpio
+    pin:  # D18
+      number: 18
+      inverted: true
+    id: "relay3"
+    name: "Relay 3"
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+    - script.execute: auto_turn_off
+    
+  - platform: gpio
+    pin:  # D19
+      number: 19
+      inverted: true
+    id: "relay4"
+    name: "Relay 4"
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+    - script.execute: auto_turn_off
+    
+  - platform: gpio
+    pin:  # D21
+      number: 21
+      inverted: true
+    id: "relay5"
+    name: "Relay 5"
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+    - script.execute: auto_turn_off
+    
+  - platform: gpio
+    pin:  # D22
+      number: 22
+      inverted: true
+    id: "relay6"
+    name: "Relay 6"
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+    - script.execute: auto_turn_off
+    
+  - platform: gpio
+    pin:  # D23
+      number: 23
+      inverted: true
+    id: "relay7"
+    name: "Relay 7"
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+    - script.execute: auto_turn_off
+    
+  - platform: gpio
+    pin:  # D25
+      number: 25
+      inverted: true
+    id: "relay8"
+    name: "Relay 8"
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+    - script.execute: auto_turn_off
+
+script:
+  # automatically turn off after (default) 4 minutes
+  - id: auto_turn_off
+    mode: restart
+    then:
+      - delay: !lambda |-
+          int run_time_minutes = 0;
+          if (id(sprinkler_max_duration).state) {
+            run_time_minutes = id(sprinkler_max_duration).state;
+          } else {
+            run_time_minutes = 4;
+          }
+          ESP_LOGI("sprinkler", "Adding max delay for %i minutes", run_time_minutes);
+          return run_time_minutes * 1000 * 60;
+      - switch.turn_off: relay1
+      - switch.turn_off: relay2
+      - switch.turn_off: relay3
+      - switch.turn_off: relay4
+      - switch.turn_off: relay5
+      - switch.turn_off: relay6
+      - switch.turn_off: relay7
+      - switch.turn_off: relay8
+
+# time:
+#   - platform: homeassistant
+#     id: homeassistant_time
+#     on_time:
+#       # Every dat @ 7am and 5pm
+#       - seconds: 0
+#         minutes: 0
+#         hours: 7,17
+#         then:
+#           - switch.turn_on: feedmotor
+
+sensor:
+  - platform: homeassistant
+    name: "sprinkler_max_duration"
+    entity_id: input_number.sprinkler_max_duration
+    id: sprinkler_max_duration

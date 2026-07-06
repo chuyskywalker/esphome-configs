@@ -1,0 +1,100 @@
+esphome:
+  name: crawlspace-sprinkler-system
+  friendly_name: Crawlspace Sprinkler System
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret crawlspace_sprinkler_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret crawlspace_sprinkler_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Crawlspace-Sprinkler-System"
+    password: !secret fallback_ap_pass
+
+  #use_address: esp32-bluetooth-proxy-579d6c.local
+
+captive_portal:
+
+switch:
+
+  - platform: gpio
+    id: espblueled
+    pin: GPIO2
+    name: "ESP Blue LED"
+    internal: True
+
+  - platform: gpio
+    pin: GPIO16
+    name: "Sprinkler Valve"
+    id: sprinkler_valve
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+      then:
+        - switch.turn_on: espblueled
+        - delay: 600s  # 10 * 60; I didn't like 5m/5min/5minutes syntax :|
+        - switch.turn_off: sprinkler_valve
+    on_turn_off:
+      then:
+        - switch.turn_off: espblueled
+
+sensor:
+
+  # Attached a temp/humidity to track the crawlspace, just because.
+  - platform: dht
+    model: "DHT22"
+    pin: GPIO17
+    temperature:
+      name: "Temperature"
+      unit_of_measurement: "°C"
+      device_class: "temperature"
+      state_class: "measurement"
+      accuracy_decimals: 1
+    humidity:
+      name: "Humidity"
+      unit_of_measurement: "%"
+      device_class: "humidity"
+      state_class: "measurement"
+      accuracy_decimals: 1
+    update_interval: 15s
+
+time:
+  - platform: homeassistant
+    id: thetime
+    # Define an automation that runs daily at a specific time
+    on_time:
+      # At 7am, every other day, turn on the water
+      - hours:   7
+        minutes: 0
+        seconds: 0
+        then:
+          # Use a lambda to check if the day count is even or odd
+          - lambda: |-
+              // Calculate the number of days since the Unix epoch
+              int days_since_epoch = id(thetime).now().timestamp / 86400;
+
+              // every other day, just skip
+              if (days_since_epoch % 2 == 0) {
+                ESP_LOGI("sprinkler", "Skipping run; non even day");
+                return;
+              }
+              ESP_LOGI("sprinkler", "Turning on the sprinks");
+
+              // made it here? turn on the sprinks -- they'll self turn off
+              id(sprinkler_valve).turn_on();

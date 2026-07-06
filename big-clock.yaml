@@ -1,0 +1,87 @@
+esphome:
+  name: big-clock
+  friendly_name: Big Clock
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+  level: DEBUG
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret bigclock_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret bigclock_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+spi:
+  clk_pin: GPIO18   # D18
+  mosi_pin: GPIO19  # D19
+
+display:
+  - platform: max7219digit
+    cs_pin: GPIO21  # D21
+    num_chips: 16
+    num_chip_lines: 2
+    chip_lines_style: "snake"
+    flip_x: False
+    intensity: 5
+    #rotate_chip: 180
+    scroll_enable: false
+    lambda: |-
+      it.intensity(id(brightness).state);
+      auto cur_time = id(hass_time).now();
+      if (cur_time.is_valid()) {
+        auto hour = cur_time.hour;
+        // If the hour is into the 13-23 range for military time, subtract 12 to get back to non-military
+        if (hour > 12) hour = hour - 12;
+        // And if the hour is "zero", rotate that to 12 (midnight)
+        if (hour == 0) hour = 12;
+        // output with formatting that's always 5 characters long, padding minutes with zeros and the hour with space
+        // draw 3 times to force the : always in the same space, align the numbers against the center line
+        it.printf((it.get_width()/2)-2, it.get_height()-1, id(pixelmix), TextAlign::BOTTOM_RIGHT, "%2d", hour);
+        it.printf((it.get_width()/2)+1,   it.get_height()-1, id(pixelmix), TextAlign::BOTTOM_CENTER, ":");
+        it.printf((it.get_width()/2)+4, it.get_height()-1, id(pixelmix), TextAlign::BOTTOM_LEFT, "%02d", cur_time.minute);
+      } else {
+        it.print(0, 0, id(pixelmix), "WIFI");
+      }
+
+button:
+  - platform: template
+    name: "Reset MAX7219 Display"
+    on_press:
+      - max7219digit.turn_off
+      - delay: 500ms
+      - max7219digit.turn_on
+
+font:
+  - id: pixelmix
+    size: 16
+    file: fonts/pixelmix.ttf
+
+time:
+  - platform: homeassistant
+    id: hass_time
+    update_interval: 15min
+    timezone: "America/Los_Angeles"
+
+number:
+  - platform: template
+    name: "Brightness"
+    id: brightness
+    min_value: 1
+    max_value: 15
+    step: 1
+    optimistic: True
+    initial_value: 5
+    restore_value: True

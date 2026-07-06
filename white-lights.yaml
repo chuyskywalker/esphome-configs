@@ -1,0 +1,62 @@
+esphome:
+  name: white-lights
+  friendly_name: White Lights
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret white_lights_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret white_lights_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "White-Lights Fallback Hotspot"
+    password: !secret fallback_ap_pass
+
+captive_portal:
+    
+light:
+  - platform: cwww
+    name: 'Ceiling light'
+    cold_white: redpin
+    warm_white: greenpin
+    cold_white_color_temperature: 6000 K
+    warm_white_color_temperature: 3000 K # From the strip's datasheet but pretty sure it's more like 3000K in reality
+    constant_brightness: false
+
+output:
+  - platform: ledc
+    pin: GPIO6
+    id: greenpin
+    frequency: 1220Hz
+#    frequency: 19531Hz
+#    min_power: 0.005
+#    max_power: 1
+#    zero_means_zero: true
+  - platform: ledc
+    pin: GPIO7
+    id: redpin
+    frequency: 1220Hz
+#    frequency: 19531Hz
+#    min_power: 0.005
+#    max_power: 1
+#    zero_means_zero: true
+
+# above might be out of date
+#define G_LED 6 // green
+#define R_LED 7 //red

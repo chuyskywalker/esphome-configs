@@ -1,0 +1,1731 @@
+esphome:
+  name: kc868-a64
+  friendly_name: KC868-A64
+#  platform: esp32
+#  board: esp32dev
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret kc868_a64_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret kc868_a64_ota_password
+
+#wifi:
+#  ssid: !secret wifi_ssid
+#  password: !secret wifi_password
+#
+#  # Enable fallback hotspot (captive portal) in case wifi connection fails
+#  ap:
+#    ssid: "Kc868-A64 Fallback Hotspot"
+#    password: !secret fallback_ap_pass
+
+#captive_portal:
+    
+# i2c configuration
+i2c:
+   - id: bus_a
+     sda: 5
+     scl: 16
+     scan: true
+     frequency: 400kHz
+   - id: bus_b
+     sda: 15
+     scl: 4
+     scan: true
+     frequency: 400kHz
+     
+
+# Example configuration entry
+ethernet:
+  type: LAN8720
+  mdc_pin: GPIO23
+  mdio_pin: GPIO18
+  clk_mode: GPIO17_OUT
+  phy_addr: 0
+
+  # # Optional manual IP
+  # manual_ip:
+  #   static_ip: 192.168.1.198
+  #   gateway: 192.168.1.1
+  #   subnet: 255.255.255.0  
+
+
+# I/O Expansion boards
+pcf8574:
+  - id: 'pcf8574_hub_out_1'  # for output channel 1-16
+    i2c_id: bus_a
+    address: 0x24
+    pcf8575: true
+
+  - id: 'pcf8574_hub_out_2'  # for output channel 17-32
+    i2c_id: bus_a
+    address: 0x25
+    pcf8575: true
+
+  - id: 'pcf8574_hub_out_3'  # for output channel 33-48
+    i2c_id: bus_a
+    address: 0x21
+    pcf8575: true
+
+  - id: 'pcf8574_hub_out_4'  # for output channel 49-64
+    i2c_id: bus_a
+    address: 0x22
+    pcf8575: true
+    
+  - id: 'pcf8574_hub_in_1'  # for a64--input channel 1-16
+    i2c_id: bus_b
+    address: 0x24
+    pcf8575: true
+
+  - id: 'pcf8574_hub_in_2'  # for a64--input channel 17-32
+    i2c_id: bus_b
+    address: 0x25
+    pcf8575: true
+
+  - id: 'pcf8574_hub_in_3'  # for a64--input channel 33-48
+    i2c_id: bus_b
+    address: 0x21
+    pcf8575: true
+
+  - id: 'pcf8574_hub_in_4'  # for a64--input channel 49-64
+    i2c_id: bus_b
+    address: 0x22
+    pcf8575: true   
+    
+# Individual outputs
+switch:
+
+# switches 1-40 mirror the binary state from binary_sensors 1-40
+
+  - platform: gpio
+    name: "a64_light01"
+    id: a64_light01
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 0
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light02"
+    id: a64_light02
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 1
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light03"
+    id: a64_light03
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 2
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light04"
+    id: a64_light04
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 3
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light05"
+    id: a64_light05
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 4
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light06"
+    id: a64_light06
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 5
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light07"
+    id: a64_light07
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 6
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light08"
+    id: a64_light08
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 7
+      mode: OUTPUT
+      inverted: true
+
+
+  - platform: gpio
+    name: "a64_light09"
+    id: a64_light09
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 8
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light10"
+    id: a64_light10
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 9
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light11"
+    id: a64_light11
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 10
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light12"
+    id: a64_light12
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 11
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light13"
+    id: a64_light13
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 12
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light14"
+    id: a64_light14
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 13
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light15"
+    id: a64_light15
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 14
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light16"
+    id: a64_light16
+    pin:
+      pcf8574: pcf8574_hub_out_1
+      number: 15
+      mode: OUTPUT
+      inverted: true
+      
+      
+  - platform: gpio
+    name: "a64_light17"
+    id: a64_light17
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 0
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light18"
+    id: a64_light18
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 1
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light19"
+    id: a64_light19
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 2
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light20"
+    id: a64_light20
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 3
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light21"
+    id: a64_light21
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 4
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light22"
+    id: a64_light22
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 5
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light23"
+    id: a64_light23
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 6
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light24"
+    id: a64_light24
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 7
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light25"
+    id: a64_light25
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 8
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light26"
+    id: a64_light26
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 9
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light27"
+    id: a64_light27
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 10
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light28"
+    id: a64_light28
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 11
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light29"
+    id: a64_light29
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 12
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light30"
+    id: a64_light30
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 13
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light31"
+    id: a64_light31
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 14
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light32"
+    id: a64_light32
+    pin:
+      pcf8574: pcf8574_hub_out_2
+      number: 15
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light33"
+    id: a64_light33
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 0
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light34"
+    id: a64_light34
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 1
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light35"
+    id: a64_light35
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 2
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light36"
+    id: a64_light36
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 3
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light37"
+    id: a64_light37
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 4
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light38"
+    id: a64_light38
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 5
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light39"
+    id: a64_light39
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 6
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light40"
+    id: a64_light40
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 7
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light41"
+    id: a64_light41
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 8
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light42"
+    id: a64_light42
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 9
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light43"
+    id: a64_light43
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 10
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light44"
+    id: a64_light44
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 11
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light45"
+    id: a64_light45
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 12
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light46"
+    id: a64_light46
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 13
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light47"
+    id: a64_light47
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 14
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light48"
+    id: a64_light48
+    pin:
+      pcf8574: pcf8574_hub_out_3
+      number: 15
+      mode: OUTPUT
+      inverted: true
+
+
+  - platform: gpio
+    name: "a64_light49"
+    id: a64_light49
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 0
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light50"
+    id: a64_light50
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 1
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light51"
+    id: a64_light51
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 2
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light52"
+    id: a64_light52
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 3
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light53"
+    id: a64_light53
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 4
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light54"
+    id: a64_light54
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 5
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light55"
+    id: a64_light55
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 6
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light56"
+    id: a64_light56
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 7
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light57"
+    id: a64_light57
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 8
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light58"
+    id: a64_light58
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 9
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light59"
+    id: a64_light59
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 10
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light60"
+    id: a64_light60
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 11
+      mode: OUTPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_light61"
+    id: a64_light61
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 12
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light62"
+    id: a64_light62
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 13
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_light63"
+    id: a64_light63
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 14
+      mode: OUTPUT
+      inverted: true
+
+  - platform: gpio
+    #name: "a64_light64"
+    #id: a64_light64
+    id: "buzzer_light"
+    name: "buzzer light"
+    pin:
+      pcf8574: pcf8574_hub_out_4
+      number: 15
+      mode: OUTPUT
+      inverted: true
+
+
+
+      
+      
+      
+# Individual inputs
+binary_sensor:
+
+# 1-40 are all RJ45 wired sensor inputs; 1-26 (inclusive) are simple reed switch; 27-40 are 12v supplied water sensors
+
+  - platform: gpio
+    name: "a64_input01"
+    id: a64_input01
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 0
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light01
+    on_release:
+      then:
+        - switch.turn_off: a64_light01
+
+  - platform: gpio
+    name: "a64_input02"
+    id: a64_input02
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 1
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light02
+    on_release:
+      then:
+        - switch.turn_off: a64_light02
+
+  - platform: gpio
+    name: "a64_input03"
+    id: a64_input03
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 2
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light03
+    on_release:
+      then:
+        - switch.turn_off: a64_light03
+
+  - platform: gpio
+    name: "a64_input04"
+    id: a64_input04
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 3
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light04
+    on_release:
+      then:
+        - switch.turn_off: a64_light04
+      
+  - platform: gpio
+    name: "a64_input05"
+    id: a64_input05
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 4
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light05
+    on_release:
+      then:
+        - switch.turn_off: a64_light05
+
+  - platform: gpio
+    name: "a64_input06"
+    id: a64_input06
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 5
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light06
+    on_release:
+      then:
+        - switch.turn_off: a64_light06
+
+  - platform: gpio
+    name: "a64_input07"
+    id: a64_input07
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 6
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light07
+    on_release:
+      then:
+        - switch.turn_off: a64_light07
+
+  - platform: gpio
+    name: "a64_input08"
+    id: a64_input08
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 7
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light08
+    on_release:
+      then:
+        - switch.turn_off: a64_light08
+
+
+  - platform: gpio
+    name: "a64_input09"
+    id: a64_input09
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 8
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light09
+    on_release:
+      then:
+        - switch.turn_off: a64_light09
+
+  - platform: gpio
+    name: "a64_input10"
+    id: a64_input10
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 9
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light10
+    on_release:
+      then:
+        - switch.turn_off: a64_light10
+
+  - platform: gpio
+    name: "a64_input11"
+    id: a64_input11
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 10
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light11
+    on_release:
+      then:
+        - switch.turn_off: a64_light11
+
+  - platform: gpio
+    name: "a64_input12"
+    id: a64_input12
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 11
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light12
+    on_release:
+      then:
+        - switch.turn_off: a64_light12
+      
+  - platform: gpio
+    name: "a64_input13"
+    id: a64_input13
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 12
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light13
+    on_release:
+      then:
+        - switch.turn_off: a64_light13
+
+  - platform: gpio
+    name: "a64_input14"
+    id: a64_input14
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 13
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light14
+    on_release:
+      then:
+        - switch.turn_off: a64_light14
+
+  - platform: gpio
+    name: "a64_input15"
+    id: a64_input15
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 14
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light15
+    on_release:
+      then:
+        - switch.turn_off: a64_light15
+
+  - platform: gpio
+    name: "a64_input16"
+    id: a64_input16
+    pin:
+      pcf8574: pcf8574_hub_in_1
+      number: 15
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light16
+    on_release:
+      then:
+        - switch.turn_off: a64_light16
+      
+      
+  - platform: gpio
+    name: "a64_input17"
+    id: a64_input17
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 0
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light17
+    on_release:
+      then:
+        - switch.turn_off: a64_light17
+
+  - platform: gpio
+    name: "a64_input18"
+    id: a64_input18
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 1
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light18
+    on_release:
+      then:
+        - switch.turn_off: a64_light18
+
+  - platform: gpio
+    name: "a64_input19"
+    id: a64_input19
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 2
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light19
+    on_release:
+      then:
+        - switch.turn_off: a64_light19
+
+  - platform: gpio
+    name: "a64_input20"
+    id: a64_input20
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 3
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light20
+    on_release:
+      then:
+        - switch.turn_off: a64_light20
+      
+  - platform: gpio
+    name: "a64_input21"
+    id: a64_input21
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 4
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light21
+    on_release:
+      then:
+        - switch.turn_off: a64_light21
+
+  - platform: gpio
+    name: "a64_input22"
+    id: a64_input22
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 5
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light22
+    on_release:
+      then:
+        - switch.turn_off: a64_light22
+
+  - platform: gpio
+    name: "a64_input23"
+    id: a64_input23
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 6
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light23
+    on_release:
+      then:
+        - switch.turn_off: a64_light23
+
+  - platform: gpio
+    name: "a64_input24"
+    id: a64_input24
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 7
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light24
+    on_release:
+      then:
+        - switch.turn_off: a64_light24
+      
+  - platform: gpio
+    name: "a64_input25"
+    id: a64_input25
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 8
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light25
+    on_release:
+      then:
+        - switch.turn_off: a64_light25
+
+  - platform: gpio
+    name: "a64_input26"
+    id: a64_input26
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 9
+      mode: INPUT
+      inverted: false
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light26
+    on_release:
+      then:
+        - switch.turn_off: a64_light26
+
+## For binary_sensors 27-40 they are all leak detectors; thus they have an extra line to also activate the buzzer
+#        - switch.turn_on: buzzer_light  ## alarm
+
+  - platform: gpio
+    name: "a64_input27"
+    id: a64_input27
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 10
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light27
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light27
+
+  - platform: gpio
+    name: "a64_input28"
+    id: a64_input28
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 11
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light28
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light28
+      
+  - platform: gpio
+    name: "a64_input29"
+    id: a64_input29
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 12
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light29
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light29
+
+  - platform: gpio
+    name: "a64_input30"
+    id: a64_input30
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 13
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light30
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light30
+
+  - platform: gpio
+    name: "a64_input31"
+    id: a64_input31
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 14
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light31
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light31
+
+  - platform: gpio
+    name: "a64_input32"
+    id: a64_input32
+    pin:
+      pcf8574: pcf8574_hub_in_2
+      number: 15
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light32
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light32
+
+
+  - platform: gpio
+    name: "a64_input33"
+    id: a64_input33
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 0
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light33
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light33
+
+  - platform: gpio
+    name: "a64_input34"
+    id: a64_input34
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 1
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light34
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light34
+
+  - platform: gpio
+    name: "a64_input35"
+    id: a64_input35
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 2
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light35
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light35
+
+  - platform: gpio
+    name: "a64_input36"
+    id: a64_input36
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 3
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light36
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light36
+      
+  - platform: gpio
+    name: "a64_input37"
+    id: a64_input37
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 4
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light37
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light37
+
+  - platform: gpio
+    name: "a64_input38"
+    id: a64_input38
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 5
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light38
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light38
+
+  - platform: gpio
+    name: "a64_input39"
+    id: a64_input39
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 6
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light39
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light39
+
+  - platform: gpio
+    name: "a64_input40"
+    id: a64_input40
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 7
+      mode: INPUT
+      inverted: true
+    filters:
+      - delayed_on: 100ms
+    on_press:
+      then:
+        - switch.turn_on: a64_light40
+        - switch.turn_on: buzzer_light  ## alarm
+    on_release:
+      then:
+        - switch.turn_off: a64_light40
+
+## End of RJ45 sensor inputs
+
+  - platform: gpio
+    name: "a64_input41"
+    id: a64_input41
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 8
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input42"
+    id: a64_input42
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 9
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input43"
+    id: a64_input43
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 10
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input44"
+    id: a64_input44
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 11
+      mode: INPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_input45"
+    id: a64_input45
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 12
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input46"
+    id: a64_input46
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 13
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input47"
+    id: a64_input47
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 14
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input48"
+    id: a64_input48
+    pin:
+      pcf8574: pcf8574_hub_in_3
+      number: 15
+      mode: INPUT
+      inverted: true
+
+
+  - platform: gpio
+    name: "a64_input49"
+    id: a64_input49
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 0
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input50"
+    id: a64_input50
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 1
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input51"
+    id: a64_input51
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 2
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input52"
+    id: a64_input52
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 3
+      mode: INPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_input53"
+    id: a64_input53
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 4
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input54"
+    id: a64_input54
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 5
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input55"
+    id: a64_input55
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 6
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input56"
+    id: a64_input56
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 7
+      mode: INPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_input57"
+    id: a64_input57
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 8
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input58"
+    id: a64_input58
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 9
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input59"
+    id: a64_input59
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 10
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input60"
+    id: a64_input60
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 11
+      mode: INPUT
+      inverted: true
+      
+  - platform: gpio
+    name: "a64_input61"
+    id: a64_input61
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 12
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input62"
+    id: a64_input62
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 13
+      mode: INPUT
+      inverted: true
+
+  - platform: gpio
+    name: "a64_input63"
+    id: a64_input63
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 14
+      mode: INPUT
+      inverted: true
+
+  # used to acknowledge the alarm state from a water sensor triggering
+  - platform: gpio
+    #name: "a64_input64"
+    name: "ack_button"
+    id: ack_button
+    pin:
+      pcf8574: pcf8574_hub_in_4
+      number: 15
+      mode: INPUT
+      inverted: true
+    on_press:
+      then:
+        - switch.turn_off: buzzer_light
+
+button:
+  - platform: template
+    name: "All Toggle"
+    id: all_toggle
+    on_press:
+      - switch.toggle: a64_light01
+      - switch.toggle: a64_light02
+      - switch.toggle: a64_light03
+      - switch.toggle: a64_light04
+      - switch.toggle: a64_light05
+      - switch.toggle: a64_light06
+      - switch.toggle: a64_light07
+      - switch.toggle: a64_light08
+      - switch.toggle: a64_light09
+      - switch.toggle: a64_light10
+
+      - switch.toggle: a64_light11
+      - switch.toggle: a64_light12
+      - switch.toggle: a64_light13
+      - switch.toggle: a64_light14
+      - switch.toggle: a64_light15
+      - switch.toggle: a64_light16
+      - switch.toggle: a64_light17
+      - switch.toggle: a64_light18
+      - switch.toggle: a64_light19
+      - switch.toggle: a64_light20
+
+      - switch.toggle: a64_light21
+      - switch.toggle: a64_light22
+      - switch.toggle: a64_light23
+      - switch.toggle: a64_light24
+      - switch.toggle: a64_light25
+      - switch.toggle: a64_light26
+      - switch.toggle: a64_light27
+      - switch.toggle: a64_light28
+      - switch.toggle: a64_light29
+      - switch.toggle: a64_light30
+
+      - switch.toggle: a64_light31
+      - switch.toggle: a64_light32
+      - switch.toggle: a64_light33
+      - switch.toggle: a64_light34
+      - switch.toggle: a64_light35
+      - switch.toggle: a64_light36
+      - switch.toggle: a64_light37
+      - switch.toggle: a64_light38
+      - switch.toggle: a64_light39
+      - switch.toggle: a64_light40
+
+      - switch.toggle: a64_light41
+      - switch.toggle: a64_light42
+      - switch.toggle: a64_light43
+      - switch.toggle: a64_light44
+      - switch.toggle: a64_light45
+      - switch.toggle: a64_light46
+      - switch.toggle: a64_light47
+      - switch.toggle: a64_light48
+      - switch.toggle: a64_light49
+      - switch.toggle: a64_light50
+
+      - switch.toggle: a64_light51
+      - switch.toggle: a64_light52
+      - switch.toggle: a64_light53
+      - switch.toggle: a64_light54
+      - switch.toggle: a64_light55
+      - switch.toggle: a64_light56
+      - switch.toggle: a64_light57
+      - switch.toggle: a64_light58
+      - switch.toggle: a64_light59
+      - switch.toggle: a64_light60
+
+      - switch.toggle: a64_light61
+      - switch.toggle: a64_light62
+      - switch.toggle: a64_light63
+      - switch.toggle: buzzer_light # a64_light64
+        
+
+# Example configuration entry
+sensor:
+  - platform: adc
+    pin: 39
+    name: "a64_analog_1"
+    id: a64_analog_1
+    update_interval: 20s
+    attenuation: 12db
+
+  - platform: adc
+    pin: 34
+    name: "a64_analog_2"
+    id: a64_analog_2
+    update_interval: 20s
+    attenuation: 12db
+    
+  - platform: adc
+    pin: 36
+    name: "a64_analog_3"
+    id: a64_analog_3
+    update_interval: 20s
+    attenuation: 12db
+    
+  - platform: adc
+    pin: 35
+    name: "a64_analog_4"
+    id: a64_analog_4
+    update_interval: 20s
+    attenuation: 12db

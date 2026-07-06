@@ -1,0 +1,180 @@
+esphome:
+  name: gl-s10-other
+  friendly_name: Other GL-S10
+  name_add_mac_suffix: false
+  project:
+    name: gl-s10.bluetooth-proxy
+    version: "2.1"
+  # turn on Power LED when esphome boots
+  on_boot:
+    then:
+      - output.turn_on: power_led
+  # includes:
+  #   - ble_helpers.h  # This adds #include <set> to the generated C++
+
+esp32:
+  board: esp32doit-devkit-v1
+  framework:
+    type: esp-idf
+
+# Configuration fo V2.3 hardware revision
+ethernet:
+  type: IP101
+  mdc_pin: GPIO23
+  mdio_pin: GPIO18
+  #clk_mode: GPIO0_IN
+  clk:
+    pin: GPIO0
+    mode: CLK_EXT_IN
+  phy_addr: 1
+  power_pin: GPIO5
+
+api:
+  encryption:
+    key: !secret gl_s10_other_api_encryption_key
+
+logger:
+
+ota:
+  - platform: esphome
+    password: !secret gl_s10_other_ota_password
+
+# no web server needed
+#web_server:
+
+# globals:
+#   - id: seen_ble_devices
+#     type: std::set<std::string>
+#     initial_value: '{}'
+
+esp32_ble_tracker:
+  scan_parameters:
+    interval: 1100ms
+    window: 1100ms
+    active: true
+
+  # on_ble_advertise:
+  #   - then:
+  #       - lambda: |
+  #           // Create a static set to remember addresses across advertisement triggers
+  #           static std::set<std::string> discovered_devices;
+  #           std::string address = x.address_str();
+  #           // If the address is NOT in the set, it's new
+  #           if (discovered_devices.find(address) == discovered_devices.end()) {
+  #             discovered_devices.insert(address);
+  #             ESP_LOGI("ble_discovery", "New device found! [MAC: %s] [Name: %s] [RSSI: %d]", 
+  #                      address.c_str(), 
+  #                      x.get_name().c_str(), 
+  #                      x.get_rssi());
+  #           }
+
+# The LED is disabled for ESPHome 2023.6.0+ since we do not
+# decode the advertising packets on device anymore, and adding
+# the LED blink would force the device to decode the packets
+# just to blink the LED.
+#
+# Bluetooth LED blinks when receiving Bluetooth advertising
+#  on_ble_advertise:
+#    then:
+#      - output.turn_on: bluetooth_led
+#      - delay: 0.5s
+#      - output.turn_off: bluetooth_led
+
+# note: disabled because I want to dedicate this device to temp monitoring
+#bluetooth_proxy:
+#  active: true
+
+button:
+  - platform: safe_mode
+    name: Safe Mode Boot
+    entity_category: diagnostic
+
+## DEVICE SPECIFIC CONFIGURATION
+# network LED (white one) configured as status led
+status_led:
+  pin:
+    number: GPIO32
+    inverted: true
+
+# button on the side labeled RESET
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO33
+      inverted: true
+    name: "Reset Button"
+
+# output settings for LED's marked Power and Bluetooth
+# power LED use: see code line 15
+# bluetooth LED use: see code line 60
+output:
+  - platform: gpio
+    pin: GPIO14
+    inverted: true
+    id: power_led
+  - platform: gpio
+    pin: GPIO12
+    inverted: true
+    id: bluetooth_led
+
+# since these pins are broken out inside and labeled as I2C pins they're configured here
+i2c:
+  sda: 15
+  scl: 13
+  scan: true
+
+sensor:
+  - platform: thermopro_ble
+    mac_address: FC:80:EA:D6:D4:16
+    temperature:
+      name: "D416 Temperature"
+    humidity:
+      name: "D416 Humidity"
+    battery_level:
+      name: "D416 Battery Level"
+    signal_strength:
+      name: "D416 Signal Strength"
+
+  - platform: thermopro_ble
+    mac_address: F8:E8:12:9E:4E:EA
+    temperature:
+      name: "4EEA Temperature"
+    humidity:
+      name: "4EEA Humidity"
+    battery_level:
+      name: "4EEA Battery Level"
+    signal_strength:
+      name: "4EEA Signal Strength"
+
+  - platform: thermopro_ble
+    mac_address: FE:96:36:A5:29:EE
+    temperature:
+      name: "29EE Temperature"
+    humidity:
+      name: "29EE Humidity"
+    battery_level:
+      name: "29EE Battery Level"
+    signal_strength:
+      name: "29EE Signal Strength"
+
+  - platform: thermopro_ble
+    mac_address: C7:42:98:23:D0:AB
+    temperature:
+      name: "D0AB Temperature"
+    humidity:
+      name: "D0AB Humidity"
+    battery_level:
+      name: "D0AB Battery Level"
+    signal_strength:
+      name: "D0AB Signal Strength"
+
+  - platform: thermopro_ble
+    mac_address: E3:CC:B9:52:88:34
+    temperature:
+      name: "8834 Temperature"
+    humidity:
+      name: "8834 Humidity"
+    battery_level:
+      name: "8834 Battery Level"
+    signal_strength:
+      name: "8834 Signal Strength"

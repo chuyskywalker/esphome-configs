@@ -1,0 +1,78 @@
+esphome:
+  name: waterpressure
+  friendly_name: WaterPressure
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+  # Global log level remains DEBUG (or whatever you prefer)
+  level: DEBUG 
+  logs:
+    ads1115.sensor: INFO # Only show INFO, WARN, ERROR messages for this component
+
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret waterpressure_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret waterpressure_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Waterpressure Fallback Hotspot"
+    password: !secret fallback_ap_pass
+
+captive_portal:
+
+i2c:
+  sda: GPIO21
+  scl: GPIO22
+  scan: true
+  id: bus_a
+
+ads1115:
+  - address: 0x48
+
+sensor:
+  - platform: ads1115
+    multiplexer: 'A0_GND'
+    gain: 6.144
+    name: "ADS1115 Pressure"
+    # Read at 100Hz
+    update_interval: 0.01s
+    filters:
+      # Take 100 samples, average them together, 
+      # then report every second. I had a lot of 
+      # noise just using 1 or 10Hz. 
+      - median:
+          window_size: 100
+          send_every: 100
+          send_first_at: 1
+      # Output: 0.5V–4.5V linear voltage output. 
+      # 0 psi outputs 0.5V, 
+      # 75psi outputs 2.5V, 
+      # 150 psi outputs 4.5V; 
+      - calibrate_linear:
+        - 0.43 ->   0.0
+        - 2.5  ->  75.0
+        - 4.5  -> 150.0
+      # only update the dash if the value changes 
+      # more than 0.5 psi
+      - delta: 0.5   
+
+    unit_of_measurement: "psi"
+    #Only displays 2 decimals on dashboard but doesn't change reported value 
+    accuracy_decimals: 2
+    #This shows a gauge on the dash, nice to have
+    device_class: pressure

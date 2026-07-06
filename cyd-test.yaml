@@ -1,0 +1,110 @@
+esphome:
+  name: cyd-test
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+
+api:
+  encryption:
+    key: !secret cyd_test_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret cyd_test_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+output:
+  - platform: ledc
+    pin: GPIO21
+    id: backlight_pwm
+  - platform: ledc
+    pin: GPIO4
+    id: led_red
+    inverted: true
+  - platform: ledc
+    pin: GPIO16
+    id: led_green
+    inverted: true
+  - platform: ledc
+    pin: GPIO17
+    id: led_blue
+    inverted: true
+
+light:
+  - platform: monochromatic
+    output: backlight_pwm
+    name: Display Backlight
+    id: backlight
+    restore_mode: ALWAYS_ON
+
+  - platform: rgb
+    name: RGB
+    id: led
+    red: led_red
+    green: led_green
+    blue: led_blue
+    restore_mode: ALWAYS_OFF
+
+spi:
+  - id: tft
+    clk_pin: GPIO14
+    mosi_pin: GPIO13
+    ## apparently not required and allows for faster speed up?
+    # miso_pin: 
+    #   number: GPIO12
+    #   ignore_strapping_warning: true
+  - id: touch
+    clk_pin: GPIO25
+    mosi_pin: GPIO32
+    miso_pin: GPIO39
+
+display:
+  - platform: mipi_spi
+    model: st7789v
+    spi_id: tft
+    dc_pin: GPIO2
+    cs_pin: GPIO15
+    invert_colors: false
+    color_order: bgr
+    # lvgl managed refresh
+    auto_clear_enabled: false
+    update_interval: never
+    # did NOT require setting an 8bit palette
+
+touchscreen:
+  platform: xpt2046
+  id: my_touchscreen
+  spi_id: touch
+  cs_pin: GPIO33
+  interrupt_pin: GPIO36
+  calibration:
+    x_min: 227
+    x_max: 3756
+    y_min: 200
+    y_max: 3817
+  transform:
+    mirror_x: true
+    mirror_y: false
+    swap_xy: false
+  on_touch:
+  - lambda: |-
+      ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%d",
+          touch.x,
+          touch.y,
+          touch.x_raw,
+          touch.y_raw
+      );
+
+# [18:51:58.254][I][cal:082]: x=226, y=311, x_raw=264,  y_raw=3767
+# [18:52:01.364][I][cal:082]: x=194, y=0,   x_raw=227,  y_raw=300
+# [18:52:03.925][I][cal:082]: x=239, y=315, x_raw=3750, y_raw=3817
+# [18:52:05.286][I][cal:082]: x=239, y=0,   x_raw=3756, y_raw=328
+
+lvgl:

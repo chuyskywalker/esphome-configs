@@ -1,0 +1,117 @@
+esphome:
+  name: music-box
+  friendly_name: Music Box
+  on_boot:
+    then:
+      - dfplayer.set_volume: 1
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+ota:
+  - platform: esphome
+    password: !secret music_box_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Music-Box Fallback Hotspot"
+    password: !secret fallback_ap_pass
+
+captive_portal:
+
+uart:
+  tx_pin: GPIO23
+  rx_pin: GPIO22
+  baud_rate: 9600
+
+
+dfplayer:
+  id: dfplayerState
+
+globals:
+   - id: track_list
+     type: int[4]
+     restore_value: yes
+     initial_value: '{1,2,3,4}'
+
+binary_sensor:
+  - platform: template
+    name: Is Playing
+    internal: False
+    lambda: |-
+      return id(dfplayerState).is_playing();
+
+  - platform: gpio
+    pin:
+      number: GPIO21
+      mode:
+        input: true
+        pullup: true
+    name: "Stop or Play Random"
+    id: startstop
+    internal: True
+    on_press:
+      - button.press: bplayrand
+
+  - platform: gpio
+    pin: GPIO1
+    name: "Volume Up"
+    id: volup
+    internal: True
+    on_press:
+      - button.press: bvolup
+
+  - platform: gpio
+    pin: GPIO3
+    name: "Volume Down"
+    id: voldown
+    internal: True
+    on_press:
+      - button.press: bvoldown
+
+button:
+  - platform: template
+    name: "Off"
+    id: offs
+    on_press:
+      - dfplayer.stop
+
+  - platform: template
+    name: "Volume Up"
+    id: bvolup
+    on_press:
+      - dfplayer.volume_up
+
+  - platform: template
+    name: "Volume Down"
+    id: bvoldown
+    on_press:
+      - dfplayer.volume_down
+
+  - platform: template
+    name: "Play Random"
+    id: bplayrand
+    on_press:
+    - if:
+        condition:
+          dfplayer.is_playing
+        then:
+          dfplayer.stop
+        else:
+          dfplayer.play: !lambda |-
+            int al = sizeof(id(track_list))/sizeof(id(track_list)[0]); //length calculation
+            return id(track_list)[int(rand() % (al-1))];
+
+api:
+  encryption:
+    key: "kdDnEH89naJtJrhzT0lB4MEW8imELGy5pSEKV0z4ge0="
+

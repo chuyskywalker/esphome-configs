@@ -1,0 +1,93 @@
+esphome:
+  name: catfeeder2
+  friendly_name: CatFeeder2
+
+esp8266:
+  board: d1_mini_lite
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret catfeeder2_api_encryption_key
+
+ota:
+  password: !secret catfeeder2_ota_password
+  platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Catfeeder Fallback Hotspot"
+    password: !secret fallback_ap_pass
+
+captive_portal:
+
+# have a turns counter
+# when the motor is turned on, set the turns counter to N (where N >= 1)
+# the motor is already running (the gpio switch did as much)
+# wait until the turns counter drops to zero (or below) -- or more than 10 seconds have passed
+# turn off the motor
+#
+# configure the motor lobed switch to decrement the counter when it is triggered
+
+globals:
+  - id: turns
+    type: int
+    restore_value: no
+    initial_value: '2'
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: D2 ## GPIO 4
+      mode:
+        input: true
+        pullup: true
+    name: "Rotation Counterdown Switch"
+    internal: true
+    on_press:
+      - lambda: |
+          ESP_LOGD("turncounter", "Turns count is: %i", id(turns));
+          if (id(turns) > 0) { 
+            id(turns)--;
+            ESP_LOGD("turncounter", "Decremented");
+          } else {
+            ESP_LOGD("turncounter", "Skipped");
+          }
+#    on_release:
+#      - lambda: 'ESP_LOGD("turncounter", "Released; tc is: %i", id(turns));'
+#    on_state:
+#      - lambda: 'ESP_LOGD("turncounter", "State; tc is: %i", id(turns));'
+      
+switch:
+  - platform: gpio
+    pin: GPIO15  # defaults to low/off; wired to GND and GPIO
+    id: motor
+    name: "Motor Relay"
+    icon: "mdi:cat"
+    on_turn_on:
+      - globals.set:
+          id: turns
+          value: '2'
+      - wait_until:
+          condition:
+            lambda: 'return (id(turns) <= 0);'
+          timeout: 10s
+      - switch.turn_off: motor
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+    # on_time:
+    #   # Feed schedule (1am, 6am, 8pm) military time
+    #   - seconds: 0
+    #     minutes: 0
+    #     hours: 1,6,20
+    #     then:
+    #       - switch.turn_on: motor
