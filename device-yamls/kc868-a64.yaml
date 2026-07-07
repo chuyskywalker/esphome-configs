@@ -35,12 +35,16 @@ ota:
 # i2c configuration
 i2c:
    - id: bus_a
-     sda: 5
+     sda:
+       number: 5
+       ignore_strapping_warning: true
      scl: 16
      scan: true
      frequency: 400kHz
    - id: bus_b
-     sda: 15
+     sda:
+       number: 15
+       ignore_strapping_warning: true
      scl: 4
      scan: true
      frequency: 400kHz
@@ -51,7 +55,9 @@ ethernet:
   type: LAN8720
   mdc_pin: GPIO23
   mdio_pin: GPIO18
-  clk_mode: GPIO17_OUT
+  clk:
+    mode: CLK_OUT
+    pin: 17
   phy_addr: 0
 
   # # Optional manual IP
