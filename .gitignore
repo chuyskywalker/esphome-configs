@@ -1,3 +1,4 @@
 device-yamls/secrets.yaml
 device-yamls/.esphome/*
 device-yamls/.device-builder*
+*__pycache__*
