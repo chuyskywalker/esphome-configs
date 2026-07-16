@@ -95,7 +95,7 @@ time:
 
 uart:
   - id: uart_modbus_client
-    rx_pin: 32
+    rx_pin: 36
     tx_pin: 23
     baud_rate: 9600
     data_bits: 8
