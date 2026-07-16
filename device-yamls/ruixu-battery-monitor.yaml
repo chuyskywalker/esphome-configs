@@ -6,15 +6,14 @@
 ## - updated ESPHome config to work for my wesp32 poe main device and various other board/install specific modifications
 ## - copied the C files locally
 
-
 substitutions:
   name: ruixu-battery-monitor
   friendly_name: Ruixu Battery Monitor
-  static_ip: 192.168.0.5  # TODO: Check for usage
+  static_ip: 192.168.0.5
   gateway: 192.168.0.1
   subnet: 255.255.255.0
-  api_key: !secret rmbs_api_encryption_key
-  ota_pass: !secret rmbs_ota_password
+  api_key: !secret rbms_api_encryption_key
+  ota_pass: !secret rbms_ota_password
   batt_1: "batt 1"
   batt_2: "batt 2"
 
