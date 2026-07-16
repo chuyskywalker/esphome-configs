@@ -179,7 +179,6 @@ binary_sensor:
 sensor:
 
   # these sensors calcualte kWh (energy) and are very useful - the separate IN / OUT sensors are necessary for the HA default power monitoring and the https://github.com/slipx06/sunsynk-power-flow-card which is highly recommended
-  # NB: For *MY* setup, these aren't really needed as I derive these from the metrics the sol-arks produce. Handy to have as a sanity check, perhaps
   - { power_id: batt_1_power_net, platform: total_daily_energy, method: left, accuracy_decimals: 2, unit_of_measurement: 'kWh', id: batt_1_net_energy_net, name: "${batt_1} daily energy net"}
   - { power_id: batt_1_power_in, platform: total_daily_energy, method: left, accuracy_decimals: 2, unit_of_measurement: 'kWh', id: batt_1_energy_in, name: "${batt_1} daily energy in"}
   - { power_id: batt_1_power_out, platform: total_daily_energy, method: left, accuracy_decimals: 2, unit_of_measurement: 'kWh', id: batt_1_energy_out, name: "${batt_1} daily energy out"}
@@ -226,32 +225,29 @@ sensor:
       - source: batt_1_current
       - source: batt_2_current
 
-## These aren't really important; plus voltage mean is kinda silly. The batteries are in parallel so they'll be the same.
-## The min/max of "bank" cell voltages is kinda...not useful. If the min is from B1, but the max is from B2...so what?
-## As far as cell health monitoring goes, you really only need to alert on the delta for a specific pack.
-#  - platform: combination
-#    type: mean
-#    name: "bank voltage mean"
-#    id: bank_mean_voltage
-#    sources:
-#      - source: batt_1_voltage_total
-#      - source: batt_2_voltage_total
-#
-#  - platform: combination
-#    type: max
-#    name: "bank voltage cell max"
-#    id: bank_max_cell_voltage
-#    sources:
-#      - source: batt_1_voltage_cell_max
-#      - source: batt_2_voltage_cell_max
-#
-#  - platform: combination
-#    type: min
-#    name: "bank voltage cell min"
-#    id: bank_min_cell_voltage
-#    sources:
-#      - source: batt_1_voltage_cell_min
-#      - source: batt_2_voltage_cell_min
+  - platform: combination
+    type: mean
+    name: "bank voltage mean"
+    id: bank_mean_voltage
+    sources:
+      - source: batt_1_voltage_total
+      - source: batt_2_voltage_total
+
+  - platform: combination
+    type: max
+    name: "bank voltage cell max"
+    id: bank_max_cell_voltage
+    sources:
+      - source: batt_1_voltage_cell_max
+      - source: batt_2_voltage_cell_max
+
+  - platform: combination
+    type: min
+    name: "bank voltage cell min"
+    id: bank_min_cell_voltage
+    sources:
+      - source: batt_1_voltage_cell_min
+      - source: batt_2_voltage_cell_min
 
   - platform: ruixu_bms #################################### batt_1 ###################################
     ruixu_bms_id: bms1
