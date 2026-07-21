@@ -145,6 +145,31 @@ switch:
           id: label_erv_status
           text_color: 0xAAAAAA
 
+  - platform: template
+    name: "System Hold"
+    id: hold_mode
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    turn_on_action:
+      - lvgl.label.update:
+          id: label_hold_mode
+          text: "ON"
+      - climate.control:
+          id: cc
+          mode: "OFF"
+      - lvgl.widget.show: cancel_icons
+      - switch.turn_off: erv
+      - switch.turn_off: blower_fan
+      - switch.turn_off: heatpump
+    turn_off_action:
+      - lvgl.label.update:
+          id: label_hold_mode
+          text: "OFF"
+      - climate.control:
+          id: cc
+          mode: "HEAT_COOL"
+      - lvgl.widget.hide: cancel_icons
+
 touchscreen:
   - platform: cst816
     id: my_touchscreen
@@ -341,28 +366,26 @@ sensor:
     # When turned clockwise
     on_clockwise:
       - logger.log: "clock wise"
-      - if:        
+      - if:
           condition:
             lvgl.page.is_showing: temp_page
           then:
-            - number.increment:     
+            - number.increment:
                 id: target_temp
                 cycle: false
-      - if:        
+      - if:
           condition:
             lvgl.page.is_showing: hold_page
           then:
-            - number.increment:     
-                id: hold_time
-                cycle: false
-      - if:        
+            - switch.turn_on: hold_mode
+      - if:
           condition:
             lvgl.page.is_showing: range_page
           then:
             - number.increment:     
                 id: target_temp_range
                 cycle: false
-      - if:        
+      - if:
           condition:
             lvgl.page.is_showing: fan_page
           then:
@@ -373,28 +396,26 @@ sensor:
     # When turned anticlockwise
     on_anticlockwise:
       - logger.log: "anti clock wise"
-      - if:        
+      - if:
           condition:
             lvgl.page.is_showing: temp_page
           then:
             - number.decrement:     
                 id: target_temp
                 cycle: false
-      - if:        
+      - if:
           condition:
             lvgl.page.is_showing: hold_page
           then:
-            - number.decrement:     
-                id: hold_time
-                cycle: false
-      - if:        
+            - switch.turn_off: hold_mode
+      - if:
           condition:
             lvgl.page.is_showing: range_page
           then:
             - number.decrement:     
                 id: target_temp_range
                 cycle: false
-      - if:        
+      - if:
           condition:
             lvgl.page.is_showing: fan_page
           then:
@@ -522,39 +543,6 @@ number:
             format: "%.0f °F"
             args: [ 'x' ]
       - script.execute: update_range
-
-  - platform: template
-    id: hold_time
-    name: Hold Time
-    optimistic: true
-    initial_value: 0
-    restore_value: true
-    min_value: 0
-    max_value: 1
-    step: 1
-    on_value:
-      # if hold mode is turned on..., else...
-      - if:
-          condition: 
-            - lambda: 'return x == 1;'
-          then:
-            # HOLD PLEASE
-            - lvgl.label.update:
-                id: label_hold_time
-                text: "ON"
-            - climate.control:
-                id: cc
-                mode: "OFF"
-            - switch.turn_off: erv
-            - lvgl.widget.show: cancel_icons
-          else:
-            - lvgl.label.update:
-                id: label_hold_time
-                text: "OFF"
-            - lvgl.widget.hide: cancel_icons
-            - climate.control:
-                id: cc
-                mode: "HEAT_COOL"
 
   - platform: template
     id: target_temp_range
@@ -820,7 +808,7 @@ lvgl:
             align: CENTER
             text_font: roboto32
         - label:
-            id: label_hold_time
+            id: label_hold_mode
             text: "On/Off"
             x: 0
             y: 0
@@ -1072,15 +1060,16 @@ climate:
           condition:
             - lambda: 'return id(circulation_active) == 0;'
           then:
-            - switch.turn_off:  blower_fan
-            - switch.turn_off:  erv
+            - switch.turn_off: blower_fan
+            - switch.turn_off: erv
       # if this was triggered via a hold time, turn the blower/erv off anyway
+      # this is kind of duplicative, but doesn't hurt
       - if:
           condition:
-            - lambda: 'return id(hold_time).state == 1;'
+            - switch.is_on: hold_mode
           then:
-            - switch.turn_off:  blower_fan
-            - switch.turn_off:  erv
+            - switch.turn_off: blower_fan
+            - switch.turn_off: erv
 
     ## heat and cool mode are implied by the heat/cool _action above,
     ## off mode is always a thing, but heat_cool_mode is NOT implied
