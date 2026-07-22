@@ -54,32 +54,32 @@ void RuixuBms::on_telemetry_data_(const std::vector<uint8_t> &data) {
   //   11     0x0C 0xE9      Cell voltage 2                   3305 * 0.001f = 3.305         V
   //   ...    ...            ...
   //   39     0x0C 0xD8      Cell voltage 16                                                V
-  float min_cell_voltage = 100.0f;
-  float max_cell_voltage = -100.0f;
-  float average_cell_voltage = 0.0f;
+  uint16_t min_cell_voltage_mv = 65535;
+  uint16_t max_cell_voltage_mv = 0;
+  uint32_t total_cell_voltage_mv = 0;
   uint8_t min_voltage_cell = 0;
   uint8_t max_voltage_cell = 0;
   for (uint8_t i = 0; i < std::min((uint8_t) 16, cells); i++) {
-    float cell_voltage = (float) ruixu_get_16bit(8 + (i * 2)) * 0.001f;
-    average_cell_voltage = average_cell_voltage + cell_voltage;
-    if (cell_voltage < min_cell_voltage) {
-      min_cell_voltage = cell_voltage;
+    uint16_t cell_voltage_mv = ruixu_get_16bit(8 + (i * 2));
+    total_cell_voltage_mv += cell_voltage_mv;
+    if (cell_voltage_mv < min_cell_voltage_mv) {
+      min_cell_voltage_mv = cell_voltage_mv;
       min_voltage_cell = i + 1;
     }
-    if (cell_voltage > max_cell_voltage) {
-      max_cell_voltage = cell_voltage;
+    if (cell_voltage_mv > max_cell_voltage_mv) {
+      max_cell_voltage_mv = cell_voltage_mv;
       max_voltage_cell = i + 1;
     }
-    this->publish_state_(this->cells_[i].cell_voltage_sensor_, cell_voltage);
+    this->publish_state_(this->cells_[i].cell_voltage_sensor_, cell_voltage_mv);
   }
-  average_cell_voltage = average_cell_voltage / cells;
+  uint16_t average_cell_voltage_mv = total_cell_voltage_mv / cells;
 
-  this->publish_state_(this->min_cell_voltage_sensor_, min_cell_voltage);
-  this->publish_state_(this->max_cell_voltage_sensor_, max_cell_voltage);
-  this->publish_state_(this->max_voltage_cell_sensor_, (float) max_voltage_cell);
-  this->publish_state_(this->min_voltage_cell_sensor_, (float) min_voltage_cell);
-  this->publish_state_(this->delta_cell_voltage_sensor_, max_cell_voltage - min_cell_voltage);
-  this->publish_state_(this->average_cell_voltage_sensor_, average_cell_voltage);
+  this->publish_state_(this->max_voltage_cell_sensor_, max_voltage_cell);
+  this->publish_state_(this->min_voltage_cell_sensor_, min_voltage_cell);
+  this->publish_state_(this->min_cell_voltage_sensor_, min_cell_voltage_mv);
+  this->publish_state_(this->max_cell_voltage_sensor_, max_cell_voltage_mv);
+  this->publish_state_(this->delta_cell_voltage_sensor_, static_cast<uint16_t>(max_cell_voltage_mv - min_cell_voltage_mv));
+  this->publish_state_(this->average_cell_voltage_sensor_, average_cell_voltage_mv);
 
   uint8_t offset = 8 + (cells * 2);
 
@@ -204,6 +204,27 @@ void RuixuBms::publish_state_(sensor::Sensor *sensor, float value) {
     return;
 
   sensor->publish_state(value);
+}
+
+void RuixuBms::publish_state_(sensor::Sensor *sensor, uint8_t value) {
+  if (sensor == nullptr)
+    return;
+
+  sensor->publish_state(static_cast<float>(value));
+}
+
+void RuixuBms::publish_state_(sensor::Sensor *sensor, uint16_t value) {
+  if (sensor == nullptr)
+    return;
+
+  sensor->publish_state(static_cast<float>(value));
+}
+
+void RuixuBms::publish_state_(sensor::Sensor *sensor, uint32_t value) {
+  if (sensor == nullptr)
+    return;
+
+  sensor->publish_state(static_cast<float>(value));
 }
 
 void RuixuBms::publish_state_(text_sensor::TextSensor *text_sensor, const std::string &state) {

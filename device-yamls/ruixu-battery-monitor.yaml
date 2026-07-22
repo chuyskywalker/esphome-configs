@@ -5,6 +5,16 @@
 ## - reconfigured down to 2 batteries; started numbering at 1, not 0 to match my physical labels
 ## - updated ESPHome config to work for my wesp32 poe main device and various other board/install specific modifications
 ## - copied the C files locally
+## - all items that were V (volts) are now mV (millivolts). The modbus api reports the
+##   values as integer millivolts, ie: 3124 as 3.124v HOWEVER, converting those to float
+##   values has all kinds of funky computer math problems so each step of the way
+##   (c code to esphome to yamls through lambdas back over to ha api then into the ha database)
+##   can and do introduce minor floating point variance fun. As such, you can end up with the same
+##   3.124v reading reporting as 3.1241233232 and then 3.12498232. This mismatch means that
+##   the HA database is recording a buttload of entries that have no actual difference except
+##   that computers suck at non-whole-integers. By going to mV, which are recorded (essentially)
+##   as whole integers, this is never a problem. The ONLY downside is that it shows up AS mV in
+##   the UI. But, that's better than flooding the database with garbage.
 
 substitutions:
   name: ruixu-battery-monitor
@@ -14,19 +24,26 @@ substitutions:
   subnet: 255.255.255.0
   api_key: !secret rbms_api_encryption_key
   ota_pass: !secret rbms_ota_password
-  batt_1: "batt 1"
-  batt_2: "batt 2"
+  batt_1: "B1"
+  batt_2: "B2"
 
 #
 # SUBS ABOVE
 #
 
 .sliding_filter: &sliding_filter
-  # updates are about every 5 seconds, so this will report the data 
+  # updates are about every 5 seconds, so this will report the data
   # every minute(ish) while averaging as we go to eliminate bouncyness
   - sliding_window_moving_average:
       window_size: 12
       send_every: 12
+
+.cell_voltage: &cell_voltage
+  filters:
+    # average out over a minute
+    - <<: *sliding_filter
+    # and only report whole values, but nail it to the 0.001v ground instead of letting it "float" upwards
+    - lambda: return (int) floor(x);
 
 esphome:
   name: ${name}
@@ -154,7 +171,6 @@ ruixu_bms:
 #          id: device_online_status
 #          state: OFF
 
-
 script:
   - id: log_to_ha
     mode: queued
@@ -172,6 +188,7 @@ script:
             message: !lambda 'return message;'
             level: error
             logger: esphome.custom_device_ruixubms # Helps you filter in HA
+
 button:
   - platform: template
     name: "Send Test Message"
@@ -197,7 +214,6 @@ sensor:
   - { power_id: bank_power_net, platform: total_daily_energy, method: left, accuracy_decimals: 2, unit_of_measurement: 'kWh', id: bank_energy_net, name: "bank daily energy net"}
   - { power_id: bank_power_in, platform: total_daily_energy, method: left, accuracy_decimals: 2, unit_of_measurement: 'kWh', id: bank_energy_in, name: "bank daily energy in"}
   - { power_id: bank_power_out, platform: total_daily_energy, method: left, accuracy_decimals: 2, unit_of_measurement: 'kWh', id: bank_energy_out, name: "bank daily energy out"}
-
 
   # these combine all _x batteries into one sensor - if you have more batteries or less you will have to adjust everything to match
   - platform: combination
@@ -258,174 +274,115 @@ sensor:
 
   - platform: ruixu_bms #################################### batt_1 ###################################
     ruixu_bms_id: bms1
+
+## Honestly, I don't even care about these min/max cell id values. No real usage
+#    min_voltage_cell:
+#      name: "${batt_1} voltage cell min number"
+#      id: batt_1_voltage_cell_min_number
+#      # NOTE: DO NOT filter this, silly billy, it's an ID, not a value
+#
+#    max_voltage_cell:
+#      name: "${batt_1} voltage cell max number"
+#      id: batt_1_voltage_cell_max_number
+#      # NOTE: DO NOT filter this, silly billy, it's an ID, not a value
+
     min_cell_voltage:
       name: "${batt_1} voltage cell min"
       id: batt_1_voltage_cell_min
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      <<: *cell_voltage
     max_cell_voltage:
       name: "${batt_1} voltage cell max"
       id: batt_1_voltage_cell_max
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
-    min_voltage_cell:
-      name: "${batt_1} voltage cell min number"
-      id: batt_1_voltage_cell_min_number
-      # NOTE: DO NOT filter this, silly billy, it's an ID, not a value
-    max_voltage_cell:
-      name: "${batt_1} voltage cell max number"
-      id: batt_1_voltage_cell_max_number
-      # NOTE: DO NOT filter this, silly billy, it's an ID, not a value
+      <<: *cell_voltage
     delta_cell_voltage:
       name: "${batt_1} voltage cell delta"
       id: batt_1_voltage_cell_delta
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      <<: *cell_voltage
     average_cell_voltage:
       name: "${batt_1} voltage cell average"
       id: batt_1_voltage_cell_average
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      <<: *cell_voltage
+
     cell_voltage_1:
-      name: "${batt_1} voltage cell 1"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 1"
+      <<: *cell_voltage
     cell_voltage_2:
-      name: "${batt_1} voltage cell 2"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 2"
+      <<: *cell_voltage
     cell_voltage_3:
-      name: "${batt_1} voltage cell 3"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 3"
+      <<: *cell_voltage
     cell_voltage_4:
-      name: "${batt_1} voltage cell 4"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 4"
+      <<: *cell_voltage
     cell_voltage_5:
-      name: "${batt_1} voltage cell 5"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 5"
+      <<: *cell_voltage
     cell_voltage_6:
-      name: "${batt_1} voltage cell 6"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 6"
+      <<: *cell_voltage
     cell_voltage_7:
-      name: "${batt_1} voltage cell 7"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 7"
+      <<: *cell_voltage
     cell_voltage_8:
-      name: "${batt_1} voltage cell 8"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 8"
+      <<: *cell_voltage
     cell_voltage_9:
-      name: "${batt_1} voltage cell 9"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 9"
+      <<: *cell_voltage
     cell_voltage_10:
-      name: "${batt_1} voltage cell 10"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 10"
+      <<: *cell_voltage
     cell_voltage_11:
-      name: "${batt_1} voltage cell 11"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 11"
+      <<: *cell_voltage
     cell_voltage_12:
-      name: "${batt_1} voltage cell 12"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 12"
+      <<: *cell_voltage
     cell_voltage_13:
-      name: "${batt_1} voltage cell 13"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 13"
+      <<: *cell_voltage
     cell_voltage_14:
-      name: "${batt_1} voltage cell 14"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 14"
+      <<: *cell_voltage
     cell_voltage_15:
-      name: "${batt_1} voltage cell 15"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 15"
+      <<: *cell_voltage
     cell_voltage_16:
-      name: "${batt_1} voltage cell 16"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_1} voltage: cell 16"
+      <<: *cell_voltage
+
+
     temperature_1:
       name: "${batt_1} temperature 1"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     temperature_2:
       name: "${batt_1} temperature 2"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     temperature_3:
       name: "${batt_1} temperature 3"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     temperature_4:
       name: "${batt_1} temperature 4"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     temperature_5:
       name: "${batt_1} temperature environment"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     temperature_6:
       name: "${batt_1} temperature mosfet"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     total_voltage:
       name: "${batt_1} voltage total"
       accuracy_decimals: 2
@@ -477,181 +434,112 @@ sensor:
       filters: *sliding_filter
     charging_cycles:
       name: "${batt_1} charging cycles"
-      filters: *sliding_filter
+      # no averaging this, lol
     state_of_health:
       name: "${batt_1} state of health"
       filters: *sliding_filter
 
   - platform: ruixu_bms #################################### batt_2 ###################################
     ruixu_bms_id: bms2
+
+
     min_cell_voltage:
       name: "${batt_2} voltage cell min"
       id: batt_2_voltage_cell_min
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      <<: *cell_voltage
     max_cell_voltage:
       name: "${batt_2} voltage cell max"
       id: batt_2_voltage_cell_max
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
-    min_voltage_cell:
-      name: "${batt_2} voltage cell min number"
-      id: batt_2_voltage_cell_min_number
-      # NOTE: DO NOT filter this, silly billy, it's an ID, not a value
-    max_voltage_cell:
-      name: "${batt_2} voltage cell max number"
-      id: batt_2_voltage_cell_max_number
-      # NOTE: DO NOT filter this, silly billy, it's an ID, not a value
+      <<: *cell_voltage
     delta_cell_voltage:
       name: "${batt_2} voltage cell delta"
       id: batt_2_voltage_cell_delta
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      <<: *cell_voltage
     average_cell_voltage:
       name: "${batt_2} voltage cell average"
       id: batt_2_voltage_cell_average
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      <<: *cell_voltage
+
     cell_voltage_1:
-      name: "${batt_2} voltage cell 1"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 1"
+      <<: *cell_voltage
     cell_voltage_2:
-      name: "${batt_2} voltage cell 2"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 2"
+      <<: *cell_voltage
     cell_voltage_3:
-      name: "${batt_2} voltage cell 3"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 3"
+      <<: *cell_voltage
     cell_voltage_4:
-      name: "${batt_2} voltage cell 4"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 4"
+      <<: *cell_voltage
     cell_voltage_5:
-      name: "${batt_2} voltage cell 5"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 5"
+      <<: *cell_voltage
     cell_voltage_6:
-      name: "${batt_2} voltage cell 6"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 6"
+      <<: *cell_voltage
     cell_voltage_7:
-      name: "${batt_2} voltage cell 7"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 7"
+      <<: *cell_voltage
     cell_voltage_8:
-      name: "${batt_2} voltage cell 8"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 8"
+      <<: *cell_voltage
     cell_voltage_9:
-      name: "${batt_2} voltage cell 9"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 9"
+      <<: *cell_voltage
     cell_voltage_10:
-      name: "${batt_2} voltage cell 10"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 10"
+      <<: *cell_voltage
     cell_voltage_11:
-      name: "${batt_2} voltage cell 11"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 11"
+      <<: *cell_voltage
     cell_voltage_12:
-      name: "${batt_2} voltage cell 12"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 12"
+      <<: *cell_voltage
     cell_voltage_13:
-      name: "${batt_2} voltage cell 13"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 13"
+      <<: *cell_voltage
     cell_voltage_14:
-      name: "${batt_2} voltage cell 14"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 14"
+      <<: *cell_voltage
     cell_voltage_15:
-      name: "${batt_2} voltage cell 15"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 15"
+      <<: *cell_voltage
     cell_voltage_16:
-      name: "${batt_2} voltage cell 16"
-      accuracy_decimals: 3
-      filters:
-        - <<: *sliding_filter
-        - round: 3
+      name: "${batt_2} voltage: cell 16"
+      <<: *cell_voltage
+
+
     temperature_1:
       name: "${batt_2} temperature 1"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     temperature_2:
       name: "${batt_2} temperature 2"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     temperature_3:
       name: "${batt_2} temperature 3"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     temperature_4:
       name: "${batt_2} temperature 4"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     temperature_5:
       name: "${batt_2} temperature environment"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     temperature_6:
       name: "${batt_2} temperature mosfet"
-      accuracy_decimals: 2
       filters:
         - <<: *sliding_filter
-        - round: 2
+        - round: 1
     total_voltage:
       name: "${batt_2} voltage total"
       accuracy_decimals: 2
@@ -703,7 +591,7 @@ sensor:
       filters: *sliding_filter
     charging_cycles:
       name: "${batt_2} charging cycles"
-      filters: *sliding_filter
+      # no averaging this, lol
     state_of_health:
       name: "${batt_2} state of health"
       filters: *sliding_filter

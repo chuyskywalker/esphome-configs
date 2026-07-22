@@ -17,6 +17,7 @@ from esphome.const import (
     UNIT_EMPTY,
     UNIT_PERCENT,
     UNIT_VOLT,
+    UNIT_MILLIVOLT,
     UNIT_WATT,
 )
 
@@ -131,24 +132,27 @@ SENSORS = [
     CONF_PORT_VOLTAGE,
 ]
 
+CELL_VOLTAGE_SCHEMA = sensor.sensor_schema(
+    unit_of_measurement=UNIT_MILLIVOLT,
+    icon=ICON_EMPTY,
+    accuracy_decimals=0,
+    device_class=DEVICE_CLASS_VOLTAGE,
+    state_class=STATE_CLASS_MEASUREMENT,
+)
+
+TEMP_SCHEMA = sensor.sensor_schema(
+    unit_of_measurement=UNIT_CELSIUS,
+    icon=ICON_EMPTY,
+    accuracy_decimals=1,
+    device_class=DEVICE_CLASS_TEMPERATURE,
+    state_class=STATE_CLASS_MEASUREMENT,
+)
+
 # pylint: disable=too-many-function-args
 CONFIG_SCHEMA = cv.Schema(
     {
         cv.GenerateID(CONF_RUIXU_BMS_ID): cv.use_id(RuixuBms),
-        cv.Optional(CONF_MIN_CELL_VOLTAGE): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_MAX_CELL_VOLTAGE): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
+
         cv.Optional(CONF_MIN_VOLTAGE_CELL): sensor.sensor_schema(
             unit_of_measurement=UNIT_EMPTY,
             icon=ICON_MIN_VOLTAGE_CELL,
@@ -163,174 +167,12 @@ CONFIG_SCHEMA = cv.Schema(
             device_class=DEVICE_CLASS_EMPTY,
             state_class=STATE_CLASS_MEASUREMENT,
         ),
-        cv.Optional(CONF_DELTA_CELL_VOLTAGE): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_AVERAGE_CELL_VOLTAGE): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_1): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_2): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_3): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_4): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_5): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_6): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_7): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_8): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_9): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_10): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_11): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_12): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_13): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_14): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_15): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_CELL_VOLTAGE_16): sensor.sensor_schema(
-            unit_of_measurement=UNIT_VOLT,
-            icon=ICON_EMPTY,
-            accuracy_decimals=3,
-            device_class=DEVICE_CLASS_VOLTAGE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_TEMPERATURE_1): sensor.sensor_schema(
-            unit_of_measurement=UNIT_CELSIUS,
-            icon=ICON_EMPTY,
-            accuracy_decimals=0,
-            device_class=DEVICE_CLASS_TEMPERATURE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_TEMPERATURE_2): sensor.sensor_schema(
-            unit_of_measurement=UNIT_CELSIUS,
-            icon=ICON_EMPTY,
-            accuracy_decimals=0,
-            device_class=DEVICE_CLASS_TEMPERATURE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_TEMPERATURE_3): sensor.sensor_schema(
-            unit_of_measurement=UNIT_CELSIUS,
-            icon=ICON_EMPTY,
-            accuracy_decimals=0,
-            device_class=DEVICE_CLASS_TEMPERATURE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_TEMPERATURE_4): sensor.sensor_schema(
-            unit_of_measurement=UNIT_CELSIUS,
-            icon=ICON_EMPTY,
-            accuracy_decimals=0,
-            device_class=DEVICE_CLASS_TEMPERATURE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_TEMPERATURE_5): sensor.sensor_schema(
-            unit_of_measurement=UNIT_CELSIUS,
-            icon=ICON_EMPTY,
-            accuracy_decimals=0,
-            device_class=DEVICE_CLASS_TEMPERATURE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
-        cv.Optional(CONF_TEMPERATURE_6): sensor.sensor_schema(
-            unit_of_measurement=UNIT_CELSIUS,
-            icon=ICON_EMPTY,
-            accuracy_decimals=0,
-            device_class=DEVICE_CLASS_TEMPERATURE,
-            state_class=STATE_CLASS_MEASUREMENT,
-        ),
+
+        cv.Optional(CONF_MIN_CELL_VOLTAGE): CELL_VOLTAGE_SCHEMA,
+        cv.Optional(CONF_MAX_CELL_VOLTAGE): CELL_VOLTAGE_SCHEMA,
+        cv.Optional(CONF_DELTA_CELL_VOLTAGE): CELL_VOLTAGE_SCHEMA,
+        cv.Optional(CONF_AVERAGE_CELL_VOLTAGE): CELL_VOLTAGE_SCHEMA,
+
         cv.Optional(CONF_TOTAL_VOLTAGE): sensor.sensor_schema(
             unit_of_measurement=UNIT_VOLT,
             icon=ICON_EMPTY,
@@ -415,6 +257,12 @@ CONFIG_SCHEMA = cv.Schema(
             state_class=STATE_CLASS_MEASUREMENT,
         ),
     }
+).extend(
+    # create the cells
+    { cv.Optional(i): CELL_VOLTAGE_SCHEMA for i in CELLS }
+).extend(
+    # create the temps
+    { cv.Optional(i): TEMP_SCHEMA for i in TEMPERATURES }
 )
 
 
