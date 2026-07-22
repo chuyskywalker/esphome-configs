@@ -21,6 +21,13 @@ substitutions:
 # SUBS ABOVE
 #
 
+.sliding_filter: &sliding_filter
+  # updates are about every 5 seconds, so this will report the data 
+  # every minute(ish) while averaging as we go to eliminate bouncyness
+  - sliding_window_moving_average:
+      window_size: 12
+      send_every: 12
+
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
@@ -254,203 +261,451 @@ sensor:
     min_cell_voltage:
       name: "${batt_1} voltage cell min"
       id: batt_1_voltage_cell_min
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     max_cell_voltage:
       name: "${batt_1} voltage cell max"
       id: batt_1_voltage_cell_max
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     min_voltage_cell:
       name: "${batt_1} voltage cell min number"
       id: batt_1_voltage_cell_min_number
+      # NOTE: DO NOT filter this, silly billy, it's an ID, not a value
     max_voltage_cell:
       name: "${batt_1} voltage cell max number"
       id: batt_1_voltage_cell_max_number
+      # NOTE: DO NOT filter this, silly billy, it's an ID, not a value
     delta_cell_voltage:
       name: "${batt_1} voltage cell delta"
       id: batt_1_voltage_cell_delta
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     average_cell_voltage:
       name: "${batt_1} voltage cell average"
       id: batt_1_voltage_cell_average
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_1:
       name: "${batt_1} voltage cell 1"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_2:
       name: "${batt_1} voltage cell 2"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_3:
       name: "${batt_1} voltage cell 3"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_4:
       name: "${batt_1} voltage cell 4"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_5:
       name: "${batt_1} voltage cell 5"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_6:
       name: "${batt_1} voltage cell 6"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_7:
       name: "${batt_1} voltage cell 7"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_8:
       name: "${batt_1} voltage cell 8"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_9:
       name: "${batt_1} voltage cell 9"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_10:
       name: "${batt_1} voltage cell 10"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_11:
       name: "${batt_1} voltage cell 11"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_12:
       name: "${batt_1} voltage cell 12"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_13:
       name: "${batt_1} voltage cell 13"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_14:
       name: "${batt_1} voltage cell 14"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_15:
       name: "${batt_1} voltage cell 15"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_16:
       name: "${batt_1} voltage cell 16"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     temperature_1:
       name: "${batt_1} temperature 1"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     temperature_2:
       name: "${batt_1} temperature 2"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     temperature_3:
       name: "${batt_1} temperature 3"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     temperature_4:
       name: "${batt_1} temperature 4"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     temperature_5:
       name: "${batt_1} temperature environment"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     temperature_6:
       name: "${batt_1} temperature mosfet"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     total_voltage:
       name: "${batt_1} voltage total"
+      accuracy_decimals: 2
       id: batt_1_voltage_total
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     current:
       name: "${batt_1} current"
       id: batt_1_current
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     power:
       name: "${batt_1} power net"
       id: batt_1_power_net
+      accuracy_decimals: 3
       filters:
         - multiply: 0.001 # Multiplication factor from W to kW is 0.001
+        - <<: *sliding_filter
+        - round: 3
       unit_of_measurement: 'kW'
-      accuracy_decimals: 3
     charging_power:
       name: "${batt_1} power in"
       id: batt_1_power_in
+      accuracy_decimals: 3
       filters:
         - multiply: 0.001 # Multiplication factor from W to kW is 0.001
+        - <<: *sliding_filter
+        - round: 3
       unit_of_measurement: 'kW'
-      accuracy_decimals: 3
     discharging_power:
       name: "${batt_1} power out"
       id: batt_1_power_out
+      accuracy_decimals: 3
       filters:
         - multiply: 0.001 # Multiplication factor from W to kW is 0.001
+        - <<: *sliding_filter
+        - round: 3
       unit_of_measurement: 'kW'
-      accuracy_decimals: 3
     residual_capacity:
       name: "${batt_1} remaining capacity"
+      filters: *sliding_filter
     battery_capacity:
       name: "${batt_1} battery capacity"
+      filters: *sliding_filter
     state_of_charge:
       name: "${batt_1} state of charge"
+      filters: *sliding_filter
     charging_cycles:
       name: "${batt_1} charging cycles"
+      filters: *sliding_filter
     state_of_health:
       name: "${batt_1} state of health"
+      filters: *sliding_filter
 
   - platform: ruixu_bms #################################### batt_2 ###################################
     ruixu_bms_id: bms2
     min_cell_voltage:
       name: "${batt_2} voltage cell min"
       id: batt_2_voltage_cell_min
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     max_cell_voltage:
       name: "${batt_2} voltage cell max"
       id: batt_2_voltage_cell_max
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     min_voltage_cell:
       name: "${batt_2} voltage cell min number"
       id: batt_2_voltage_cell_min_number
+      # NOTE: DO NOT filter this, silly billy, it's an ID, not a value
     max_voltage_cell:
       name: "${batt_2} voltage cell max number"
       id: batt_2_voltage_cell_max_number
+      # NOTE: DO NOT filter this, silly billy, it's an ID, not a value
     delta_cell_voltage:
       name: "${batt_2} voltage cell delta"
       id: batt_2_voltage_cell_delta
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     average_cell_voltage:
       name: "${batt_2} voltage cell average"
       id: batt_2_voltage_cell_average
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_1:
       name: "${batt_2} voltage cell 1"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_2:
       name: "${batt_2} voltage cell 2"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_3:
       name: "${batt_2} voltage cell 3"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_4:
       name: "${batt_2} voltage cell 4"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_5:
       name: "${batt_2} voltage cell 5"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_6:
       name: "${batt_2} voltage cell 6"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_7:
       name: "${batt_2} voltage cell 7"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_8:
       name: "${batt_2} voltage cell 8"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_9:
       name: "${batt_2} voltage cell 9"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_10:
       name: "${batt_2} voltage cell 10"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_11:
       name: "${batt_2} voltage cell 11"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_12:
       name: "${batt_2} voltage cell 12"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_13:
       name: "${batt_2} voltage cell 13"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_14:
       name: "${batt_2} voltage cell 14"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_15:
       name: "${batt_2} voltage cell 15"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     cell_voltage_16:
       name: "${batt_2} voltage cell 16"
+      accuracy_decimals: 3
+      filters:
+        - <<: *sliding_filter
+        - round: 3
     temperature_1:
       name: "${batt_2} temperature 1"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     temperature_2:
       name: "${batt_2} temperature 2"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     temperature_3:
       name: "${batt_2} temperature 3"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     temperature_4:
       name: "${batt_2} temperature 4"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     temperature_5:
       name: "${batt_2} temperature environment"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     temperature_6:
       name: "${batt_2} temperature mosfet"
+      accuracy_decimals: 2
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     total_voltage:
       name: "${batt_2} voltage total"
+      accuracy_decimals: 2
       id: batt_2_voltage_total
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     current:
       name: "${batt_2} current"
       id: batt_2_current
+      filters:
+        - <<: *sliding_filter
+        - round: 2
     power:
       name: "${batt_2} power net"
       id: batt_2_power_net
+      accuracy_decimals: 3
       filters:
         - multiply: 0.001 # Multiplication factor from W to kW is 0.001
+        - <<: *sliding_filter
+        - round: 3
       unit_of_measurement: 'kW'
-      accuracy_decimals: 3
     charging_power:
       name: "${batt_2} power in"
       id: batt_2_power_in
+      accuracy_decimals: 3
       filters:
         - multiply: 0.001 # Multiplication factor from W to kW is 0.001
+        - <<: *sliding_filter
+        - round: 3
       unit_of_measurement: 'kW'
-      accuracy_decimals: 3
     discharging_power:
       name: "${batt_2} power out"
       id: batt_2_power_out
+      accuracy_decimals: 3
       filters:
         - multiply: 0.001 # Multiplication factor from W to kW is 0.001
+        - <<: *sliding_filter
+        - round: 3
       unit_of_measurement: 'kW'
-      accuracy_decimals: 3
     residual_capacity:
       name: "${batt_2} remaining capacity"
+      filters: *sliding_filter
     battery_capacity:
       name: "${batt_2} battery capacity"
+      filters: *sliding_filter
     state_of_charge:
       name: "${batt_2} state of charge"
+      filters: *sliding_filter
     charging_cycles:
       name: "${batt_2} charging cycles"
+      filters: *sliding_filter
     state_of_health:
       name: "${batt_2} state of health"
+      filters: *sliding_filter
 
 # EOF
