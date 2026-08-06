@@ -121,14 +121,14 @@ for bank_id in range(1,7):
     for pin_id in range(1,11):
         print(f'''
   - platform: modbus_controller
+    id: n60_{bank_id}_current_{pin_id}
+    name: bl0910_{bank_id}_current_{pin_id}
     address: {(bank_id * 100) + (pin_id * 2) - 2 }
     register_type: holding
-    name: bl0910_{bank_id}_current_{pin_id}
-    id: n60_{bank_id}_current_{pin_id}
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001''')
 
@@ -136,14 +136,14 @@ for bank_id in range(1,7):
     for pin_id in range(1,11):
         print(f'''
   - platform: modbus_controller
+    id: n60_{bank_id}_watt_{pin_id}
+    name: bl0910_{bank_id}_power_{pin_id}
     address: {(bank_id * 100) + (pin_id * 2) - 2 + 20}
     register_type: holding
-    name: bl0910_{bank_id}_power_{pin_id}
-    id: n60_{bank_id}_watt_{pin_id}
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1''')
 
@@ -151,59 +151,59 @@ for bank_id in range(1,7):
     for pin_id in range(1,11):
         print(f'''    
   - platform: modbus_controller
-    state_class: total_increasing
-    device_class: energy
+    id: n60_{bank_id}_energy_{pin_id}
+    name: bl0910_{bank_id}_energy_{pin_id}
     address: {(bank_id * 100) + (pin_id * 2) - 2 + 40}
     register_type: holding
-    name: bl0910_{bank_id}_energy_{pin_id}
-    id: n60_{bank_id}_energy_{pin_id}
+    value_type: U_DWORD_R
     unit_of_measurement: kWh
-    accuracy_decimals: 1
-    value_type: U_DWORD_R''')
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1''')
 
     # now back in the bank loop, the per-bank sum items
     print(f'''
   - platform: modbus_controller
-    state_class: total_increasing
-    device_class: energy
+    id: n60_{bank_id}_energy_sum
+    name: bl0910_{bank_id}_energy_sum
     address: {bank_id}60
     register_type: holding
-    name: bl0910_{bank_id}_energy_sum
-    id: n60_{bank_id}_energy_sum
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
 
   - platform: modbus_controller
+    id: n60_{bank_id}_voltage
+    name: bl0910_{bank_id}_voltage
     address: {bank_id}62
     register_type: holding
-    name: bl0910_{bank_id}_voltage
-    id: n60_{bank_id}_voltage
+    value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_{bank_id}_period
+    name: bl0910_{bank_id}_frequency
     address: {bank_id}63
     register_type: holding
-    name: bl0910_{bank_id}_frequency
-    id: n60_{bank_id}_period
+    value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_{bank_id}_tps_1
+    name: bl0910_{bank_id}_tps1
     address: {bank_id}64
     register_type: holding
-    name: bl0910_{bank_id}_tps1
-    id: n60_{bank_id}_tps_1
+    value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
-    accuracy_decimals: 1
-    value_type: FP32_R''')
+    accuracy_decimals: 1''')

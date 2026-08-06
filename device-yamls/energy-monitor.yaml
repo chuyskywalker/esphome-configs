@@ -104,2371 +104,2371 @@ sensor:
 
 
   - platform: modbus_controller
+    id: n60_1_current_1
+    name: bl0910_1_current_1
     address: 100
     register_type: holding
-    name: bl0910_1_current_1
-    id: n60_1_current_1
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_1_current_2
+    name: bl0910_1_current_2
     address: 102
     register_type: holding
-    name: bl0910_1_current_2
-    id: n60_1_current_2
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_1_current_3
+    name: bl0910_1_current_3
     address: 104
     register_type: holding
-    name: bl0910_1_current_3
-    id: n60_1_current_3
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_1_current_4
+    name: bl0910_1_current_4
     address: 106
     register_type: holding
-    name: bl0910_1_current_4
-    id: n60_1_current_4
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_1_current_5
+    name: bl0910_1_current_5
     address: 108
     register_type: holding
-    name: bl0910_1_current_5
-    id: n60_1_current_5
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_1_current_6
+    name: bl0910_1_current_6
     address: 110
     register_type: holding
-    name: bl0910_1_current_6
-    id: n60_1_current_6
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_1_current_7
+    name: bl0910_1_current_7
     address: 112
     register_type: holding
-    name: bl0910_1_current_7
-    id: n60_1_current_7
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_1_current_8
+    name: bl0910_1_current_8
     address: 114
     register_type: holding
-    name: bl0910_1_current_8
-    id: n60_1_current_8
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_1_current_9
+    name: bl0910_1_current_9
     address: 116
     register_type: holding
-    name: bl0910_1_current_9
-    id: n60_1_current_9
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_1_current_10
+    name: bl0910_1_current_10
     address: 118
     register_type: holding
-    name: bl0910_1_current_10
-    id: n60_1_current_10
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_1_watt_1
+    name: bl0910_1_power_1
     address: 120
     register_type: holding
-    name: bl0910_1_power_1
-    id: n60_1_watt_1
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_1_watt_2
+    name: bl0910_1_power_2
     address: 122
     register_type: holding
-    name: bl0910_1_power_2
-    id: n60_1_watt_2
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_1_watt_3
+    name: bl0910_1_power_3
     address: 124
     register_type: holding
-    name: bl0910_1_power_3
-    id: n60_1_watt_3
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_1_watt_4
+    name: bl0910_1_power_4
     address: 126
     register_type: holding
-    name: bl0910_1_power_4
-    id: n60_1_watt_4
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_1_watt_5
+    name: bl0910_1_power_5
     address: 128
     register_type: holding
-    name: bl0910_1_power_5
-    id: n60_1_watt_5
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_1_watt_6
+    name: bl0910_1_power_6
     address: 130
     register_type: holding
-    name: bl0910_1_power_6
-    id: n60_1_watt_6
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_1_watt_7
+    name: bl0910_1_power_7
     address: 132
     register_type: holding
-    name: bl0910_1_power_7
-    id: n60_1_watt_7
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_1_watt_8
+    name: bl0910_1_power_8
     address: 134
     register_type: holding
-    name: bl0910_1_power_8
-    id: n60_1_watt_8
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_1_watt_9
+    name: bl0910_1_power_9
     address: 136
     register_type: holding
-    name: bl0910_1_power_9
-    id: n60_1_watt_9
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_1_watt_10
+    name: bl0910_1_power_10
     address: 138
     register_type: holding
-    name: bl0910_1_power_10
-    id: n60_1_watt_10
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
     
   - platform: modbus_controller
-    state_class: total_increasing
-    device_class: energy
+    id: n60_1_energy_1
+    name: bl0910_1_energy_1
     address: 140
     register_type: holding
-    name: bl0910_1_energy_1
-    id: n60_1_energy_1
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_1_energy_2
+    name: bl0910_1_energy_2
     address: 142
     register_type: holding
-    name: bl0910_1_energy_2
-    id: n60_1_energy_2
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_1_energy_3
+    name: bl0910_1_energy_3
     address: 144
     register_type: holding
-    name: bl0910_1_energy_3
-    id: n60_1_energy_3
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_1_energy_4
+    name: bl0910_1_energy_4
     address: 146
     register_type: holding
-    name: bl0910_1_energy_4
-    id: n60_1_energy_4
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_1_energy_5
+    name: bl0910_1_energy_5
     address: 148
     register_type: holding
-    name: bl0910_1_energy_5
-    id: n60_1_energy_5
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_1_energy_6
+    name: bl0910_1_energy_6
     address: 150
     register_type: holding
-    name: bl0910_1_energy_6
-    id: n60_1_energy_6
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_1_energy_7
+    name: bl0910_1_energy_7
     address: 152
     register_type: holding
-    name: bl0910_1_energy_7
-    id: n60_1_energy_7
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_1_energy_8
+    name: bl0910_1_energy_8
     address: 154
     register_type: holding
-    name: bl0910_1_energy_8
-    id: n60_1_energy_8
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_1_energy_9
+    name: bl0910_1_energy_9
     address: 156
     register_type: holding
-    name: bl0910_1_energy_9
-    id: n60_1_energy_9
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_1_energy_10
+    name: bl0910_1_energy_10
     address: 158
     register_type: holding
-    name: bl0910_1_energy_10
-    id: n60_1_energy_10
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    id: n60_1_energy_sum
+    name: bl0910_1_energy_sum
     address: 160
     register_type: holding
-    name: bl0910_1_energy_sum
-    id: n60_1_energy_sum
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
 
   - platform: modbus_controller
+    id: n60_1_voltage
+    name: bl0910_1_voltage
     address: 162
     register_type: holding
-    name: bl0910_1_voltage
-    id: n60_1_voltage
+    value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_1_period
+    name: bl0910_1_frequency
     address: 163
     register_type: holding
-    name: bl0910_1_frequency
-    id: n60_1_period
+    value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_1_tps_1
+    name: bl0910_1_tps1
     address: 164
     register_type: holding
-    name: bl0910_1_tps1
-    id: n60_1_tps_1
+    value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
     accuracy_decimals: 1
-    value_type: FP32_R
 
   - platform: modbus_controller
+    id: n60_2_current_1
+    name: bl0910_2_current_1
     address: 200
     register_type: holding
-    name: bl0910_2_current_1
-    id: n60_2_current_1
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_2_current_2
+    name: bl0910_2_current_2
     address: 202
     register_type: holding
-    name: bl0910_2_current_2
-    id: n60_2_current_2
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_2_current_3
+    name: bl0910_2_current_3
     address: 204
     register_type: holding
-    name: bl0910_2_current_3
-    id: n60_2_current_3
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_2_current_4
+    name: bl0910_2_current_4
     address: 206
     register_type: holding
-    name: bl0910_2_current_4
-    id: n60_2_current_4
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_2_current_5
+    name: bl0910_2_current_5
     address: 208
     register_type: holding
-    name: bl0910_2_current_5
-    id: n60_2_current_5
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_2_current_6
+    name: bl0910_2_current_6
     address: 210
     register_type: holding
-    name: bl0910_2_current_6
-    id: n60_2_current_6
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_2_current_7
+    name: bl0910_2_current_7
     address: 212
     register_type: holding
-    name: bl0910_2_current_7
-    id: n60_2_current_7
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_2_current_8
+    name: bl0910_2_current_8
     address: 214
     register_type: holding
-    name: bl0910_2_current_8
-    id: n60_2_current_8
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_2_current_9
+    name: bl0910_2_current_9
     address: 216
     register_type: holding
-    name: bl0910_2_current_9
-    id: n60_2_current_9
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_2_current_10
+    name: bl0910_2_current_10
     address: 218
     register_type: holding
-    name: bl0910_2_current_10
-    id: n60_2_current_10
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_2_watt_1
+    name: bl0910_2_power_1
     address: 220
     register_type: holding
-    name: bl0910_2_power_1
-    id: n60_2_watt_1
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_2_watt_2
+    name: bl0910_2_power_2
     address: 222
     register_type: holding
-    name: bl0910_2_power_2
-    id: n60_2_watt_2
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_2_watt_3
+    name: bl0910_2_power_3
     address: 224
     register_type: holding
-    name: bl0910_2_power_3
-    id: n60_2_watt_3
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_2_watt_4
+    name: bl0910_2_power_4
     address: 226
     register_type: holding
-    name: bl0910_2_power_4
-    id: n60_2_watt_4
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_2_watt_5
+    name: bl0910_2_power_5
     address: 228
     register_type: holding
-    name: bl0910_2_power_5
-    id: n60_2_watt_5
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_2_watt_6
+    name: bl0910_2_power_6
     address: 230
     register_type: holding
-    name: bl0910_2_power_6
-    id: n60_2_watt_6
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_2_watt_7
+    name: bl0910_2_power_7
     address: 232
     register_type: holding
-    name: bl0910_2_power_7
-    id: n60_2_watt_7
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_2_watt_8
+    name: bl0910_2_power_8
     address: 234
     register_type: holding
-    name: bl0910_2_power_8
-    id: n60_2_watt_8
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_2_watt_9
+    name: bl0910_2_power_9
     address: 236
     register_type: holding
-    name: bl0910_2_power_9
-    id: n60_2_watt_9
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_2_watt_10
+    name: bl0910_2_power_10
     address: 238
     register_type: holding
-    name: bl0910_2_power_10
-    id: n60_2_watt_10
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
     
   - platform: modbus_controller
-    state_class: total_increasing
-    device_class: energy
+    id: n60_2_energy_1
+    name: bl0910_2_energy_1
     address: 240
     register_type: holding
-    name: bl0910_2_energy_1
-    id: n60_2_energy_1
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_2_energy_2
+    name: bl0910_2_energy_2
     address: 242
     register_type: holding
-    name: bl0910_2_energy_2
-    id: n60_2_energy_2
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_2_energy_3
+    name: bl0910_2_energy_3
     address: 244
     register_type: holding
-    name: bl0910_2_energy_3
-    id: n60_2_energy_3
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_2_energy_4
+    name: bl0910_2_energy_4
     address: 246
     register_type: holding
-    name: bl0910_2_energy_4
-    id: n60_2_energy_4
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_2_energy_5
+    name: bl0910_2_energy_5
     address: 248
     register_type: holding
-    name: bl0910_2_energy_5
-    id: n60_2_energy_5
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_2_energy_6
+    name: bl0910_2_energy_6
     address: 250
     register_type: holding
-    name: bl0910_2_energy_6
-    id: n60_2_energy_6
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_2_energy_7
+    name: bl0910_2_energy_7
     address: 252
     register_type: holding
-    name: bl0910_2_energy_7
-    id: n60_2_energy_7
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_2_energy_8
+    name: bl0910_2_energy_8
     address: 254
     register_type: holding
-    name: bl0910_2_energy_8
-    id: n60_2_energy_8
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_2_energy_9
+    name: bl0910_2_energy_9
     address: 256
     register_type: holding
-    name: bl0910_2_energy_9
-    id: n60_2_energy_9
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_2_energy_10
+    name: bl0910_2_energy_10
     address: 258
     register_type: holding
-    name: bl0910_2_energy_10
-    id: n60_2_energy_10
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    id: n60_2_energy_sum
+    name: bl0910_2_energy_sum
     address: 260
     register_type: holding
-    name: bl0910_2_energy_sum
-    id: n60_2_energy_sum
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
 
   - platform: modbus_controller
+    id: n60_2_voltage
+    name: bl0910_2_voltage
     address: 262
     register_type: holding
-    name: bl0910_2_voltage
-    id: n60_2_voltage
+    value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_2_period
+    name: bl0910_2_frequency
     address: 263
     register_type: holding
-    name: bl0910_2_frequency
-    id: n60_2_period
+    value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_2_tps_1
+    name: bl0910_2_tps1
     address: 264
     register_type: holding
-    name: bl0910_2_tps1
-    id: n60_2_tps_1
+    value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
     accuracy_decimals: 1
-    value_type: FP32_R
 
   - platform: modbus_controller
+    id: n60_3_current_1
+    name: bl0910_3_current_1
     address: 300
     register_type: holding
-    name: bl0910_3_current_1
-    id: n60_3_current_1
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_3_current_2
+    name: bl0910_3_current_2
     address: 302
     register_type: holding
-    name: bl0910_3_current_2
-    id: n60_3_current_2
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_3_current_3
+    name: bl0910_3_current_3
     address: 304
     register_type: holding
-    name: bl0910_3_current_3
-    id: n60_3_current_3
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_3_current_4
+    name: bl0910_3_current_4
     address: 306
     register_type: holding
-    name: bl0910_3_current_4
-    id: n60_3_current_4
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_3_current_5
+    name: bl0910_3_current_5
     address: 308
     register_type: holding
-    name: bl0910_3_current_5
-    id: n60_3_current_5
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_3_current_6
+    name: bl0910_3_current_6
     address: 310
     register_type: holding
-    name: bl0910_3_current_6
-    id: n60_3_current_6
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_3_current_7
+    name: bl0910_3_current_7
     address: 312
     register_type: holding
-    name: bl0910_3_current_7
-    id: n60_3_current_7
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_3_current_8
+    name: bl0910_3_current_8
     address: 314
     register_type: holding
-    name: bl0910_3_current_8
-    id: n60_3_current_8
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_3_current_9
+    name: bl0910_3_current_9
     address: 316
     register_type: holding
-    name: bl0910_3_current_9
-    id: n60_3_current_9
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_3_current_10
+    name: bl0910_3_current_10
     address: 318
     register_type: holding
-    name: bl0910_3_current_10
-    id: n60_3_current_10
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_3_watt_1
+    name: bl0910_3_power_1
     address: 320
     register_type: holding
-    name: bl0910_3_power_1
-    id: n60_3_watt_1
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_3_watt_2
+    name: bl0910_3_power_2
     address: 322
     register_type: holding
-    name: bl0910_3_power_2
-    id: n60_3_watt_2
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_3_watt_3
+    name: bl0910_3_power_3
     address: 324
     register_type: holding
-    name: bl0910_3_power_3
-    id: n60_3_watt_3
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_3_watt_4
+    name: bl0910_3_power_4
     address: 326
     register_type: holding
-    name: bl0910_3_power_4
-    id: n60_3_watt_4
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_3_watt_5
+    name: bl0910_3_power_5
     address: 328
     register_type: holding
-    name: bl0910_3_power_5
-    id: n60_3_watt_5
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_3_watt_6
+    name: bl0910_3_power_6
     address: 330
     register_type: holding
-    name: bl0910_3_power_6
-    id: n60_3_watt_6
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_3_watt_7
+    name: bl0910_3_power_7
     address: 332
     register_type: holding
-    name: bl0910_3_power_7
-    id: n60_3_watt_7
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_3_watt_8
+    name: bl0910_3_power_8
     address: 334
     register_type: holding
-    name: bl0910_3_power_8
-    id: n60_3_watt_8
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_3_watt_9
+    name: bl0910_3_power_9
     address: 336
     register_type: holding
-    name: bl0910_3_power_9
-    id: n60_3_watt_9
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_3_watt_10
+    name: bl0910_3_power_10
     address: 338
     register_type: holding
-    name: bl0910_3_power_10
-    id: n60_3_watt_10
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
     
   - platform: modbus_controller
-    state_class: total_increasing
-    device_class: energy
+    id: n60_3_energy_1
+    name: bl0910_3_energy_1
     address: 340
     register_type: holding
-    name: bl0910_3_energy_1
-    id: n60_3_energy_1
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_3_energy_2
+    name: bl0910_3_energy_2
     address: 342
     register_type: holding
-    name: bl0910_3_energy_2
-    id: n60_3_energy_2
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_3_energy_3
+    name: bl0910_3_energy_3
     address: 344
     register_type: holding
-    name: bl0910_3_energy_3
-    id: n60_3_energy_3
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_3_energy_4
+    name: bl0910_3_energy_4
     address: 346
     register_type: holding
-    name: bl0910_3_energy_4
-    id: n60_3_energy_4
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_3_energy_5
+    name: bl0910_3_energy_5
     address: 348
     register_type: holding
-    name: bl0910_3_energy_5
-    id: n60_3_energy_5
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_3_energy_6
+    name: bl0910_3_energy_6
     address: 350
     register_type: holding
-    name: bl0910_3_energy_6
-    id: n60_3_energy_6
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_3_energy_7
+    name: bl0910_3_energy_7
     address: 352
     register_type: holding
-    name: bl0910_3_energy_7
-    id: n60_3_energy_7
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_3_energy_8
+    name: bl0910_3_energy_8
     address: 354
     register_type: holding
-    name: bl0910_3_energy_8
-    id: n60_3_energy_8
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_3_energy_9
+    name: bl0910_3_energy_9
     address: 356
     register_type: holding
-    name: bl0910_3_energy_9
-    id: n60_3_energy_9
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_3_energy_10
+    name: bl0910_3_energy_10
     address: 358
     register_type: holding
-    name: bl0910_3_energy_10
-    id: n60_3_energy_10
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    id: n60_3_energy_sum
+    name: bl0910_3_energy_sum
     address: 360
     register_type: holding
-    name: bl0910_3_energy_sum
-    id: n60_3_energy_sum
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
 
   - platform: modbus_controller
+    id: n60_3_voltage
+    name: bl0910_3_voltage
     address: 362
     register_type: holding
-    name: bl0910_3_voltage
-    id: n60_3_voltage
+    value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_3_period
+    name: bl0910_3_frequency
     address: 363
     register_type: holding
-    name: bl0910_3_frequency
-    id: n60_3_period
+    value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_3_tps_1
+    name: bl0910_3_tps1
     address: 364
     register_type: holding
-    name: bl0910_3_tps1
-    id: n60_3_tps_1
+    value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
     accuracy_decimals: 1
-    value_type: FP32_R
 
   - platform: modbus_controller
+    id: n60_4_current_1
+    name: bl0910_4_current_1
     address: 400
     register_type: holding
-    name: bl0910_4_current_1
-    id: n60_4_current_1
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_4_current_2
+    name: bl0910_4_current_2
     address: 402
     register_type: holding
-    name: bl0910_4_current_2
-    id: n60_4_current_2
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_4_current_3
+    name: bl0910_4_current_3
     address: 404
     register_type: holding
-    name: bl0910_4_current_3
-    id: n60_4_current_3
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_4_current_4
+    name: bl0910_4_current_4
     address: 406
     register_type: holding
-    name: bl0910_4_current_4
-    id: n60_4_current_4
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_4_current_5
+    name: bl0910_4_current_5
     address: 408
     register_type: holding
-    name: bl0910_4_current_5
-    id: n60_4_current_5
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_4_current_6
+    name: bl0910_4_current_6
     address: 410
     register_type: holding
-    name: bl0910_4_current_6
-    id: n60_4_current_6
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_4_current_7
+    name: bl0910_4_current_7
     address: 412
     register_type: holding
-    name: bl0910_4_current_7
-    id: n60_4_current_7
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_4_current_8
+    name: bl0910_4_current_8
     address: 414
     register_type: holding
-    name: bl0910_4_current_8
-    id: n60_4_current_8
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_4_current_9
+    name: bl0910_4_current_9
     address: 416
     register_type: holding
-    name: bl0910_4_current_9
-    id: n60_4_current_9
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_4_current_10
+    name: bl0910_4_current_10
     address: 418
     register_type: holding
-    name: bl0910_4_current_10
-    id: n60_4_current_10
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_4_watt_1
+    name: bl0910_4_power_1
     address: 420
     register_type: holding
-    name: bl0910_4_power_1
-    id: n60_4_watt_1
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_4_watt_2
+    name: bl0910_4_power_2
     address: 422
     register_type: holding
-    name: bl0910_4_power_2
-    id: n60_4_watt_2
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_4_watt_3
+    name: bl0910_4_power_3
     address: 424
     register_type: holding
-    name: bl0910_4_power_3
-    id: n60_4_watt_3
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_4_watt_4
+    name: bl0910_4_power_4
     address: 426
     register_type: holding
-    name: bl0910_4_power_4
-    id: n60_4_watt_4
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_4_watt_5
+    name: bl0910_4_power_5
     address: 428
     register_type: holding
-    name: bl0910_4_power_5
-    id: n60_4_watt_5
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_4_watt_6
+    name: bl0910_4_power_6
     address: 430
     register_type: holding
-    name: bl0910_4_power_6
-    id: n60_4_watt_6
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_4_watt_7
+    name: bl0910_4_power_7
     address: 432
     register_type: holding
-    name: bl0910_4_power_7
-    id: n60_4_watt_7
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_4_watt_8
+    name: bl0910_4_power_8
     address: 434
     register_type: holding
-    name: bl0910_4_power_8
-    id: n60_4_watt_8
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_4_watt_9
+    name: bl0910_4_power_9
     address: 436
     register_type: holding
-    name: bl0910_4_power_9
-    id: n60_4_watt_9
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_4_watt_10
+    name: bl0910_4_power_10
     address: 438
     register_type: holding
-    name: bl0910_4_power_10
-    id: n60_4_watt_10
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
     
   - platform: modbus_controller
-    state_class: total_increasing
-    device_class: energy
+    id: n60_4_energy_1
+    name: bl0910_4_energy_1
     address: 440
     register_type: holding
-    name: bl0910_4_energy_1
-    id: n60_4_energy_1
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_4_energy_2
+    name: bl0910_4_energy_2
     address: 442
     register_type: holding
-    name: bl0910_4_energy_2
-    id: n60_4_energy_2
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_4_energy_3
+    name: bl0910_4_energy_3
     address: 444
     register_type: holding
-    name: bl0910_4_energy_3
-    id: n60_4_energy_3
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_4_energy_4
+    name: bl0910_4_energy_4
     address: 446
     register_type: holding
-    name: bl0910_4_energy_4
-    id: n60_4_energy_4
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_4_energy_5
+    name: bl0910_4_energy_5
     address: 448
     register_type: holding
-    name: bl0910_4_energy_5
-    id: n60_4_energy_5
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_4_energy_6
+    name: bl0910_4_energy_6
     address: 450
     register_type: holding
-    name: bl0910_4_energy_6
-    id: n60_4_energy_6
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_4_energy_7
+    name: bl0910_4_energy_7
     address: 452
     register_type: holding
-    name: bl0910_4_energy_7
-    id: n60_4_energy_7
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_4_energy_8
+    name: bl0910_4_energy_8
     address: 454
     register_type: holding
-    name: bl0910_4_energy_8
-    id: n60_4_energy_8
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_4_energy_9
+    name: bl0910_4_energy_9
     address: 456
     register_type: holding
-    name: bl0910_4_energy_9
-    id: n60_4_energy_9
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_4_energy_10
+    name: bl0910_4_energy_10
     address: 458
     register_type: holding
-    name: bl0910_4_energy_10
-    id: n60_4_energy_10
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    id: n60_4_energy_sum
+    name: bl0910_4_energy_sum
     address: 460
     register_type: holding
-    name: bl0910_4_energy_sum
-    id: n60_4_energy_sum
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
 
   - platform: modbus_controller
+    id: n60_4_voltage
+    name: bl0910_4_voltage
     address: 462
     register_type: holding
-    name: bl0910_4_voltage
-    id: n60_4_voltage
+    value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_4_period
+    name: bl0910_4_frequency
     address: 463
     register_type: holding
-    name: bl0910_4_frequency
-    id: n60_4_period
+    value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_4_tps_1
+    name: bl0910_4_tps1
     address: 464
     register_type: holding
-    name: bl0910_4_tps1
-    id: n60_4_tps_1
+    value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
     accuracy_decimals: 1
-    value_type: FP32_R
 
   - platform: modbus_controller
+    id: n60_5_current_1
+    name: bl0910_5_current_1
     address: 500
     register_type: holding
-    name: bl0910_5_current_1
-    id: n60_5_current_1
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_5_current_2
+    name: bl0910_5_current_2
     address: 502
     register_type: holding
-    name: bl0910_5_current_2
-    id: n60_5_current_2
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_5_current_3
+    name: bl0910_5_current_3
     address: 504
     register_type: holding
-    name: bl0910_5_current_3
-    id: n60_5_current_3
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_5_current_4
+    name: bl0910_5_current_4
     address: 506
     register_type: holding
-    name: bl0910_5_current_4
-    id: n60_5_current_4
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_5_current_5
+    name: bl0910_5_current_5
     address: 508
     register_type: holding
-    name: bl0910_5_current_5
-    id: n60_5_current_5
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_5_current_6
+    name: bl0910_5_current_6
     address: 510
     register_type: holding
-    name: bl0910_5_current_6
-    id: n60_5_current_6
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_5_current_7
+    name: bl0910_5_current_7
     address: 512
     register_type: holding
-    name: bl0910_5_current_7
-    id: n60_5_current_7
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_5_current_8
+    name: bl0910_5_current_8
     address: 514
     register_type: holding
-    name: bl0910_5_current_8
-    id: n60_5_current_8
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_5_current_9
+    name: bl0910_5_current_9
     address: 516
     register_type: holding
-    name: bl0910_5_current_9
-    id: n60_5_current_9
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_5_current_10
+    name: bl0910_5_current_10
     address: 518
     register_type: holding
-    name: bl0910_5_current_10
-    id: n60_5_current_10
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_5_watt_1
+    name: bl0910_5_power_1
     address: 520
     register_type: holding
-    name: bl0910_5_power_1
-    id: n60_5_watt_1
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_5_watt_2
+    name: bl0910_5_power_2
     address: 522
     register_type: holding
-    name: bl0910_5_power_2
-    id: n60_5_watt_2
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_5_watt_3
+    name: bl0910_5_power_3
     address: 524
     register_type: holding
-    name: bl0910_5_power_3
-    id: n60_5_watt_3
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_5_watt_4
+    name: bl0910_5_power_4
     address: 526
     register_type: holding
-    name: bl0910_5_power_4
-    id: n60_5_watt_4
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_5_watt_5
+    name: bl0910_5_power_5
     address: 528
     register_type: holding
-    name: bl0910_5_power_5
-    id: n60_5_watt_5
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_5_watt_6
+    name: bl0910_5_power_6
     address: 530
     register_type: holding
-    name: bl0910_5_power_6
-    id: n60_5_watt_6
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_5_watt_7
+    name: bl0910_5_power_7
     address: 532
     register_type: holding
-    name: bl0910_5_power_7
-    id: n60_5_watt_7
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_5_watt_8
+    name: bl0910_5_power_8
     address: 534
     register_type: holding
-    name: bl0910_5_power_8
-    id: n60_5_watt_8
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_5_watt_9
+    name: bl0910_5_power_9
     address: 536
     register_type: holding
-    name: bl0910_5_power_9
-    id: n60_5_watt_9
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_5_watt_10
+    name: bl0910_5_power_10
     address: 538
     register_type: holding
-    name: bl0910_5_power_10
-    id: n60_5_watt_10
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
     
   - platform: modbus_controller
-    state_class: total_increasing
-    device_class: energy
+    id: n60_5_energy_1
+    name: bl0910_5_energy_1
     address: 540
     register_type: holding
-    name: bl0910_5_energy_1
-    id: n60_5_energy_1
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_5_energy_2
+    name: bl0910_5_energy_2
     address: 542
     register_type: holding
-    name: bl0910_5_energy_2
-    id: n60_5_energy_2
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_5_energy_3
+    name: bl0910_5_energy_3
     address: 544
     register_type: holding
-    name: bl0910_5_energy_3
-    id: n60_5_energy_3
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_5_energy_4
+    name: bl0910_5_energy_4
     address: 546
     register_type: holding
-    name: bl0910_5_energy_4
-    id: n60_5_energy_4
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_5_energy_5
+    name: bl0910_5_energy_5
     address: 548
     register_type: holding
-    name: bl0910_5_energy_5
-    id: n60_5_energy_5
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_5_energy_6
+    name: bl0910_5_energy_6
     address: 550
     register_type: holding
-    name: bl0910_5_energy_6
-    id: n60_5_energy_6
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_5_energy_7
+    name: bl0910_5_energy_7
     address: 552
     register_type: holding
-    name: bl0910_5_energy_7
-    id: n60_5_energy_7
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_5_energy_8
+    name: bl0910_5_energy_8
     address: 554
     register_type: holding
-    name: bl0910_5_energy_8
-    id: n60_5_energy_8
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_5_energy_9
+    name: bl0910_5_energy_9
     address: 556
     register_type: holding
-    name: bl0910_5_energy_9
-    id: n60_5_energy_9
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_5_energy_10
+    name: bl0910_5_energy_10
     address: 558
     register_type: holding
-    name: bl0910_5_energy_10
-    id: n60_5_energy_10
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    id: n60_5_energy_sum
+    name: bl0910_5_energy_sum
     address: 560
     register_type: holding
-    name: bl0910_5_energy_sum
-    id: n60_5_energy_sum
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
 
   - platform: modbus_controller
+    id: n60_5_voltage
+    name: bl0910_5_voltage
     address: 562
     register_type: holding
-    name: bl0910_5_voltage
-    id: n60_5_voltage
+    value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_5_period
+    name: bl0910_5_frequency
     address: 563
     register_type: holding
-    name: bl0910_5_frequency
-    id: n60_5_period
+    value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_5_tps_1
+    name: bl0910_5_tps1
     address: 564
     register_type: holding
-    name: bl0910_5_tps1
-    id: n60_5_tps_1
+    value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
     accuracy_decimals: 1
-    value_type: FP32_R
 
   - platform: modbus_controller
+    id: n60_6_current_1
+    name: bl0910_6_current_1
     address: 600
     register_type: holding
-    name: bl0910_6_current_1
-    id: n60_6_current_1
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_6_current_2
+    name: bl0910_6_current_2
     address: 602
     register_type: holding
-    name: bl0910_6_current_2
-    id: n60_6_current_2
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_6_current_3
+    name: bl0910_6_current_3
     address: 604
     register_type: holding
-    name: bl0910_6_current_3
-    id: n60_6_current_3
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_6_current_4
+    name: bl0910_6_current_4
     address: 606
     register_type: holding
-    name: bl0910_6_current_4
-    id: n60_6_current_4
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_6_current_5
+    name: bl0910_6_current_5
     address: 608
     register_type: holding
-    name: bl0910_6_current_5
-    id: n60_6_current_5
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_6_current_6
+    name: bl0910_6_current_6
     address: 610
     register_type: holding
-    name: bl0910_6_current_6
-    id: n60_6_current_6
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_6_current_7
+    name: bl0910_6_current_7
     address: 612
     register_type: holding
-    name: bl0910_6_current_7
-    id: n60_6_current_7
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_6_current_8
+    name: bl0910_6_current_8
     address: 614
     register_type: holding
-    name: bl0910_6_current_8
-    id: n60_6_current_8
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_6_current_9
+    name: bl0910_6_current_9
     address: 616
     register_type: holding
-    name: bl0910_6_current_9
-    id: n60_6_current_9
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_6_current_10
+    name: bl0910_6_current_10
     address: 618
     register_type: holding
-    name: bl0910_6_current_10
-    id: n60_6_current_10
+    value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
     accuracy_decimals: 3
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.001
 
   - platform: modbus_controller
+    id: n60_6_watt_1
+    name: bl0910_6_power_1
     address: 620
     register_type: holding
-    name: bl0910_6_power_1
-    id: n60_6_watt_1
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_6_watt_2
+    name: bl0910_6_power_2
     address: 622
     register_type: holding
-    name: bl0910_6_power_2
-    id: n60_6_watt_2
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_6_watt_3
+    name: bl0910_6_power_3
     address: 624
     register_type: holding
-    name: bl0910_6_power_3
-    id: n60_6_watt_3
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_6_watt_4
+    name: bl0910_6_power_4
     address: 626
     register_type: holding
-    name: bl0910_6_power_4
-    id: n60_6_watt_4
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_6_watt_5
+    name: bl0910_6_power_5
     address: 628
     register_type: holding
-    name: bl0910_6_power_5
-    id: n60_6_watt_5
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_6_watt_6
+    name: bl0910_6_power_6
     address: 630
     register_type: holding
-    name: bl0910_6_power_6
-    id: n60_6_watt_6
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_6_watt_7
+    name: bl0910_6_power_7
     address: 632
     register_type: holding
-    name: bl0910_6_power_7
-    id: n60_6_watt_7
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_6_watt_8
+    name: bl0910_6_power_8
     address: 634
     register_type: holding
-    name: bl0910_6_power_8
-    id: n60_6_watt_8
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_6_watt_9
+    name: bl0910_6_power_9
     address: 636
     register_type: holding
-    name: bl0910_6_power_9
-    id: n60_6_watt_9
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
 
   - platform: modbus_controller
+    id: n60_6_watt_10
+    name: bl0910_6_power_10
     address: 638
     register_type: holding
-    name: bl0910_6_power_10
-    id: n60_6_watt_10
+    value_type: U_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
-    value_type: U_DWORD_R
     filters:
     - multiply: 0.1
     
   - platform: modbus_controller
-    state_class: total_increasing
-    device_class: energy
+    id: n60_6_energy_1
+    name: bl0910_6_energy_1
     address: 640
     register_type: holding
-    name: bl0910_6_energy_1
-    id: n60_6_energy_1
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_6_energy_2
+    name: bl0910_6_energy_2
     address: 642
     register_type: holding
-    name: bl0910_6_energy_2
-    id: n60_6_energy_2
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_6_energy_3
+    name: bl0910_6_energy_3
     address: 644
     register_type: holding
-    name: bl0910_6_energy_3
-    id: n60_6_energy_3
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_6_energy_4
+    name: bl0910_6_energy_4
     address: 646
     register_type: holding
-    name: bl0910_6_energy_4
-    id: n60_6_energy_4
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_6_energy_5
+    name: bl0910_6_energy_5
     address: 648
     register_type: holding
-    name: bl0910_6_energy_5
-    id: n60_6_energy_5
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_6_energy_6
+    name: bl0910_6_energy_6
     address: 650
     register_type: holding
-    name: bl0910_6_energy_6
-    id: n60_6_energy_6
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_6_energy_7
+    name: bl0910_6_energy_7
     address: 652
     register_type: holding
-    name: bl0910_6_energy_7
-    id: n60_6_energy_7
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_6_energy_8
+    name: bl0910_6_energy_8
     address: 654
     register_type: holding
-    name: bl0910_6_energy_8
-    id: n60_6_energy_8
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-    
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: n60_6_energy_9
+    name: bl0910_6_energy_9
     address: 656
     register_type: holding
-    name: bl0910_6_energy_9
-    id: n60_6_energy_9
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
     
   - platform: modbus_controller
-    state_class: total_increasing
-    device_class: energy
+    id: n60_6_energy_10
+    name: bl0910_6_energy_10
     address: 658
     register_type: holding
-    name: bl0910_6_energy_10
-    id: n60_6_energy_10
-    unit_of_measurement: kWh
-    accuracy_decimals: 1
     value_type: U_DWORD_R
-
-  - platform: modbus_controller
+    unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    address: 660
-    register_type: holding
-    name: bl0910_6_energy_sum
-    id: n60_6_energy_sum
-    unit_of_measurement: kWh
     accuracy_decimals: 1
-    value_type: U_DWORD_R
 
   - platform: modbus_controller
+    id: n60_6_energy_sum
+    name: bl0910_6_energy_sum
+    address: 660
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    id: n60_6_voltage
+    name: bl0910_6_voltage
     address: 662
     register_type: holding
-    name: bl0910_6_voltage
-    id: n60_6_voltage
+    value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_6_period
+    name: bl0910_6_frequency
     address: 663
     register_type: holding
-    name: bl0910_6_frequency
-    id: n60_6_period
+    value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
     accuracy_decimals: 1
-    value_type: U_WORD
     filters:
     - multiply: 0.01
 
   - platform: modbus_controller
+    id: n60_6_tps_1
+    name: bl0910_6_tps1
     address: 664
     register_type: holding
-    name: bl0910_6_tps1
-    id: n60_6_tps_1
+    value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
     accuracy_decimals: 1
-    value_type: FP32_R
