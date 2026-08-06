@@ -13,7 +13,7 @@ if target not in ['sa1', 'sa2']:
 print(f"Generating to: {target}.yaml")
 
 # Open your log file (use 'w' to overwrite, or 'a' to append)
-sys.stdout = open(f"/app/device-yamls/{target}.yaml", "w", encoding="utf-8")
+sys.stdout = open(f"/config/{target}.yaml", "w", encoding="utf-8")
 
 # SUBS:
 
@@ -380,7 +380,18 @@ for (address, name, word_type) in watts:
     value_type: {word_type}
 ''')
 
-
+# Combine the PV input powers; every other stats has a combined value but this one :/
+print(f'''
+  - platform: combination
+    type: sum
+    name: "PV Input Power Combined"
+    id: pv_input_power_combined
+    sources:
+      - source: sensor_186
+      - source: sensor_187
+      - source: sensor_188
+      - source: sensor_189
+''')
 
 voltages = [
   ( 109, "DC (PV) voltage 1"                     ),
