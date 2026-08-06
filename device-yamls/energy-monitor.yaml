@@ -103,9 +103,10 @@ modbus_controller:
 sensor:
 
 
+  # bank: 1, pin: 1, ct: 1
   - platform: modbus_controller
-    id: n60_1_1_current
-    name: bl0910_1_1_current
+    id: ct_1_current
+    name: CT 1 Current
     address: 100
     register_type: holding
     value_type: U_DWORD_R
@@ -115,9 +116,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 1, pin: 2, ct: 2
   - platform: modbus_controller
-    id: n60_1_2_current
-    name: bl0910_1_2_current
+    id: ct_2_current
+    name: CT 2 Current
     address: 102
     register_type: holding
     value_type: U_DWORD_R
@@ -127,9 +129,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 1, pin: 3, ct: 3
   - platform: modbus_controller
-    id: n60_1_3_current
-    name: bl0910_1_3_current
+    id: ct_3_current
+    name: CT 3 Current
     address: 104
     register_type: holding
     value_type: U_DWORD_R
@@ -139,9 +142,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 1, pin: 4, ct: 4
   - platform: modbus_controller
-    id: n60_1_4_current
-    name: bl0910_1_4_current
+    id: ct_4_current
+    name: CT 4 Current
     address: 106
     register_type: holding
     value_type: U_DWORD_R
@@ -151,9 +155,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 1, pin: 5, ct: 5
   - platform: modbus_controller
-    id: n60_1_5_current
-    name: bl0910_1_5_current
+    id: ct_5_current
+    name: CT 5 Current
     address: 108
     register_type: holding
     value_type: U_DWORD_R
@@ -163,9 +168,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 1, pin: 6, ct: 6
   - platform: modbus_controller
-    id: n60_1_6_current
-    name: bl0910_1_6_current
+    id: ct_6_current
+    name: CT 6 Current
     address: 110
     register_type: holding
     value_type: U_DWORD_R
@@ -175,9 +181,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 1, pin: 7, ct: 7
   - platform: modbus_controller
-    id: n60_1_7_current
-    name: bl0910_1_7_current
+    id: ct_7_current
+    name: CT 7 Current
     address: 112
     register_type: holding
     value_type: U_DWORD_R
@@ -187,9 +194,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 1, pin: 8, ct: 8
   - platform: modbus_controller
-    id: n60_1_8_current
-    name: bl0910_1_8_current
+    id: ct_8_current
+    name: CT 8 Current
     address: 114
     register_type: holding
     value_type: U_DWORD_R
@@ -199,9 +207,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 1, pin: 9, ct: 9
   - platform: modbus_controller
-    id: n60_1_9_current
-    name: bl0910_1_9_current
+    id: ct_9_current
+    name: CT 9 Current
     address: 116
     register_type: holding
     value_type: U_DWORD_R
@@ -211,9 +220,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 1, pin: 10, ct: 10
   - platform: modbus_controller
-    id: n60_1_10_current
-    name: bl0910_1_10_current
+    id: ct_10_current
+    name: CT 10 Current
     address: 118
     register_type: holding
     value_type: U_DWORD_R
@@ -223,9 +233,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 1, pin: 1, ct: 1
   - platform: modbus_controller
-    id: n60_1_1_power
-    name: bl0910_1_1_power
+    id: ct_1_power
+    name: CT 1 Power
     address: 120
     register_type: holding
     value_type: U_DWORD_R
@@ -235,9 +246,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 1, pin: 2, ct: 2
   - platform: modbus_controller
-    id: n60_1_2_power
-    name: bl0910_1_2_power
+    id: ct_2_power
+    name: CT 2 Power
     address: 122
     register_type: holding
     value_type: U_DWORD_R
@@ -247,9 +259,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 1, pin: 3, ct: 3
   - platform: modbus_controller
-    id: n60_1_3_power
-    name: bl0910_1_3_power
+    id: ct_3_power
+    name: CT 3 Power
     address: 124
     register_type: holding
     value_type: U_DWORD_R
@@ -259,9 +272,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 1, pin: 4, ct: 4
   - platform: modbus_controller
-    id: n60_1_4_power
-    name: bl0910_1_4_power
+    id: ct_4_power
+    name: CT 4 Power
     address: 126
     register_type: holding
     value_type: U_DWORD_R
@@ -271,9 +285,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 1, pin: 5, ct: 5
   - platform: modbus_controller
-    id: n60_1_5_power
-    name: bl0910_1_5_power
+    id: ct_5_power
+    name: CT 5 Power
     address: 128
     register_type: holding
     value_type: U_DWORD_R
@@ -283,9 +298,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 1, pin: 6, ct: 6
   - platform: modbus_controller
-    id: n60_1_6_power
-    name: bl0910_1_6_power
+    id: ct_6_power
+    name: CT 6 Power
     address: 130
     register_type: holding
     value_type: U_DWORD_R
@@ -295,9 +311,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 1, pin: 7, ct: 7
   - platform: modbus_controller
-    id: n60_1_7_power
-    name: bl0910_1_7_power
+    id: ct_7_power
+    name: CT 7 Power
     address: 132
     register_type: holding
     value_type: U_DWORD_R
@@ -307,9 +324,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 1, pin: 8, ct: 8
   - platform: modbus_controller
-    id: n60_1_8_power
-    name: bl0910_1_8_power
+    id: ct_8_power
+    name: CT 8 Power
     address: 134
     register_type: holding
     value_type: U_DWORD_R
@@ -319,9 +337,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 1, pin: 9, ct: 9
   - platform: modbus_controller
-    id: n60_1_9_power
-    name: bl0910_1_9_power
+    id: ct_9_power
+    name: CT 9 Power
     address: 136
     register_type: holding
     value_type: U_DWORD_R
@@ -331,9 +350,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 1, pin: 10, ct: 10
   - platform: modbus_controller
-    id: n60_1_10_power
-    name: bl0910_1_10_power
+    id: ct_10_power
+    name: CT 10 Power
     address: 138
     register_type: holding
     value_type: U_DWORD_R
@@ -342,10 +362,11 @@ sensor:
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
-    
+
+  # bank: 1, pin: 1, ct: 1
   - platform: modbus_controller
-    id: n60_1_1_energy
-    name: bl0910_1_1_energy
+    id: ct_1_energy
+    name: CT 1 Energy
     address: 140
     register_type: holding
     value_type: U_DWORD_R
@@ -353,10 +374,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 1, pin: 2, ct: 2
   - platform: modbus_controller
-    id: n60_1_2_energy
-    name: bl0910_1_2_energy
+    id: ct_2_energy
+    name: CT 2 Energy
     address: 142
     register_type: holding
     value_type: U_DWORD_R
@@ -364,10 +386,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 1, pin: 3, ct: 3
   - platform: modbus_controller
-    id: n60_1_3_energy
-    name: bl0910_1_3_energy
+    id: ct_3_energy
+    name: CT 3 Energy
     address: 144
     register_type: holding
     value_type: U_DWORD_R
@@ -375,10 +398,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 1, pin: 4, ct: 4
   - platform: modbus_controller
-    id: n60_1_4_energy
-    name: bl0910_1_4_energy
+    id: ct_4_energy
+    name: CT 4 Energy
     address: 146
     register_type: holding
     value_type: U_DWORD_R
@@ -386,10 +410,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 1, pin: 5, ct: 5
   - platform: modbus_controller
-    id: n60_1_5_energy
-    name: bl0910_1_5_energy
+    id: ct_5_energy
+    name: CT 5 Energy
     address: 148
     register_type: holding
     value_type: U_DWORD_R
@@ -397,10 +422,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 1, pin: 6, ct: 6
   - platform: modbus_controller
-    id: n60_1_6_energy
-    name: bl0910_1_6_energy
+    id: ct_6_energy
+    name: CT 6 Energy
     address: 150
     register_type: holding
     value_type: U_DWORD_R
@@ -408,10 +434,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 1, pin: 7, ct: 7
   - platform: modbus_controller
-    id: n60_1_7_energy
-    name: bl0910_1_7_energy
+    id: ct_7_energy
+    name: CT 7 Energy
     address: 152
     register_type: holding
     value_type: U_DWORD_R
@@ -419,10 +446,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 1, pin: 8, ct: 8
   - platform: modbus_controller
-    id: n60_1_8_energy
-    name: bl0910_1_8_energy
+    id: ct_8_energy
+    name: CT 8 Energy
     address: 154
     register_type: holding
     value_type: U_DWORD_R
@@ -430,10 +458,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 1, pin: 9, ct: 9
   - platform: modbus_controller
-    id: n60_1_9_energy
-    name: bl0910_1_9_energy
+    id: ct_9_energy
+    name: CT 9 Energy
     address: 156
     register_type: holding
     value_type: U_DWORD_R
@@ -441,10 +470,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 1, pin: 10, ct: 10
   - platform: modbus_controller
-    id: n60_1_10_energy
-    name: bl0910_1_10_energy
+    id: ct_10_energy
+    name: CT 10 Energy
     address: 158
     register_type: holding
     value_type: U_DWORD_R
@@ -453,9 +483,10 @@ sensor:
     device_class: energy
     accuracy_decimals: 1
 
+  # bank: 1, ct start: 1, ct end: 10
   - platform: modbus_controller
-    id: n60_1_energy_sum
-    name: bl0910_1_energy_sum
+    id: bank_1_energy_sum
+    name: Bank 1 (CT 1-10) Energy Sum
     address: 160
     register_type: holding
     value_type: U_DWORD_R
@@ -465,8 +496,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_1_voltage
-    name: bl0910_1_voltage
+    id: bank_1_voltage
+    name: Bank 1 (CT 1-10) Voltage
     address: 162
     register_type: holding
     value_type: U_WORD
@@ -477,8 +508,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_1_frequency
-    name: bl0910_1_frequency
+    id: bank_1_frequency
+    name: Bank 1 (CT 1-10) Frequency
     address: 163
     register_type: holding
     value_type: U_WORD
@@ -489,8 +520,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_1_temp
-    name: bl0910_1_temp
+    id: bank_1_temp
+    name: Bank 1 (CT 1-10) Temperature
     address: 164
     register_type: holding
     value_type: FP32_R
@@ -498,9 +529,10 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
+  # bank: 2, pin: 1, ct: 11
   - platform: modbus_controller
-    id: n60_2_1_current
-    name: bl0910_2_1_current
+    id: ct_11_current
+    name: CT 11 Current
     address: 200
     register_type: holding
     value_type: U_DWORD_R
@@ -510,9 +542,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 2, pin: 2, ct: 12
   - platform: modbus_controller
-    id: n60_2_2_current
-    name: bl0910_2_2_current
+    id: ct_12_current
+    name: CT 12 Current
     address: 202
     register_type: holding
     value_type: U_DWORD_R
@@ -522,9 +555,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 2, pin: 3, ct: 13
   - platform: modbus_controller
-    id: n60_2_3_current
-    name: bl0910_2_3_current
+    id: ct_13_current
+    name: CT 13 Current
     address: 204
     register_type: holding
     value_type: U_DWORD_R
@@ -534,9 +568,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 2, pin: 4, ct: 14
   - platform: modbus_controller
-    id: n60_2_4_current
-    name: bl0910_2_4_current
+    id: ct_14_current
+    name: CT 14 Current
     address: 206
     register_type: holding
     value_type: U_DWORD_R
@@ -546,9 +581,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 2, pin: 5, ct: 15
   - platform: modbus_controller
-    id: n60_2_5_current
-    name: bl0910_2_5_current
+    id: ct_15_current
+    name: CT 15 Current
     address: 208
     register_type: holding
     value_type: U_DWORD_R
@@ -558,9 +594,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 2, pin: 6, ct: 16
   - platform: modbus_controller
-    id: n60_2_6_current
-    name: bl0910_2_6_current
+    id: ct_16_current
+    name: CT 16 Current
     address: 210
     register_type: holding
     value_type: U_DWORD_R
@@ -570,9 +607,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 2, pin: 7, ct: 17
   - platform: modbus_controller
-    id: n60_2_7_current
-    name: bl0910_2_7_current
+    id: ct_17_current
+    name: CT 17 Current
     address: 212
     register_type: holding
     value_type: U_DWORD_R
@@ -582,9 +620,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 2, pin: 8, ct: 18
   - platform: modbus_controller
-    id: n60_2_8_current
-    name: bl0910_2_8_current
+    id: ct_18_current
+    name: CT 18 Current
     address: 214
     register_type: holding
     value_type: U_DWORD_R
@@ -594,9 +633,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 2, pin: 9, ct: 19
   - platform: modbus_controller
-    id: n60_2_9_current
-    name: bl0910_2_9_current
+    id: ct_19_current
+    name: CT 19 Current
     address: 216
     register_type: holding
     value_type: U_DWORD_R
@@ -606,9 +646,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 2, pin: 10, ct: 20
   - platform: modbus_controller
-    id: n60_2_10_current
-    name: bl0910_2_10_current
+    id: ct_20_current
+    name: CT 20 Current
     address: 218
     register_type: holding
     value_type: U_DWORD_R
@@ -618,9 +659,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 2, pin: 1, ct: 11
   - platform: modbus_controller
-    id: n60_2_1_power
-    name: bl0910_2_1_power
+    id: ct_11_power
+    name: CT 11 Power
     address: 220
     register_type: holding
     value_type: U_DWORD_R
@@ -630,9 +672,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 2, pin: 2, ct: 12
   - platform: modbus_controller
-    id: n60_2_2_power
-    name: bl0910_2_2_power
+    id: ct_12_power
+    name: CT 12 Power
     address: 222
     register_type: holding
     value_type: U_DWORD_R
@@ -642,9 +685,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 2, pin: 3, ct: 13
   - platform: modbus_controller
-    id: n60_2_3_power
-    name: bl0910_2_3_power
+    id: ct_13_power
+    name: CT 13 Power
     address: 224
     register_type: holding
     value_type: U_DWORD_R
@@ -654,9 +698,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 2, pin: 4, ct: 14
   - platform: modbus_controller
-    id: n60_2_4_power
-    name: bl0910_2_4_power
+    id: ct_14_power
+    name: CT 14 Power
     address: 226
     register_type: holding
     value_type: U_DWORD_R
@@ -666,9 +711,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 2, pin: 5, ct: 15
   - platform: modbus_controller
-    id: n60_2_5_power
-    name: bl0910_2_5_power
+    id: ct_15_power
+    name: CT 15 Power
     address: 228
     register_type: holding
     value_type: U_DWORD_R
@@ -678,9 +724,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 2, pin: 6, ct: 16
   - platform: modbus_controller
-    id: n60_2_6_power
-    name: bl0910_2_6_power
+    id: ct_16_power
+    name: CT 16 Power
     address: 230
     register_type: holding
     value_type: U_DWORD_R
@@ -690,9 +737,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 2, pin: 7, ct: 17
   - platform: modbus_controller
-    id: n60_2_7_power
-    name: bl0910_2_7_power
+    id: ct_17_power
+    name: CT 17 Power
     address: 232
     register_type: holding
     value_type: U_DWORD_R
@@ -702,9 +750,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 2, pin: 8, ct: 18
   - platform: modbus_controller
-    id: n60_2_8_power
-    name: bl0910_2_8_power
+    id: ct_18_power
+    name: CT 18 Power
     address: 234
     register_type: holding
     value_type: U_DWORD_R
@@ -714,9 +763,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 2, pin: 9, ct: 19
   - platform: modbus_controller
-    id: n60_2_9_power
-    name: bl0910_2_9_power
+    id: ct_19_power
+    name: CT 19 Power
     address: 236
     register_type: holding
     value_type: U_DWORD_R
@@ -726,9 +776,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 2, pin: 10, ct: 20
   - platform: modbus_controller
-    id: n60_2_10_power
-    name: bl0910_2_10_power
+    id: ct_20_power
+    name: CT 20 Power
     address: 238
     register_type: holding
     value_type: U_DWORD_R
@@ -737,10 +788,11 @@ sensor:
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
-    
+
+  # bank: 2, pin: 1, ct: 11
   - platform: modbus_controller
-    id: n60_2_1_energy
-    name: bl0910_2_1_energy
+    id: ct_11_energy
+    name: CT 11 Energy
     address: 240
     register_type: holding
     value_type: U_DWORD_R
@@ -748,10 +800,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 2, pin: 2, ct: 12
   - platform: modbus_controller
-    id: n60_2_2_energy
-    name: bl0910_2_2_energy
+    id: ct_12_energy
+    name: CT 12 Energy
     address: 242
     register_type: holding
     value_type: U_DWORD_R
@@ -759,10 +812,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 2, pin: 3, ct: 13
   - platform: modbus_controller
-    id: n60_2_3_energy
-    name: bl0910_2_3_energy
+    id: ct_13_energy
+    name: CT 13 Energy
     address: 244
     register_type: holding
     value_type: U_DWORD_R
@@ -770,10 +824,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 2, pin: 4, ct: 14
   - platform: modbus_controller
-    id: n60_2_4_energy
-    name: bl0910_2_4_energy
+    id: ct_14_energy
+    name: CT 14 Energy
     address: 246
     register_type: holding
     value_type: U_DWORD_R
@@ -781,10 +836,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 2, pin: 5, ct: 15
   - platform: modbus_controller
-    id: n60_2_5_energy
-    name: bl0910_2_5_energy
+    id: ct_15_energy
+    name: CT 15 Energy
     address: 248
     register_type: holding
     value_type: U_DWORD_R
@@ -792,10 +848,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 2, pin: 6, ct: 16
   - platform: modbus_controller
-    id: n60_2_6_energy
-    name: bl0910_2_6_energy
+    id: ct_16_energy
+    name: CT 16 Energy
     address: 250
     register_type: holding
     value_type: U_DWORD_R
@@ -803,10 +860,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 2, pin: 7, ct: 17
   - platform: modbus_controller
-    id: n60_2_7_energy
-    name: bl0910_2_7_energy
+    id: ct_17_energy
+    name: CT 17 Energy
     address: 252
     register_type: holding
     value_type: U_DWORD_R
@@ -814,10 +872,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 2, pin: 8, ct: 18
   - platform: modbus_controller
-    id: n60_2_8_energy
-    name: bl0910_2_8_energy
+    id: ct_18_energy
+    name: CT 18 Energy
     address: 254
     register_type: holding
     value_type: U_DWORD_R
@@ -825,10 +884,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 2, pin: 9, ct: 19
   - platform: modbus_controller
-    id: n60_2_9_energy
-    name: bl0910_2_9_energy
+    id: ct_19_energy
+    name: CT 19 Energy
     address: 256
     register_type: holding
     value_type: U_DWORD_R
@@ -836,10 +896,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 2, pin: 10, ct: 20
   - platform: modbus_controller
-    id: n60_2_10_energy
-    name: bl0910_2_10_energy
+    id: ct_20_energy
+    name: CT 20 Energy
     address: 258
     register_type: holding
     value_type: U_DWORD_R
@@ -848,9 +909,10 @@ sensor:
     device_class: energy
     accuracy_decimals: 1
 
+  # bank: 2, ct start: 11, ct end: 20
   - platform: modbus_controller
-    id: n60_2_energy_sum
-    name: bl0910_2_energy_sum
+    id: bank_2_energy_sum
+    name: Bank 2 (CT 11-20) Energy Sum
     address: 260
     register_type: holding
     value_type: U_DWORD_R
@@ -860,8 +922,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_2_voltage
-    name: bl0910_2_voltage
+    id: bank_2_voltage
+    name: Bank 2 (CT 11-20) Voltage
     address: 262
     register_type: holding
     value_type: U_WORD
@@ -872,8 +934,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_2_frequency
-    name: bl0910_2_frequency
+    id: bank_2_frequency
+    name: Bank 2 (CT 11-20) Frequency
     address: 263
     register_type: holding
     value_type: U_WORD
@@ -884,8 +946,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_2_temp
-    name: bl0910_2_temp
+    id: bank_2_temp
+    name: Bank 2 (CT 11-20) Temperature
     address: 264
     register_type: holding
     value_type: FP32_R
@@ -893,9 +955,10 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
+  # bank: 3, pin: 1, ct: 21
   - platform: modbus_controller
-    id: n60_3_1_current
-    name: bl0910_3_1_current
+    id: ct_21_current
+    name: CT 21 Current
     address: 300
     register_type: holding
     value_type: U_DWORD_R
@@ -905,9 +968,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 3, pin: 2, ct: 22
   - platform: modbus_controller
-    id: n60_3_2_current
-    name: bl0910_3_2_current
+    id: ct_22_current
+    name: CT 22 Current
     address: 302
     register_type: holding
     value_type: U_DWORD_R
@@ -917,9 +981,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 3, pin: 3, ct: 23
   - platform: modbus_controller
-    id: n60_3_3_current
-    name: bl0910_3_3_current
+    id: ct_23_current
+    name: CT 23 Current
     address: 304
     register_type: holding
     value_type: U_DWORD_R
@@ -929,9 +994,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 3, pin: 4, ct: 24
   - platform: modbus_controller
-    id: n60_3_4_current
-    name: bl0910_3_4_current
+    id: ct_24_current
+    name: CT 24 Current
     address: 306
     register_type: holding
     value_type: U_DWORD_R
@@ -941,9 +1007,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 3, pin: 5, ct: 25
   - platform: modbus_controller
-    id: n60_3_5_current
-    name: bl0910_3_5_current
+    id: ct_25_current
+    name: CT 25 Current
     address: 308
     register_type: holding
     value_type: U_DWORD_R
@@ -953,9 +1020,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 3, pin: 6, ct: 26
   - platform: modbus_controller
-    id: n60_3_6_current
-    name: bl0910_3_6_current
+    id: ct_26_current
+    name: CT 26 Current
     address: 310
     register_type: holding
     value_type: U_DWORD_R
@@ -965,9 +1033,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 3, pin: 7, ct: 27
   - platform: modbus_controller
-    id: n60_3_7_current
-    name: bl0910_3_7_current
+    id: ct_27_current
+    name: CT 27 Current
     address: 312
     register_type: holding
     value_type: U_DWORD_R
@@ -977,9 +1046,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 3, pin: 8, ct: 28
   - platform: modbus_controller
-    id: n60_3_8_current
-    name: bl0910_3_8_current
+    id: ct_28_current
+    name: CT 28 Current
     address: 314
     register_type: holding
     value_type: U_DWORD_R
@@ -989,9 +1059,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 3, pin: 9, ct: 29
   - platform: modbus_controller
-    id: n60_3_9_current
-    name: bl0910_3_9_current
+    id: ct_29_current
+    name: CT 29 Current
     address: 316
     register_type: holding
     value_type: U_DWORD_R
@@ -1001,9 +1072,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 3, pin: 10, ct: 30
   - platform: modbus_controller
-    id: n60_3_10_current
-    name: bl0910_3_10_current
+    id: ct_30_current
+    name: CT 30 Current
     address: 318
     register_type: holding
     value_type: U_DWORD_R
@@ -1013,9 +1085,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 3, pin: 1, ct: 21
   - platform: modbus_controller
-    id: n60_3_1_power
-    name: bl0910_3_1_power
+    id: ct_21_power
+    name: CT 21 Power
     address: 320
     register_type: holding
     value_type: U_DWORD_R
@@ -1025,9 +1098,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 3, pin: 2, ct: 22
   - platform: modbus_controller
-    id: n60_3_2_power
-    name: bl0910_3_2_power
+    id: ct_22_power
+    name: CT 22 Power
     address: 322
     register_type: holding
     value_type: U_DWORD_R
@@ -1037,9 +1111,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 3, pin: 3, ct: 23
   - platform: modbus_controller
-    id: n60_3_3_power
-    name: bl0910_3_3_power
+    id: ct_23_power
+    name: CT 23 Power
     address: 324
     register_type: holding
     value_type: U_DWORD_R
@@ -1049,9 +1124,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 3, pin: 4, ct: 24
   - platform: modbus_controller
-    id: n60_3_4_power
-    name: bl0910_3_4_power
+    id: ct_24_power
+    name: CT 24 Power
     address: 326
     register_type: holding
     value_type: U_DWORD_R
@@ -1061,9 +1137,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 3, pin: 5, ct: 25
   - platform: modbus_controller
-    id: n60_3_5_power
-    name: bl0910_3_5_power
+    id: ct_25_power
+    name: CT 25 Power
     address: 328
     register_type: holding
     value_type: U_DWORD_R
@@ -1073,9 +1150,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 3, pin: 6, ct: 26
   - platform: modbus_controller
-    id: n60_3_6_power
-    name: bl0910_3_6_power
+    id: ct_26_power
+    name: CT 26 Power
     address: 330
     register_type: holding
     value_type: U_DWORD_R
@@ -1085,9 +1163,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 3, pin: 7, ct: 27
   - platform: modbus_controller
-    id: n60_3_7_power
-    name: bl0910_3_7_power
+    id: ct_27_power
+    name: CT 27 Power
     address: 332
     register_type: holding
     value_type: U_DWORD_R
@@ -1097,9 +1176,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 3, pin: 8, ct: 28
   - platform: modbus_controller
-    id: n60_3_8_power
-    name: bl0910_3_8_power
+    id: ct_28_power
+    name: CT 28 Power
     address: 334
     register_type: holding
     value_type: U_DWORD_R
@@ -1109,9 +1189,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 3, pin: 9, ct: 29
   - platform: modbus_controller
-    id: n60_3_9_power
-    name: bl0910_3_9_power
+    id: ct_29_power
+    name: CT 29 Power
     address: 336
     register_type: holding
     value_type: U_DWORD_R
@@ -1121,9 +1202,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 3, pin: 10, ct: 30
   - platform: modbus_controller
-    id: n60_3_10_power
-    name: bl0910_3_10_power
+    id: ct_30_power
+    name: CT 30 Power
     address: 338
     register_type: holding
     value_type: U_DWORD_R
@@ -1132,10 +1214,11 @@ sensor:
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
-    
+
+  # bank: 3, pin: 1, ct: 21
   - platform: modbus_controller
-    id: n60_3_1_energy
-    name: bl0910_3_1_energy
+    id: ct_21_energy
+    name: CT 21 Energy
     address: 340
     register_type: holding
     value_type: U_DWORD_R
@@ -1143,10 +1226,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 3, pin: 2, ct: 22
   - platform: modbus_controller
-    id: n60_3_2_energy
-    name: bl0910_3_2_energy
+    id: ct_22_energy
+    name: CT 22 Energy
     address: 342
     register_type: holding
     value_type: U_DWORD_R
@@ -1154,10 +1238,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 3, pin: 3, ct: 23
   - platform: modbus_controller
-    id: n60_3_3_energy
-    name: bl0910_3_3_energy
+    id: ct_23_energy
+    name: CT 23 Energy
     address: 344
     register_type: holding
     value_type: U_DWORD_R
@@ -1165,10 +1250,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 3, pin: 4, ct: 24
   - platform: modbus_controller
-    id: n60_3_4_energy
-    name: bl0910_3_4_energy
+    id: ct_24_energy
+    name: CT 24 Energy
     address: 346
     register_type: holding
     value_type: U_DWORD_R
@@ -1176,10 +1262,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 3, pin: 5, ct: 25
   - platform: modbus_controller
-    id: n60_3_5_energy
-    name: bl0910_3_5_energy
+    id: ct_25_energy
+    name: CT 25 Energy
     address: 348
     register_type: holding
     value_type: U_DWORD_R
@@ -1187,10 +1274,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 3, pin: 6, ct: 26
   - platform: modbus_controller
-    id: n60_3_6_energy
-    name: bl0910_3_6_energy
+    id: ct_26_energy
+    name: CT 26 Energy
     address: 350
     register_type: holding
     value_type: U_DWORD_R
@@ -1198,10 +1286,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 3, pin: 7, ct: 27
   - platform: modbus_controller
-    id: n60_3_7_energy
-    name: bl0910_3_7_energy
+    id: ct_27_energy
+    name: CT 27 Energy
     address: 352
     register_type: holding
     value_type: U_DWORD_R
@@ -1209,10 +1298,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 3, pin: 8, ct: 28
   - platform: modbus_controller
-    id: n60_3_8_energy
-    name: bl0910_3_8_energy
+    id: ct_28_energy
+    name: CT 28 Energy
     address: 354
     register_type: holding
     value_type: U_DWORD_R
@@ -1220,10 +1310,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 3, pin: 9, ct: 29
   - platform: modbus_controller
-    id: n60_3_9_energy
-    name: bl0910_3_9_energy
+    id: ct_29_energy
+    name: CT 29 Energy
     address: 356
     register_type: holding
     value_type: U_DWORD_R
@@ -1231,10 +1322,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 3, pin: 10, ct: 30
   - platform: modbus_controller
-    id: n60_3_10_energy
-    name: bl0910_3_10_energy
+    id: ct_30_energy
+    name: CT 30 Energy
     address: 358
     register_type: holding
     value_type: U_DWORD_R
@@ -1243,9 +1335,10 @@ sensor:
     device_class: energy
     accuracy_decimals: 1
 
+  # bank: 3, ct start: 21, ct end: 30
   - platform: modbus_controller
-    id: n60_3_energy_sum
-    name: bl0910_3_energy_sum
+    id: bank_3_energy_sum
+    name: Bank 3 (CT 21-30) Energy Sum
     address: 360
     register_type: holding
     value_type: U_DWORD_R
@@ -1255,8 +1348,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_3_voltage
-    name: bl0910_3_voltage
+    id: bank_3_voltage
+    name: Bank 3 (CT 21-30) Voltage
     address: 362
     register_type: holding
     value_type: U_WORD
@@ -1267,8 +1360,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_3_frequency
-    name: bl0910_3_frequency
+    id: bank_3_frequency
+    name: Bank 3 (CT 21-30) Frequency
     address: 363
     register_type: holding
     value_type: U_WORD
@@ -1279,8 +1372,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_3_temp
-    name: bl0910_3_temp
+    id: bank_3_temp
+    name: Bank 3 (CT 21-30) Temperature
     address: 364
     register_type: holding
     value_type: FP32_R
@@ -1288,9 +1381,10 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
+  # bank: 4, pin: 1, ct: 31
   - platform: modbus_controller
-    id: n60_4_1_current
-    name: bl0910_4_1_current
+    id: ct_31_current
+    name: CT 31 Current
     address: 400
     register_type: holding
     value_type: U_DWORD_R
@@ -1300,9 +1394,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 4, pin: 2, ct: 32
   - platform: modbus_controller
-    id: n60_4_2_current
-    name: bl0910_4_2_current
+    id: ct_32_current
+    name: CT 32 Current
     address: 402
     register_type: holding
     value_type: U_DWORD_R
@@ -1312,9 +1407,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 4, pin: 3, ct: 33
   - platform: modbus_controller
-    id: n60_4_3_current
-    name: bl0910_4_3_current
+    id: ct_33_current
+    name: CT 33 Current
     address: 404
     register_type: holding
     value_type: U_DWORD_R
@@ -1324,9 +1420,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 4, pin: 4, ct: 34
   - platform: modbus_controller
-    id: n60_4_4_current
-    name: bl0910_4_4_current
+    id: ct_34_current
+    name: CT 34 Current
     address: 406
     register_type: holding
     value_type: U_DWORD_R
@@ -1336,9 +1433,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 4, pin: 5, ct: 35
   - platform: modbus_controller
-    id: n60_4_5_current
-    name: bl0910_4_5_current
+    id: ct_35_current
+    name: CT 35 Current
     address: 408
     register_type: holding
     value_type: U_DWORD_R
@@ -1348,9 +1446,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 4, pin: 6, ct: 36
   - platform: modbus_controller
-    id: n60_4_6_current
-    name: bl0910_4_6_current
+    id: ct_36_current
+    name: CT 36 Current
     address: 410
     register_type: holding
     value_type: U_DWORD_R
@@ -1360,9 +1459,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 4, pin: 7, ct: 37
   - platform: modbus_controller
-    id: n60_4_7_current
-    name: bl0910_4_7_current
+    id: ct_37_current
+    name: CT 37 Current
     address: 412
     register_type: holding
     value_type: U_DWORD_R
@@ -1372,9 +1472,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 4, pin: 8, ct: 38
   - platform: modbus_controller
-    id: n60_4_8_current
-    name: bl0910_4_8_current
+    id: ct_38_current
+    name: CT 38 Current
     address: 414
     register_type: holding
     value_type: U_DWORD_R
@@ -1384,9 +1485,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 4, pin: 9, ct: 39
   - platform: modbus_controller
-    id: n60_4_9_current
-    name: bl0910_4_9_current
+    id: ct_39_current
+    name: CT 39 Current
     address: 416
     register_type: holding
     value_type: U_DWORD_R
@@ -1396,9 +1498,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 4, pin: 10, ct: 40
   - platform: modbus_controller
-    id: n60_4_10_current
-    name: bl0910_4_10_current
+    id: ct_40_current
+    name: CT 40 Current
     address: 418
     register_type: holding
     value_type: U_DWORD_R
@@ -1408,9 +1511,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 4, pin: 1, ct: 31
   - platform: modbus_controller
-    id: n60_4_1_power
-    name: bl0910_4_1_power
+    id: ct_31_power
+    name: CT 31 Power
     address: 420
     register_type: holding
     value_type: U_DWORD_R
@@ -1420,9 +1524,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 4, pin: 2, ct: 32
   - platform: modbus_controller
-    id: n60_4_2_power
-    name: bl0910_4_2_power
+    id: ct_32_power
+    name: CT 32 Power
     address: 422
     register_type: holding
     value_type: U_DWORD_R
@@ -1432,9 +1537,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 4, pin: 3, ct: 33
   - platform: modbus_controller
-    id: n60_4_3_power
-    name: bl0910_4_3_power
+    id: ct_33_power
+    name: CT 33 Power
     address: 424
     register_type: holding
     value_type: U_DWORD_R
@@ -1444,9 +1550,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 4, pin: 4, ct: 34
   - platform: modbus_controller
-    id: n60_4_4_power
-    name: bl0910_4_4_power
+    id: ct_34_power
+    name: CT 34 Power
     address: 426
     register_type: holding
     value_type: U_DWORD_R
@@ -1456,9 +1563,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 4, pin: 5, ct: 35
   - platform: modbus_controller
-    id: n60_4_5_power
-    name: bl0910_4_5_power
+    id: ct_35_power
+    name: CT 35 Power
     address: 428
     register_type: holding
     value_type: U_DWORD_R
@@ -1468,9 +1576,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 4, pin: 6, ct: 36
   - platform: modbus_controller
-    id: n60_4_6_power
-    name: bl0910_4_6_power
+    id: ct_36_power
+    name: CT 36 Power
     address: 430
     register_type: holding
     value_type: U_DWORD_R
@@ -1480,9 +1589,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 4, pin: 7, ct: 37
   - platform: modbus_controller
-    id: n60_4_7_power
-    name: bl0910_4_7_power
+    id: ct_37_power
+    name: CT 37 Power
     address: 432
     register_type: holding
     value_type: U_DWORD_R
@@ -1492,9 +1602,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 4, pin: 8, ct: 38
   - platform: modbus_controller
-    id: n60_4_8_power
-    name: bl0910_4_8_power
+    id: ct_38_power
+    name: CT 38 Power
     address: 434
     register_type: holding
     value_type: U_DWORD_R
@@ -1504,9 +1615,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 4, pin: 9, ct: 39
   - platform: modbus_controller
-    id: n60_4_9_power
-    name: bl0910_4_9_power
+    id: ct_39_power
+    name: CT 39 Power
     address: 436
     register_type: holding
     value_type: U_DWORD_R
@@ -1516,9 +1628,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 4, pin: 10, ct: 40
   - platform: modbus_controller
-    id: n60_4_10_power
-    name: bl0910_4_10_power
+    id: ct_40_power
+    name: CT 40 Power
     address: 438
     register_type: holding
     value_type: U_DWORD_R
@@ -1527,10 +1640,11 @@ sensor:
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
-    
+
+  # bank: 4, pin: 1, ct: 31
   - platform: modbus_controller
-    id: n60_4_1_energy
-    name: bl0910_4_1_energy
+    id: ct_31_energy
+    name: CT 31 Energy
     address: 440
     register_type: holding
     value_type: U_DWORD_R
@@ -1538,10 +1652,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 4, pin: 2, ct: 32
   - platform: modbus_controller
-    id: n60_4_2_energy
-    name: bl0910_4_2_energy
+    id: ct_32_energy
+    name: CT 32 Energy
     address: 442
     register_type: holding
     value_type: U_DWORD_R
@@ -1549,10 +1664,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 4, pin: 3, ct: 33
   - platform: modbus_controller
-    id: n60_4_3_energy
-    name: bl0910_4_3_energy
+    id: ct_33_energy
+    name: CT 33 Energy
     address: 444
     register_type: holding
     value_type: U_DWORD_R
@@ -1560,10 +1676,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 4, pin: 4, ct: 34
   - platform: modbus_controller
-    id: n60_4_4_energy
-    name: bl0910_4_4_energy
+    id: ct_34_energy
+    name: CT 34 Energy
     address: 446
     register_type: holding
     value_type: U_DWORD_R
@@ -1571,10 +1688,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 4, pin: 5, ct: 35
   - platform: modbus_controller
-    id: n60_4_5_energy
-    name: bl0910_4_5_energy
+    id: ct_35_energy
+    name: CT 35 Energy
     address: 448
     register_type: holding
     value_type: U_DWORD_R
@@ -1582,10 +1700,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 4, pin: 6, ct: 36
   - platform: modbus_controller
-    id: n60_4_6_energy
-    name: bl0910_4_6_energy
+    id: ct_36_energy
+    name: CT 36 Energy
     address: 450
     register_type: holding
     value_type: U_DWORD_R
@@ -1593,10 +1712,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 4, pin: 7, ct: 37
   - platform: modbus_controller
-    id: n60_4_7_energy
-    name: bl0910_4_7_energy
+    id: ct_37_energy
+    name: CT 37 Energy
     address: 452
     register_type: holding
     value_type: U_DWORD_R
@@ -1604,10 +1724,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 4, pin: 8, ct: 38
   - platform: modbus_controller
-    id: n60_4_8_energy
-    name: bl0910_4_8_energy
+    id: ct_38_energy
+    name: CT 38 Energy
     address: 454
     register_type: holding
     value_type: U_DWORD_R
@@ -1615,10 +1736,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 4, pin: 9, ct: 39
   - platform: modbus_controller
-    id: n60_4_9_energy
-    name: bl0910_4_9_energy
+    id: ct_39_energy
+    name: CT 39 Energy
     address: 456
     register_type: holding
     value_type: U_DWORD_R
@@ -1626,10 +1748,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 4, pin: 10, ct: 40
   - platform: modbus_controller
-    id: n60_4_10_energy
-    name: bl0910_4_10_energy
+    id: ct_40_energy
+    name: CT 40 Energy
     address: 458
     register_type: holding
     value_type: U_DWORD_R
@@ -1638,9 +1761,10 @@ sensor:
     device_class: energy
     accuracy_decimals: 1
 
+  # bank: 4, ct start: 31, ct end: 40
   - platform: modbus_controller
-    id: n60_4_energy_sum
-    name: bl0910_4_energy_sum
+    id: bank_4_energy_sum
+    name: Bank 4 (CT 31-40) Energy Sum
     address: 460
     register_type: holding
     value_type: U_DWORD_R
@@ -1650,8 +1774,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_4_voltage
-    name: bl0910_4_voltage
+    id: bank_4_voltage
+    name: Bank 4 (CT 31-40) Voltage
     address: 462
     register_type: holding
     value_type: U_WORD
@@ -1662,8 +1786,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_4_frequency
-    name: bl0910_4_frequency
+    id: bank_4_frequency
+    name: Bank 4 (CT 31-40) Frequency
     address: 463
     register_type: holding
     value_type: U_WORD
@@ -1674,8 +1798,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_4_temp
-    name: bl0910_4_temp
+    id: bank_4_temp
+    name: Bank 4 (CT 31-40) Temperature
     address: 464
     register_type: holding
     value_type: FP32_R
@@ -1683,9 +1807,10 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
+  # bank: 5, pin: 1, ct: 41
   - platform: modbus_controller
-    id: n60_5_1_current
-    name: bl0910_5_1_current
+    id: ct_41_current
+    name: CT 41 Current
     address: 500
     register_type: holding
     value_type: U_DWORD_R
@@ -1695,9 +1820,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 5, pin: 2, ct: 42
   - platform: modbus_controller
-    id: n60_5_2_current
-    name: bl0910_5_2_current
+    id: ct_42_current
+    name: CT 42 Current
     address: 502
     register_type: holding
     value_type: U_DWORD_R
@@ -1707,9 +1833,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 5, pin: 3, ct: 43
   - platform: modbus_controller
-    id: n60_5_3_current
-    name: bl0910_5_3_current
+    id: ct_43_current
+    name: CT 43 Current
     address: 504
     register_type: holding
     value_type: U_DWORD_R
@@ -1719,9 +1846,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 5, pin: 4, ct: 44
   - platform: modbus_controller
-    id: n60_5_4_current
-    name: bl0910_5_4_current
+    id: ct_44_current
+    name: CT 44 Current
     address: 506
     register_type: holding
     value_type: U_DWORD_R
@@ -1731,9 +1859,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 5, pin: 5, ct: 45
   - platform: modbus_controller
-    id: n60_5_5_current
-    name: bl0910_5_5_current
+    id: ct_45_current
+    name: CT 45 Current
     address: 508
     register_type: holding
     value_type: U_DWORD_R
@@ -1743,9 +1872,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 5, pin: 6, ct: 46
   - platform: modbus_controller
-    id: n60_5_6_current
-    name: bl0910_5_6_current
+    id: ct_46_current
+    name: CT 46 Current
     address: 510
     register_type: holding
     value_type: U_DWORD_R
@@ -1755,9 +1885,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 5, pin: 7, ct: 47
   - platform: modbus_controller
-    id: n60_5_7_current
-    name: bl0910_5_7_current
+    id: ct_47_current
+    name: CT 47 Current
     address: 512
     register_type: holding
     value_type: U_DWORD_R
@@ -1767,9 +1898,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 5, pin: 8, ct: 48
   - platform: modbus_controller
-    id: n60_5_8_current
-    name: bl0910_5_8_current
+    id: ct_48_current
+    name: CT 48 Current
     address: 514
     register_type: holding
     value_type: U_DWORD_R
@@ -1779,9 +1911,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 5, pin: 9, ct: 49
   - platform: modbus_controller
-    id: n60_5_9_current
-    name: bl0910_5_9_current
+    id: ct_49_current
+    name: CT 49 Current
     address: 516
     register_type: holding
     value_type: U_DWORD_R
@@ -1791,9 +1924,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 5, pin: 10, ct: 50
   - platform: modbus_controller
-    id: n60_5_10_current
-    name: bl0910_5_10_current
+    id: ct_50_current
+    name: CT 50 Current
     address: 518
     register_type: holding
     value_type: U_DWORD_R
@@ -1803,9 +1937,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 5, pin: 1, ct: 41
   - platform: modbus_controller
-    id: n60_5_1_power
-    name: bl0910_5_1_power
+    id: ct_41_power
+    name: CT 41 Power
     address: 520
     register_type: holding
     value_type: U_DWORD_R
@@ -1815,9 +1950,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 5, pin: 2, ct: 42
   - platform: modbus_controller
-    id: n60_5_2_power
-    name: bl0910_5_2_power
+    id: ct_42_power
+    name: CT 42 Power
     address: 522
     register_type: holding
     value_type: U_DWORD_R
@@ -1827,9 +1963,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 5, pin: 3, ct: 43
   - platform: modbus_controller
-    id: n60_5_3_power
-    name: bl0910_5_3_power
+    id: ct_43_power
+    name: CT 43 Power
     address: 524
     register_type: holding
     value_type: U_DWORD_R
@@ -1839,9 +1976,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 5, pin: 4, ct: 44
   - platform: modbus_controller
-    id: n60_5_4_power
-    name: bl0910_5_4_power
+    id: ct_44_power
+    name: CT 44 Power
     address: 526
     register_type: holding
     value_type: U_DWORD_R
@@ -1851,9 +1989,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 5, pin: 5, ct: 45
   - platform: modbus_controller
-    id: n60_5_5_power
-    name: bl0910_5_5_power
+    id: ct_45_power
+    name: CT 45 Power
     address: 528
     register_type: holding
     value_type: U_DWORD_R
@@ -1863,9 +2002,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 5, pin: 6, ct: 46
   - platform: modbus_controller
-    id: n60_5_6_power
-    name: bl0910_5_6_power
+    id: ct_46_power
+    name: CT 46 Power
     address: 530
     register_type: holding
     value_type: U_DWORD_R
@@ -1875,9 +2015,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 5, pin: 7, ct: 47
   - platform: modbus_controller
-    id: n60_5_7_power
-    name: bl0910_5_7_power
+    id: ct_47_power
+    name: CT 47 Power
     address: 532
     register_type: holding
     value_type: U_DWORD_R
@@ -1887,9 +2028,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 5, pin: 8, ct: 48
   - platform: modbus_controller
-    id: n60_5_8_power
-    name: bl0910_5_8_power
+    id: ct_48_power
+    name: CT 48 Power
     address: 534
     register_type: holding
     value_type: U_DWORD_R
@@ -1899,9 +2041,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 5, pin: 9, ct: 49
   - platform: modbus_controller
-    id: n60_5_9_power
-    name: bl0910_5_9_power
+    id: ct_49_power
+    name: CT 49 Power
     address: 536
     register_type: holding
     value_type: U_DWORD_R
@@ -1911,9 +2054,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 5, pin: 10, ct: 50
   - platform: modbus_controller
-    id: n60_5_10_power
-    name: bl0910_5_10_power
+    id: ct_50_power
+    name: CT 50 Power
     address: 538
     register_type: holding
     value_type: U_DWORD_R
@@ -1922,10 +2066,11 @@ sensor:
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
-    
+
+  # bank: 5, pin: 1, ct: 41
   - platform: modbus_controller
-    id: n60_5_1_energy
-    name: bl0910_5_1_energy
+    id: ct_41_energy
+    name: CT 41 Energy
     address: 540
     register_type: holding
     value_type: U_DWORD_R
@@ -1933,10 +2078,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 5, pin: 2, ct: 42
   - platform: modbus_controller
-    id: n60_5_2_energy
-    name: bl0910_5_2_energy
+    id: ct_42_energy
+    name: CT 42 Energy
     address: 542
     register_type: holding
     value_type: U_DWORD_R
@@ -1944,10 +2090,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 5, pin: 3, ct: 43
   - platform: modbus_controller
-    id: n60_5_3_energy
-    name: bl0910_5_3_energy
+    id: ct_43_energy
+    name: CT 43 Energy
     address: 544
     register_type: holding
     value_type: U_DWORD_R
@@ -1955,10 +2102,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 5, pin: 4, ct: 44
   - platform: modbus_controller
-    id: n60_5_4_energy
-    name: bl0910_5_4_energy
+    id: ct_44_energy
+    name: CT 44 Energy
     address: 546
     register_type: holding
     value_type: U_DWORD_R
@@ -1966,10 +2114,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 5, pin: 5, ct: 45
   - platform: modbus_controller
-    id: n60_5_5_energy
-    name: bl0910_5_5_energy
+    id: ct_45_energy
+    name: CT 45 Energy
     address: 548
     register_type: holding
     value_type: U_DWORD_R
@@ -1977,10 +2126,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 5, pin: 6, ct: 46
   - platform: modbus_controller
-    id: n60_5_6_energy
-    name: bl0910_5_6_energy
+    id: ct_46_energy
+    name: CT 46 Energy
     address: 550
     register_type: holding
     value_type: U_DWORD_R
@@ -1988,10 +2138,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 5, pin: 7, ct: 47
   - platform: modbus_controller
-    id: n60_5_7_energy
-    name: bl0910_5_7_energy
+    id: ct_47_energy
+    name: CT 47 Energy
     address: 552
     register_type: holding
     value_type: U_DWORD_R
@@ -1999,10 +2150,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 5, pin: 8, ct: 48
   - platform: modbus_controller
-    id: n60_5_8_energy
-    name: bl0910_5_8_energy
+    id: ct_48_energy
+    name: CT 48 Energy
     address: 554
     register_type: holding
     value_type: U_DWORD_R
@@ -2010,10 +2162,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 5, pin: 9, ct: 49
   - platform: modbus_controller
-    id: n60_5_9_energy
-    name: bl0910_5_9_energy
+    id: ct_49_energy
+    name: CT 49 Energy
     address: 556
     register_type: holding
     value_type: U_DWORD_R
@@ -2021,10 +2174,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 5, pin: 10, ct: 50
   - platform: modbus_controller
-    id: n60_5_10_energy
-    name: bl0910_5_10_energy
+    id: ct_50_energy
+    name: CT 50 Energy
     address: 558
     register_type: holding
     value_type: U_DWORD_R
@@ -2033,9 +2187,10 @@ sensor:
     device_class: energy
     accuracy_decimals: 1
 
+  # bank: 5, ct start: 41, ct end: 50
   - platform: modbus_controller
-    id: n60_5_energy_sum
-    name: bl0910_5_energy_sum
+    id: bank_5_energy_sum
+    name: Bank 5 (CT 41-50) Energy Sum
     address: 560
     register_type: holding
     value_type: U_DWORD_R
@@ -2045,8 +2200,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_5_voltage
-    name: bl0910_5_voltage
+    id: bank_5_voltage
+    name: Bank 5 (CT 41-50) Voltage
     address: 562
     register_type: holding
     value_type: U_WORD
@@ -2057,8 +2212,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_5_frequency
-    name: bl0910_5_frequency
+    id: bank_5_frequency
+    name: Bank 5 (CT 41-50) Frequency
     address: 563
     register_type: holding
     value_type: U_WORD
@@ -2069,8 +2224,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_5_temp
-    name: bl0910_5_temp
+    id: bank_5_temp
+    name: Bank 5 (CT 41-50) Temperature
     address: 564
     register_type: holding
     value_type: FP32_R
@@ -2078,9 +2233,10 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
+  # bank: 6, pin: 1, ct: 51
   - platform: modbus_controller
-    id: n60_6_1_current
-    name: bl0910_6_1_current
+    id: ct_51_current
+    name: CT 51 Current
     address: 600
     register_type: holding
     value_type: U_DWORD_R
@@ -2090,9 +2246,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 6, pin: 2, ct: 52
   - platform: modbus_controller
-    id: n60_6_2_current
-    name: bl0910_6_2_current
+    id: ct_52_current
+    name: CT 52 Current
     address: 602
     register_type: holding
     value_type: U_DWORD_R
@@ -2102,9 +2259,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 6, pin: 3, ct: 53
   - platform: modbus_controller
-    id: n60_6_3_current
-    name: bl0910_6_3_current
+    id: ct_53_current
+    name: CT 53 Current
     address: 604
     register_type: holding
     value_type: U_DWORD_R
@@ -2114,9 +2272,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 6, pin: 4, ct: 54
   - platform: modbus_controller
-    id: n60_6_4_current
-    name: bl0910_6_4_current
+    id: ct_54_current
+    name: CT 54 Current
     address: 606
     register_type: holding
     value_type: U_DWORD_R
@@ -2126,9 +2285,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 6, pin: 5, ct: 55
   - platform: modbus_controller
-    id: n60_6_5_current
-    name: bl0910_6_5_current
+    id: ct_55_current
+    name: CT 55 Current
     address: 608
     register_type: holding
     value_type: U_DWORD_R
@@ -2138,9 +2298,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 6, pin: 6, ct: 56
   - platform: modbus_controller
-    id: n60_6_6_current
-    name: bl0910_6_6_current
+    id: ct_56_current
+    name: CT 56 Current
     address: 610
     register_type: holding
     value_type: U_DWORD_R
@@ -2150,9 +2311,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 6, pin: 7, ct: 57
   - platform: modbus_controller
-    id: n60_6_7_current
-    name: bl0910_6_7_current
+    id: ct_57_current
+    name: CT 57 Current
     address: 612
     register_type: holding
     value_type: U_DWORD_R
@@ -2162,9 +2324,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 6, pin: 8, ct: 58
   - platform: modbus_controller
-    id: n60_6_8_current
-    name: bl0910_6_8_current
+    id: ct_58_current
+    name: CT 58 Current
     address: 614
     register_type: holding
     value_type: U_DWORD_R
@@ -2174,9 +2337,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 6, pin: 9, ct: 59
   - platform: modbus_controller
-    id: n60_6_9_current
-    name: bl0910_6_9_current
+    id: ct_59_current
+    name: CT 59 Current
     address: 616
     register_type: holding
     value_type: U_DWORD_R
@@ -2186,9 +2350,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 6, pin: 10, ct: 60
   - platform: modbus_controller
-    id: n60_6_10_current
-    name: bl0910_6_10_current
+    id: ct_60_current
+    name: CT 60 Current
     address: 618
     register_type: holding
     value_type: U_DWORD_R
@@ -2198,9 +2363,10 @@ sensor:
     filters:
     - multiply: 0.001
 
+  # bank: 6, pin: 1, ct: 51
   - platform: modbus_controller
-    id: n60_6_1_power
-    name: bl0910_6_1_power
+    id: ct_51_power
+    name: CT 51 Power
     address: 620
     register_type: holding
     value_type: U_DWORD_R
@@ -2210,9 +2376,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 6, pin: 2, ct: 52
   - platform: modbus_controller
-    id: n60_6_2_power
-    name: bl0910_6_2_power
+    id: ct_52_power
+    name: CT 52 Power
     address: 622
     register_type: holding
     value_type: U_DWORD_R
@@ -2222,9 +2389,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 6, pin: 3, ct: 53
   - platform: modbus_controller
-    id: n60_6_3_power
-    name: bl0910_6_3_power
+    id: ct_53_power
+    name: CT 53 Power
     address: 624
     register_type: holding
     value_type: U_DWORD_R
@@ -2234,9 +2402,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 6, pin: 4, ct: 54
   - platform: modbus_controller
-    id: n60_6_4_power
-    name: bl0910_6_4_power
+    id: ct_54_power
+    name: CT 54 Power
     address: 626
     register_type: holding
     value_type: U_DWORD_R
@@ -2246,9 +2415,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 6, pin: 5, ct: 55
   - platform: modbus_controller
-    id: n60_6_5_power
-    name: bl0910_6_5_power
+    id: ct_55_power
+    name: CT 55 Power
     address: 628
     register_type: holding
     value_type: U_DWORD_R
@@ -2258,9 +2428,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 6, pin: 6, ct: 56
   - platform: modbus_controller
-    id: n60_6_6_power
-    name: bl0910_6_6_power
+    id: ct_56_power
+    name: CT 56 Power
     address: 630
     register_type: holding
     value_type: U_DWORD_R
@@ -2270,9 +2441,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 6, pin: 7, ct: 57
   - platform: modbus_controller
-    id: n60_6_7_power
-    name: bl0910_6_7_power
+    id: ct_57_power
+    name: CT 57 Power
     address: 632
     register_type: holding
     value_type: U_DWORD_R
@@ -2282,9 +2454,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 6, pin: 8, ct: 58
   - platform: modbus_controller
-    id: n60_6_8_power
-    name: bl0910_6_8_power
+    id: ct_58_power
+    name: CT 58 Power
     address: 634
     register_type: holding
     value_type: U_DWORD_R
@@ -2294,9 +2467,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 6, pin: 9, ct: 59
   - platform: modbus_controller
-    id: n60_6_9_power
-    name: bl0910_6_9_power
+    id: ct_59_power
+    name: CT 59 Power
     address: 636
     register_type: holding
     value_type: U_DWORD_R
@@ -2306,9 +2480,10 @@ sensor:
     filters:
     - multiply: 0.1
 
+  # bank: 6, pin: 10, ct: 60
   - platform: modbus_controller
-    id: n60_6_10_power
-    name: bl0910_6_10_power
+    id: ct_60_power
+    name: CT 60 Power
     address: 638
     register_type: holding
     value_type: U_DWORD_R
@@ -2317,10 +2492,11 @@ sensor:
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
-    
+
+  # bank: 6, pin: 1, ct: 51
   - platform: modbus_controller
-    id: n60_6_1_energy
-    name: bl0910_6_1_energy
+    id: ct_51_energy
+    name: CT 51 Energy
     address: 640
     register_type: holding
     value_type: U_DWORD_R
@@ -2328,10 +2504,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 6, pin: 2, ct: 52
   - platform: modbus_controller
-    id: n60_6_2_energy
-    name: bl0910_6_2_energy
+    id: ct_52_energy
+    name: CT 52 Energy
     address: 642
     register_type: holding
     value_type: U_DWORD_R
@@ -2339,10 +2516,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 6, pin: 3, ct: 53
   - platform: modbus_controller
-    id: n60_6_3_energy
-    name: bl0910_6_3_energy
+    id: ct_53_energy
+    name: CT 53 Energy
     address: 644
     register_type: holding
     value_type: U_DWORD_R
@@ -2350,10 +2528,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 6, pin: 4, ct: 54
   - platform: modbus_controller
-    id: n60_6_4_energy
-    name: bl0910_6_4_energy
+    id: ct_54_energy
+    name: CT 54 Energy
     address: 646
     register_type: holding
     value_type: U_DWORD_R
@@ -2361,10 +2540,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 6, pin: 5, ct: 55
   - platform: modbus_controller
-    id: n60_6_5_energy
-    name: bl0910_6_5_energy
+    id: ct_55_energy
+    name: CT 55 Energy
     address: 648
     register_type: holding
     value_type: U_DWORD_R
@@ -2372,10 +2552,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 6, pin: 6, ct: 56
   - platform: modbus_controller
-    id: n60_6_6_energy
-    name: bl0910_6_6_energy
+    id: ct_56_energy
+    name: CT 56 Energy
     address: 650
     register_type: holding
     value_type: U_DWORD_R
@@ -2383,10 +2564,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 6, pin: 7, ct: 57
   - platform: modbus_controller
-    id: n60_6_7_energy
-    name: bl0910_6_7_energy
+    id: ct_57_energy
+    name: CT 57 Energy
     address: 652
     register_type: holding
     value_type: U_DWORD_R
@@ -2394,10 +2576,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 6, pin: 8, ct: 58
   - platform: modbus_controller
-    id: n60_6_8_energy
-    name: bl0910_6_8_energy
+    id: ct_58_energy
+    name: CT 58 Energy
     address: 654
     register_type: holding
     value_type: U_DWORD_R
@@ -2405,10 +2588,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 6, pin: 9, ct: 59
   - platform: modbus_controller
-    id: n60_6_9_energy
-    name: bl0910_6_9_energy
+    id: ct_59_energy
+    name: CT 59 Energy
     address: 656
     register_type: holding
     value_type: U_DWORD_R
@@ -2416,10 +2600,11 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
-    
+
+  # bank: 6, pin: 10, ct: 60
   - platform: modbus_controller
-    id: n60_6_10_energy
-    name: bl0910_6_10_energy
+    id: ct_60_energy
+    name: CT 60 Energy
     address: 658
     register_type: holding
     value_type: U_DWORD_R
@@ -2428,9 +2613,10 @@ sensor:
     device_class: energy
     accuracy_decimals: 1
 
+  # bank: 6, ct start: 51, ct end: 60
   - platform: modbus_controller
-    id: n60_6_energy_sum
-    name: bl0910_6_energy_sum
+    id: bank_6_energy_sum
+    name: Bank 6 (CT 51-60) Energy Sum
     address: 660
     register_type: holding
     value_type: U_DWORD_R
@@ -2440,8 +2626,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_6_voltage
-    name: bl0910_6_voltage
+    id: bank_6_voltage
+    name: Bank 6 (CT 51-60) Voltage
     address: 662
     register_type: holding
     value_type: U_WORD
@@ -2452,8 +2638,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_6_frequency
-    name: bl0910_6_frequency
+    id: bank_6_frequency
+    name: Bank 6 (CT 51-60) Frequency
     address: 663
     register_type: holding
     value_type: U_WORD
@@ -2464,8 +2650,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_6_temp
-    name: bl0910_6_temp
+    id: bank_6_temp
+    name: Bank 6 (CT 51-60) Temperature
     address: 664
     register_type: holding
     value_type: FP32_R

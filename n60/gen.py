@@ -120,9 +120,10 @@ for bank_id in range(1,7):
     # current (amps) per pin
     for pin_id in range(1,11):
         print(f'''
+  # bank: {bank_id}, pin: {pin_id}, ct: {(bank_id*10)-10+pin_id}
   - platform: modbus_controller
-    id: n60_{bank_id}_{pin_id}_current
-    name: bl0910_{bank_id}_{pin_id}_current
+    id: ct_{(bank_id*10)-10+pin_id}_current
+    name: CT {(bank_id*10)-10+pin_id} Current
     address: {(bank_id * 100) + (pin_id * 2) - 2 }
     register_type: holding
     value_type: U_DWORD_R
@@ -135,9 +136,10 @@ for bank_id in range(1,7):
     # power (watts) per pin
     for pin_id in range(1,11):
         print(f'''
+  # bank: {bank_id}, pin: {pin_id}, ct: {(bank_id*10)-10+pin_id}
   - platform: modbus_controller
-    id: n60_{bank_id}_{pin_id}_power
-    name: bl0910_{bank_id}_{pin_id}_power
+    id: ct_{(bank_id*10)-10+pin_id}_power
+    name: CT {(bank_id*10)-10+pin_id} Power
     address: {(bank_id * 100) + (pin_id * 2) - 2 + 20}
     register_type: holding
     value_type: U_DWORD_R
@@ -149,10 +151,11 @@ for bank_id in range(1,7):
 
     # energy (kWh) per pin
     for pin_id in range(1,11):
-        print(f'''    
+        print(f'''
+  # bank: {bank_id}, pin: {pin_id}, ct: {(bank_id*10)-10+pin_id}
   - platform: modbus_controller
-    id: n60_{bank_id}_{pin_id}_energy
-    name: bl0910_{bank_id}_{pin_id}_energy
+    id: ct_{(bank_id*10)-10+pin_id}_energy
+    name: CT {(bank_id*10)-10+pin_id} Energy
     address: {(bank_id * 100) + (pin_id * 2) - 2 + 40}
     register_type: holding
     value_type: U_DWORD_R
@@ -163,9 +166,10 @@ for bank_id in range(1,7):
 
     # now back in the bank loop, the per-bank sum items
     print(f'''
+  # bank: {bank_id}, ct start: {(bank_id*10)-9}, ct end: {(bank_id*10)}
   - platform: modbus_controller
-    id: n60_{bank_id}_energy_sum
-    name: bl0910_{bank_id}_energy_sum
+    id: bank_{bank_id}_energy_sum
+    name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Energy Sum
     address: {bank_id}60
     register_type: holding
     value_type: U_DWORD_R
@@ -175,8 +179,8 @@ for bank_id in range(1,7):
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_{bank_id}_voltage
-    name: bl0910_{bank_id}_voltage
+    id: bank_{bank_id}_voltage
+    name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Voltage
     address: {bank_id}62
     register_type: holding
     value_type: U_WORD
@@ -187,8 +191,8 @@ for bank_id in range(1,7):
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_{bank_id}_frequency
-    name: bl0910_{bank_id}_frequency
+    id: bank_{bank_id}_frequency
+    name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Frequency
     address: {bank_id}63
     register_type: holding
     value_type: U_WORD
@@ -199,8 +203,8 @@ for bank_id in range(1,7):
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_{bank_id}_temp
-    name: bl0910_{bank_id}_temp
+    id: bank_{bank_id}_temp
+    name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Temperature
     address: {bank_id}64
     register_type: holding
     value_type: FP32_R
