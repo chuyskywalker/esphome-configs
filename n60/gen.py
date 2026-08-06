@@ -136,7 +136,7 @@ for bank_id in range(1,7):
     for pin_id in range(1,11):
         print(f'''
   - platform: modbus_controller
-    id: n60_{bank_id}_watt_{pin_id}
+    id: n60_{bank_id}_power_{pin_id}
     name: bl0910_{bank_id}_power_{pin_id}
     address: {(bank_id * 100) + (pin_id * 2) - 2 + 20}
     register_type: holding
@@ -187,7 +187,7 @@ for bank_id in range(1,7):
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_{bank_id}_period
+    id: n60_{bank_id}_frequency
     name: bl0910_{bank_id}_frequency
     address: {bank_id}63
     register_type: holding
@@ -199,8 +199,8 @@ for bank_id in range(1,7):
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_{bank_id}_tps_1
-    name: bl0910_{bank_id}_tps1
+    id: n60_{bank_id}_temp
+    name: bl0910_{bank_id}_temp
     address: {bank_id}64
     register_type: holding
     value_type: FP32_R

@@ -224,7 +224,7 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_watt_1
+    id: n60_1_power_1
     name: bl0910_1_power_1
     address: 120
     register_type: holding
@@ -236,7 +236,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_watt_2
+    id: n60_1_power_2
     name: bl0910_1_power_2
     address: 122
     register_type: holding
@@ -248,7 +248,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_watt_3
+    id: n60_1_power_3
     name: bl0910_1_power_3
     address: 124
     register_type: holding
@@ -260,7 +260,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_watt_4
+    id: n60_1_power_4
     name: bl0910_1_power_4
     address: 126
     register_type: holding
@@ -272,7 +272,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_watt_5
+    id: n60_1_power_5
     name: bl0910_1_power_5
     address: 128
     register_type: holding
@@ -284,7 +284,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_watt_6
+    id: n60_1_power_6
     name: bl0910_1_power_6
     address: 130
     register_type: holding
@@ -296,7 +296,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_watt_7
+    id: n60_1_power_7
     name: bl0910_1_power_7
     address: 132
     register_type: holding
@@ -308,7 +308,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_watt_8
+    id: n60_1_power_8
     name: bl0910_1_power_8
     address: 134
     register_type: holding
@@ -320,7 +320,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_watt_9
+    id: n60_1_power_9
     name: bl0910_1_power_9
     address: 136
     register_type: holding
@@ -332,7 +332,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_watt_10
+    id: n60_1_power_10
     name: bl0910_1_power_10
     address: 138
     register_type: holding
@@ -477,7 +477,7 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_1_period
+    id: n60_1_frequency
     name: bl0910_1_frequency
     address: 163
     register_type: holding
@@ -489,8 +489,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_1_tps_1
-    name: bl0910_1_tps1
+    id: n60_1_temp
+    name: bl0910_1_temp
     address: 164
     register_type: holding
     value_type: FP32_R
@@ -619,7 +619,7 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_watt_1
+    id: n60_2_power_1
     name: bl0910_2_power_1
     address: 220
     register_type: holding
@@ -631,7 +631,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_watt_2
+    id: n60_2_power_2
     name: bl0910_2_power_2
     address: 222
     register_type: holding
@@ -643,7 +643,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_watt_3
+    id: n60_2_power_3
     name: bl0910_2_power_3
     address: 224
     register_type: holding
@@ -655,7 +655,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_watt_4
+    id: n60_2_power_4
     name: bl0910_2_power_4
     address: 226
     register_type: holding
@@ -667,7 +667,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_watt_5
+    id: n60_2_power_5
     name: bl0910_2_power_5
     address: 228
     register_type: holding
@@ -679,7 +679,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_watt_6
+    id: n60_2_power_6
     name: bl0910_2_power_6
     address: 230
     register_type: holding
@@ -691,7 +691,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_watt_7
+    id: n60_2_power_7
     name: bl0910_2_power_7
     address: 232
     register_type: holding
@@ -703,7 +703,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_watt_8
+    id: n60_2_power_8
     name: bl0910_2_power_8
     address: 234
     register_type: holding
@@ -715,7 +715,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_watt_9
+    id: n60_2_power_9
     name: bl0910_2_power_9
     address: 236
     register_type: holding
@@ -727,7 +727,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_watt_10
+    id: n60_2_power_10
     name: bl0910_2_power_10
     address: 238
     register_type: holding
@@ -872,7 +872,7 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_2_period
+    id: n60_2_frequency
     name: bl0910_2_frequency
     address: 263
     register_type: holding
@@ -884,8 +884,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_2_tps_1
-    name: bl0910_2_tps1
+    id: n60_2_temp
+    name: bl0910_2_temp
     address: 264
     register_type: holding
     value_type: FP32_R
@@ -1014,7 +1014,7 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_watt_1
+    id: n60_3_power_1
     name: bl0910_3_power_1
     address: 320
     register_type: holding
@@ -1026,7 +1026,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_watt_2
+    id: n60_3_power_2
     name: bl0910_3_power_2
     address: 322
     register_type: holding
@@ -1038,7 +1038,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_watt_3
+    id: n60_3_power_3
     name: bl0910_3_power_3
     address: 324
     register_type: holding
@@ -1050,7 +1050,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_watt_4
+    id: n60_3_power_4
     name: bl0910_3_power_4
     address: 326
     register_type: holding
@@ -1062,7 +1062,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_watt_5
+    id: n60_3_power_5
     name: bl0910_3_power_5
     address: 328
     register_type: holding
@@ -1074,7 +1074,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_watt_6
+    id: n60_3_power_6
     name: bl0910_3_power_6
     address: 330
     register_type: holding
@@ -1086,7 +1086,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_watt_7
+    id: n60_3_power_7
     name: bl0910_3_power_7
     address: 332
     register_type: holding
@@ -1098,7 +1098,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_watt_8
+    id: n60_3_power_8
     name: bl0910_3_power_8
     address: 334
     register_type: holding
@@ -1110,7 +1110,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_watt_9
+    id: n60_3_power_9
     name: bl0910_3_power_9
     address: 336
     register_type: holding
@@ -1122,7 +1122,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_watt_10
+    id: n60_3_power_10
     name: bl0910_3_power_10
     address: 338
     register_type: holding
@@ -1267,7 +1267,7 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_3_period
+    id: n60_3_frequency
     name: bl0910_3_frequency
     address: 363
     register_type: holding
@@ -1279,8 +1279,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_3_tps_1
-    name: bl0910_3_tps1
+    id: n60_3_temp
+    name: bl0910_3_temp
     address: 364
     register_type: holding
     value_type: FP32_R
@@ -1409,7 +1409,7 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_watt_1
+    id: n60_4_power_1
     name: bl0910_4_power_1
     address: 420
     register_type: holding
@@ -1421,7 +1421,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_watt_2
+    id: n60_4_power_2
     name: bl0910_4_power_2
     address: 422
     register_type: holding
@@ -1433,7 +1433,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_watt_3
+    id: n60_4_power_3
     name: bl0910_4_power_3
     address: 424
     register_type: holding
@@ -1445,7 +1445,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_watt_4
+    id: n60_4_power_4
     name: bl0910_4_power_4
     address: 426
     register_type: holding
@@ -1457,7 +1457,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_watt_5
+    id: n60_4_power_5
     name: bl0910_4_power_5
     address: 428
     register_type: holding
@@ -1469,7 +1469,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_watt_6
+    id: n60_4_power_6
     name: bl0910_4_power_6
     address: 430
     register_type: holding
@@ -1481,7 +1481,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_watt_7
+    id: n60_4_power_7
     name: bl0910_4_power_7
     address: 432
     register_type: holding
@@ -1493,7 +1493,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_watt_8
+    id: n60_4_power_8
     name: bl0910_4_power_8
     address: 434
     register_type: holding
@@ -1505,7 +1505,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_watt_9
+    id: n60_4_power_9
     name: bl0910_4_power_9
     address: 436
     register_type: holding
@@ -1517,7 +1517,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_watt_10
+    id: n60_4_power_10
     name: bl0910_4_power_10
     address: 438
     register_type: holding
@@ -1662,7 +1662,7 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_4_period
+    id: n60_4_frequency
     name: bl0910_4_frequency
     address: 463
     register_type: holding
@@ -1674,8 +1674,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_4_tps_1
-    name: bl0910_4_tps1
+    id: n60_4_temp
+    name: bl0910_4_temp
     address: 464
     register_type: holding
     value_type: FP32_R
@@ -1804,7 +1804,7 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_watt_1
+    id: n60_5_power_1
     name: bl0910_5_power_1
     address: 520
     register_type: holding
@@ -1816,7 +1816,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_watt_2
+    id: n60_5_power_2
     name: bl0910_5_power_2
     address: 522
     register_type: holding
@@ -1828,7 +1828,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_watt_3
+    id: n60_5_power_3
     name: bl0910_5_power_3
     address: 524
     register_type: holding
@@ -1840,7 +1840,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_watt_4
+    id: n60_5_power_4
     name: bl0910_5_power_4
     address: 526
     register_type: holding
@@ -1852,7 +1852,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_watt_5
+    id: n60_5_power_5
     name: bl0910_5_power_5
     address: 528
     register_type: holding
@@ -1864,7 +1864,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_watt_6
+    id: n60_5_power_6
     name: bl0910_5_power_6
     address: 530
     register_type: holding
@@ -1876,7 +1876,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_watt_7
+    id: n60_5_power_7
     name: bl0910_5_power_7
     address: 532
     register_type: holding
@@ -1888,7 +1888,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_watt_8
+    id: n60_5_power_8
     name: bl0910_5_power_8
     address: 534
     register_type: holding
@@ -1900,7 +1900,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_watt_9
+    id: n60_5_power_9
     name: bl0910_5_power_9
     address: 536
     register_type: holding
@@ -1912,7 +1912,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_watt_10
+    id: n60_5_power_10
     name: bl0910_5_power_10
     address: 538
     register_type: holding
@@ -2057,7 +2057,7 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_5_period
+    id: n60_5_frequency
     name: bl0910_5_frequency
     address: 563
     register_type: holding
@@ -2069,8 +2069,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_5_tps_1
-    name: bl0910_5_tps1
+    id: n60_5_temp
+    name: bl0910_5_temp
     address: 564
     register_type: holding
     value_type: FP32_R
@@ -2199,7 +2199,7 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_watt_1
+    id: n60_6_power_1
     name: bl0910_6_power_1
     address: 620
     register_type: holding
@@ -2211,7 +2211,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_watt_2
+    id: n60_6_power_2
     name: bl0910_6_power_2
     address: 622
     register_type: holding
@@ -2223,7 +2223,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_watt_3
+    id: n60_6_power_3
     name: bl0910_6_power_3
     address: 624
     register_type: holding
@@ -2235,7 +2235,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_watt_4
+    id: n60_6_power_4
     name: bl0910_6_power_4
     address: 626
     register_type: holding
@@ -2247,7 +2247,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_watt_5
+    id: n60_6_power_5
     name: bl0910_6_power_5
     address: 628
     register_type: holding
@@ -2259,7 +2259,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_watt_6
+    id: n60_6_power_6
     name: bl0910_6_power_6
     address: 630
     register_type: holding
@@ -2271,7 +2271,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_watt_7
+    id: n60_6_power_7
     name: bl0910_6_power_7
     address: 632
     register_type: holding
@@ -2283,7 +2283,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_watt_8
+    id: n60_6_power_8
     name: bl0910_6_power_8
     address: 634
     register_type: holding
@@ -2295,7 +2295,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_watt_9
+    id: n60_6_power_9
     name: bl0910_6_power_9
     address: 636
     register_type: holding
@@ -2307,7 +2307,7 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_watt_10
+    id: n60_6_power_10
     name: bl0910_6_power_10
     address: 638
     register_type: holding
@@ -2452,7 +2452,7 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_6_period
+    id: n60_6_frequency
     name: bl0910_6_frequency
     address: 663
     register_type: holding
@@ -2464,8 +2464,8 @@ sensor:
     - multiply: 0.01
 
   - platform: modbus_controller
-    id: n60_6_tps_1
-    name: bl0910_6_tps1
+    id: n60_6_temp
+    name: bl0910_6_temp
     address: 664
     register_type: holding
     value_type: FP32_R
