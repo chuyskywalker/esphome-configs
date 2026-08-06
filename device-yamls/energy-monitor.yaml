@@ -5,8 +5,8 @@ substitutions:
   static_ip: 192.168.0.6
   gateway: 192.168.0.1
   subnet: 255.255.254.0
-  api_key: !secret sa1_api_encryption_key
-  ota_pass: !secret sa1_ota_password
+  api_key: !secret energy_monitor_api_encryption_key
+  ota_pass: !secret energy_monitor_ota_password
 
 esphome:
   name: ${name}
@@ -104,8 +104,8 @@ sensor:
 
 
   - platform: modbus_controller
-    id: n60_1_current_1
-    name: bl0910_1_current_1
+    id: n60_1_1_current
+    name: bl0910_1_1_current
     address: 100
     register_type: holding
     value_type: U_DWORD_R
@@ -116,8 +116,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_current_2
-    name: bl0910_1_current_2
+    id: n60_1_2_current
+    name: bl0910_1_2_current
     address: 102
     register_type: holding
     value_type: U_DWORD_R
@@ -128,8 +128,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_current_3
-    name: bl0910_1_current_3
+    id: n60_1_3_current
+    name: bl0910_1_3_current
     address: 104
     register_type: holding
     value_type: U_DWORD_R
@@ -140,8 +140,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_current_4
-    name: bl0910_1_current_4
+    id: n60_1_4_current
+    name: bl0910_1_4_current
     address: 106
     register_type: holding
     value_type: U_DWORD_R
@@ -152,8 +152,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_current_5
-    name: bl0910_1_current_5
+    id: n60_1_5_current
+    name: bl0910_1_5_current
     address: 108
     register_type: holding
     value_type: U_DWORD_R
@@ -164,8 +164,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_current_6
-    name: bl0910_1_current_6
+    id: n60_1_6_current
+    name: bl0910_1_6_current
     address: 110
     register_type: holding
     value_type: U_DWORD_R
@@ -176,8 +176,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_current_7
-    name: bl0910_1_current_7
+    id: n60_1_7_current
+    name: bl0910_1_7_current
     address: 112
     register_type: holding
     value_type: U_DWORD_R
@@ -188,8 +188,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_current_8
-    name: bl0910_1_current_8
+    id: n60_1_8_current
+    name: bl0910_1_8_current
     address: 114
     register_type: holding
     value_type: U_DWORD_R
@@ -200,8 +200,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_current_9
-    name: bl0910_1_current_9
+    id: n60_1_9_current
+    name: bl0910_1_9_current
     address: 116
     register_type: holding
     value_type: U_DWORD_R
@@ -212,8 +212,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_current_10
-    name: bl0910_1_current_10
+    id: n60_1_10_current
+    name: bl0910_1_10_current
     address: 118
     register_type: holding
     value_type: U_DWORD_R
@@ -224,8 +224,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_1_power_1
-    name: bl0910_1_power_1
+    id: n60_1_1_power
+    name: bl0910_1_1_power
     address: 120
     register_type: holding
     value_type: U_DWORD_R
@@ -236,8 +236,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_power_2
-    name: bl0910_1_power_2
+    id: n60_1_2_power
+    name: bl0910_1_2_power
     address: 122
     register_type: holding
     value_type: U_DWORD_R
@@ -248,8 +248,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_power_3
-    name: bl0910_1_power_3
+    id: n60_1_3_power
+    name: bl0910_1_3_power
     address: 124
     register_type: holding
     value_type: U_DWORD_R
@@ -260,8 +260,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_power_4
-    name: bl0910_1_power_4
+    id: n60_1_4_power
+    name: bl0910_1_4_power
     address: 126
     register_type: holding
     value_type: U_DWORD_R
@@ -272,8 +272,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_power_5
-    name: bl0910_1_power_5
+    id: n60_1_5_power
+    name: bl0910_1_5_power
     address: 128
     register_type: holding
     value_type: U_DWORD_R
@@ -284,8 +284,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_power_6
-    name: bl0910_1_power_6
+    id: n60_1_6_power
+    name: bl0910_1_6_power
     address: 130
     register_type: holding
     value_type: U_DWORD_R
@@ -296,8 +296,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_power_7
-    name: bl0910_1_power_7
+    id: n60_1_7_power
+    name: bl0910_1_7_power
     address: 132
     register_type: holding
     value_type: U_DWORD_R
@@ -308,8 +308,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_power_8
-    name: bl0910_1_power_8
+    id: n60_1_8_power
+    name: bl0910_1_8_power
     address: 134
     register_type: holding
     value_type: U_DWORD_R
@@ -320,8 +320,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_power_9
-    name: bl0910_1_power_9
+    id: n60_1_9_power
+    name: bl0910_1_9_power
     address: 136
     register_type: holding
     value_type: U_DWORD_R
@@ -332,8 +332,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_1_power_10
-    name: bl0910_1_power_10
+    id: n60_1_10_power
+    name: bl0910_1_10_power
     address: 138
     register_type: holding
     value_type: U_DWORD_R
@@ -344,8 +344,8 @@ sensor:
     - multiply: 0.1
     
   - platform: modbus_controller
-    id: n60_1_energy_1
-    name: bl0910_1_energy_1
+    id: n60_1_1_energy
+    name: bl0910_1_1_energy
     address: 140
     register_type: holding
     value_type: U_DWORD_R
@@ -355,8 +355,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_1_energy_2
-    name: bl0910_1_energy_2
+    id: n60_1_2_energy
+    name: bl0910_1_2_energy
     address: 142
     register_type: holding
     value_type: U_DWORD_R
@@ -366,8 +366,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_1_energy_3
-    name: bl0910_1_energy_3
+    id: n60_1_3_energy
+    name: bl0910_1_3_energy
     address: 144
     register_type: holding
     value_type: U_DWORD_R
@@ -377,8 +377,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_1_energy_4
-    name: bl0910_1_energy_4
+    id: n60_1_4_energy
+    name: bl0910_1_4_energy
     address: 146
     register_type: holding
     value_type: U_DWORD_R
@@ -388,8 +388,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_1_energy_5
-    name: bl0910_1_energy_5
+    id: n60_1_5_energy
+    name: bl0910_1_5_energy
     address: 148
     register_type: holding
     value_type: U_DWORD_R
@@ -399,8 +399,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_1_energy_6
-    name: bl0910_1_energy_6
+    id: n60_1_6_energy
+    name: bl0910_1_6_energy
     address: 150
     register_type: holding
     value_type: U_DWORD_R
@@ -410,8 +410,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_1_energy_7
-    name: bl0910_1_energy_7
+    id: n60_1_7_energy
+    name: bl0910_1_7_energy
     address: 152
     register_type: holding
     value_type: U_DWORD_R
@@ -421,8 +421,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_1_energy_8
-    name: bl0910_1_energy_8
+    id: n60_1_8_energy
+    name: bl0910_1_8_energy
     address: 154
     register_type: holding
     value_type: U_DWORD_R
@@ -432,8 +432,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_1_energy_9
-    name: bl0910_1_energy_9
+    id: n60_1_9_energy
+    name: bl0910_1_9_energy
     address: 156
     register_type: holding
     value_type: U_DWORD_R
@@ -443,8 +443,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_1_energy_10
-    name: bl0910_1_energy_10
+    id: n60_1_10_energy
+    name: bl0910_1_10_energy
     address: 158
     register_type: holding
     value_type: U_DWORD_R
@@ -499,8 +499,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_2_current_1
-    name: bl0910_2_current_1
+    id: n60_2_1_current
+    name: bl0910_2_1_current
     address: 200
     register_type: holding
     value_type: U_DWORD_R
@@ -511,8 +511,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_current_2
-    name: bl0910_2_current_2
+    id: n60_2_2_current
+    name: bl0910_2_2_current
     address: 202
     register_type: holding
     value_type: U_DWORD_R
@@ -523,8 +523,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_current_3
-    name: bl0910_2_current_3
+    id: n60_2_3_current
+    name: bl0910_2_3_current
     address: 204
     register_type: holding
     value_type: U_DWORD_R
@@ -535,8 +535,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_current_4
-    name: bl0910_2_current_4
+    id: n60_2_4_current
+    name: bl0910_2_4_current
     address: 206
     register_type: holding
     value_type: U_DWORD_R
@@ -547,8 +547,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_current_5
-    name: bl0910_2_current_5
+    id: n60_2_5_current
+    name: bl0910_2_5_current
     address: 208
     register_type: holding
     value_type: U_DWORD_R
@@ -559,8 +559,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_current_6
-    name: bl0910_2_current_6
+    id: n60_2_6_current
+    name: bl0910_2_6_current
     address: 210
     register_type: holding
     value_type: U_DWORD_R
@@ -571,8 +571,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_current_7
-    name: bl0910_2_current_7
+    id: n60_2_7_current
+    name: bl0910_2_7_current
     address: 212
     register_type: holding
     value_type: U_DWORD_R
@@ -583,8 +583,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_current_8
-    name: bl0910_2_current_8
+    id: n60_2_8_current
+    name: bl0910_2_8_current
     address: 214
     register_type: holding
     value_type: U_DWORD_R
@@ -595,8 +595,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_current_9
-    name: bl0910_2_current_9
+    id: n60_2_9_current
+    name: bl0910_2_9_current
     address: 216
     register_type: holding
     value_type: U_DWORD_R
@@ -607,8 +607,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_current_10
-    name: bl0910_2_current_10
+    id: n60_2_10_current
+    name: bl0910_2_10_current
     address: 218
     register_type: holding
     value_type: U_DWORD_R
@@ -619,8 +619,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_2_power_1
-    name: bl0910_2_power_1
+    id: n60_2_1_power
+    name: bl0910_2_1_power
     address: 220
     register_type: holding
     value_type: U_DWORD_R
@@ -631,8 +631,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_power_2
-    name: bl0910_2_power_2
+    id: n60_2_2_power
+    name: bl0910_2_2_power
     address: 222
     register_type: holding
     value_type: U_DWORD_R
@@ -643,8 +643,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_power_3
-    name: bl0910_2_power_3
+    id: n60_2_3_power
+    name: bl0910_2_3_power
     address: 224
     register_type: holding
     value_type: U_DWORD_R
@@ -655,8 +655,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_power_4
-    name: bl0910_2_power_4
+    id: n60_2_4_power
+    name: bl0910_2_4_power
     address: 226
     register_type: holding
     value_type: U_DWORD_R
@@ -667,8 +667,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_power_5
-    name: bl0910_2_power_5
+    id: n60_2_5_power
+    name: bl0910_2_5_power
     address: 228
     register_type: holding
     value_type: U_DWORD_R
@@ -679,8 +679,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_power_6
-    name: bl0910_2_power_6
+    id: n60_2_6_power
+    name: bl0910_2_6_power
     address: 230
     register_type: holding
     value_type: U_DWORD_R
@@ -691,8 +691,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_power_7
-    name: bl0910_2_power_7
+    id: n60_2_7_power
+    name: bl0910_2_7_power
     address: 232
     register_type: holding
     value_type: U_DWORD_R
@@ -703,8 +703,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_power_8
-    name: bl0910_2_power_8
+    id: n60_2_8_power
+    name: bl0910_2_8_power
     address: 234
     register_type: holding
     value_type: U_DWORD_R
@@ -715,8 +715,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_power_9
-    name: bl0910_2_power_9
+    id: n60_2_9_power
+    name: bl0910_2_9_power
     address: 236
     register_type: holding
     value_type: U_DWORD_R
@@ -727,8 +727,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_2_power_10
-    name: bl0910_2_power_10
+    id: n60_2_10_power
+    name: bl0910_2_10_power
     address: 238
     register_type: holding
     value_type: U_DWORD_R
@@ -739,8 +739,8 @@ sensor:
     - multiply: 0.1
     
   - platform: modbus_controller
-    id: n60_2_energy_1
-    name: bl0910_2_energy_1
+    id: n60_2_1_energy
+    name: bl0910_2_1_energy
     address: 240
     register_type: holding
     value_type: U_DWORD_R
@@ -750,8 +750,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_2_energy_2
-    name: bl0910_2_energy_2
+    id: n60_2_2_energy
+    name: bl0910_2_2_energy
     address: 242
     register_type: holding
     value_type: U_DWORD_R
@@ -761,8 +761,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_2_energy_3
-    name: bl0910_2_energy_3
+    id: n60_2_3_energy
+    name: bl0910_2_3_energy
     address: 244
     register_type: holding
     value_type: U_DWORD_R
@@ -772,8 +772,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_2_energy_4
-    name: bl0910_2_energy_4
+    id: n60_2_4_energy
+    name: bl0910_2_4_energy
     address: 246
     register_type: holding
     value_type: U_DWORD_R
@@ -783,8 +783,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_2_energy_5
-    name: bl0910_2_energy_5
+    id: n60_2_5_energy
+    name: bl0910_2_5_energy
     address: 248
     register_type: holding
     value_type: U_DWORD_R
@@ -794,8 +794,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_2_energy_6
-    name: bl0910_2_energy_6
+    id: n60_2_6_energy
+    name: bl0910_2_6_energy
     address: 250
     register_type: holding
     value_type: U_DWORD_R
@@ -805,8 +805,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_2_energy_7
-    name: bl0910_2_energy_7
+    id: n60_2_7_energy
+    name: bl0910_2_7_energy
     address: 252
     register_type: holding
     value_type: U_DWORD_R
@@ -816,8 +816,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_2_energy_8
-    name: bl0910_2_energy_8
+    id: n60_2_8_energy
+    name: bl0910_2_8_energy
     address: 254
     register_type: holding
     value_type: U_DWORD_R
@@ -827,8 +827,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_2_energy_9
-    name: bl0910_2_energy_9
+    id: n60_2_9_energy
+    name: bl0910_2_9_energy
     address: 256
     register_type: holding
     value_type: U_DWORD_R
@@ -838,8 +838,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_2_energy_10
-    name: bl0910_2_energy_10
+    id: n60_2_10_energy
+    name: bl0910_2_10_energy
     address: 258
     register_type: holding
     value_type: U_DWORD_R
@@ -894,8 +894,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_3_current_1
-    name: bl0910_3_current_1
+    id: n60_3_1_current
+    name: bl0910_3_1_current
     address: 300
     register_type: holding
     value_type: U_DWORD_R
@@ -906,8 +906,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_current_2
-    name: bl0910_3_current_2
+    id: n60_3_2_current
+    name: bl0910_3_2_current
     address: 302
     register_type: holding
     value_type: U_DWORD_R
@@ -918,8 +918,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_current_3
-    name: bl0910_3_current_3
+    id: n60_3_3_current
+    name: bl0910_3_3_current
     address: 304
     register_type: holding
     value_type: U_DWORD_R
@@ -930,8 +930,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_current_4
-    name: bl0910_3_current_4
+    id: n60_3_4_current
+    name: bl0910_3_4_current
     address: 306
     register_type: holding
     value_type: U_DWORD_R
@@ -942,8 +942,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_current_5
-    name: bl0910_3_current_5
+    id: n60_3_5_current
+    name: bl0910_3_5_current
     address: 308
     register_type: holding
     value_type: U_DWORD_R
@@ -954,8 +954,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_current_6
-    name: bl0910_3_current_6
+    id: n60_3_6_current
+    name: bl0910_3_6_current
     address: 310
     register_type: holding
     value_type: U_DWORD_R
@@ -966,8 +966,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_current_7
-    name: bl0910_3_current_7
+    id: n60_3_7_current
+    name: bl0910_3_7_current
     address: 312
     register_type: holding
     value_type: U_DWORD_R
@@ -978,8 +978,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_current_8
-    name: bl0910_3_current_8
+    id: n60_3_8_current
+    name: bl0910_3_8_current
     address: 314
     register_type: holding
     value_type: U_DWORD_R
@@ -990,8 +990,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_current_9
-    name: bl0910_3_current_9
+    id: n60_3_9_current
+    name: bl0910_3_9_current
     address: 316
     register_type: holding
     value_type: U_DWORD_R
@@ -1002,8 +1002,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_current_10
-    name: bl0910_3_current_10
+    id: n60_3_10_current
+    name: bl0910_3_10_current
     address: 318
     register_type: holding
     value_type: U_DWORD_R
@@ -1014,8 +1014,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_3_power_1
-    name: bl0910_3_power_1
+    id: n60_3_1_power
+    name: bl0910_3_1_power
     address: 320
     register_type: holding
     value_type: U_DWORD_R
@@ -1026,8 +1026,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_power_2
-    name: bl0910_3_power_2
+    id: n60_3_2_power
+    name: bl0910_3_2_power
     address: 322
     register_type: holding
     value_type: U_DWORD_R
@@ -1038,8 +1038,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_power_3
-    name: bl0910_3_power_3
+    id: n60_3_3_power
+    name: bl0910_3_3_power
     address: 324
     register_type: holding
     value_type: U_DWORD_R
@@ -1050,8 +1050,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_power_4
-    name: bl0910_3_power_4
+    id: n60_3_4_power
+    name: bl0910_3_4_power
     address: 326
     register_type: holding
     value_type: U_DWORD_R
@@ -1062,8 +1062,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_power_5
-    name: bl0910_3_power_5
+    id: n60_3_5_power
+    name: bl0910_3_5_power
     address: 328
     register_type: holding
     value_type: U_DWORD_R
@@ -1074,8 +1074,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_power_6
-    name: bl0910_3_power_6
+    id: n60_3_6_power
+    name: bl0910_3_6_power
     address: 330
     register_type: holding
     value_type: U_DWORD_R
@@ -1086,8 +1086,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_power_7
-    name: bl0910_3_power_7
+    id: n60_3_7_power
+    name: bl0910_3_7_power
     address: 332
     register_type: holding
     value_type: U_DWORD_R
@@ -1098,8 +1098,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_power_8
-    name: bl0910_3_power_8
+    id: n60_3_8_power
+    name: bl0910_3_8_power
     address: 334
     register_type: holding
     value_type: U_DWORD_R
@@ -1110,8 +1110,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_power_9
-    name: bl0910_3_power_9
+    id: n60_3_9_power
+    name: bl0910_3_9_power
     address: 336
     register_type: holding
     value_type: U_DWORD_R
@@ -1122,8 +1122,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_3_power_10
-    name: bl0910_3_power_10
+    id: n60_3_10_power
+    name: bl0910_3_10_power
     address: 338
     register_type: holding
     value_type: U_DWORD_R
@@ -1134,8 +1134,8 @@ sensor:
     - multiply: 0.1
     
   - platform: modbus_controller
-    id: n60_3_energy_1
-    name: bl0910_3_energy_1
+    id: n60_3_1_energy
+    name: bl0910_3_1_energy
     address: 340
     register_type: holding
     value_type: U_DWORD_R
@@ -1145,8 +1145,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_3_energy_2
-    name: bl0910_3_energy_2
+    id: n60_3_2_energy
+    name: bl0910_3_2_energy
     address: 342
     register_type: holding
     value_type: U_DWORD_R
@@ -1156,8 +1156,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_3_energy_3
-    name: bl0910_3_energy_3
+    id: n60_3_3_energy
+    name: bl0910_3_3_energy
     address: 344
     register_type: holding
     value_type: U_DWORD_R
@@ -1167,8 +1167,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_3_energy_4
-    name: bl0910_3_energy_4
+    id: n60_3_4_energy
+    name: bl0910_3_4_energy
     address: 346
     register_type: holding
     value_type: U_DWORD_R
@@ -1178,8 +1178,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_3_energy_5
-    name: bl0910_3_energy_5
+    id: n60_3_5_energy
+    name: bl0910_3_5_energy
     address: 348
     register_type: holding
     value_type: U_DWORD_R
@@ -1189,8 +1189,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_3_energy_6
-    name: bl0910_3_energy_6
+    id: n60_3_6_energy
+    name: bl0910_3_6_energy
     address: 350
     register_type: holding
     value_type: U_DWORD_R
@@ -1200,8 +1200,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_3_energy_7
-    name: bl0910_3_energy_7
+    id: n60_3_7_energy
+    name: bl0910_3_7_energy
     address: 352
     register_type: holding
     value_type: U_DWORD_R
@@ -1211,8 +1211,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_3_energy_8
-    name: bl0910_3_energy_8
+    id: n60_3_8_energy
+    name: bl0910_3_8_energy
     address: 354
     register_type: holding
     value_type: U_DWORD_R
@@ -1222,8 +1222,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_3_energy_9
-    name: bl0910_3_energy_9
+    id: n60_3_9_energy
+    name: bl0910_3_9_energy
     address: 356
     register_type: holding
     value_type: U_DWORD_R
@@ -1233,8 +1233,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_3_energy_10
-    name: bl0910_3_energy_10
+    id: n60_3_10_energy
+    name: bl0910_3_10_energy
     address: 358
     register_type: holding
     value_type: U_DWORD_R
@@ -1289,8 +1289,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_4_current_1
-    name: bl0910_4_current_1
+    id: n60_4_1_current
+    name: bl0910_4_1_current
     address: 400
     register_type: holding
     value_type: U_DWORD_R
@@ -1301,8 +1301,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_current_2
-    name: bl0910_4_current_2
+    id: n60_4_2_current
+    name: bl0910_4_2_current
     address: 402
     register_type: holding
     value_type: U_DWORD_R
@@ -1313,8 +1313,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_current_3
-    name: bl0910_4_current_3
+    id: n60_4_3_current
+    name: bl0910_4_3_current
     address: 404
     register_type: holding
     value_type: U_DWORD_R
@@ -1325,8 +1325,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_current_4
-    name: bl0910_4_current_4
+    id: n60_4_4_current
+    name: bl0910_4_4_current
     address: 406
     register_type: holding
     value_type: U_DWORD_R
@@ -1337,8 +1337,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_current_5
-    name: bl0910_4_current_5
+    id: n60_4_5_current
+    name: bl0910_4_5_current
     address: 408
     register_type: holding
     value_type: U_DWORD_R
@@ -1349,8 +1349,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_current_6
-    name: bl0910_4_current_6
+    id: n60_4_6_current
+    name: bl0910_4_6_current
     address: 410
     register_type: holding
     value_type: U_DWORD_R
@@ -1361,8 +1361,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_current_7
-    name: bl0910_4_current_7
+    id: n60_4_7_current
+    name: bl0910_4_7_current
     address: 412
     register_type: holding
     value_type: U_DWORD_R
@@ -1373,8 +1373,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_current_8
-    name: bl0910_4_current_8
+    id: n60_4_8_current
+    name: bl0910_4_8_current
     address: 414
     register_type: holding
     value_type: U_DWORD_R
@@ -1385,8 +1385,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_current_9
-    name: bl0910_4_current_9
+    id: n60_4_9_current
+    name: bl0910_4_9_current
     address: 416
     register_type: holding
     value_type: U_DWORD_R
@@ -1397,8 +1397,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_current_10
-    name: bl0910_4_current_10
+    id: n60_4_10_current
+    name: bl0910_4_10_current
     address: 418
     register_type: holding
     value_type: U_DWORD_R
@@ -1409,8 +1409,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_4_power_1
-    name: bl0910_4_power_1
+    id: n60_4_1_power
+    name: bl0910_4_1_power
     address: 420
     register_type: holding
     value_type: U_DWORD_R
@@ -1421,8 +1421,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_power_2
-    name: bl0910_4_power_2
+    id: n60_4_2_power
+    name: bl0910_4_2_power
     address: 422
     register_type: holding
     value_type: U_DWORD_R
@@ -1433,8 +1433,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_power_3
-    name: bl0910_4_power_3
+    id: n60_4_3_power
+    name: bl0910_4_3_power
     address: 424
     register_type: holding
     value_type: U_DWORD_R
@@ -1445,8 +1445,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_power_4
-    name: bl0910_4_power_4
+    id: n60_4_4_power
+    name: bl0910_4_4_power
     address: 426
     register_type: holding
     value_type: U_DWORD_R
@@ -1457,8 +1457,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_power_5
-    name: bl0910_4_power_5
+    id: n60_4_5_power
+    name: bl0910_4_5_power
     address: 428
     register_type: holding
     value_type: U_DWORD_R
@@ -1469,8 +1469,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_power_6
-    name: bl0910_4_power_6
+    id: n60_4_6_power
+    name: bl0910_4_6_power
     address: 430
     register_type: holding
     value_type: U_DWORD_R
@@ -1481,8 +1481,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_power_7
-    name: bl0910_4_power_7
+    id: n60_4_7_power
+    name: bl0910_4_7_power
     address: 432
     register_type: holding
     value_type: U_DWORD_R
@@ -1493,8 +1493,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_power_8
-    name: bl0910_4_power_8
+    id: n60_4_8_power
+    name: bl0910_4_8_power
     address: 434
     register_type: holding
     value_type: U_DWORD_R
@@ -1505,8 +1505,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_power_9
-    name: bl0910_4_power_9
+    id: n60_4_9_power
+    name: bl0910_4_9_power
     address: 436
     register_type: holding
     value_type: U_DWORD_R
@@ -1517,8 +1517,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_4_power_10
-    name: bl0910_4_power_10
+    id: n60_4_10_power
+    name: bl0910_4_10_power
     address: 438
     register_type: holding
     value_type: U_DWORD_R
@@ -1529,8 +1529,8 @@ sensor:
     - multiply: 0.1
     
   - platform: modbus_controller
-    id: n60_4_energy_1
-    name: bl0910_4_energy_1
+    id: n60_4_1_energy
+    name: bl0910_4_1_energy
     address: 440
     register_type: holding
     value_type: U_DWORD_R
@@ -1540,8 +1540,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_4_energy_2
-    name: bl0910_4_energy_2
+    id: n60_4_2_energy
+    name: bl0910_4_2_energy
     address: 442
     register_type: holding
     value_type: U_DWORD_R
@@ -1551,8 +1551,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_4_energy_3
-    name: bl0910_4_energy_3
+    id: n60_4_3_energy
+    name: bl0910_4_3_energy
     address: 444
     register_type: holding
     value_type: U_DWORD_R
@@ -1562,8 +1562,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_4_energy_4
-    name: bl0910_4_energy_4
+    id: n60_4_4_energy
+    name: bl0910_4_4_energy
     address: 446
     register_type: holding
     value_type: U_DWORD_R
@@ -1573,8 +1573,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_4_energy_5
-    name: bl0910_4_energy_5
+    id: n60_4_5_energy
+    name: bl0910_4_5_energy
     address: 448
     register_type: holding
     value_type: U_DWORD_R
@@ -1584,8 +1584,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_4_energy_6
-    name: bl0910_4_energy_6
+    id: n60_4_6_energy
+    name: bl0910_4_6_energy
     address: 450
     register_type: holding
     value_type: U_DWORD_R
@@ -1595,8 +1595,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_4_energy_7
-    name: bl0910_4_energy_7
+    id: n60_4_7_energy
+    name: bl0910_4_7_energy
     address: 452
     register_type: holding
     value_type: U_DWORD_R
@@ -1606,8 +1606,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_4_energy_8
-    name: bl0910_4_energy_8
+    id: n60_4_8_energy
+    name: bl0910_4_8_energy
     address: 454
     register_type: holding
     value_type: U_DWORD_R
@@ -1617,8 +1617,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_4_energy_9
-    name: bl0910_4_energy_9
+    id: n60_4_9_energy
+    name: bl0910_4_9_energy
     address: 456
     register_type: holding
     value_type: U_DWORD_R
@@ -1628,8 +1628,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_4_energy_10
-    name: bl0910_4_energy_10
+    id: n60_4_10_energy
+    name: bl0910_4_10_energy
     address: 458
     register_type: holding
     value_type: U_DWORD_R
@@ -1684,8 +1684,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_5_current_1
-    name: bl0910_5_current_1
+    id: n60_5_1_current
+    name: bl0910_5_1_current
     address: 500
     register_type: holding
     value_type: U_DWORD_R
@@ -1696,8 +1696,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_current_2
-    name: bl0910_5_current_2
+    id: n60_5_2_current
+    name: bl0910_5_2_current
     address: 502
     register_type: holding
     value_type: U_DWORD_R
@@ -1708,8 +1708,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_current_3
-    name: bl0910_5_current_3
+    id: n60_5_3_current
+    name: bl0910_5_3_current
     address: 504
     register_type: holding
     value_type: U_DWORD_R
@@ -1720,8 +1720,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_current_4
-    name: bl0910_5_current_4
+    id: n60_5_4_current
+    name: bl0910_5_4_current
     address: 506
     register_type: holding
     value_type: U_DWORD_R
@@ -1732,8 +1732,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_current_5
-    name: bl0910_5_current_5
+    id: n60_5_5_current
+    name: bl0910_5_5_current
     address: 508
     register_type: holding
     value_type: U_DWORD_R
@@ -1744,8 +1744,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_current_6
-    name: bl0910_5_current_6
+    id: n60_5_6_current
+    name: bl0910_5_6_current
     address: 510
     register_type: holding
     value_type: U_DWORD_R
@@ -1756,8 +1756,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_current_7
-    name: bl0910_5_current_7
+    id: n60_5_7_current
+    name: bl0910_5_7_current
     address: 512
     register_type: holding
     value_type: U_DWORD_R
@@ -1768,8 +1768,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_current_8
-    name: bl0910_5_current_8
+    id: n60_5_8_current
+    name: bl0910_5_8_current
     address: 514
     register_type: holding
     value_type: U_DWORD_R
@@ -1780,8 +1780,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_current_9
-    name: bl0910_5_current_9
+    id: n60_5_9_current
+    name: bl0910_5_9_current
     address: 516
     register_type: holding
     value_type: U_DWORD_R
@@ -1792,8 +1792,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_current_10
-    name: bl0910_5_current_10
+    id: n60_5_10_current
+    name: bl0910_5_10_current
     address: 518
     register_type: holding
     value_type: U_DWORD_R
@@ -1804,8 +1804,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_5_power_1
-    name: bl0910_5_power_1
+    id: n60_5_1_power
+    name: bl0910_5_1_power
     address: 520
     register_type: holding
     value_type: U_DWORD_R
@@ -1816,8 +1816,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_power_2
-    name: bl0910_5_power_2
+    id: n60_5_2_power
+    name: bl0910_5_2_power
     address: 522
     register_type: holding
     value_type: U_DWORD_R
@@ -1828,8 +1828,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_power_3
-    name: bl0910_5_power_3
+    id: n60_5_3_power
+    name: bl0910_5_3_power
     address: 524
     register_type: holding
     value_type: U_DWORD_R
@@ -1840,8 +1840,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_power_4
-    name: bl0910_5_power_4
+    id: n60_5_4_power
+    name: bl0910_5_4_power
     address: 526
     register_type: holding
     value_type: U_DWORD_R
@@ -1852,8 +1852,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_power_5
-    name: bl0910_5_power_5
+    id: n60_5_5_power
+    name: bl0910_5_5_power
     address: 528
     register_type: holding
     value_type: U_DWORD_R
@@ -1864,8 +1864,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_power_6
-    name: bl0910_5_power_6
+    id: n60_5_6_power
+    name: bl0910_5_6_power
     address: 530
     register_type: holding
     value_type: U_DWORD_R
@@ -1876,8 +1876,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_power_7
-    name: bl0910_5_power_7
+    id: n60_5_7_power
+    name: bl0910_5_7_power
     address: 532
     register_type: holding
     value_type: U_DWORD_R
@@ -1888,8 +1888,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_power_8
-    name: bl0910_5_power_8
+    id: n60_5_8_power
+    name: bl0910_5_8_power
     address: 534
     register_type: holding
     value_type: U_DWORD_R
@@ -1900,8 +1900,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_power_9
-    name: bl0910_5_power_9
+    id: n60_5_9_power
+    name: bl0910_5_9_power
     address: 536
     register_type: holding
     value_type: U_DWORD_R
@@ -1912,8 +1912,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_5_power_10
-    name: bl0910_5_power_10
+    id: n60_5_10_power
+    name: bl0910_5_10_power
     address: 538
     register_type: holding
     value_type: U_DWORD_R
@@ -1924,8 +1924,8 @@ sensor:
     - multiply: 0.1
     
   - platform: modbus_controller
-    id: n60_5_energy_1
-    name: bl0910_5_energy_1
+    id: n60_5_1_energy
+    name: bl0910_5_1_energy
     address: 540
     register_type: holding
     value_type: U_DWORD_R
@@ -1935,8 +1935,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_5_energy_2
-    name: bl0910_5_energy_2
+    id: n60_5_2_energy
+    name: bl0910_5_2_energy
     address: 542
     register_type: holding
     value_type: U_DWORD_R
@@ -1946,8 +1946,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_5_energy_3
-    name: bl0910_5_energy_3
+    id: n60_5_3_energy
+    name: bl0910_5_3_energy
     address: 544
     register_type: holding
     value_type: U_DWORD_R
@@ -1957,8 +1957,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_5_energy_4
-    name: bl0910_5_energy_4
+    id: n60_5_4_energy
+    name: bl0910_5_4_energy
     address: 546
     register_type: holding
     value_type: U_DWORD_R
@@ -1968,8 +1968,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_5_energy_5
-    name: bl0910_5_energy_5
+    id: n60_5_5_energy
+    name: bl0910_5_5_energy
     address: 548
     register_type: holding
     value_type: U_DWORD_R
@@ -1979,8 +1979,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_5_energy_6
-    name: bl0910_5_energy_6
+    id: n60_5_6_energy
+    name: bl0910_5_6_energy
     address: 550
     register_type: holding
     value_type: U_DWORD_R
@@ -1990,8 +1990,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_5_energy_7
-    name: bl0910_5_energy_7
+    id: n60_5_7_energy
+    name: bl0910_5_7_energy
     address: 552
     register_type: holding
     value_type: U_DWORD_R
@@ -2001,8 +2001,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_5_energy_8
-    name: bl0910_5_energy_8
+    id: n60_5_8_energy
+    name: bl0910_5_8_energy
     address: 554
     register_type: holding
     value_type: U_DWORD_R
@@ -2012,8 +2012,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_5_energy_9
-    name: bl0910_5_energy_9
+    id: n60_5_9_energy
+    name: bl0910_5_9_energy
     address: 556
     register_type: holding
     value_type: U_DWORD_R
@@ -2023,8 +2023,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_5_energy_10
-    name: bl0910_5_energy_10
+    id: n60_5_10_energy
+    name: bl0910_5_10_energy
     address: 558
     register_type: holding
     value_type: U_DWORD_R
@@ -2079,8 +2079,8 @@ sensor:
     accuracy_decimals: 1
 
   - platform: modbus_controller
-    id: n60_6_current_1
-    name: bl0910_6_current_1
+    id: n60_6_1_current
+    name: bl0910_6_1_current
     address: 600
     register_type: holding
     value_type: U_DWORD_R
@@ -2091,8 +2091,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_current_2
-    name: bl0910_6_current_2
+    id: n60_6_2_current
+    name: bl0910_6_2_current
     address: 602
     register_type: holding
     value_type: U_DWORD_R
@@ -2103,8 +2103,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_current_3
-    name: bl0910_6_current_3
+    id: n60_6_3_current
+    name: bl0910_6_3_current
     address: 604
     register_type: holding
     value_type: U_DWORD_R
@@ -2115,8 +2115,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_current_4
-    name: bl0910_6_current_4
+    id: n60_6_4_current
+    name: bl0910_6_4_current
     address: 606
     register_type: holding
     value_type: U_DWORD_R
@@ -2127,8 +2127,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_current_5
-    name: bl0910_6_current_5
+    id: n60_6_5_current
+    name: bl0910_6_5_current
     address: 608
     register_type: holding
     value_type: U_DWORD_R
@@ -2139,8 +2139,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_current_6
-    name: bl0910_6_current_6
+    id: n60_6_6_current
+    name: bl0910_6_6_current
     address: 610
     register_type: holding
     value_type: U_DWORD_R
@@ -2151,8 +2151,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_current_7
-    name: bl0910_6_current_7
+    id: n60_6_7_current
+    name: bl0910_6_7_current
     address: 612
     register_type: holding
     value_type: U_DWORD_R
@@ -2163,8 +2163,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_current_8
-    name: bl0910_6_current_8
+    id: n60_6_8_current
+    name: bl0910_6_8_current
     address: 614
     register_type: holding
     value_type: U_DWORD_R
@@ -2175,8 +2175,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_current_9
-    name: bl0910_6_current_9
+    id: n60_6_9_current
+    name: bl0910_6_9_current
     address: 616
     register_type: holding
     value_type: U_DWORD_R
@@ -2187,8 +2187,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_current_10
-    name: bl0910_6_current_10
+    id: n60_6_10_current
+    name: bl0910_6_10_current
     address: 618
     register_type: holding
     value_type: U_DWORD_R
@@ -2199,8 +2199,8 @@ sensor:
     - multiply: 0.001
 
   - platform: modbus_controller
-    id: n60_6_power_1
-    name: bl0910_6_power_1
+    id: n60_6_1_power
+    name: bl0910_6_1_power
     address: 620
     register_type: holding
     value_type: U_DWORD_R
@@ -2211,8 +2211,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_power_2
-    name: bl0910_6_power_2
+    id: n60_6_2_power
+    name: bl0910_6_2_power
     address: 622
     register_type: holding
     value_type: U_DWORD_R
@@ -2223,8 +2223,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_power_3
-    name: bl0910_6_power_3
+    id: n60_6_3_power
+    name: bl0910_6_3_power
     address: 624
     register_type: holding
     value_type: U_DWORD_R
@@ -2235,8 +2235,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_power_4
-    name: bl0910_6_power_4
+    id: n60_6_4_power
+    name: bl0910_6_4_power
     address: 626
     register_type: holding
     value_type: U_DWORD_R
@@ -2247,8 +2247,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_power_5
-    name: bl0910_6_power_5
+    id: n60_6_5_power
+    name: bl0910_6_5_power
     address: 628
     register_type: holding
     value_type: U_DWORD_R
@@ -2259,8 +2259,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_power_6
-    name: bl0910_6_power_6
+    id: n60_6_6_power
+    name: bl0910_6_6_power
     address: 630
     register_type: holding
     value_type: U_DWORD_R
@@ -2271,8 +2271,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_power_7
-    name: bl0910_6_power_7
+    id: n60_6_7_power
+    name: bl0910_6_7_power
     address: 632
     register_type: holding
     value_type: U_DWORD_R
@@ -2283,8 +2283,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_power_8
-    name: bl0910_6_power_8
+    id: n60_6_8_power
+    name: bl0910_6_8_power
     address: 634
     register_type: holding
     value_type: U_DWORD_R
@@ -2295,8 +2295,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_power_9
-    name: bl0910_6_power_9
+    id: n60_6_9_power
+    name: bl0910_6_9_power
     address: 636
     register_type: holding
     value_type: U_DWORD_R
@@ -2307,8 +2307,8 @@ sensor:
     - multiply: 0.1
 
   - platform: modbus_controller
-    id: n60_6_power_10
-    name: bl0910_6_power_10
+    id: n60_6_10_power
+    name: bl0910_6_10_power
     address: 638
     register_type: holding
     value_type: U_DWORD_R
@@ -2319,8 +2319,8 @@ sensor:
     - multiply: 0.1
     
   - platform: modbus_controller
-    id: n60_6_energy_1
-    name: bl0910_6_energy_1
+    id: n60_6_1_energy
+    name: bl0910_6_1_energy
     address: 640
     register_type: holding
     value_type: U_DWORD_R
@@ -2330,8 +2330,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_6_energy_2
-    name: bl0910_6_energy_2
+    id: n60_6_2_energy
+    name: bl0910_6_2_energy
     address: 642
     register_type: holding
     value_type: U_DWORD_R
@@ -2341,8 +2341,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_6_energy_3
-    name: bl0910_6_energy_3
+    id: n60_6_3_energy
+    name: bl0910_6_3_energy
     address: 644
     register_type: holding
     value_type: U_DWORD_R
@@ -2352,8 +2352,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_6_energy_4
-    name: bl0910_6_energy_4
+    id: n60_6_4_energy
+    name: bl0910_6_4_energy
     address: 646
     register_type: holding
     value_type: U_DWORD_R
@@ -2363,8 +2363,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_6_energy_5
-    name: bl0910_6_energy_5
+    id: n60_6_5_energy
+    name: bl0910_6_5_energy
     address: 648
     register_type: holding
     value_type: U_DWORD_R
@@ -2374,8 +2374,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_6_energy_6
-    name: bl0910_6_energy_6
+    id: n60_6_6_energy
+    name: bl0910_6_6_energy
     address: 650
     register_type: holding
     value_type: U_DWORD_R
@@ -2385,8 +2385,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_6_energy_7
-    name: bl0910_6_energy_7
+    id: n60_6_7_energy
+    name: bl0910_6_7_energy
     address: 652
     register_type: holding
     value_type: U_DWORD_R
@@ -2396,8 +2396,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_6_energy_8
-    name: bl0910_6_energy_8
+    id: n60_6_8_energy
+    name: bl0910_6_8_energy
     address: 654
     register_type: holding
     value_type: U_DWORD_R
@@ -2407,8 +2407,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_6_energy_9
-    name: bl0910_6_energy_9
+    id: n60_6_9_energy
+    name: bl0910_6_9_energy
     address: 656
     register_type: holding
     value_type: U_DWORD_R
@@ -2418,8 +2418,8 @@ sensor:
     accuracy_decimals: 1
     
   - platform: modbus_controller
-    id: n60_6_energy_10
-    name: bl0910_6_energy_10
+    id: n60_6_10_energy
+    name: bl0910_6_10_energy
     address: 658
     register_type: holding
     value_type: U_DWORD_R

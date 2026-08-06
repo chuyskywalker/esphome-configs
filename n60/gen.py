@@ -16,8 +16,8 @@ substitutions:
   static_ip: 192.168.0.6
   gateway: 192.168.0.1
   subnet: 255.255.254.0
-  api_key: !secret sa1_api_encryption_key
-  ota_pass: !secret sa1_ota_password
+  api_key: !secret energy_monitor_api_encryption_key
+  ota_pass: !secret energy_monitor_ota_password
 
 esphome:
   name: ${name}
@@ -121,8 +121,8 @@ for bank_id in range(1,7):
     for pin_id in range(1,11):
         print(f'''
   - platform: modbus_controller
-    id: n60_{bank_id}_current_{pin_id}
-    name: bl0910_{bank_id}_current_{pin_id}
+    id: n60_{bank_id}_{pin_id}_current
+    name: bl0910_{bank_id}_{pin_id}_current
     address: {(bank_id * 100) + (pin_id * 2) - 2 }
     register_type: holding
     value_type: U_DWORD_R
@@ -136,8 +136,8 @@ for bank_id in range(1,7):
     for pin_id in range(1,11):
         print(f'''
   - platform: modbus_controller
-    id: n60_{bank_id}_power_{pin_id}
-    name: bl0910_{bank_id}_power_{pin_id}
+    id: n60_{bank_id}_{pin_id}_power
+    name: bl0910_{bank_id}_{pin_id}_power
     address: {(bank_id * 100) + (pin_id * 2) - 2 + 20}
     register_type: holding
     value_type: U_DWORD_R
@@ -151,8 +151,8 @@ for bank_id in range(1,7):
     for pin_id in range(1,11):
         print(f'''    
   - platform: modbus_controller
-    id: n60_{bank_id}_energy_{pin_id}
-    name: bl0910_{bank_id}_energy_{pin_id}
+    id: n60_{bank_id}_{pin_id}_energy
+    name: bl0910_{bank_id}_{pin_id}_energy
     address: {(bank_id * 100) + (pin_id * 2) - 2 + 40}
     register_type: holding
     value_type: U_DWORD_R
