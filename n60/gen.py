@@ -253,12 +253,6 @@ for (power_name, ct_ids) in mapping.items():
         addr_offset = internal_maps[ct_num][2]
         print(f'''
   ### bank: {bank_id}, pin: {pin_id}, ct: {ct_num}
-  
-  
-  
-
-  
-
 
   # current (amps)
   - platform: modbus_controller
@@ -279,20 +273,20 @@ for (power_name, ct_ids) in mapping.items():
     internal: true
     address: {addr_offset + 20}
     register_type: holding
-    value_type: S_DWORD_R  # WAS: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
-    
+
   # energy (kWh)
   - platform: modbus_controller
     id: ct_{ct_num}_energy
     internal: true
     address: {addr_offset + 40}
     register_type: holding
-    value_type: FP32_R  # WAS: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
@@ -359,41 +353,41 @@ print('''
 for bank_id in range(1,7):
 
     print(f'''
-  # bank: {bank_id}, ct start: {(bank_id*10)-9}, ct end: {(bank_id*10)}
-  - platform: modbus_controller
-    id: bank_{bank_id}_energy_sum
-    name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Energy Sum
-    address: {bank_id}60
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  - platform: modbus_controller
-    id: bank_{bank_id}_voltage
-    name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Voltage
-    address: {bank_id}62
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: V
-    device_class: voltage
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
-
-  - platform: modbus_controller
-    id: bank_{bank_id}_frequency
-    name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Frequency
-    address: {bank_id}63
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: Hz
-    device_class: frequency
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
+  # # bank: {bank_id}, ct start: {(bank_id*10)-9}, ct end: {(bank_id*10)}
+  # - platform: modbus_controller
+  #   id: bank_{bank_id}_energy_sum
+  #   name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Energy Sum
+  #   address: {bank_id}60
+  #   register_type: holding
+  #   value_type: FP32_R
+  #   unit_of_measurement: kWh
+  #   state_class: total_increasing
+  #   device_class: energy
+  #   accuracy_decimals: 3
+  # 
+  # - platform: modbus_controller
+  #   id: bank_{bank_id}_voltage
+  #   name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Voltage
+  #   address: {bank_id}62
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: V
+  #   device_class: voltage
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
+  # 
+  # - platform: modbus_controller
+  #   id: bank_{bank_id}_frequency
+  #   name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Frequency
+  #   address: {bank_id}63
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: Hz
+  #   device_class: frequency
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
 
   - platform: modbus_controller
     id: bank_{bank_id}_temp
@@ -404,3 +398,57 @@ for bank_id in range(1,7):
     unit_of_measurement: "°C"
     device_class: temperature
     accuracy_decimals: 1''')
+
+
+bank_id = 1
+print(f'''
+  - platform: modbus_controller
+    id: l1_voltage
+    name: L1 Voltage
+    address: {bank_id}62
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: V
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.01
+
+  - platform: modbus_controller
+    id: l1_frequency
+    name: L1 Frequency
+    address: {bank_id}63
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: Hz
+    device_class: frequency
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.01''')
+
+
+bank_id = 4
+print(f'''
+  - platform: modbus_controller
+    id: l2_voltage
+    name: L2 Voltage
+    address: {bank_id}62
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: V
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.01
+
+  - platform: modbus_controller
+    id: l2_frequency
+    name: L2 Frequency
+    address: {bank_id}63
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: Hz
+    device_class: frequency
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.01''')

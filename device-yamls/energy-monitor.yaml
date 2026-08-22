@@ -131,7 +131,7 @@ sensor:
     internal: true
     address: 120
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -144,11 +144,11 @@ sensor:
     internal: true
     address: 140
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -197,7 +197,7 @@ sensor:
     internal: true
     address: 420
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -210,11 +210,11 @@ sensor:
     internal: true
     address: 440
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -263,7 +263,7 @@ sensor:
     internal: true
     address: 122
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -276,11 +276,11 @@ sensor:
     internal: true
     address: 142
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -329,7 +329,7 @@ sensor:
     internal: true
     address: 422
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -342,11 +342,11 @@ sensor:
     internal: true
     address: 442
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -395,7 +395,7 @@ sensor:
     internal: true
     address: 124
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -408,11 +408,11 @@ sensor:
     internal: true
     address: 144
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -461,7 +461,7 @@ sensor:
     internal: true
     address: 424
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -474,11 +474,11 @@ sensor:
     internal: true
     address: 444
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -527,7 +527,7 @@ sensor:
     internal: true
     address: 126
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -540,11 +540,11 @@ sensor:
     internal: true
     address: 146
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -593,7 +593,7 @@ sensor:
     internal: true
     address: 426
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -606,11 +606,11 @@ sensor:
     internal: true
     address: 446
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -659,7 +659,7 @@ sensor:
     internal: true
     address: 128
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -672,11 +672,11 @@ sensor:
     internal: true
     address: 148
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -725,7 +725,7 @@ sensor:
     internal: true
     address: 130
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -738,11 +738,11 @@ sensor:
     internal: true
     address: 150
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   ### bank: 4, pin: 5, ct: 35
 
@@ -765,7 +765,7 @@ sensor:
     internal: true
     address: 428
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -778,11 +778,11 @@ sensor:
     internal: true
     address: 448
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -834,7 +834,7 @@ sensor:
     internal: true
     address: 132
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -847,11 +847,11 @@ sensor:
     internal: true
     address: 152
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   ### bank: 4, pin: 6, ct: 36
 
@@ -874,7 +874,7 @@ sensor:
     internal: true
     address: 430
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -887,11 +887,11 @@ sensor:
     internal: true
     address: 450
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -943,7 +943,7 @@ sensor:
     internal: true
     address: 136
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -956,11 +956,11 @@ sensor:
     internal: true
     address: 156
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1009,7 +1009,7 @@ sensor:
     internal: true
     address: 436
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1022,11 +1022,11 @@ sensor:
     internal: true
     address: 456
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1075,7 +1075,7 @@ sensor:
     internal: true
     address: 138
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1088,11 +1088,11 @@ sensor:
     internal: true
     address: 158
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1141,7 +1141,7 @@ sensor:
     internal: true
     address: 438
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1154,11 +1154,11 @@ sensor:
     internal: true
     address: 458
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1207,7 +1207,7 @@ sensor:
     internal: true
     address: 220
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1220,11 +1220,11 @@ sensor:
     internal: true
     address: 240
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1273,7 +1273,7 @@ sensor:
     internal: true
     address: 520
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1286,11 +1286,11 @@ sensor:
     internal: true
     address: 540
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1339,7 +1339,7 @@ sensor:
     internal: true
     address: 222
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1352,11 +1352,11 @@ sensor:
     internal: true
     address: 242
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1405,7 +1405,7 @@ sensor:
     internal: true
     address: 522
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1418,11 +1418,11 @@ sensor:
     internal: true
     address: 542
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1471,7 +1471,7 @@ sensor:
     internal: true
     address: 224
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1484,11 +1484,11 @@ sensor:
     internal: true
     address: 244
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1537,7 +1537,7 @@ sensor:
     internal: true
     address: 524
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1550,11 +1550,11 @@ sensor:
     internal: true
     address: 544
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1603,7 +1603,7 @@ sensor:
     internal: true
     address: 226
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1616,11 +1616,11 @@ sensor:
     internal: true
     address: 246
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   ### bank: 5, pin: 4, ct: 44
 
@@ -1643,7 +1643,7 @@ sensor:
     internal: true
     address: 526
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1656,11 +1656,11 @@ sensor:
     internal: true
     address: 546
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1712,7 +1712,7 @@ sensor:
     internal: true
     address: 228
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1725,11 +1725,11 @@ sensor:
     internal: true
     address: 248
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   ### bank: 5, pin: 5, ct: 45
 
@@ -1752,7 +1752,7 @@ sensor:
     internal: true
     address: 528
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1765,11 +1765,11 @@ sensor:
     internal: true
     address: 548
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1821,7 +1821,7 @@ sensor:
     internal: true
     address: 230
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1834,11 +1834,11 @@ sensor:
     internal: true
     address: 250
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   ### bank: 5, pin: 6, ct: 46
 
@@ -1861,7 +1861,7 @@ sensor:
     internal: true
     address: 530
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1874,11 +1874,11 @@ sensor:
     internal: true
     address: 550
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1930,7 +1930,7 @@ sensor:
     internal: true
     address: 232
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -1943,11 +1943,11 @@ sensor:
     internal: true
     address: 252
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -1996,7 +1996,7 @@ sensor:
     internal: true
     address: 532
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2009,11 +2009,11 @@ sensor:
     internal: true
     address: 552
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2062,7 +2062,7 @@ sensor:
     internal: true
     address: 234
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2075,11 +2075,11 @@ sensor:
     internal: true
     address: 254
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2128,7 +2128,7 @@ sensor:
     internal: true
     address: 534
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2141,11 +2141,11 @@ sensor:
     internal: true
     address: 554
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2194,7 +2194,7 @@ sensor:
     internal: true
     address: 236
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2207,11 +2207,11 @@ sensor:
     internal: true
     address: 256
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2260,7 +2260,7 @@ sensor:
     internal: true
     address: 536
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2273,11 +2273,11 @@ sensor:
     internal: true
     address: 556
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2326,7 +2326,7 @@ sensor:
     internal: true
     address: 238
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2339,11 +2339,11 @@ sensor:
     internal: true
     address: 258
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2392,7 +2392,7 @@ sensor:
     internal: true
     address: 538
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2405,11 +2405,11 @@ sensor:
     internal: true
     address: 558
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2458,7 +2458,7 @@ sensor:
     internal: true
     address: 320
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2471,11 +2471,11 @@ sensor:
     internal: true
     address: 340
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2524,7 +2524,7 @@ sensor:
     internal: true
     address: 324
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2537,11 +2537,11 @@ sensor:
     internal: true
     address: 344
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   ### bank: 6, pin: 3, ct: 53
 
@@ -2564,7 +2564,7 @@ sensor:
     internal: true
     address: 624
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2577,11 +2577,11 @@ sensor:
     internal: true
     address: 644
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2633,7 +2633,7 @@ sensor:
     internal: true
     address: 326
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2646,11 +2646,11 @@ sensor:
     internal: true
     address: 346
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2699,7 +2699,7 @@ sensor:
     internal: true
     address: 626
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2712,11 +2712,11 @@ sensor:
     internal: true
     address: 646
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2765,7 +2765,7 @@ sensor:
     internal: true
     address: 328
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2778,11 +2778,11 @@ sensor:
     internal: true
     address: 348
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2831,7 +2831,7 @@ sensor:
     internal: true
     address: 628
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2844,11 +2844,11 @@ sensor:
     internal: true
     address: 648
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2897,7 +2897,7 @@ sensor:
     internal: true
     address: 330
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2910,11 +2910,11 @@ sensor:
     internal: true
     address: 350
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -2963,7 +2963,7 @@ sensor:
     internal: true
     address: 630
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -2976,11 +2976,11 @@ sensor:
     internal: true
     address: 650
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -3029,7 +3029,7 @@ sensor:
     internal: true
     address: 332
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
     accuracy_decimals: 1
@@ -3042,11 +3042,11 @@ sensor:
     internal: true
     address: 352
     register_type: holding
-    value_type: U_DWORD_R
+    value_type: FP32_R
     unit_of_measurement: kWh
     state_class: total_increasing
     device_class: energy
-    accuracy_decimals: 1
+    accuracy_decimals: 3
 
   - platform: combination
     type: sum
@@ -3074,41 +3074,41 @@ sensor:
 ##########################################################################################
 
 
-  # bank: 1, ct start: 1, ct end: 10
-  - platform: modbus_controller
-    id: bank_1_energy_sum
-    name: Bank 1 (CT 1-10) Energy Sum
-    address: 160
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  - platform: modbus_controller
-    id: bank_1_voltage
-    name: Bank 1 (CT 1-10) Voltage
-    address: 162
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: V
-    device_class: voltage
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
-
-  - platform: modbus_controller
-    id: bank_1_frequency
-    name: Bank 1 (CT 1-10) Frequency
-    address: 163
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: Hz
-    device_class: frequency
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
+  # # bank: 1, ct start: 1, ct end: 10
+  # - platform: modbus_controller
+  #   id: bank_1_energy_sum
+  #   name: Bank 1 (CT 1-10) Energy Sum
+  #   address: 160
+  #   register_type: holding
+  #   value_type: FP32_R
+  #   unit_of_measurement: kWh
+  #   state_class: total_increasing
+  #   device_class: energy
+  #   accuracy_decimals: 3
+  # 
+  # - platform: modbus_controller
+  #   id: bank_1_voltage
+  #   name: Bank 1 (CT 1-10) Voltage
+  #   address: 162
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: V
+  #   device_class: voltage
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
+  # 
+  # - platform: modbus_controller
+  #   id: bank_1_frequency
+  #   name: Bank 1 (CT 1-10) Frequency
+  #   address: 163
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: Hz
+  #   device_class: frequency
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
 
   - platform: modbus_controller
     id: bank_1_temp
@@ -3120,41 +3120,41 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
-  # bank: 2, ct start: 11, ct end: 20
-  - platform: modbus_controller
-    id: bank_2_energy_sum
-    name: Bank 2 (CT 11-20) Energy Sum
-    address: 260
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  - platform: modbus_controller
-    id: bank_2_voltage
-    name: Bank 2 (CT 11-20) Voltage
-    address: 262
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: V
-    device_class: voltage
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
-
-  - platform: modbus_controller
-    id: bank_2_frequency
-    name: Bank 2 (CT 11-20) Frequency
-    address: 263
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: Hz
-    device_class: frequency
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
+  # # bank: 2, ct start: 11, ct end: 20
+  # - platform: modbus_controller
+  #   id: bank_2_energy_sum
+  #   name: Bank 2 (CT 11-20) Energy Sum
+  #   address: 260
+  #   register_type: holding
+  #   value_type: FP32_R
+  #   unit_of_measurement: kWh
+  #   state_class: total_increasing
+  #   device_class: energy
+  #   accuracy_decimals: 3
+  # 
+  # - platform: modbus_controller
+  #   id: bank_2_voltage
+  #   name: Bank 2 (CT 11-20) Voltage
+  #   address: 262
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: V
+  #   device_class: voltage
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
+  # 
+  # - platform: modbus_controller
+  #   id: bank_2_frequency
+  #   name: Bank 2 (CT 11-20) Frequency
+  #   address: 263
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: Hz
+  #   device_class: frequency
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
 
   - platform: modbus_controller
     id: bank_2_temp
@@ -3166,41 +3166,41 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
-  # bank: 3, ct start: 21, ct end: 30
-  - platform: modbus_controller
-    id: bank_3_energy_sum
-    name: Bank 3 (CT 21-30) Energy Sum
-    address: 360
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  - platform: modbus_controller
-    id: bank_3_voltage
-    name: Bank 3 (CT 21-30) Voltage
-    address: 362
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: V
-    device_class: voltage
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
-
-  - platform: modbus_controller
-    id: bank_3_frequency
-    name: Bank 3 (CT 21-30) Frequency
-    address: 363
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: Hz
-    device_class: frequency
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
+  # # bank: 3, ct start: 21, ct end: 30
+  # - platform: modbus_controller
+  #   id: bank_3_energy_sum
+  #   name: Bank 3 (CT 21-30) Energy Sum
+  #   address: 360
+  #   register_type: holding
+  #   value_type: FP32_R
+  #   unit_of_measurement: kWh
+  #   state_class: total_increasing
+  #   device_class: energy
+  #   accuracy_decimals: 3
+  # 
+  # - platform: modbus_controller
+  #   id: bank_3_voltage
+  #   name: Bank 3 (CT 21-30) Voltage
+  #   address: 362
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: V
+  #   device_class: voltage
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
+  # 
+  # - platform: modbus_controller
+  #   id: bank_3_frequency
+  #   name: Bank 3 (CT 21-30) Frequency
+  #   address: 363
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: Hz
+  #   device_class: frequency
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
 
   - platform: modbus_controller
     id: bank_3_temp
@@ -3212,41 +3212,41 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
-  # bank: 4, ct start: 31, ct end: 40
-  - platform: modbus_controller
-    id: bank_4_energy_sum
-    name: Bank 4 (CT 31-40) Energy Sum
-    address: 460
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  - platform: modbus_controller
-    id: bank_4_voltage
-    name: Bank 4 (CT 31-40) Voltage
-    address: 462
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: V
-    device_class: voltage
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
-
-  - platform: modbus_controller
-    id: bank_4_frequency
-    name: Bank 4 (CT 31-40) Frequency
-    address: 463
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: Hz
-    device_class: frequency
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
+  # # bank: 4, ct start: 31, ct end: 40
+  # - platform: modbus_controller
+  #   id: bank_4_energy_sum
+  #   name: Bank 4 (CT 31-40) Energy Sum
+  #   address: 460
+  #   register_type: holding
+  #   value_type: FP32_R
+  #   unit_of_measurement: kWh
+  #   state_class: total_increasing
+  #   device_class: energy
+  #   accuracy_decimals: 3
+  # 
+  # - platform: modbus_controller
+  #   id: bank_4_voltage
+  #   name: Bank 4 (CT 31-40) Voltage
+  #   address: 462
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: V
+  #   device_class: voltage
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
+  # 
+  # - platform: modbus_controller
+  #   id: bank_4_frequency
+  #   name: Bank 4 (CT 31-40) Frequency
+  #   address: 463
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: Hz
+  #   device_class: frequency
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
 
   - platform: modbus_controller
     id: bank_4_temp
@@ -3258,41 +3258,41 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
-  # bank: 5, ct start: 41, ct end: 50
-  - platform: modbus_controller
-    id: bank_5_energy_sum
-    name: Bank 5 (CT 41-50) Energy Sum
-    address: 560
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  - platform: modbus_controller
-    id: bank_5_voltage
-    name: Bank 5 (CT 41-50) Voltage
-    address: 562
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: V
-    device_class: voltage
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
-
-  - platform: modbus_controller
-    id: bank_5_frequency
-    name: Bank 5 (CT 41-50) Frequency
-    address: 563
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: Hz
-    device_class: frequency
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
+  # # bank: 5, ct start: 41, ct end: 50
+  # - platform: modbus_controller
+  #   id: bank_5_energy_sum
+  #   name: Bank 5 (CT 41-50) Energy Sum
+  #   address: 560
+  #   register_type: holding
+  #   value_type: FP32_R
+  #   unit_of_measurement: kWh
+  #   state_class: total_increasing
+  #   device_class: energy
+  #   accuracy_decimals: 3
+  # 
+  # - platform: modbus_controller
+  #   id: bank_5_voltage
+  #   name: Bank 5 (CT 41-50) Voltage
+  #   address: 562
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: V
+  #   device_class: voltage
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
+  # 
+  # - platform: modbus_controller
+  #   id: bank_5_frequency
+  #   name: Bank 5 (CT 41-50) Frequency
+  #   address: 563
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: Hz
+  #   device_class: frequency
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
 
   - platform: modbus_controller
     id: bank_5_temp
@@ -3304,41 +3304,41 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
-  # bank: 6, ct start: 51, ct end: 60
-  - platform: modbus_controller
-    id: bank_6_energy_sum
-    name: Bank 6 (CT 51-60) Energy Sum
-    address: 660
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  - platform: modbus_controller
-    id: bank_6_voltage
-    name: Bank 6 (CT 51-60) Voltage
-    address: 662
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: V
-    device_class: voltage
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
-
-  - platform: modbus_controller
-    id: bank_6_frequency
-    name: Bank 6 (CT 51-60) Frequency
-    address: 663
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: Hz
-    device_class: frequency
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
+  # # bank: 6, ct start: 51, ct end: 60
+  # - platform: modbus_controller
+  #   id: bank_6_energy_sum
+  #   name: Bank 6 (CT 51-60) Energy Sum
+  #   address: 660
+  #   register_type: holding
+  #   value_type: FP32_R
+  #   unit_of_measurement: kWh
+  #   state_class: total_increasing
+  #   device_class: energy
+  #   accuracy_decimals: 3
+  # 
+  # - platform: modbus_controller
+  #   id: bank_6_voltage
+  #   name: Bank 6 (CT 51-60) Voltage
+  #   address: 662
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: V
+  #   device_class: voltage
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
+  # 
+  # - platform: modbus_controller
+  #   id: bank_6_frequency
+  #   name: Bank 6 (CT 51-60) Frequency
+  #   address: 663
+  #   register_type: holding
+  #   value_type: U_WORD
+  #   unit_of_measurement: Hz
+  #   device_class: frequency
+  #   accuracy_decimals: 1
+  #   filters:
+  #   - multiply: 0.01
 
   - platform: modbus_controller
     id: bank_6_temp
@@ -3349,3 +3349,51 @@ sensor:
     unit_of_measurement: "°C"
     device_class: temperature
     accuracy_decimals: 1
+
+  - platform: modbus_controller
+    id: l1_voltage
+    name: L1 Voltage
+    address: 162
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: V
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.01
+
+  - platform: modbus_controller
+    id: l1_frequency
+    name: L1 Frequency
+    address: 163
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: Hz
+    device_class: frequency
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.01
+
+  - platform: modbus_controller
+    id: l2_voltage
+    name: L2 Voltage
+    address: 462
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: V
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.01
+
+  - platform: modbus_controller
+    id: l2_frequency
+    name: L2 Frequency
+    address: 463
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: Hz
+    device_class: frequency
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.01
