@@ -63,20 +63,21 @@ text_sensor:
     ip_address:
       name: ESP IP Address
       id: eth_ip
-      address_0:
-        name: ESP IP Address 0
-      address_1:
-        name: ESP IP Address 1
-      address_2:
-        name: ESP IP Address 2
-      address_3:
-        name: ESP IP Address 3
-      address_4:
-        name: ESP IP Address 4
-    dns_address:
-      name: ESP DNS Address
-    mac_address:
-      name: ESP MAC Address
+    # none of this gets used; commenting out
+    #   address_0:
+    #     name: ESP IP Address 0
+    #   address_1:
+    #     name: ESP IP Address 1
+    #   address_2:
+    #     name: ESP IP Address 2
+    #   address_3:
+    #     name: ESP IP Address 3
+    #   address_4:
+    #     name: ESP IP Address 4
+    # dns_address:
+    #   name: ESP DNS Address
+    # mac_address:
+    #   name: ESP MAC Address
 
 font:
   - file: "gfonts://Roboto"
@@ -87,6 +88,9 @@ i2c:
   sda: 18
   scl: 17
 
+# TODO: seems like we could do something way more fun with this than just IP address
+#       maybe keep a running tally of kwh, or current amps/watts, etc.
+#       a cool running graph of the last 15 minutes or something? I dunno!
 display:
   - platform: ssd1306_i2c
     model: "SSD1306 128x64"
@@ -103,10 +107,15 @@ modbus_controller:
 sensor:
 
 
-  # bank: 1, pin: 1, ct: 1
+  ##############   Microwave (P1B1)   ##############
+  
+
+  ### bank: 1, pin: 1, ct: 1
+
+  # current (amps)
   - platform: modbus_controller
     id: ct_1_current
-    name: CT 1 Current
+    internal: true
     address: 100
     register_type: holding
     value_type: U_DWORD_R
@@ -116,127 +125,10 @@ sensor:
     filters:
     - multiply: 0.001
 
-  # bank: 1, pin: 2, ct: 2
-  - platform: modbus_controller
-    id: ct_2_current
-    name: CT 2 Current
-    address: 102
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 1, pin: 3, ct: 3
-  - platform: modbus_controller
-    id: ct_3_current
-    name: CT 3 Current
-    address: 104
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 1, pin: 4, ct: 4
-  - platform: modbus_controller
-    id: ct_4_current
-    name: CT 4 Current
-    address: 106
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 1, pin: 5, ct: 5
-  - platform: modbus_controller
-    id: ct_5_current
-    name: CT 5 Current
-    address: 108
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 1, pin: 6, ct: 6
-  - platform: modbus_controller
-    id: ct_6_current
-    name: CT 6 Current
-    address: 110
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 1, pin: 7, ct: 7
-  - platform: modbus_controller
-    id: ct_7_current
-    name: CT 7 Current
-    address: 112
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 1, pin: 8, ct: 8
-  - platform: modbus_controller
-    id: ct_8_current
-    name: CT 8 Current
-    address: 114
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 1, pin: 9, ct: 9
-  - platform: modbus_controller
-    id: ct_9_current
-    name: CT 9 Current
-    address: 116
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 1, pin: 10, ct: 10
-  - platform: modbus_controller
-    id: ct_10_current
-    name: CT 10 Current
-    address: 118
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 1, pin: 1, ct: 1
+  # power (watts)
   - platform: modbus_controller
     id: ct_1_power
-    name: CT 1 Power
+    internal: true
     address: 120
     register_type: holding
     value_type: U_DWORD_R
@@ -246,10 +138,129 @@ sensor:
     filters:
     - multiply: 0.1
 
-  # bank: 1, pin: 2, ct: 2
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_1_energy
+    internal: true
+    address: 140
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Microwave (P1B1) Load"
+    id: microwave_p1b1_current
+    sources:
+      - source: ct_1_current
+
+  - platform: combination
+    type: sum
+    name: "Microwave (P1B1) Power"
+    id: microwave_p1b1_power
+    sources:
+      - source: ct_1_power
+
+  - platform: combination
+    type: sum
+    name: "Microwave (P1B1) Energy"
+    id: microwave_p1b1_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_1_energy
+
+  ##############   Fridge & Hood (P1B3)   ##############
+  
+
+  ### bank: 4, pin: 1, ct: 31
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_31_current
+    internal: true
+    address: 400
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_31_power
+    internal: true
+    address: 420
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_31_energy
+    internal: true
+    address: 440
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Fridge & Hood (P1B3) Load"
+    id: fridge__hood_p1b3_current
+    sources:
+      - source: ct_31_current
+
+  - platform: combination
+    type: sum
+    name: "Fridge & Hood (P1B3) Power"
+    id: fridge__hood_p1b3_power
+    sources:
+      - source: ct_31_power
+
+  - platform: combination
+    type: sum
+    name: "Fridge & Hood (P1B3) Energy"
+    id: fridge__hood_p1b3_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_31_energy
+
+  ##############   Kitchen Outlets (P1B5)   ##############
+  
+
+  ### bank: 1, pin: 2, ct: 2
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_2_current
+    internal: true
+    address: 102
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
   - platform: modbus_controller
     id: ct_2_power
-    name: CT 2 Power
+    internal: true
     address: 122
     register_type: holding
     value_type: U_DWORD_R
@@ -259,10 +270,129 @@ sensor:
     filters:
     - multiply: 0.1
 
-  # bank: 1, pin: 3, ct: 3
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_2_energy
+    internal: true
+    address: 142
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Kitchen Outlets (P1B5) Load"
+    id: kitchen_outlets_p1b5_current
+    sources:
+      - source: ct_2_current
+
+  - platform: combination
+    type: sum
+    name: "Kitchen Outlets (P1B5) Power"
+    id: kitchen_outlets_p1b5_power
+    sources:
+      - source: ct_2_power
+
+  - platform: combination
+    type: sum
+    name: "Kitchen Outlets (P1B5) Energy"
+    id: kitchen_outlets_p1b5_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_2_energy
+
+  ##############   Disposal (P1B7)   ##############
+  
+
+  ### bank: 4, pin: 2, ct: 32
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_32_current
+    internal: true
+    address: 402
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_32_power
+    internal: true
+    address: 422
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_32_energy
+    internal: true
+    address: 442
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Disposal (P1B7) Load"
+    id: disposal_p1b7_current
+    sources:
+      - source: ct_32_current
+
+  - platform: combination
+    type: sum
+    name: "Disposal (P1B7) Power"
+    id: disposal_p1b7_power
+    sources:
+      - source: ct_32_power
+
+  - platform: combination
+    type: sum
+    name: "Disposal (P1B7) Energy"
+    id: disposal_p1b7_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_32_energy
+
+  ##############   Garage Outlets 1 (P1B9)   ##############
+  
+
+  ### bank: 1, pin: 3, ct: 3
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_3_current
+    internal: true
+    address: 104
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
   - platform: modbus_controller
     id: ct_3_power
-    name: CT 3 Power
+    internal: true
     address: 124
     register_type: holding
     value_type: U_DWORD_R
@@ -272,10 +402,129 @@ sensor:
     filters:
     - multiply: 0.1
 
-  # bank: 1, pin: 4, ct: 4
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_3_energy
+    internal: true
+    address: 144
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Garage Outlets 1 (P1B9) Load"
+    id: garage_outlets_1_p1b9_current
+    sources:
+      - source: ct_3_current
+
+  - platform: combination
+    type: sum
+    name: "Garage Outlets 1 (P1B9) Power"
+    id: garage_outlets_1_p1b9_power
+    sources:
+      - source: ct_3_power
+
+  - platform: combination
+    type: sum
+    name: "Garage Outlets 1 (P1B9) Energy"
+    id: garage_outlets_1_p1b9_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_3_energy
+
+  ##############   Garage Outlets 2 (P1B11)   ##############
+  
+
+  ### bank: 4, pin: 3, ct: 33
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_33_current
+    internal: true
+    address: 404
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_33_power
+    internal: true
+    address: 424
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_33_energy
+    internal: true
+    address: 444
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Garage Outlets 2 (P1B11) Load"
+    id: garage_outlets_2_p1b11_current
+    sources:
+      - source: ct_33_current
+
+  - platform: combination
+    type: sum
+    name: "Garage Outlets 2 (P1B11) Power"
+    id: garage_outlets_2_p1b11_power
+    sources:
+      - source: ct_33_power
+
+  - platform: combination
+    type: sum
+    name: "Garage Outlets 2 (P1B11) Energy"
+    id: garage_outlets_2_p1b11_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_33_energy
+
+  ##############   Outside Outlets (P1B13)   ##############
+  
+
+  ### bank: 1, pin: 4, ct: 4
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_4_current
+    internal: true
+    address: 106
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
   - platform: modbus_controller
     id: ct_4_power
-    name: CT 4 Power
+    internal: true
     address: 126
     register_type: holding
     value_type: U_DWORD_R
@@ -285,10 +534,129 @@ sensor:
     filters:
     - multiply: 0.1
 
-  # bank: 1, pin: 5, ct: 5
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_4_energy
+    internal: true
+    address: 146
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Outside Outlets (P1B13) Load"
+    id: outside_outlets_p1b13_current
+    sources:
+      - source: ct_4_current
+
+  - platform: combination
+    type: sum
+    name: "Outside Outlets (P1B13) Power"
+    id: outside_outlets_p1b13_power
+    sources:
+      - source: ct_4_power
+
+  - platform: combination
+    type: sum
+    name: "Outside Outlets (P1B13) Energy"
+    id: outside_outlets_p1b13_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_4_energy
+
+  ##############   ERV (P1B15)   ##############
+  
+
+  ### bank: 4, pin: 4, ct: 34
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_34_current
+    internal: true
+    address: 406
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_34_power
+    internal: true
+    address: 426
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_34_energy
+    internal: true
+    address: 446
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "ERV (P1B15) Load"
+    id: erv_p1b15_current
+    sources:
+      - source: ct_34_current
+
+  - platform: combination
+    type: sum
+    name: "ERV (P1B15) Power"
+    id: erv_p1b15_power
+    sources:
+      - source: ct_34_power
+
+  - platform: combination
+    type: sum
+    name: "ERV (P1B15) Energy"
+    id: erv_p1b15_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_34_energy
+
+  ##############   Crawl: Dehum, LED, Cond.Pump, Moen Flo (P1B17)   ##############
+  
+
+  ### bank: 1, pin: 5, ct: 5
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_5_current
+    internal: true
+    address: 108
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
   - platform: modbus_controller
     id: ct_5_power
-    name: CT 5 Power
+    internal: true
     address: 128
     register_type: holding
     value_type: U_DWORD_R
@@ -298,10 +666,63 @@ sensor:
     filters:
     - multiply: 0.1
 
-  # bank: 1, pin: 6, ct: 6
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_5_energy
+    internal: true
+    address: 148
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Crawl: Dehum, LED, Cond.Pump, Moen Flo (P1B17) Load"
+    id: crawl_dehum_led_condpump_moen_flo_p1b17_current
+    sources:
+      - source: ct_5_current
+
+  - platform: combination
+    type: sum
+    name: "Crawl: Dehum, LED, Cond.Pump, Moen Flo (P1B17) Power"
+    id: crawl_dehum_led_condpump_moen_flo_p1b17_power
+    sources:
+      - source: ct_5_power
+
+  - platform: combination
+    type: sum
+    name: "Crawl: Dehum, LED, Cond.Pump, Moen Flo (P1B17) Energy"
+    id: crawl_dehum_led_condpump_moen_flo_p1b17_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_5_energy
+
+  ##############   Oven (30A) (P1B19-21)   ##############
+  
+
+  ### bank: 1, pin: 6, ct: 6
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_6_current
+    internal: true
+    address: 110
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
   - platform: modbus_controller
     id: ct_6_power
-    name: CT 6 Power
+    internal: true
     address: 130
     register_type: holding
     value_type: U_DWORD_R
@@ -311,10 +732,106 @@ sensor:
     filters:
     - multiply: 0.1
 
-  # bank: 1, pin: 7, ct: 7
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_6_energy
+    internal: true
+    address: 150
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  ### bank: 4, pin: 5, ct: 35
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_35_current
+    internal: true
+    address: 408
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_35_power
+    internal: true
+    address: 428
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_35_energy
+    internal: true
+    address: 448
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Oven (30A) (P1B19-21) Load"
+    id: oven_30a_p1b19_21_current
+    sources:
+      - source: ct_6_current
+      - source: ct_35_current
+
+  - platform: combination
+    type: sum
+    name: "Oven (30A) (P1B19-21) Power"
+    id: oven_30a_p1b19_21_power
+    sources:
+      - source: ct_6_power
+      - source: ct_35_power
+
+  - platform: combination
+    type: sum
+    name: "Oven (30A) (P1B19-21) Energy"
+    id: oven_30a_p1b19_21_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_6_energy
+      - source: ct_35_energy
+
+  ##############   Cooktop (50A) (P1B23-25)   ##############
+  
+
+  ### bank: 1, pin: 7, ct: 7
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_7_current
+    internal: true
+    address: 112
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
   - platform: modbus_controller
     id: ct_7_power
-    name: CT 7 Power
+    internal: true
     address: 132
     register_type: holding
     value_type: U_DWORD_R
@@ -324,11 +841,38 @@ sensor:
     filters:
     - multiply: 0.1
 
-  # bank: 1, pin: 8, ct: 8
+  # energy (kWh)
   - platform: modbus_controller
-    id: ct_8_power
-    name: CT 8 Power
-    address: 134
+    id: ct_7_energy
+    internal: true
+    address: 152
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  ### bank: 4, pin: 6, ct: 36
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_36_current
+    internal: true
+    address: 410
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_36_power
+    internal: true
+    address: 430
     register_type: holding
     value_type: U_DWORD_R
     unit_of_measurement: W
@@ -337,10 +881,66 @@ sensor:
     filters:
     - multiply: 0.1
 
-  # bank: 1, pin: 9, ct: 9
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_36_energy
+    internal: true
+    address: 450
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Cooktop (50A) (P1B23-25) Load"
+    id: cooktop_50a_p1b23_25_current
+    sources:
+      - source: ct_7_current
+      - source: ct_36_current
+
+  - platform: combination
+    type: sum
+    name: "Cooktop (50A) (P1B23-25) Power"
+    id: cooktop_50a_p1b23_25_power
+    sources:
+      - source: ct_7_power
+      - source: ct_36_power
+
+  - platform: combination
+    type: sum
+    name: "Cooktop (50A) (P1B23-25) Energy"
+    id: cooktop_50a_p1b23_25_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_7_energy
+      - source: ct_36_energy
+
+  ##############   Smoke Alarms (P1B2)   ##############
+  
+
+  ### bank: 1, pin: 9, ct: 9
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_9_current
+    internal: true
+    address: 116
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
   - platform: modbus_controller
     id: ct_9_power
-    name: CT 9 Power
+    internal: true
     address: 136
     register_type: holding
     value_type: U_DWORD_R
@@ -350,10 +950,129 @@ sensor:
     filters:
     - multiply: 0.1
 
-  # bank: 1, pin: 10, ct: 10
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_9_energy
+    internal: true
+    address: 156
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Smoke Alarms (P1B2) Load"
+    id: smoke_alarms_p1b2_current
+    sources:
+      - source: ct_9_current
+
+  - platform: combination
+    type: sum
+    name: "Smoke Alarms (P1B2) Power"
+    id: smoke_alarms_p1b2_power
+    sources:
+      - source: ct_9_power
+
+  - platform: combination
+    type: sum
+    name: "Smoke Alarms (P1B2) Energy"
+    id: smoke_alarms_p1b2_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_9_energy
+
+  ##############   Garage Int&Ext Lights (P1B4)   ##############
+  
+
+  ### bank: 4, pin: 9, ct: 39
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_39_current
+    internal: true
+    address: 416
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_39_power
+    internal: true
+    address: 436
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_39_energy
+    internal: true
+    address: 456
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Garage Int&Ext Lights (P1B4) Load"
+    id: garage_intext_lights_p1b4_current
+    sources:
+      - source: ct_39_current
+
+  - platform: combination
+    type: sum
+    name: "Garage Int&Ext Lights (P1B4) Power"
+    id: garage_intext_lights_p1b4_power
+    sources:
+      - source: ct_39_power
+
+  - platform: combination
+    type: sum
+    name: "Garage Int&Ext Lights (P1B4) Energy"
+    id: garage_intext_lights_p1b4_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_39_energy
+
+  ##############   (Old) TV Nook Lights (P1B6)   ##############
+  
+
+  ### bank: 1, pin: 10, ct: 10
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_10_current
+    internal: true
+    address: 118
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
   - platform: modbus_controller
     id: ct_10_power
-    name: CT 10 Power
+    internal: true
     address: 138
     register_type: holding
     value_type: U_DWORD_R
@@ -363,118 +1082,10 @@ sensor:
     filters:
     - multiply: 0.1
 
-  # bank: 1, pin: 1, ct: 1
-  - platform: modbus_controller
-    id: ct_1_energy
-    name: CT 1 Energy
-    address: 140
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 1, pin: 2, ct: 2
-  - platform: modbus_controller
-    id: ct_2_energy
-    name: CT 2 Energy
-    address: 142
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 1, pin: 3, ct: 3
-  - platform: modbus_controller
-    id: ct_3_energy
-    name: CT 3 Energy
-    address: 144
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 1, pin: 4, ct: 4
-  - platform: modbus_controller
-    id: ct_4_energy
-    name: CT 4 Energy
-    address: 146
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 1, pin: 5, ct: 5
-  - platform: modbus_controller
-    id: ct_5_energy
-    name: CT 5 Energy
-    address: 148
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 1, pin: 6, ct: 6
-  - platform: modbus_controller
-    id: ct_6_energy
-    name: CT 6 Energy
-    address: 150
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 1, pin: 7, ct: 7
-  - platform: modbus_controller
-    id: ct_7_energy
-    name: CT 7 Energy
-    address: 152
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 1, pin: 8, ct: 8
-  - platform: modbus_controller
-    id: ct_8_energy
-    name: CT 8 Energy
-    address: 154
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 1, pin: 9, ct: 9
-  - platform: modbus_controller
-    id: ct_9_energy
-    name: CT 9 Energy
-    address: 156
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 1, pin: 10, ct: 10
+  # energy (kWh)
   - platform: modbus_controller
     id: ct_10_energy
-    name: CT 10 Energy
+    internal: true
     address: 158
     register_type: holding
     value_type: U_DWORD_R
@@ -482,6 +1093,1986 @@ sensor:
     state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "(Old) TV Nook Lights (P1B6) Load"
+    id: old_tv_nook_lights_p1b6_current
+    sources:
+      - source: ct_10_current
+
+  - platform: combination
+    type: sum
+    name: "(Old) TV Nook Lights (P1B6) Power"
+    id: old_tv_nook_lights_p1b6_power
+    sources:
+      - source: ct_10_power
+
+  - platform: combination
+    type: sum
+    name: "(Old) TV Nook Lights (P1B6) Energy"
+    id: old_tv_nook_lights_p1b6_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_10_energy
+
+  ##############   Living Outlets (P1B8)   ##############
+  
+
+  ### bank: 4, pin: 10, ct: 40
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_40_current
+    internal: true
+    address: 418
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_40_power
+    internal: true
+    address: 438
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_40_energy
+    internal: true
+    address: 458
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Living Outlets (P1B8) Load"
+    id: living_outlets_p1b8_current
+    sources:
+      - source: ct_40_current
+
+  - platform: combination
+    type: sum
+    name: "Living Outlets (P1B8) Power"
+    id: living_outlets_p1b8_power
+    sources:
+      - source: ct_40_power
+
+  - platform: combination
+    type: sum
+    name: "Living Outlets (P1B8) Energy"
+    id: living_outlets_p1b8_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_40_energy
+
+  ##############   Primary Bed Lights (P1B10)   ##############
+  
+
+  ### bank: 2, pin: 1, ct: 11
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_11_current
+    internal: true
+    address: 200
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_11_power
+    internal: true
+    address: 220
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_11_energy
+    internal: true
+    address: 240
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Primary Bed Lights (P1B10) Load"
+    id: primary_bed_lights_p1b10_current
+    sources:
+      - source: ct_11_current
+
+  - platform: combination
+    type: sum
+    name: "Primary Bed Lights (P1B10) Power"
+    id: primary_bed_lights_p1b10_power
+    sources:
+      - source: ct_11_power
+
+  - platform: combination
+    type: sum
+    name: "Primary Bed Lights (P1B10) Energy"
+    id: primary_bed_lights_p1b10_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_11_energy
+
+  ##############   Hallway Lights (P1B12)   ##############
+  
+
+  ### bank: 5, pin: 1, ct: 41
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_41_current
+    internal: true
+    address: 500
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_41_power
+    internal: true
+    address: 520
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_41_energy
+    internal: true
+    address: 540
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Hallway Lights (P1B12) Load"
+    id: hallway_lights_p1b12_current
+    sources:
+      - source: ct_41_current
+
+  - platform: combination
+    type: sum
+    name: "Hallway Lights (P1B12) Power"
+    id: hallway_lights_p1b12_power
+    sources:
+      - source: ct_41_power
+
+  - platform: combination
+    type: sum
+    name: "Hallway Lights (P1B12) Energy"
+    id: hallway_lights_p1b12_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_41_energy
+
+  ##############   Big Room Lights (P1B14)   ##############
+  
+
+  ### bank: 2, pin: 2, ct: 12
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_12_current
+    internal: true
+    address: 202
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_12_power
+    internal: true
+    address: 222
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_12_energy
+    internal: true
+    address: 242
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Big Room Lights (P1B14) Load"
+    id: big_room_lights_p1b14_current
+    sources:
+      - source: ct_12_current
+
+  - platform: combination
+    type: sum
+    name: "Big Room Lights (P1B14) Power"
+    id: big_room_lights_p1b14_power
+    sources:
+      - source: ct_12_power
+
+  - platform: combination
+    type: sum
+    name: "Big Room Lights (P1B14) Energy"
+    id: big_room_lights_p1b14_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_12_energy
+
+  ##############   Lights: Entrance, Porch, Front  (P1B16)   ##############
+  
+
+  ### bank: 5, pin: 2, ct: 42
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_42_current
+    internal: true
+    address: 502
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_42_power
+    internal: true
+    address: 522
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_42_energy
+    internal: true
+    address: 542
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Lights: Entrance, Porch, Front  (P1B16) Load"
+    id: lights_entrance_porch_front_p1b16_current
+    sources:
+      - source: ct_42_current
+
+  - platform: combination
+    type: sum
+    name: "Lights: Entrance, Porch, Front  (P1B16) Power"
+    id: lights_entrance_porch_front_p1b16_power
+    sources:
+      - source: ct_42_power
+
+  - platform: combination
+    type: sum
+    name: "Lights: Entrance, Porch, Front  (P1B16) Energy"
+    id: lights_entrance_porch_front_p1b16_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_42_energy
+
+  ##############   Primary Bath Lights (P1B18)   ##############
+  
+
+  ### bank: 2, pin: 3, ct: 13
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_13_current
+    internal: true
+    address: 204
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_13_power
+    internal: true
+    address: 224
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_13_energy
+    internal: true
+    address: 244
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Primary Bath Lights (P1B18) Load"
+    id: primary_bath_lights_p1b18_current
+    sources:
+      - source: ct_13_current
+
+  - platform: combination
+    type: sum
+    name: "Primary Bath Lights (P1B18) Power"
+    id: primary_bath_lights_p1b18_power
+    sources:
+      - source: ct_13_power
+
+  - platform: combination
+    type: sum
+    name: "Primary Bath Lights (P1B18) Energy"
+    id: primary_bath_lights_p1b18_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_13_energy
+
+  ##############   Kitchen Island Oulets (P1B20)   ##############
+  
+
+  ### bank: 5, pin: 3, ct: 43
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_43_current
+    internal: true
+    address: 504
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_43_power
+    internal: true
+    address: 524
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_43_energy
+    internal: true
+    address: 544
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Kitchen Island Oulets (P1B20) Load"
+    id: kitchen_island_oulets_p1b20_current
+    sources:
+      - source: ct_43_current
+
+  - platform: combination
+    type: sum
+    name: "Kitchen Island Oulets (P1B20) Power"
+    id: kitchen_island_oulets_p1b20_power
+    sources:
+      - source: ct_43_power
+
+  - platform: combination
+    type: sum
+    name: "Kitchen Island Oulets (P1B20) Energy"
+    id: kitchen_island_oulets_p1b20_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_43_energy
+
+  ##############   AC (40A) (P1B22-24)   ##############
+  
+
+  ### bank: 2, pin: 4, ct: 14
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_14_current
+    internal: true
+    address: 206
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_14_power
+    internal: true
+    address: 226
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_14_energy
+    internal: true
+    address: 246
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  ### bank: 5, pin: 4, ct: 44
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_44_current
+    internal: true
+    address: 506
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_44_power
+    internal: true
+    address: 526
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_44_energy
+    internal: true
+    address: 546
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "AC (40A) (P1B22-24) Load"
+    id: ac_40a_p1b22_24_current
+    sources:
+      - source: ct_14_current
+      - source: ct_44_current
+
+  - platform: combination
+    type: sum
+    name: "AC (40A) (P1B22-24) Power"
+    id: ac_40a_p1b22_24_power
+    sources:
+      - source: ct_14_power
+      - source: ct_44_power
+
+  - platform: combination
+    type: sum
+    name: "AC (40A) (P1B22-24) Energy"
+    id: ac_40a_p1b22_24_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_14_energy
+      - source: ct_44_energy
+
+  ##############   EV Charger 1 (40A) (P2B1-3)   ##############
+  
+
+  ### bank: 2, pin: 5, ct: 15
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_15_current
+    internal: true
+    address: 208
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_15_power
+    internal: true
+    address: 228
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_15_energy
+    internal: true
+    address: 248
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  ### bank: 5, pin: 5, ct: 45
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_45_current
+    internal: true
+    address: 508
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_45_power
+    internal: true
+    address: 528
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_45_energy
+    internal: true
+    address: 548
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "EV Charger 1 (40A) (P2B1-3) Load"
+    id: ev_charger_1_40a_p2b1_3_current
+    sources:
+      - source: ct_15_current
+      - source: ct_45_current
+
+  - platform: combination
+    type: sum
+    name: "EV Charger 1 (40A) (P2B1-3) Power"
+    id: ev_charger_1_40a_p2b1_3_power
+    sources:
+      - source: ct_15_power
+      - source: ct_45_power
+
+  - platform: combination
+    type: sum
+    name: "EV Charger 1 (40A) (P2B1-3) Energy"
+    id: ev_charger_1_40a_p2b1_3_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_15_energy
+      - source: ct_45_energy
+
+  ##############   EV Charger 2 (40A) (P2B5-7)   ##############
+  
+
+  ### bank: 2, pin: 6, ct: 16
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_16_current
+    internal: true
+    address: 210
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_16_power
+    internal: true
+    address: 230
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_16_energy
+    internal: true
+    address: 250
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  ### bank: 5, pin: 6, ct: 46
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_46_current
+    internal: true
+    address: 510
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_46_power
+    internal: true
+    address: 530
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_46_energy
+    internal: true
+    address: 550
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "EV Charger 2 (40A) (P2B5-7) Load"
+    id: ev_charger_2_40a_p2b5_7_current
+    sources:
+      - source: ct_16_current
+      - source: ct_46_current
+
+  - platform: combination
+    type: sum
+    name: "EV Charger 2 (40A) (P2B5-7) Power"
+    id: ev_charger_2_40a_p2b5_7_power
+    sources:
+      - source: ct_16_power
+      - source: ct_46_power
+
+  - platform: combination
+    type: sum
+    name: "EV Charger 2 (40A) (P2B5-7) Energy"
+    id: ev_charger_2_40a_p2b5_7_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_16_energy
+      - source: ct_46_energy
+
+  ##############   Back Yard Porch Lights (P2B9)   ##############
+  
+
+  ### bank: 2, pin: 7, ct: 17
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_17_current
+    internal: true
+    address: 212
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_17_power
+    internal: true
+    address: 232
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_17_energy
+    internal: true
+    address: 252
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Back Yard Porch Lights (P2B9) Load"
+    id: back_yard_porch_lights_p2b9_current
+    sources:
+      - source: ct_17_current
+
+  - platform: combination
+    type: sum
+    name: "Back Yard Porch Lights (P2B9) Power"
+    id: back_yard_porch_lights_p2b9_power
+    sources:
+      - source: ct_17_power
+
+  - platform: combination
+    type: sum
+    name: "Back Yard Porch Lights (P2B9) Energy"
+    id: back_yard_porch_lights_p2b9_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_17_energy
+
+  ##############   Desk Outlets (P2B11)   ##############
+  
+
+  ### bank: 5, pin: 7, ct: 47
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_47_current
+    internal: true
+    address: 512
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_47_power
+    internal: true
+    address: 532
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_47_energy
+    internal: true
+    address: 552
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Desk Outlets (P2B11) Load"
+    id: desk_outlets_p2b11_current
+    sources:
+      - source: ct_47_current
+
+  - platform: combination
+    type: sum
+    name: "Desk Outlets (P2B11) Power"
+    id: desk_outlets_p2b11_power
+    sources:
+      - source: ct_47_power
+
+  - platform: combination
+    type: sum
+    name: "Desk Outlets (P2B11) Energy"
+    id: desk_outlets_p2b11_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_47_energy
+
+  ##############   Laundry Lights (P2B13)   ##############
+  
+
+  ### bank: 2, pin: 8, ct: 18
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_18_current
+    internal: true
+    address: 214
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_18_power
+    internal: true
+    address: 234
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_18_energy
+    internal: true
+    address: 254
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Laundry Lights (P2B13) Load"
+    id: laundry_lights_p2b13_current
+    sources:
+      - source: ct_18_current
+
+  - platform: combination
+    type: sum
+    name: "Laundry Lights (P2B13) Power"
+    id: laundry_lights_p2b13_power
+    sources:
+      - source: ct_18_power
+
+  - platform: combination
+    type: sum
+    name: "Laundry Lights (P2B13) Energy"
+    id: laundry_lights_p2b13_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_18_energy
+
+  ##############   Bedroom 1 Lights (P2B15)   ##############
+  
+
+  ### bank: 5, pin: 8, ct: 48
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_48_current
+    internal: true
+    address: 514
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_48_power
+    internal: true
+    address: 534
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_48_energy
+    internal: true
+    address: 554
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 1 Lights (P2B15) Load"
+    id: bedroom_1_lights_p2b15_current
+    sources:
+      - source: ct_48_current
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 1 Lights (P2B15) Power"
+    id: bedroom_1_lights_p2b15_power
+    sources:
+      - source: ct_48_power
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 1 Lights (P2B15) Energy"
+    id: bedroom_1_lights_p2b15_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_48_energy
+
+  ##############   Hallway Bath Lights (P2B17)   ##############
+  
+
+  ### bank: 2, pin: 9, ct: 19
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_19_current
+    internal: true
+    address: 216
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_19_power
+    internal: true
+    address: 236
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_19_energy
+    internal: true
+    address: 256
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Hallway Bath Lights (P2B17) Load"
+    id: hallway_bath_lights_p2b17_current
+    sources:
+      - source: ct_19_current
+
+  - platform: combination
+    type: sum
+    name: "Hallway Bath Lights (P2B17) Power"
+    id: hallway_bath_lights_p2b17_power
+    sources:
+      - source: ct_19_power
+
+  - platform: combination
+    type: sum
+    name: "Hallway Bath Lights (P2B17) Energy"
+    id: hallway_bath_lights_p2b17_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_19_energy
+
+  ##############   Bedroom 1 Outlets (P2B19)   ##############
+  
+
+  ### bank: 5, pin: 9, ct: 49
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_49_current
+    internal: true
+    address: 516
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_49_power
+    internal: true
+    address: 536
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_49_energy
+    internal: true
+    address: 556
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 1 Outlets (P2B19) Load"
+    id: bedroom_1_outlets_p2b19_current
+    sources:
+      - source: ct_49_current
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 1 Outlets (P2B19) Power"
+    id: bedroom_1_outlets_p2b19_power
+    sources:
+      - source: ct_49_power
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 1 Outlets (P2B19) Energy"
+    id: bedroom_1_outlets_p2b19_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_49_energy
+
+  ##############   Primary Bed Outlets (P2B21)   ##############
+  
+
+  ### bank: 2, pin: 10, ct: 20
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_20_current
+    internal: true
+    address: 218
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_20_power
+    internal: true
+    address: 238
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_20_energy
+    internal: true
+    address: 258
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Primary Bed Outlets (P2B21) Load"
+    id: primary_bed_outlets_p2b21_current
+    sources:
+      - source: ct_20_current
+
+  - platform: combination
+    type: sum
+    name: "Primary Bed Outlets (P2B21) Power"
+    id: primary_bed_outlets_p2b21_power
+    sources:
+      - source: ct_20_power
+
+  - platform: combination
+    type: sum
+    name: "Primary Bed Outlets (P2B21) Energy"
+    id: primary_bed_outlets_p2b21_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_20_energy
+
+  ##############   Bedroom 2 Lights (P2B23)   ##############
+  
+
+  ### bank: 5, pin: 10, ct: 50
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_50_current
+    internal: true
+    address: 518
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_50_power
+    internal: true
+    address: 538
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_50_energy
+    internal: true
+    address: 558
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 2 Lights (P2B23) Load"
+    id: bedroom_2_lights_p2b23_current
+    sources:
+      - source: ct_50_current
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 2 Lights (P2B23) Power"
+    id: bedroom_2_lights_p2b23_power
+    sources:
+      - source: ct_50_power
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 2 Lights (P2B23) Energy"
+    id: bedroom_2_lights_p2b23_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_50_energy
+
+  ##############   Bedroom 2 Outlets (P2B25)   ##############
+  
+
+  ### bank: 3, pin: 1, ct: 21
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_21_current
+    internal: true
+    address: 300
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_21_power
+    internal: true
+    address: 320
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_21_energy
+    internal: true
+    address: 340
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 2 Outlets (P2B25) Load"
+    id: bedroom_2_outlets_p2b25_current
+    sources:
+      - source: ct_21_current
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 2 Outlets (P2B25) Power"
+    id: bedroom_2_outlets_p2b25_power
+    sources:
+      - source: ct_21_power
+
+  - platform: combination
+    type: sum
+    name: "Bedroom 2 Outlets (P2B25) Energy"
+    id: bedroom_2_outlets_p2b25_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_21_energy
+
+  ##############   Water Heater (30A) (P2B2-4)   ##############
+  
+
+  ### bank: 3, pin: 3, ct: 23
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_23_current
+    internal: true
+    address: 304
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_23_power
+    internal: true
+    address: 324
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_23_energy
+    internal: true
+    address: 344
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  ### bank: 6, pin: 3, ct: 53
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_53_current
+    internal: true
+    address: 604
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_53_power
+    internal: true
+    address: 624
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_53_energy
+    internal: true
+    address: 644
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Water Heater (30A) (P2B2-4) Load"
+    id: water_heater_30a_p2b2_4_current
+    sources:
+      - source: ct_23_current
+      - source: ct_53_current
+
+  - platform: combination
+    type: sum
+    name: "Water Heater (30A) (P2B2-4) Power"
+    id: water_heater_30a_p2b2_4_power
+    sources:
+      - source: ct_23_power
+      - source: ct_53_power
+
+  - platform: combination
+    type: sum
+    name: "Water Heater (30A) (P2B2-4) Energy"
+    id: water_heater_30a_p2b2_4_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_23_energy
+      - source: ct_53_energy
+
+  ##############   Primary Bath Outlets (P2B6)   ##############
+  
+
+  ### bank: 3, pin: 4, ct: 24
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_24_current
+    internal: true
+    address: 306
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_24_power
+    internal: true
+    address: 326
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_24_energy
+    internal: true
+    address: 346
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Primary Bath Outlets (P2B6) Load"
+    id: primary_bath_outlets_p2b6_current
+    sources:
+      - source: ct_24_current
+
+  - platform: combination
+    type: sum
+    name: "Primary Bath Outlets (P2B6) Power"
+    id: primary_bath_outlets_p2b6_power
+    sources:
+      - source: ct_24_power
+
+  - platform: combination
+    type: sum
+    name: "Primary Bath Outlets (P2B6) Energy"
+    id: primary_bath_outlets_p2b6_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_24_energy
+
+  ##############   Data (P2B8)   ##############
+  
+
+  ### bank: 6, pin: 4, ct: 54
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_54_current
+    internal: true
+    address: 606
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_54_power
+    internal: true
+    address: 626
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_54_energy
+    internal: true
+    address: 646
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Data (P2B8) Load"
+    id: data_p2b8_current
+    sources:
+      - source: ct_54_current
+
+  - platform: combination
+    type: sum
+    name: "Data (P2B8) Power"
+    id: data_p2b8_power
+    sources:
+      - source: ct_54_power
+
+  - platform: combination
+    type: sum
+    name: "Data (P2B8) Energy"
+    id: data_p2b8_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_54_energy
+
+  ##############   Laundry Outlets (P2B10)   ##############
+  
+
+  ### bank: 3, pin: 5, ct: 25
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_25_current
+    internal: true
+    address: 308
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_25_power
+    internal: true
+    address: 328
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_25_energy
+    internal: true
+    address: 348
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Laundry Outlets (P2B10) Load"
+    id: laundry_outlets_p2b10_current
+    sources:
+      - source: ct_25_current
+
+  - platform: combination
+    type: sum
+    name: "Laundry Outlets (P2B10) Power"
+    id: laundry_outlets_p2b10_power
+    sources:
+      - source: ct_25_power
+
+  - platform: combination
+    type: sum
+    name: "Laundry Outlets (P2B10) Energy"
+    id: laundry_outlets_p2b10_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_25_energy
+
+  ##############   Washer Outlet (P2B12)   ##############
+  
+
+  ### bank: 6, pin: 5, ct: 55
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_55_current
+    internal: true
+    address: 608
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_55_power
+    internal: true
+    address: 628
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_55_energy
+    internal: true
+    address: 648
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Washer Outlet (P2B12) Load"
+    id: washer_outlet_p2b12_current
+    sources:
+      - source: ct_55_current
+
+  - platform: combination
+    type: sum
+    name: "Washer Outlet (P2B12) Power"
+    id: washer_outlet_p2b12_power
+    sources:
+      - source: ct_55_power
+
+  - platform: combination
+    type: sum
+    name: "Washer Outlet (P2B12) Energy"
+    id: washer_outlet_p2b12_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_55_energy
+
+  ##############   Hallway Bath Outlets (P2B14)   ##############
+  
+
+  ### bank: 3, pin: 6, ct: 26
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_26_current
+    internal: true
+    address: 310
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_26_power
+    internal: true
+    address: 330
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_26_energy
+    internal: true
+    address: 350
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Hallway Bath Outlets (P2B14) Load"
+    id: hallway_bath_outlets_p2b14_current
+    sources:
+      - source: ct_26_current
+
+  - platform: combination
+    type: sum
+    name: "Hallway Bath Outlets (P2B14) Power"
+    id: hallway_bath_outlets_p2b14_power
+    sources:
+      - source: ct_26_power
+
+  - platform: combination
+    type: sum
+    name: "Hallway Bath Outlets (P2B14) Energy"
+    id: hallway_bath_outlets_p2b14_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_26_energy
+
+  ##############   Shower Valves (MOEN; in wall) (P2B16)   ##############
+  
+
+  ### bank: 6, pin: 6, ct: 56
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_56_current
+    internal: true
+    address: 610
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_56_power
+    internal: true
+    address: 630
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_56_energy
+    internal: true
+    address: 650
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Shower Valves (MOEN; in wall) (P2B16) Load"
+    id: shower_valves_moen_in_wall_p2b16_current
+    sources:
+      - source: ct_56_current
+
+  - platform: combination
+    type: sum
+    name: "Shower Valves (MOEN; in wall) (P2B16) Power"
+    id: shower_valves_moen_in_wall_p2b16_power
+    sources:
+      - source: ct_56_power
+
+  - platform: combination
+    type: sum
+    name: "Shower Valves (MOEN; in wall) (P2B16) Energy"
+    id: shower_valves_moen_in_wall_p2b16_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_56_energy
+
+  ##############   Fire Alarm (P2B18)   ##############
+  
+
+  ### bank: 3, pin: 7, ct: 27
+
+  # current (amps)
+  - platform: modbus_controller
+    id: ct_27_current
+    internal: true
+    address: 312
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: A
+    device_class: current
+    accuracy_decimals: 3
+    filters:
+    - multiply: 0.001
+
+  # power (watts)
+  - platform: modbus_controller
+    id: ct_27_power
+    internal: true
+    address: 332
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: W
+    device_class: power
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.1
+
+  # energy (kWh)
+  - platform: modbus_controller
+    id: ct_27_energy
+    internal: true
+    address: 352
+    register_type: holding
+    value_type: U_DWORD_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 1
+
+  - platform: combination
+    type: sum
+    name: "Fire Alarm (P2B18) Load"
+    id: fire_alarm_p2b18_current
+    sources:
+      - source: ct_27_current
+
+  - platform: combination
+    type: sum
+    name: "Fire Alarm (P2B18) Power"
+    id: fire_alarm_p2b18_power
+    sources:
+      - source: ct_27_power
+
+  - platform: combination
+    type: sum
+    name: "Fire Alarm (P2B18) Energy"
+    id: fire_alarm_p2b18_energy
+    # this specific stateclasss must be defined
+    state_class: total_increasing
+    sources:
+      - source: ct_27_energy
+
+##########################################################################################
+
 
   # bank: 1, ct start: 1, ct end: 10
   - platform: modbus_controller
@@ -527,386 +3118,6 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
-    accuracy_decimals: 1
-
-  # bank: 2, pin: 1, ct: 11
-  - platform: modbus_controller
-    id: ct_11_current
-    name: CT 11 Current
-    address: 200
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 2, pin: 2, ct: 12
-  - platform: modbus_controller
-    id: ct_12_current
-    name: CT 12 Current
-    address: 202
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 2, pin: 3, ct: 13
-  - platform: modbus_controller
-    id: ct_13_current
-    name: CT 13 Current
-    address: 204
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 2, pin: 4, ct: 14
-  - platform: modbus_controller
-    id: ct_14_current
-    name: CT 14 Current
-    address: 206
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 2, pin: 5, ct: 15
-  - platform: modbus_controller
-    id: ct_15_current
-    name: CT 15 Current
-    address: 208
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 2, pin: 6, ct: 16
-  - platform: modbus_controller
-    id: ct_16_current
-    name: CT 16 Current
-    address: 210
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 2, pin: 7, ct: 17
-  - platform: modbus_controller
-    id: ct_17_current
-    name: CT 17 Current
-    address: 212
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 2, pin: 8, ct: 18
-  - platform: modbus_controller
-    id: ct_18_current
-    name: CT 18 Current
-    address: 214
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 2, pin: 9, ct: 19
-  - platform: modbus_controller
-    id: ct_19_current
-    name: CT 19 Current
-    address: 216
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 2, pin: 10, ct: 20
-  - platform: modbus_controller
-    id: ct_20_current
-    name: CT 20 Current
-    address: 218
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 2, pin: 1, ct: 11
-  - platform: modbus_controller
-    id: ct_11_power
-    name: CT 11 Power
-    address: 220
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 2, pin: 2, ct: 12
-  - platform: modbus_controller
-    id: ct_12_power
-    name: CT 12 Power
-    address: 222
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 2, pin: 3, ct: 13
-  - platform: modbus_controller
-    id: ct_13_power
-    name: CT 13 Power
-    address: 224
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 2, pin: 4, ct: 14
-  - platform: modbus_controller
-    id: ct_14_power
-    name: CT 14 Power
-    address: 226
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 2, pin: 5, ct: 15
-  - platform: modbus_controller
-    id: ct_15_power
-    name: CT 15 Power
-    address: 228
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 2, pin: 6, ct: 16
-  - platform: modbus_controller
-    id: ct_16_power
-    name: CT 16 Power
-    address: 230
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 2, pin: 7, ct: 17
-  - platform: modbus_controller
-    id: ct_17_power
-    name: CT 17 Power
-    address: 232
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 2, pin: 8, ct: 18
-  - platform: modbus_controller
-    id: ct_18_power
-    name: CT 18 Power
-    address: 234
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 2, pin: 9, ct: 19
-  - platform: modbus_controller
-    id: ct_19_power
-    name: CT 19 Power
-    address: 236
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 2, pin: 10, ct: 20
-  - platform: modbus_controller
-    id: ct_20_power
-    name: CT 20 Power
-    address: 238
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 2, pin: 1, ct: 11
-  - platform: modbus_controller
-    id: ct_11_energy
-    name: CT 11 Energy
-    address: 240
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 2, pin: 2, ct: 12
-  - platform: modbus_controller
-    id: ct_12_energy
-    name: CT 12 Energy
-    address: 242
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 2, pin: 3, ct: 13
-  - platform: modbus_controller
-    id: ct_13_energy
-    name: CT 13 Energy
-    address: 244
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 2, pin: 4, ct: 14
-  - platform: modbus_controller
-    id: ct_14_energy
-    name: CT 14 Energy
-    address: 246
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 2, pin: 5, ct: 15
-  - platform: modbus_controller
-    id: ct_15_energy
-    name: CT 15 Energy
-    address: 248
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 2, pin: 6, ct: 16
-  - platform: modbus_controller
-    id: ct_16_energy
-    name: CT 16 Energy
-    address: 250
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 2, pin: 7, ct: 17
-  - platform: modbus_controller
-    id: ct_17_energy
-    name: CT 17 Energy
-    address: 252
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 2, pin: 8, ct: 18
-  - platform: modbus_controller
-    id: ct_18_energy
-    name: CT 18 Energy
-    address: 254
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 2, pin: 9, ct: 19
-  - platform: modbus_controller
-    id: ct_19_energy
-    name: CT 19 Energy
-    address: 256
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 2, pin: 10, ct: 20
-  - platform: modbus_controller
-    id: ct_20_energy
-    name: CT 20 Energy
-    address: 258
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
     accuracy_decimals: 1
 
   # bank: 2, ct start: 11, ct end: 20
@@ -955,386 +3166,6 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
-  # bank: 3, pin: 1, ct: 21
-  - platform: modbus_controller
-    id: ct_21_current
-    name: CT 21 Current
-    address: 300
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 3, pin: 2, ct: 22
-  - platform: modbus_controller
-    id: ct_22_current
-    name: CT 22 Current
-    address: 302
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 3, pin: 3, ct: 23
-  - platform: modbus_controller
-    id: ct_23_current
-    name: CT 23 Current
-    address: 304
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 3, pin: 4, ct: 24
-  - platform: modbus_controller
-    id: ct_24_current
-    name: CT 24 Current
-    address: 306
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 3, pin: 5, ct: 25
-  - platform: modbus_controller
-    id: ct_25_current
-    name: CT 25 Current
-    address: 308
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 3, pin: 6, ct: 26
-  - platform: modbus_controller
-    id: ct_26_current
-    name: CT 26 Current
-    address: 310
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 3, pin: 7, ct: 27
-  - platform: modbus_controller
-    id: ct_27_current
-    name: CT 27 Current
-    address: 312
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 3, pin: 8, ct: 28
-  - platform: modbus_controller
-    id: ct_28_current
-    name: CT 28 Current
-    address: 314
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 3, pin: 9, ct: 29
-  - platform: modbus_controller
-    id: ct_29_current
-    name: CT 29 Current
-    address: 316
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 3, pin: 10, ct: 30
-  - platform: modbus_controller
-    id: ct_30_current
-    name: CT 30 Current
-    address: 318
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 3, pin: 1, ct: 21
-  - platform: modbus_controller
-    id: ct_21_power
-    name: CT 21 Power
-    address: 320
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 3, pin: 2, ct: 22
-  - platform: modbus_controller
-    id: ct_22_power
-    name: CT 22 Power
-    address: 322
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 3, pin: 3, ct: 23
-  - platform: modbus_controller
-    id: ct_23_power
-    name: CT 23 Power
-    address: 324
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 3, pin: 4, ct: 24
-  - platform: modbus_controller
-    id: ct_24_power
-    name: CT 24 Power
-    address: 326
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 3, pin: 5, ct: 25
-  - platform: modbus_controller
-    id: ct_25_power
-    name: CT 25 Power
-    address: 328
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 3, pin: 6, ct: 26
-  - platform: modbus_controller
-    id: ct_26_power
-    name: CT 26 Power
-    address: 330
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 3, pin: 7, ct: 27
-  - platform: modbus_controller
-    id: ct_27_power
-    name: CT 27 Power
-    address: 332
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 3, pin: 8, ct: 28
-  - platform: modbus_controller
-    id: ct_28_power
-    name: CT 28 Power
-    address: 334
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 3, pin: 9, ct: 29
-  - platform: modbus_controller
-    id: ct_29_power
-    name: CT 29 Power
-    address: 336
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 3, pin: 10, ct: 30
-  - platform: modbus_controller
-    id: ct_30_power
-    name: CT 30 Power
-    address: 338
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 3, pin: 1, ct: 21
-  - platform: modbus_controller
-    id: ct_21_energy
-    name: CT 21 Energy
-    address: 340
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 3, pin: 2, ct: 22
-  - platform: modbus_controller
-    id: ct_22_energy
-    name: CT 22 Energy
-    address: 342
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 3, pin: 3, ct: 23
-  - platform: modbus_controller
-    id: ct_23_energy
-    name: CT 23 Energy
-    address: 344
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 3, pin: 4, ct: 24
-  - platform: modbus_controller
-    id: ct_24_energy
-    name: CT 24 Energy
-    address: 346
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 3, pin: 5, ct: 25
-  - platform: modbus_controller
-    id: ct_25_energy
-    name: CT 25 Energy
-    address: 348
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 3, pin: 6, ct: 26
-  - platform: modbus_controller
-    id: ct_26_energy
-    name: CT 26 Energy
-    address: 350
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 3, pin: 7, ct: 27
-  - platform: modbus_controller
-    id: ct_27_energy
-    name: CT 27 Energy
-    address: 352
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 3, pin: 8, ct: 28
-  - platform: modbus_controller
-    id: ct_28_energy
-    name: CT 28 Energy
-    address: 354
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 3, pin: 9, ct: 29
-  - platform: modbus_controller
-    id: ct_29_energy
-    name: CT 29 Energy
-    address: 356
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 3, pin: 10, ct: 30
-  - platform: modbus_controller
-    id: ct_30_energy
-    name: CT 30 Energy
-    address: 358
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
   # bank: 3, ct start: 21, ct end: 30
   - platform: modbus_controller
     id: bank_3_energy_sum
@@ -1379,386 +3210,6 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
-    accuracy_decimals: 1
-
-  # bank: 4, pin: 1, ct: 31
-  - platform: modbus_controller
-    id: ct_31_current
-    name: CT 31 Current
-    address: 400
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 4, pin: 2, ct: 32
-  - platform: modbus_controller
-    id: ct_32_current
-    name: CT 32 Current
-    address: 402
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 4, pin: 3, ct: 33
-  - platform: modbus_controller
-    id: ct_33_current
-    name: CT 33 Current
-    address: 404
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 4, pin: 4, ct: 34
-  - platform: modbus_controller
-    id: ct_34_current
-    name: CT 34 Current
-    address: 406
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 4, pin: 5, ct: 35
-  - platform: modbus_controller
-    id: ct_35_current
-    name: CT 35 Current
-    address: 408
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 4, pin: 6, ct: 36
-  - platform: modbus_controller
-    id: ct_36_current
-    name: CT 36 Current
-    address: 410
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 4, pin: 7, ct: 37
-  - platform: modbus_controller
-    id: ct_37_current
-    name: CT 37 Current
-    address: 412
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 4, pin: 8, ct: 38
-  - platform: modbus_controller
-    id: ct_38_current
-    name: CT 38 Current
-    address: 414
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 4, pin: 9, ct: 39
-  - platform: modbus_controller
-    id: ct_39_current
-    name: CT 39 Current
-    address: 416
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 4, pin: 10, ct: 40
-  - platform: modbus_controller
-    id: ct_40_current
-    name: CT 40 Current
-    address: 418
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 4, pin: 1, ct: 31
-  - platform: modbus_controller
-    id: ct_31_power
-    name: CT 31 Power
-    address: 420
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 4, pin: 2, ct: 32
-  - platform: modbus_controller
-    id: ct_32_power
-    name: CT 32 Power
-    address: 422
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 4, pin: 3, ct: 33
-  - platform: modbus_controller
-    id: ct_33_power
-    name: CT 33 Power
-    address: 424
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 4, pin: 4, ct: 34
-  - platform: modbus_controller
-    id: ct_34_power
-    name: CT 34 Power
-    address: 426
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 4, pin: 5, ct: 35
-  - platform: modbus_controller
-    id: ct_35_power
-    name: CT 35 Power
-    address: 428
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 4, pin: 6, ct: 36
-  - platform: modbus_controller
-    id: ct_36_power
-    name: CT 36 Power
-    address: 430
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 4, pin: 7, ct: 37
-  - platform: modbus_controller
-    id: ct_37_power
-    name: CT 37 Power
-    address: 432
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 4, pin: 8, ct: 38
-  - platform: modbus_controller
-    id: ct_38_power
-    name: CT 38 Power
-    address: 434
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 4, pin: 9, ct: 39
-  - platform: modbus_controller
-    id: ct_39_power
-    name: CT 39 Power
-    address: 436
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 4, pin: 10, ct: 40
-  - platform: modbus_controller
-    id: ct_40_power
-    name: CT 40 Power
-    address: 438
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 4, pin: 1, ct: 31
-  - platform: modbus_controller
-    id: ct_31_energy
-    name: CT 31 Energy
-    address: 440
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 4, pin: 2, ct: 32
-  - platform: modbus_controller
-    id: ct_32_energy
-    name: CT 32 Energy
-    address: 442
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 4, pin: 3, ct: 33
-  - platform: modbus_controller
-    id: ct_33_energy
-    name: CT 33 Energy
-    address: 444
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 4, pin: 4, ct: 34
-  - platform: modbus_controller
-    id: ct_34_energy
-    name: CT 34 Energy
-    address: 446
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 4, pin: 5, ct: 35
-  - platform: modbus_controller
-    id: ct_35_energy
-    name: CT 35 Energy
-    address: 448
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 4, pin: 6, ct: 36
-  - platform: modbus_controller
-    id: ct_36_energy
-    name: CT 36 Energy
-    address: 450
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 4, pin: 7, ct: 37
-  - platform: modbus_controller
-    id: ct_37_energy
-    name: CT 37 Energy
-    address: 452
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 4, pin: 8, ct: 38
-  - platform: modbus_controller
-    id: ct_38_energy
-    name: CT 38 Energy
-    address: 454
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 4, pin: 9, ct: 39
-  - platform: modbus_controller
-    id: ct_39_energy
-    name: CT 39 Energy
-    address: 456
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 4, pin: 10, ct: 40
-  - platform: modbus_controller
-    id: ct_40_energy
-    name: CT 40 Energy
-    address: 458
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
     accuracy_decimals: 1
 
   # bank: 4, ct start: 31, ct end: 40
@@ -1807,386 +3258,6 @@ sensor:
     device_class: temperature
     accuracy_decimals: 1
 
-  # bank: 5, pin: 1, ct: 41
-  - platform: modbus_controller
-    id: ct_41_current
-    name: CT 41 Current
-    address: 500
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 5, pin: 2, ct: 42
-  - platform: modbus_controller
-    id: ct_42_current
-    name: CT 42 Current
-    address: 502
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 5, pin: 3, ct: 43
-  - platform: modbus_controller
-    id: ct_43_current
-    name: CT 43 Current
-    address: 504
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 5, pin: 4, ct: 44
-  - platform: modbus_controller
-    id: ct_44_current
-    name: CT 44 Current
-    address: 506
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 5, pin: 5, ct: 45
-  - platform: modbus_controller
-    id: ct_45_current
-    name: CT 45 Current
-    address: 508
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 5, pin: 6, ct: 46
-  - platform: modbus_controller
-    id: ct_46_current
-    name: CT 46 Current
-    address: 510
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 5, pin: 7, ct: 47
-  - platform: modbus_controller
-    id: ct_47_current
-    name: CT 47 Current
-    address: 512
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 5, pin: 8, ct: 48
-  - platform: modbus_controller
-    id: ct_48_current
-    name: CT 48 Current
-    address: 514
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 5, pin: 9, ct: 49
-  - platform: modbus_controller
-    id: ct_49_current
-    name: CT 49 Current
-    address: 516
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 5, pin: 10, ct: 50
-  - platform: modbus_controller
-    id: ct_50_current
-    name: CT 50 Current
-    address: 518
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 5, pin: 1, ct: 41
-  - platform: modbus_controller
-    id: ct_41_power
-    name: CT 41 Power
-    address: 520
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 5, pin: 2, ct: 42
-  - platform: modbus_controller
-    id: ct_42_power
-    name: CT 42 Power
-    address: 522
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 5, pin: 3, ct: 43
-  - platform: modbus_controller
-    id: ct_43_power
-    name: CT 43 Power
-    address: 524
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 5, pin: 4, ct: 44
-  - platform: modbus_controller
-    id: ct_44_power
-    name: CT 44 Power
-    address: 526
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 5, pin: 5, ct: 45
-  - platform: modbus_controller
-    id: ct_45_power
-    name: CT 45 Power
-    address: 528
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 5, pin: 6, ct: 46
-  - platform: modbus_controller
-    id: ct_46_power
-    name: CT 46 Power
-    address: 530
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 5, pin: 7, ct: 47
-  - platform: modbus_controller
-    id: ct_47_power
-    name: CT 47 Power
-    address: 532
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 5, pin: 8, ct: 48
-  - platform: modbus_controller
-    id: ct_48_power
-    name: CT 48 Power
-    address: 534
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 5, pin: 9, ct: 49
-  - platform: modbus_controller
-    id: ct_49_power
-    name: CT 49 Power
-    address: 536
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 5, pin: 10, ct: 50
-  - platform: modbus_controller
-    id: ct_50_power
-    name: CT 50 Power
-    address: 538
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 5, pin: 1, ct: 41
-  - platform: modbus_controller
-    id: ct_41_energy
-    name: CT 41 Energy
-    address: 540
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 5, pin: 2, ct: 42
-  - platform: modbus_controller
-    id: ct_42_energy
-    name: CT 42 Energy
-    address: 542
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 5, pin: 3, ct: 43
-  - platform: modbus_controller
-    id: ct_43_energy
-    name: CT 43 Energy
-    address: 544
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 5, pin: 4, ct: 44
-  - platform: modbus_controller
-    id: ct_44_energy
-    name: CT 44 Energy
-    address: 546
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 5, pin: 5, ct: 45
-  - platform: modbus_controller
-    id: ct_45_energy
-    name: CT 45 Energy
-    address: 548
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 5, pin: 6, ct: 46
-  - platform: modbus_controller
-    id: ct_46_energy
-    name: CT 46 Energy
-    address: 550
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 5, pin: 7, ct: 47
-  - platform: modbus_controller
-    id: ct_47_energy
-    name: CT 47 Energy
-    address: 552
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 5, pin: 8, ct: 48
-  - platform: modbus_controller
-    id: ct_48_energy
-    name: CT 48 Energy
-    address: 554
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 5, pin: 9, ct: 49
-  - platform: modbus_controller
-    id: ct_49_energy
-    name: CT 49 Energy
-    address: 556
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 5, pin: 10, ct: 50
-  - platform: modbus_controller
-    id: ct_50_energy
-    name: CT 50 Energy
-    address: 558
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
   # bank: 5, ct start: 41, ct end: 50
   - platform: modbus_controller
     id: bank_5_energy_sum
@@ -2231,386 +3302,6 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
-    accuracy_decimals: 1
-
-  # bank: 6, pin: 1, ct: 51
-  - platform: modbus_controller
-    id: ct_51_current
-    name: CT 51 Current
-    address: 600
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 6, pin: 2, ct: 52
-  - platform: modbus_controller
-    id: ct_52_current
-    name: CT 52 Current
-    address: 602
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 6, pin: 3, ct: 53
-  - platform: modbus_controller
-    id: ct_53_current
-    name: CT 53 Current
-    address: 604
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 6, pin: 4, ct: 54
-  - platform: modbus_controller
-    id: ct_54_current
-    name: CT 54 Current
-    address: 606
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 6, pin: 5, ct: 55
-  - platform: modbus_controller
-    id: ct_55_current
-    name: CT 55 Current
-    address: 608
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 6, pin: 6, ct: 56
-  - platform: modbus_controller
-    id: ct_56_current
-    name: CT 56 Current
-    address: 610
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 6, pin: 7, ct: 57
-  - platform: modbus_controller
-    id: ct_57_current
-    name: CT 57 Current
-    address: 612
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 6, pin: 8, ct: 58
-  - platform: modbus_controller
-    id: ct_58_current
-    name: CT 58 Current
-    address: 614
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 6, pin: 9, ct: 59
-  - platform: modbus_controller
-    id: ct_59_current
-    name: CT 59 Current
-    address: 616
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 6, pin: 10, ct: 60
-  - platform: modbus_controller
-    id: ct_60_current
-    name: CT 60 Current
-    address: 618
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: A
-    device_class: current
-    accuracy_decimals: 3
-    filters:
-    - multiply: 0.001
-
-  # bank: 6, pin: 1, ct: 51
-  - platform: modbus_controller
-    id: ct_51_power
-    name: CT 51 Power
-    address: 620
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 6, pin: 2, ct: 52
-  - platform: modbus_controller
-    id: ct_52_power
-    name: CT 52 Power
-    address: 622
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 6, pin: 3, ct: 53
-  - platform: modbus_controller
-    id: ct_53_power
-    name: CT 53 Power
-    address: 624
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 6, pin: 4, ct: 54
-  - platform: modbus_controller
-    id: ct_54_power
-    name: CT 54 Power
-    address: 626
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 6, pin: 5, ct: 55
-  - platform: modbus_controller
-    id: ct_55_power
-    name: CT 55 Power
-    address: 628
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 6, pin: 6, ct: 56
-  - platform: modbus_controller
-    id: ct_56_power
-    name: CT 56 Power
-    address: 630
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 6, pin: 7, ct: 57
-  - platform: modbus_controller
-    id: ct_57_power
-    name: CT 57 Power
-    address: 632
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 6, pin: 8, ct: 58
-  - platform: modbus_controller
-    id: ct_58_power
-    name: CT 58 Power
-    address: 634
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 6, pin: 9, ct: 59
-  - platform: modbus_controller
-    id: ct_59_power
-    name: CT 59 Power
-    address: 636
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 6, pin: 10, ct: 60
-  - platform: modbus_controller
-    id: ct_60_power
-    name: CT 60 Power
-    address: 638
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: W
-    device_class: power
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.1
-
-  # bank: 6, pin: 1, ct: 51
-  - platform: modbus_controller
-    id: ct_51_energy
-    name: CT 51 Energy
-    address: 640
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 6, pin: 2, ct: 52
-  - platform: modbus_controller
-    id: ct_52_energy
-    name: CT 52 Energy
-    address: 642
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 6, pin: 3, ct: 53
-  - platform: modbus_controller
-    id: ct_53_energy
-    name: CT 53 Energy
-    address: 644
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 6, pin: 4, ct: 54
-  - platform: modbus_controller
-    id: ct_54_energy
-    name: CT 54 Energy
-    address: 646
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 6, pin: 5, ct: 55
-  - platform: modbus_controller
-    id: ct_55_energy
-    name: CT 55 Energy
-    address: 648
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 6, pin: 6, ct: 56
-  - platform: modbus_controller
-    id: ct_56_energy
-    name: CT 56 Energy
-    address: 650
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 6, pin: 7, ct: 57
-  - platform: modbus_controller
-    id: ct_57_energy
-    name: CT 57 Energy
-    address: 652
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 6, pin: 8, ct: 58
-  - platform: modbus_controller
-    id: ct_58_energy
-    name: CT 58 Energy
-    address: 654
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 6, pin: 9, ct: 59
-  - platform: modbus_controller
-    id: ct_59_energy
-    name: CT 59 Energy
-    address: 656
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
-    accuracy_decimals: 1
-
-  # bank: 6, pin: 10, ct: 60
-  - platform: modbus_controller
-    id: ct_60_energy
-    name: CT 60 Energy
-    address: 658
-    register_type: holding
-    value_type: U_DWORD_R
-    unit_of_measurement: kWh
-    state_class: total_increasing
-    device_class: energy
     accuracy_decimals: 1
 
   # bank: 6, ct start: 51, ct end: 60
