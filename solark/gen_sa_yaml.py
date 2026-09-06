@@ -391,6 +391,9 @@ print(f'''
       - source: sensor_187
       - source: sensor_188
       - source: sensor_189
+    unit_of_measurement: "W"
+    device_class: "power"
+    state_class: "measurement"
 ''')
 
 voltages = [
