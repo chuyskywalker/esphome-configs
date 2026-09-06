@@ -43,6 +43,13 @@ esphome:
   name: ${name}
   friendly_name: ${friendly_name}
 
+  # This block delays initial sensor data publishing on boot
+  on_boot:
+    priority: -100.0  # Runs after WiFi, MQTT, and API connections are ready
+    then:
+      - delay: 15s     # Wait 15 seconds for energy ICs to stabilize
+      - logger.log: "Boot delay finished. Allowing sensor publishing."
+
 esp32:
   board: esp32-s3-devkitc-1
   framework:
@@ -50,7 +57,15 @@ esp32:
 
 # Enable logging
 logger:
-  # baud_rate: 0
+  level: INFO
+  # level: VERBOSE
+  # logs:
+  #   modbus: VERBOSE
+  #   modbus_controller: VERBOSE
+  #   # Turn down everything else so your log screen doesn't fly by too fast:
+  #   sensor: DEBUG
+  #   component: DEBUG
+  #   i2c.idf: NONE
 
 # Enable Home Assistant API
 api:
@@ -70,10 +85,6 @@ ethernet:
   cs_pin: GPIO41
   interrupt_pin: GPIO2
   reset_pin: GPIO1
-  manual_ip:
-    static_ip: ${static_ip}
-    gateway: ${gateway}
-    subnet: ${subnet}
 
 uart:
   rx_pin: 9
@@ -94,21 +105,6 @@ text_sensor:
     ip_address:
       name: ESP IP Address
       id: eth_ip
-    # none of this gets used; commenting out
-    #   address_0:
-    #     name: ESP IP Address 0
-    #   address_1:
-    #     name: ESP IP Address 1
-    #   address_2:
-    #     name: ESP IP Address 2
-    #   address_3:
-    #     name: ESP IP Address 3
-    #   address_4:
-    #     name: ESP IP Address 4
-    # dns_address:
-    #   name: ESP DNS Address
-    # mac_address:
-    #   name: ESP MAC Address
 
 font:
   - file: "gfonts://Roboto"
@@ -130,10 +126,18 @@ display:
       it.printf(0, 15, id(roboto), "IP: %s", id(eth_ip).state.c_str());
 
 modbus:
+  id: modbus_to_arm32
+  turnaround_time: 200ms
 
+# In theory, it would make sense to poll watts/amps quicker than kWh (since the later changes slowly)
+# However, because of the optimized modbus polling, getting the kWh values just as frequently
+# doesn't cost any extra.
 modbus_controller:
-  - address: 1
+  - id: modbod
+    address: 1
+    # I have measured the full response (all 6 banks) taking around 3 seconds.
     update_interval: 5s
+    # update_interval: 60s
 
 sensor:
 ''')
@@ -141,17 +145,17 @@ sensor:
 # build up a quick map of every CT pin id => bank_id, pin_in_bank_id, modbus_address_offset value
 internal_maps = {}
 ct_counter = 0
-for bank_id in range(1,7):
+for bank_id in range(1,7):  # reminder, range is (inclusive,exclusive)
     for pin_id in range(1,11):
         ct_counter += 1
         # ct: [bank, pin, base_addr)
         addr_offset = (bank_id * 100) + (pin_id * 2) - 2
         internal_maps[ct_counter] = [bank_id, pin_id, addr_offset]
 
-# Label -> group of ct ids which should be combined into the labeled value
+# Mapping is a label to group-of-ct-ids which should be combined into the labeled value
 #
 # The two typical scenarios would be 1) labeling single CT items and 2) combining double pole breakers for items on 240v
-# However, it would be perfectly reasonable to use these entries to summarized a set of loads, for example,
+# However, it would be perfectly reasonable to use these entries to summarize a set of loads, for example,
 # you could tag 5 individual CT's as "Lights" if you have multiple circuits for lights, but want them all
 # grouped together because tracking each circuit holds no value to you. The caveat to this, which the script
 # will catch, is that you can't define a CT twice, otherwise it would (potentially) be double counted.
@@ -241,23 +245,27 @@ for name, id_list in mapping.items():
 if not is_valid:
     sys.exit(1)
 
-for (power_name, ct_ids) in mapping.items():
+# This will pull all details from all banks. Why? It's actually more efficient. For example,
+# the data from bank 1 is in registers 100 - 166; a total of 68bytes to fetch. If you pull
+# all of those fields, the modbus protocol can batch it into a single long request/response.
+# If you choose to only pull a few of those registers, though, then the modbus client
+# will make multiple, smaller requests. This causes a longer turn around time.
+#
+# So, instead, we just pull EVERYTHING from each bank (6 requests) and then "hide" that
+# data internally. Then we create exposed sensors that represent the data as desired.
+
+# you can change this to "true" or "false" to hide/show all these values
+internal = 'true'
+
+for ct_num, (bank_id, pin_id, addr_offset) in internal_maps.items():
     print(f'''
-  ##############   {power_name}   ##############
-  ''')
-
-    # first, dump out the raw modbus fetching ct sensors; these will populate the labeled nice values later
-    for ct_num in ct_ids:
-        bank_id = internal_maps[ct_num][0]
-        pin_id = internal_maps[ct_num][1]
-        addr_offset = internal_maps[ct_num][2]
-        print(f'''
-  ### bank: {bank_id}, pin: {pin_id}, ct: {ct_num}
-
+  # ct {ct_num:02d}, bank {bank_id}, pin {pin_id}, addr_offset {addr_offset}
+  
   # current (amps)
   - platform: modbus_controller
-    id: ct_{ct_num}_current
-    internal: true
+    id: ct_{ct_num:02d}_current
+    name: ct_{ct_num:02d}_current
+    internal: {internal}
     address: {addr_offset}
     register_type: holding
     value_type: U_DWORD_R
@@ -269,8 +277,9 @@ for (power_name, ct_ids) in mapping.items():
 
   # power (watts)
   - platform: modbus_controller
-    id: ct_{ct_num}_power
-    internal: true
+    id: ct_{ct_num:02d}_power
+    name: ct_{ct_num:02d}_power
+    internal: {internal}
     address: {addr_offset + 20}
     register_type: holding
     value_type: S_DWORD_R
@@ -282,8 +291,9 @@ for (power_name, ct_ids) in mapping.items():
 
   # energy (kWh)
   - platform: modbus_controller
-    id: ct_{ct_num}_energy
-    internal: true
+    id: ct_{ct_num:02d}_energy
+    name: ct_{ct_num:02d}_energy
+    internal: {internal}
     address: {addr_offset + 40}
     register_type: holding
     value_type: FP32_R
@@ -292,17 +302,89 @@ for (power_name, ct_ids) in mapping.items():
     device_class: energy
     accuracy_decimals: 3''')
 
-    # Now that the raw modbus values are being collected, let's setup the "combination"
-    # helpers which will show up. Sometimes the combination is, uh, just a single source
-    # other times, we're combining sources that have mupltiple power legs
-    current_sources = "\n".join(f"      - source: ct_{num}_current" for num in ct_ids)
-    power_sources   = "\n".join(f"      - source: ct_{num}_power"   for num in ct_ids)
-    energy_sources  = "\n".join(f"      - source: ct_{num}_energy"  for num in ct_ids)
+# There are also some "per bank" values that can be collected and referenced later as well
+for bank_id in range(1,7):
 
     print(f'''
+  # bank: {bank_id}, ct start: {(bank_id*10)-9}, ct end: {(bank_id*10)}
+  - platform: modbus_controller
+    id: bank_{bank_id}_energy_sum
+    name: bank_{bank_id}_energy_sum
+    internal: {internal}
+    address: {bank_id}60
+    register_type: holding
+    value_type: FP32_R
+    unit_of_measurement: kWh
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 3
+
+  - platform: modbus_controller
+    id: bank_{bank_id}_voltage
+    name: bank_{bank_id}_voltage
+    internal: {internal}
+    address: {bank_id}62
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: V
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.01
+
+  - platform: modbus_controller
+    id: bank_{bank_id}_frequency
+    name: bank_{bank_id}_frequency
+    internal: {internal}
+    address: {bank_id}63
+    register_type: holding
+    value_type: U_WORD
+    unit_of_measurement: Hz
+    device_class: frequency
+    accuracy_decimals: 1
+    filters:
+    - multiply: 0.01
+    
+  - platform: modbus_controller
+    id: bank_{bank_id}_temp
+    name: bank_{bank_id}_temp
+    #internal: {internal}
+    internal: false  # specifically override because per-bank temp is (mildly) useful
+    address: {bank_id}64
+    register_type: holding
+    value_type: FP32_R
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 1
+    
+  - platform: modbus_controller
+    id: bank_{bank_id}_powerfactor
+    name: bank_{bank_id}_powerfactor
+    internal: {internal}
+    address: {bank_id}66
+    register_type: holding
+    value_type: FP32_R
+    unit_of_measurement: ""
+    device_class: power_factor
+    accuracy_decimals: 2
+''')
+
+
+# Now that the raw modbus values are being collected, let's setup the "combination"
+# helpers which will show up. Sometimes the combination is, uh, just a single source
+# other times, we're combining sources that have mupltiple power legs
+for (power_name, ct_ids) in mapping.items():
+
+    current_sources = "\n".join(f"      - source: ct_{num:02d}_current" for num in ct_ids)
+    power_sources   = "\n".join(f"      - source: ct_{num:02d}_power"   for num in ct_ids)
+    energy_sources  = "\n".join(f"      - source: ct_{num:02d}_energy"  for num in ct_ids)
+
+    print(f'''
+  ##############   {power_name}   ##############
+ 
   - platform: combination
     type: sum
-    name: "{power_name} Load"
+    name: "{power_name} Current"
     id: {to_esphome_id(power_name)}_current
     sources:
 {current_sources}
@@ -324,131 +406,146 @@ for (power_name, ct_ids) in mapping.items():
 {energy_sources}''')
 
 print('''
-##########################################################################################
+
+### Useful combinations soley based on MY wiring configuration
+### I have L1 hooked up to bank 1, 2, 3 and L2 on bank 4,5,6
+### If you have a different setup, season to taste
+
+  - platform: combination
+    type: mean
+    name: "L1 Voltage"
+    id: l1_voltage
+    sources:
+    - source: bank_1_voltage
+    - source: bank_2_voltage
+    - source: bank_3_voltage
+    accuracy_decimals: 2
+
+  - platform: combination
+    type: mean
+    name: "L1 Frequency"
+    id: l1_frequency
+    sources:
+    - source: bank_1_frequency
+    - source: bank_2_frequency
+    - source: bank_3_frequency
+    accuracy_decimals: 2
+
+  - platform: combination
+    type: mean
+    name: "L2 Voltage"
+    id: l2_voltage
+    sources:
+    - source: bank_4_voltage
+    - source: bank_5_voltage
+    - source: bank_6_voltage
+    accuracy_decimals: 2
+
+  - platform: combination
+    type: mean
+    name: "L2 Frequency"
+    id: l2_frequency
+    sources:
+    - source: bank_4_frequency
+    - source: bank_5_frequency
+    - source: bank_6_frequency
+    accuracy_decimals: 2
+
 ''')
 
-# Each bank has its own summation; the kwh summation is...kinda silly, the random grouping of ct's
-# likely doesn't really relate to anything. The voltage & frequence measure are repeated several times
-# because, based on how I wired things, L1 == L2 == L3 and L4 == L5 == L6 (since I'm in NA and we have
-# two leg 120/240 split phase power). Even for 3 phase monitoring, it's likely that some of the banks
-# legs are doubled up there too. Especialy on the N60.
+
+# 6. Energy Clearing Functions (Function Code 0x05)
+# --------------------------------------------------
 #
-# The temp per-bank is semi-useful, or at least it's not redundant.
+# The following registers clear energy consumption data when written with function code 0x05:
 #
-# I may well come back in here, hide these, and re-label them to make more sense for my particular
-# setup, like:
+# 6.1 Clear All Channels on a Chip
+# ---------------------------------
 #
-# - L1 Voltage
-# - L1 Frequency
-# - L2 Voltage
-# - L2 Frequency
-# - Internal Temp 1
-# - Internal Temp 2
-# - Internal Temp 3
-# - Internal Temp 4
-# - Internal Temp 5
-# - Internal Temp 6
+# +----------+--------------------------------+
+# | Register | Function                       |
+# +----------+--------------------------------+
+# | 520      | Clear all energy on Chip 1     |
+# | 521      | Clear all energy on Chip 2     |
+# | 522      | Clear all energy on Chip 3     |
+# | 523      | Clear all energy on Chip 4     |
+# | 524      | Clear all energy on Chip 5     |
+# | 525      | Clear all energy on Chip 6     |
+# +----------+--------------------------------+
 #
-# Just leave off the kWh sums entirely and ignore some of the repeat volt/freq
-for bank_id in range(1,7):
+# 6.2 Clear Individual Channels
+# ------------------------------
+#
+# +----------------+------------------------------------------------+
+# | Register Range | Function                                       |
+# +----------------+------------------------------------------------+
+# | 526-535        | Clear energy on Chip 1, channels 1-10          |
+# | 536-545        | Clear energy on Chip 2, channels 1-10          |
+# | 546-555        | Clear energy on Chip 3, channels 1-10          |
+# | 556-565        | Clear energy on Chip 4, channels 1-10          |
+# | 566-575        | Clear energy on Chip 5, channels 1-10          |
+# | 576-585        | Clear energy on Chip 6, channels 1-10          |
+# | 586            | Clear sum energy on Chip 1                     |
+# | 587            | Clear sum energy on Chip 2                     |
+# | 588            | Clear sum energy on Chip 3                     |
+# | 589            | Clear sum energy on Chip 4                     |
+# | 590            | Clear sum energy on Chip 5                     |
+# | 591            | Clear sum energy on Chip 6                     |
+# +----------------+------------------------------------------------+
+#
+# print('''
+#
+# button:
+#
+#   - platform: template
+#     name: "Warm Reset"
+#     icon: "mdi:refresh"
+#     id: clear_btn_chip_500
+#     on_press:
+#       - modbus_client.write_single_coil:
+#           address: 0x01
+#           start_address: 500
+#           value: true
+#
+#   - platform: template
+#     name: "Factory Reset"
+#     icon: "mdi:refresh"
+#     id: clear_btn_chip_510
+#     on_press:
+#       - modbus_client.write_single_coil:
+#           address: 0x01
+#           start_address: 510
+#           value: true''')
 
-    print(f'''
-  # # bank: {bank_id}, ct start: {(bank_id*10)-9}, ct end: {(bank_id*10)}
-  # - platform: modbus_controller
-  #   id: bank_{bank_id}_energy_sum
-  #   name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Energy Sum
-  #   address: {bank_id}60
-  #   register_type: holding
-  #   value_type: FP32_R
-  #   unit_of_measurement: kWh
-  #   state_class: total_increasing
-  #   device_class: energy
-  #   accuracy_decimals: 3
-  # 
-  # - platform: modbus_controller
-  #   id: bank_{bank_id}_voltage
-  #   name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Voltage
-  #   address: {bank_id}62
-  #   register_type: holding
-  #   value_type: U_WORD
-  #   unit_of_measurement: V
-  #   device_class: voltage
-  #   accuracy_decimals: 1
-  #   filters:
-  #   - multiply: 0.01
-  # 
-  # - platform: modbus_controller
-  #   id: bank_{bank_id}_frequency
-  #   name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Frequency
-  #   address: {bank_id}63
-  #   register_type: holding
-  #   value_type: U_WORD
-  #   unit_of_measurement: Hz
-  #   device_class: frequency
-  #   accuracy_decimals: 1
-  #   filters:
-  #   - multiply: 0.01
 
+print('''
+switch:
   - platform: modbus_controller
-    id: bank_{bank_id}_temp
-    name: Bank {bank_id} (CT {(bank_id*10)-9}-{(bank_id*10)}) Temperature
-    address: {bank_id}64
+    id: bidirectional
+    name: "Bidirectional CT mode"
     register_type: holding
-    value_type: FP32_R
-    unit_of_measurement: "°C"
-    device_class: temperature
-    accuracy_decimals: 1''')
+    address: 30
+''')
 
-
-bank_id = 1
-print(f'''
+for chip in range(1, 7):
+  print(f'''
   - platform: modbus_controller
-    id: l1_voltage
-    name: L1 Voltage
-    address: {bank_id}62
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: V
-    device_class: voltage
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
+    id: clear_btn_chip_{chip}
+    name: "Clear Energy, Chip {chip}"
+    register_type: coil
+    address: {520+chip-1}
+''')
 
-  - platform: modbus_controller
-    id: l1_frequency
-    name: L1 Frequency
-    address: {bank_id}63
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: Hz
-    device_class: frequency
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01''')
-
-
-bank_id = 4
-print(f'''
-  - platform: modbus_controller
-    id: l2_voltage
-    name: L2 Voltage
-    address: {bank_id}62
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: V
-    device_class: voltage
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01
-
-  - platform: modbus_controller
-    id: l2_frequency
-    name: L2 Frequency
-    address: {bank_id}63
-    register_type: holding
-    value_type: U_WORD
-    unit_of_measurement: Hz
-    device_class: frequency
-    accuracy_decimals: 1
-    filters:
-    - multiply: 0.01''')
+# - platform: template
+#   name: "CLEAR ALL ENERGY REGISTERS"
+#   icon: "mdi:refresh"
+#   id: clear_btn_chip_1
+#   on_press:
+#
+# for addr in range(520,592):
+#     print(f'''      - modbus_client.write_single_coil:
+#           address: 0x01
+#           start_address: {addr}
+#           value: true
+#       - delay: 500ms''')
+#
