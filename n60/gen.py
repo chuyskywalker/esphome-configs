@@ -271,6 +271,7 @@ for ct_num, (bank_id, pin_id, addr_offset) in internal_maps.items():
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -285,6 +286,7 @@ for ct_num, (bank_id, pin_id, addr_offset) in internal_maps.items():
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -298,8 +300,8 @@ for ct_num, (bank_id, pin_id, addr_offset) in internal_maps.items():
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3''')
 
 # There are also some "per bank" values that can be collected and referenced later as well
@@ -328,6 +330,7 @@ for bank_id in range(1,7):
     value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -341,6 +344,7 @@ for bank_id in range(1,7):
     value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -355,6 +359,7 @@ for bank_id in range(1,7):
     value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
+    state_class: measurement
     accuracy_decimals: 1
     
   - platform: modbus_controller
@@ -366,6 +371,7 @@ for bank_id in range(1,7):
     value_type: FP32_R
     unit_of_measurement: ""
     device_class: power_factor
+    state_class: measurement
     accuracy_decimals: 2
 ''')
 
@@ -386,6 +392,8 @@ for (power_name, ct_ids) in mapping.items():
     type: sum
     name: "{power_name} Current"
     id: {to_esphome_id(power_name)}_current
+    device_class: current
+    state_class: measurement
     sources:
 {current_sources}
 
@@ -393,6 +401,8 @@ for (power_name, ct_ids) in mapping.items():
     type: sum
     name: "{power_name} Power"
     id: {to_esphome_id(power_name)}_power
+    device_class: power
+    state_class: measurement
     sources:
 {power_sources}
 
@@ -400,7 +410,7 @@ for (power_name, ct_ids) in mapping.items():
     type: sum
     name: "{power_name} Energy"
     id: {to_esphome_id(power_name)}_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
 {energy_sources}''')
@@ -420,6 +430,9 @@ print('''
     - source: bank_2_voltage
     - source: bank_3_voltage
     accuracy_decimals: 2
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
 
   - platform: combination
     type: mean
@@ -430,6 +443,9 @@ print('''
     - source: bank_2_frequency
     - source: bank_3_frequency
     accuracy_decimals: 2
+    unit_of_measurement: Hz
+    device_class: frequency
+    state_class: measurement
 
   - platform: combination
     type: mean
@@ -440,6 +456,9 @@ print('''
     - source: bank_5_voltage
     - source: bank_6_voltage
     accuracy_decimals: 2
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
 
   - platform: combination
     type: mean
@@ -450,6 +469,9 @@ print('''
     - source: bank_5_frequency
     - source: bank_6_frequency
     accuracy_decimals: 2
+    unit_of_measurement: Hz
+    device_class: frequency
+    state_class: measurement
 
 ''')
 

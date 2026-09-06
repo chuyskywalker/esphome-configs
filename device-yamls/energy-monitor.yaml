@@ -123,6 +123,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -137,6 +138,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -150,8 +152,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 02, bank 1, pin 2, addr_offset 102
@@ -166,6 +168,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -180,6 +183,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -193,8 +197,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 03, bank 1, pin 3, addr_offset 104
@@ -209,6 +213,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -223,6 +228,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -236,8 +242,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 04, bank 1, pin 4, addr_offset 106
@@ -252,6 +258,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -266,6 +273,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -279,8 +287,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 05, bank 1, pin 5, addr_offset 108
@@ -295,6 +303,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -309,6 +318,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -322,8 +332,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 06, bank 1, pin 6, addr_offset 110
@@ -338,6 +348,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -352,6 +363,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -365,8 +377,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 07, bank 1, pin 7, addr_offset 112
@@ -381,6 +393,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -395,6 +408,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -408,8 +422,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 08, bank 1, pin 8, addr_offset 114
@@ -424,6 +438,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -438,6 +453,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -451,8 +467,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 09, bank 1, pin 9, addr_offset 116
@@ -467,6 +483,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -481,6 +498,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -494,8 +512,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 10, bank 1, pin 10, addr_offset 118
@@ -510,6 +528,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -524,6 +543,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -537,8 +557,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 11, bank 2, pin 1, addr_offset 200
@@ -553,6 +573,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -567,6 +588,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -580,8 +602,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 12, bank 2, pin 2, addr_offset 202
@@ -596,6 +618,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -610,6 +633,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -623,8 +647,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 13, bank 2, pin 3, addr_offset 204
@@ -639,6 +663,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -653,6 +678,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -666,8 +692,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 14, bank 2, pin 4, addr_offset 206
@@ -682,6 +708,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -696,6 +723,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -709,8 +737,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 15, bank 2, pin 5, addr_offset 208
@@ -725,6 +753,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -739,6 +768,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -752,8 +782,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 16, bank 2, pin 6, addr_offset 210
@@ -768,6 +798,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -782,6 +813,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -795,8 +827,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 17, bank 2, pin 7, addr_offset 212
@@ -811,6 +843,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -825,6 +858,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -838,8 +872,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 18, bank 2, pin 8, addr_offset 214
@@ -854,6 +888,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -868,6 +903,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -881,8 +917,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 19, bank 2, pin 9, addr_offset 216
@@ -897,6 +933,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -911,6 +948,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -924,8 +962,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 20, bank 2, pin 10, addr_offset 218
@@ -940,6 +978,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -954,6 +993,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -967,8 +1007,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 21, bank 3, pin 1, addr_offset 300
@@ -983,6 +1023,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -997,6 +1038,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1010,8 +1052,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 22, bank 3, pin 2, addr_offset 302
@@ -1026,6 +1068,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1040,6 +1083,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1053,8 +1097,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 23, bank 3, pin 3, addr_offset 304
@@ -1069,6 +1113,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1083,6 +1128,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1096,8 +1142,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 24, bank 3, pin 4, addr_offset 306
@@ -1112,6 +1158,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1126,6 +1173,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1139,8 +1187,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 25, bank 3, pin 5, addr_offset 308
@@ -1155,6 +1203,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1169,6 +1218,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1182,8 +1232,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 26, bank 3, pin 6, addr_offset 310
@@ -1198,6 +1248,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1212,6 +1263,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1225,8 +1277,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 27, bank 3, pin 7, addr_offset 312
@@ -1241,6 +1293,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1255,6 +1308,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1268,8 +1322,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 28, bank 3, pin 8, addr_offset 314
@@ -1284,6 +1338,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1298,6 +1353,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1311,8 +1367,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 29, bank 3, pin 9, addr_offset 316
@@ -1327,6 +1383,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1341,6 +1398,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1354,8 +1412,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 30, bank 3, pin 10, addr_offset 318
@@ -1370,6 +1428,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1384,6 +1443,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1397,8 +1457,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 31, bank 4, pin 1, addr_offset 400
@@ -1413,6 +1473,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1427,6 +1488,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1440,8 +1502,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 32, bank 4, pin 2, addr_offset 402
@@ -1456,6 +1518,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1470,6 +1533,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1483,8 +1547,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 33, bank 4, pin 3, addr_offset 404
@@ -1499,6 +1563,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1513,6 +1578,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1526,8 +1592,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 34, bank 4, pin 4, addr_offset 406
@@ -1542,6 +1608,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1556,6 +1623,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1569,8 +1637,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 35, bank 4, pin 5, addr_offset 408
@@ -1585,6 +1653,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1599,6 +1668,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1612,8 +1682,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 36, bank 4, pin 6, addr_offset 410
@@ -1628,6 +1698,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1642,6 +1713,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1655,8 +1727,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 37, bank 4, pin 7, addr_offset 412
@@ -1671,6 +1743,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1685,6 +1758,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1698,8 +1772,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 38, bank 4, pin 8, addr_offset 414
@@ -1714,6 +1788,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1728,6 +1803,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1741,8 +1817,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 39, bank 4, pin 9, addr_offset 416
@@ -1757,6 +1833,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1771,6 +1848,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1784,8 +1862,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 40, bank 4, pin 10, addr_offset 418
@@ -1800,6 +1878,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1814,6 +1893,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1827,8 +1907,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 41, bank 5, pin 1, addr_offset 500
@@ -1843,6 +1923,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1857,6 +1938,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1870,8 +1952,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 42, bank 5, pin 2, addr_offset 502
@@ -1886,6 +1968,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1900,6 +1983,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1913,8 +1997,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 43, bank 5, pin 3, addr_offset 504
@@ -1929,6 +2013,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1943,6 +2028,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1956,8 +2042,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 44, bank 5, pin 4, addr_offset 506
@@ -1972,6 +2058,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -1986,6 +2073,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -1999,8 +2087,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 45, bank 5, pin 5, addr_offset 508
@@ -2015,6 +2103,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2029,6 +2118,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2042,8 +2132,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 46, bank 5, pin 6, addr_offset 510
@@ -2058,6 +2148,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2072,6 +2163,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2085,8 +2177,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 47, bank 5, pin 7, addr_offset 512
@@ -2101,6 +2193,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2115,6 +2208,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2128,8 +2222,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 48, bank 5, pin 8, addr_offset 514
@@ -2144,6 +2238,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2158,6 +2253,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2171,8 +2267,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 49, bank 5, pin 9, addr_offset 516
@@ -2187,6 +2283,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2201,6 +2298,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2214,8 +2312,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 50, bank 5, pin 10, addr_offset 518
@@ -2230,6 +2328,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2244,6 +2343,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2257,8 +2357,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 51, bank 6, pin 1, addr_offset 600
@@ -2273,6 +2373,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2287,6 +2388,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2300,8 +2402,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 52, bank 6, pin 2, addr_offset 602
@@ -2316,6 +2418,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2330,6 +2433,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2343,8 +2447,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 53, bank 6, pin 3, addr_offset 604
@@ -2359,6 +2463,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2373,6 +2478,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2386,8 +2492,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 54, bank 6, pin 4, addr_offset 606
@@ -2402,6 +2508,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2416,6 +2523,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2429,8 +2537,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 55, bank 6, pin 5, addr_offset 608
@@ -2445,6 +2553,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2459,6 +2568,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2472,8 +2582,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 56, bank 6, pin 6, addr_offset 610
@@ -2488,6 +2598,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2502,6 +2613,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2515,8 +2627,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 57, bank 6, pin 7, addr_offset 612
@@ -2531,6 +2643,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2545,6 +2658,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2558,8 +2672,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 58, bank 6, pin 8, addr_offset 614
@@ -2574,6 +2688,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2588,6 +2703,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2601,8 +2717,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 59, bank 6, pin 9, addr_offset 616
@@ -2617,6 +2733,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2631,6 +2748,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2644,8 +2762,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # ct 60, bank 6, pin 10, addr_offset 618
@@ -2660,6 +2778,7 @@ sensor:
     value_type: U_DWORD_R
     unit_of_measurement: A
     device_class: current
+    state_class: measurement
     accuracy_decimals: 3
     filters:
     - multiply: 0.001
@@ -2674,6 +2793,7 @@ sensor:
     value_type: S_DWORD_R
     unit_of_measurement: W
     device_class: power
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.1
@@ -2687,8 +2807,8 @@ sensor:
     register_type: holding
     value_type: FP32_R
     unit_of_measurement: kWh
-    state_class: total_increasing
     device_class: energy
+    state_class: total_increasing
     accuracy_decimals: 3
 
   # bank: 1, ct start: 1, ct end: 10
@@ -2713,6 +2833,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -2726,6 +2847,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -2740,6 +2862,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
+    state_class: measurement
     accuracy_decimals: 1
     
   - platform: modbus_controller
@@ -2751,6 +2874,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: ""
     device_class: power_factor
+    state_class: measurement
     accuracy_decimals: 2
 
 
@@ -2776,6 +2900,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -2789,6 +2914,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -2803,6 +2929,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
+    state_class: measurement
     accuracy_decimals: 1
     
   - platform: modbus_controller
@@ -2814,6 +2941,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: ""
     device_class: power_factor
+    state_class: measurement
     accuracy_decimals: 2
 
 
@@ -2839,6 +2967,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -2852,6 +2981,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -2866,6 +2996,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
+    state_class: measurement
     accuracy_decimals: 1
     
   - platform: modbus_controller
@@ -2877,6 +3008,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: ""
     device_class: power_factor
+    state_class: measurement
     accuracy_decimals: 2
 
 
@@ -2902,6 +3034,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -2915,6 +3048,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -2929,6 +3063,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
+    state_class: measurement
     accuracy_decimals: 1
     
   - platform: modbus_controller
@@ -2940,6 +3075,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: ""
     device_class: power_factor
+    state_class: measurement
     accuracy_decimals: 2
 
 
@@ -2965,6 +3101,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -2978,6 +3115,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -2992,6 +3130,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
+    state_class: measurement
     accuracy_decimals: 1
     
   - platform: modbus_controller
@@ -3003,6 +3142,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: ""
     device_class: power_factor
+    state_class: measurement
     accuracy_decimals: 2
 
 
@@ -3028,6 +3168,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: V
     device_class: voltage
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -3041,6 +3182,7 @@ sensor:
     value_type: U_WORD
     unit_of_measurement: Hz
     device_class: frequency
+    state_class: measurement
     accuracy_decimals: 1
     filters:
     - multiply: 0.01
@@ -3055,6 +3197,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: "°C"
     device_class: temperature
+    state_class: measurement
     accuracy_decimals: 1
     
   - platform: modbus_controller
@@ -3066,6 +3209,7 @@ sensor:
     value_type: FP32_R
     unit_of_measurement: ""
     device_class: power_factor
+    state_class: measurement
     accuracy_decimals: 2
 
 
@@ -3075,6 +3219,8 @@ sensor:
     type: sum
     name: "Microwave (P1B1) Current"
     id: microwave_p1b1_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_01_current
 
@@ -3082,6 +3228,8 @@ sensor:
     type: sum
     name: "Microwave (P1B1) Power"
     id: microwave_p1b1_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_01_power
 
@@ -3089,7 +3237,7 @@ sensor:
     type: sum
     name: "Microwave (P1B1) Energy"
     id: microwave_p1b1_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_01_energy
@@ -3100,6 +3248,8 @@ sensor:
     type: sum
     name: "Fridge & Hood (P1B3) Current"
     id: fridge__hood_p1b3_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_31_current
 
@@ -3107,6 +3257,8 @@ sensor:
     type: sum
     name: "Fridge & Hood (P1B3) Power"
     id: fridge__hood_p1b3_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_31_power
 
@@ -3114,7 +3266,7 @@ sensor:
     type: sum
     name: "Fridge & Hood (P1B3) Energy"
     id: fridge__hood_p1b3_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_31_energy
@@ -3125,6 +3277,8 @@ sensor:
     type: sum
     name: "Kitchen Outlets (P1B5) Current"
     id: kitchen_outlets_p1b5_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_02_current
 
@@ -3132,6 +3286,8 @@ sensor:
     type: sum
     name: "Kitchen Outlets (P1B5) Power"
     id: kitchen_outlets_p1b5_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_02_power
 
@@ -3139,7 +3295,7 @@ sensor:
     type: sum
     name: "Kitchen Outlets (P1B5) Energy"
     id: kitchen_outlets_p1b5_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_02_energy
@@ -3150,6 +3306,8 @@ sensor:
     type: sum
     name: "Disposal (P1B7) Current"
     id: disposal_p1b7_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_32_current
 
@@ -3157,6 +3315,8 @@ sensor:
     type: sum
     name: "Disposal (P1B7) Power"
     id: disposal_p1b7_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_32_power
 
@@ -3164,7 +3324,7 @@ sensor:
     type: sum
     name: "Disposal (P1B7) Energy"
     id: disposal_p1b7_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_32_energy
@@ -3175,6 +3335,8 @@ sensor:
     type: sum
     name: "Garage Outlets 1 (P1B9) Current"
     id: garage_outlets_1_p1b9_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_03_current
 
@@ -3182,6 +3344,8 @@ sensor:
     type: sum
     name: "Garage Outlets 1 (P1B9) Power"
     id: garage_outlets_1_p1b9_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_03_power
 
@@ -3189,7 +3353,7 @@ sensor:
     type: sum
     name: "Garage Outlets 1 (P1B9) Energy"
     id: garage_outlets_1_p1b9_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_03_energy
@@ -3200,6 +3364,8 @@ sensor:
     type: sum
     name: "Garage Outlets 2 (P1B11) Current"
     id: garage_outlets_2_p1b11_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_33_current
 
@@ -3207,6 +3373,8 @@ sensor:
     type: sum
     name: "Garage Outlets 2 (P1B11) Power"
     id: garage_outlets_2_p1b11_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_33_power
 
@@ -3214,7 +3382,7 @@ sensor:
     type: sum
     name: "Garage Outlets 2 (P1B11) Energy"
     id: garage_outlets_2_p1b11_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_33_energy
@@ -3225,6 +3393,8 @@ sensor:
     type: sum
     name: "Outside Outlets (P1B13) Current"
     id: outside_outlets_p1b13_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_04_current
 
@@ -3232,6 +3402,8 @@ sensor:
     type: sum
     name: "Outside Outlets (P1B13) Power"
     id: outside_outlets_p1b13_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_04_power
 
@@ -3239,7 +3411,7 @@ sensor:
     type: sum
     name: "Outside Outlets (P1B13) Energy"
     id: outside_outlets_p1b13_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_04_energy
@@ -3250,6 +3422,8 @@ sensor:
     type: sum
     name: "ERV (P1B15) Current"
     id: erv_p1b15_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_34_current
 
@@ -3257,6 +3431,8 @@ sensor:
     type: sum
     name: "ERV (P1B15) Power"
     id: erv_p1b15_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_34_power
 
@@ -3264,7 +3440,7 @@ sensor:
     type: sum
     name: "ERV (P1B15) Energy"
     id: erv_p1b15_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_34_energy
@@ -3275,6 +3451,8 @@ sensor:
     type: sum
     name: "Crawl: Dehum, LED, Cond.Pump, Moen Flo (P1B17) Current"
     id: crawl_dehum_led_condpump_moen_flo_p1b17_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_05_current
 
@@ -3282,6 +3460,8 @@ sensor:
     type: sum
     name: "Crawl: Dehum, LED, Cond.Pump, Moen Flo (P1B17) Power"
     id: crawl_dehum_led_condpump_moen_flo_p1b17_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_05_power
 
@@ -3289,7 +3469,7 @@ sensor:
     type: sum
     name: "Crawl: Dehum, LED, Cond.Pump, Moen Flo (P1B17) Energy"
     id: crawl_dehum_led_condpump_moen_flo_p1b17_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_05_energy
@@ -3300,6 +3480,8 @@ sensor:
     type: sum
     name: "Oven (30A) (P1B19-21) Current"
     id: oven_30a_p1b19_21_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_06_current
       - source: ct_35_current
@@ -3308,6 +3490,8 @@ sensor:
     type: sum
     name: "Oven (30A) (P1B19-21) Power"
     id: oven_30a_p1b19_21_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_06_power
       - source: ct_35_power
@@ -3316,7 +3500,7 @@ sensor:
     type: sum
     name: "Oven (30A) (P1B19-21) Energy"
     id: oven_30a_p1b19_21_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_06_energy
@@ -3328,6 +3512,8 @@ sensor:
     type: sum
     name: "Cooktop (50A) (P1B23-25) Current"
     id: cooktop_50a_p1b23_25_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_07_current
       - source: ct_36_current
@@ -3336,6 +3522,8 @@ sensor:
     type: sum
     name: "Cooktop (50A) (P1B23-25) Power"
     id: cooktop_50a_p1b23_25_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_07_power
       - source: ct_36_power
@@ -3344,7 +3532,7 @@ sensor:
     type: sum
     name: "Cooktop (50A) (P1B23-25) Energy"
     id: cooktop_50a_p1b23_25_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_07_energy
@@ -3356,6 +3544,8 @@ sensor:
     type: sum
     name: "Smoke Alarms (P1B2) Current"
     id: smoke_alarms_p1b2_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_09_current
 
@@ -3363,6 +3553,8 @@ sensor:
     type: sum
     name: "Smoke Alarms (P1B2) Power"
     id: smoke_alarms_p1b2_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_09_power
 
@@ -3370,7 +3562,7 @@ sensor:
     type: sum
     name: "Smoke Alarms (P1B2) Energy"
     id: smoke_alarms_p1b2_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_09_energy
@@ -3381,6 +3573,8 @@ sensor:
     type: sum
     name: "Garage Int&Ext Lights (P1B4) Current"
     id: garage_intext_lights_p1b4_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_39_current
 
@@ -3388,6 +3582,8 @@ sensor:
     type: sum
     name: "Garage Int&Ext Lights (P1B4) Power"
     id: garage_intext_lights_p1b4_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_39_power
 
@@ -3395,7 +3591,7 @@ sensor:
     type: sum
     name: "Garage Int&Ext Lights (P1B4) Energy"
     id: garage_intext_lights_p1b4_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_39_energy
@@ -3406,6 +3602,8 @@ sensor:
     type: sum
     name: "(Old) TV Nook Lights (P1B6) Current"
     id: old_tv_nook_lights_p1b6_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_10_current
 
@@ -3413,6 +3611,8 @@ sensor:
     type: sum
     name: "(Old) TV Nook Lights (P1B6) Power"
     id: old_tv_nook_lights_p1b6_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_10_power
 
@@ -3420,7 +3620,7 @@ sensor:
     type: sum
     name: "(Old) TV Nook Lights (P1B6) Energy"
     id: old_tv_nook_lights_p1b6_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_10_energy
@@ -3431,6 +3631,8 @@ sensor:
     type: sum
     name: "Living Outlets (P1B8) Current"
     id: living_outlets_p1b8_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_40_current
 
@@ -3438,6 +3640,8 @@ sensor:
     type: sum
     name: "Living Outlets (P1B8) Power"
     id: living_outlets_p1b8_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_40_power
 
@@ -3445,7 +3649,7 @@ sensor:
     type: sum
     name: "Living Outlets (P1B8) Energy"
     id: living_outlets_p1b8_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_40_energy
@@ -3456,6 +3660,8 @@ sensor:
     type: sum
     name: "Primary Bed Lights (P1B10) Current"
     id: primary_bed_lights_p1b10_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_11_current
 
@@ -3463,6 +3669,8 @@ sensor:
     type: sum
     name: "Primary Bed Lights (P1B10) Power"
     id: primary_bed_lights_p1b10_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_11_power
 
@@ -3470,7 +3678,7 @@ sensor:
     type: sum
     name: "Primary Bed Lights (P1B10) Energy"
     id: primary_bed_lights_p1b10_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_11_energy
@@ -3481,6 +3689,8 @@ sensor:
     type: sum
     name: "Hallway Lights (P1B12) Current"
     id: hallway_lights_p1b12_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_41_current
 
@@ -3488,6 +3698,8 @@ sensor:
     type: sum
     name: "Hallway Lights (P1B12) Power"
     id: hallway_lights_p1b12_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_41_power
 
@@ -3495,7 +3707,7 @@ sensor:
     type: sum
     name: "Hallway Lights (P1B12) Energy"
     id: hallway_lights_p1b12_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_41_energy
@@ -3506,6 +3718,8 @@ sensor:
     type: sum
     name: "Big Room Lights (P1B14) Current"
     id: big_room_lights_p1b14_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_12_current
 
@@ -3513,6 +3727,8 @@ sensor:
     type: sum
     name: "Big Room Lights (P1B14) Power"
     id: big_room_lights_p1b14_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_12_power
 
@@ -3520,7 +3736,7 @@ sensor:
     type: sum
     name: "Big Room Lights (P1B14) Energy"
     id: big_room_lights_p1b14_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_12_energy
@@ -3531,6 +3747,8 @@ sensor:
     type: sum
     name: "Lights: Entrance, Porch, Front  (P1B16) Current"
     id: lights_entrance_porch_front_p1b16_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_42_current
 
@@ -3538,6 +3756,8 @@ sensor:
     type: sum
     name: "Lights: Entrance, Porch, Front  (P1B16) Power"
     id: lights_entrance_porch_front_p1b16_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_42_power
 
@@ -3545,7 +3765,7 @@ sensor:
     type: sum
     name: "Lights: Entrance, Porch, Front  (P1B16) Energy"
     id: lights_entrance_porch_front_p1b16_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_42_energy
@@ -3556,6 +3776,8 @@ sensor:
     type: sum
     name: "Primary Bath Lights (P1B18) Current"
     id: primary_bath_lights_p1b18_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_13_current
 
@@ -3563,6 +3785,8 @@ sensor:
     type: sum
     name: "Primary Bath Lights (P1B18) Power"
     id: primary_bath_lights_p1b18_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_13_power
 
@@ -3570,7 +3794,7 @@ sensor:
     type: sum
     name: "Primary Bath Lights (P1B18) Energy"
     id: primary_bath_lights_p1b18_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_13_energy
@@ -3581,6 +3805,8 @@ sensor:
     type: sum
     name: "Kitchen Island Oulets (P1B20) Current"
     id: kitchen_island_oulets_p1b20_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_43_current
 
@@ -3588,6 +3814,8 @@ sensor:
     type: sum
     name: "Kitchen Island Oulets (P1B20) Power"
     id: kitchen_island_oulets_p1b20_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_43_power
 
@@ -3595,7 +3823,7 @@ sensor:
     type: sum
     name: "Kitchen Island Oulets (P1B20) Energy"
     id: kitchen_island_oulets_p1b20_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_43_energy
@@ -3606,6 +3834,8 @@ sensor:
     type: sum
     name: "AC (40A) (P1B22-24) Current"
     id: ac_40a_p1b22_24_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_14_current
       - source: ct_44_current
@@ -3614,6 +3844,8 @@ sensor:
     type: sum
     name: "AC (40A) (P1B22-24) Power"
     id: ac_40a_p1b22_24_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_14_power
       - source: ct_44_power
@@ -3622,7 +3854,7 @@ sensor:
     type: sum
     name: "AC (40A) (P1B22-24) Energy"
     id: ac_40a_p1b22_24_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_14_energy
@@ -3634,6 +3866,8 @@ sensor:
     type: sum
     name: "EV Charger 1 (40A) (P2B1-3) Current"
     id: ev_charger_1_40a_p2b1_3_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_15_current
       - source: ct_45_current
@@ -3642,6 +3876,8 @@ sensor:
     type: sum
     name: "EV Charger 1 (40A) (P2B1-3) Power"
     id: ev_charger_1_40a_p2b1_3_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_15_power
       - source: ct_45_power
@@ -3650,7 +3886,7 @@ sensor:
     type: sum
     name: "EV Charger 1 (40A) (P2B1-3) Energy"
     id: ev_charger_1_40a_p2b1_3_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_15_energy
@@ -3662,6 +3898,8 @@ sensor:
     type: sum
     name: "EV Charger 2 (40A) (P2B5-7) Current"
     id: ev_charger_2_40a_p2b5_7_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_16_current
       - source: ct_46_current
@@ -3670,6 +3908,8 @@ sensor:
     type: sum
     name: "EV Charger 2 (40A) (P2B5-7) Power"
     id: ev_charger_2_40a_p2b5_7_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_16_power
       - source: ct_46_power
@@ -3678,7 +3918,7 @@ sensor:
     type: sum
     name: "EV Charger 2 (40A) (P2B5-7) Energy"
     id: ev_charger_2_40a_p2b5_7_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_16_energy
@@ -3690,6 +3930,8 @@ sensor:
     type: sum
     name: "Back Yard Porch Lights (P2B9) Current"
     id: back_yard_porch_lights_p2b9_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_17_current
 
@@ -3697,6 +3939,8 @@ sensor:
     type: sum
     name: "Back Yard Porch Lights (P2B9) Power"
     id: back_yard_porch_lights_p2b9_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_17_power
 
@@ -3704,7 +3948,7 @@ sensor:
     type: sum
     name: "Back Yard Porch Lights (P2B9) Energy"
     id: back_yard_porch_lights_p2b9_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_17_energy
@@ -3715,6 +3959,8 @@ sensor:
     type: sum
     name: "Desk Outlets (P2B11) Current"
     id: desk_outlets_p2b11_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_47_current
 
@@ -3722,6 +3968,8 @@ sensor:
     type: sum
     name: "Desk Outlets (P2B11) Power"
     id: desk_outlets_p2b11_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_47_power
 
@@ -3729,7 +3977,7 @@ sensor:
     type: sum
     name: "Desk Outlets (P2B11) Energy"
     id: desk_outlets_p2b11_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_47_energy
@@ -3740,6 +3988,8 @@ sensor:
     type: sum
     name: "Laundry Lights (P2B13) Current"
     id: laundry_lights_p2b13_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_18_current
 
@@ -3747,6 +3997,8 @@ sensor:
     type: sum
     name: "Laundry Lights (P2B13) Power"
     id: laundry_lights_p2b13_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_18_power
 
@@ -3754,7 +4006,7 @@ sensor:
     type: sum
     name: "Laundry Lights (P2B13) Energy"
     id: laundry_lights_p2b13_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_18_energy
@@ -3765,6 +4017,8 @@ sensor:
     type: sum
     name: "Bedroom 1 Lights (P2B15) Current"
     id: bedroom_1_lights_p2b15_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_48_current
 
@@ -3772,6 +4026,8 @@ sensor:
     type: sum
     name: "Bedroom 1 Lights (P2B15) Power"
     id: bedroom_1_lights_p2b15_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_48_power
 
@@ -3779,7 +4035,7 @@ sensor:
     type: sum
     name: "Bedroom 1 Lights (P2B15) Energy"
     id: bedroom_1_lights_p2b15_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_48_energy
@@ -3790,6 +4046,8 @@ sensor:
     type: sum
     name: "Hallway Bath Lights (P2B17) Current"
     id: hallway_bath_lights_p2b17_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_19_current
 
@@ -3797,6 +4055,8 @@ sensor:
     type: sum
     name: "Hallway Bath Lights (P2B17) Power"
     id: hallway_bath_lights_p2b17_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_19_power
 
@@ -3804,7 +4064,7 @@ sensor:
     type: sum
     name: "Hallway Bath Lights (P2B17) Energy"
     id: hallway_bath_lights_p2b17_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_19_energy
@@ -3815,6 +4075,8 @@ sensor:
     type: sum
     name: "Bedroom 1 Outlets (P2B19) Current"
     id: bedroom_1_outlets_p2b19_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_49_current
 
@@ -3822,6 +4084,8 @@ sensor:
     type: sum
     name: "Bedroom 1 Outlets (P2B19) Power"
     id: bedroom_1_outlets_p2b19_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_49_power
 
@@ -3829,7 +4093,7 @@ sensor:
     type: sum
     name: "Bedroom 1 Outlets (P2B19) Energy"
     id: bedroom_1_outlets_p2b19_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_49_energy
@@ -3840,6 +4104,8 @@ sensor:
     type: sum
     name: "Primary Bed Outlets (P2B21) Current"
     id: primary_bed_outlets_p2b21_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_20_current
 
@@ -3847,6 +4113,8 @@ sensor:
     type: sum
     name: "Primary Bed Outlets (P2B21) Power"
     id: primary_bed_outlets_p2b21_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_20_power
 
@@ -3854,7 +4122,7 @@ sensor:
     type: sum
     name: "Primary Bed Outlets (P2B21) Energy"
     id: primary_bed_outlets_p2b21_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_20_energy
@@ -3865,6 +4133,8 @@ sensor:
     type: sum
     name: "Bedroom 2 Lights (P2B23) Current"
     id: bedroom_2_lights_p2b23_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_50_current
 
@@ -3872,6 +4142,8 @@ sensor:
     type: sum
     name: "Bedroom 2 Lights (P2B23) Power"
     id: bedroom_2_lights_p2b23_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_50_power
 
@@ -3879,7 +4151,7 @@ sensor:
     type: sum
     name: "Bedroom 2 Lights (P2B23) Energy"
     id: bedroom_2_lights_p2b23_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_50_energy
@@ -3890,6 +4162,8 @@ sensor:
     type: sum
     name: "Bedroom 2 Outlets (P2B25) Current"
     id: bedroom_2_outlets_p2b25_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_21_current
 
@@ -3897,6 +4171,8 @@ sensor:
     type: sum
     name: "Bedroom 2 Outlets (P2B25) Power"
     id: bedroom_2_outlets_p2b25_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_21_power
 
@@ -3904,7 +4180,7 @@ sensor:
     type: sum
     name: "Bedroom 2 Outlets (P2B25) Energy"
     id: bedroom_2_outlets_p2b25_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_21_energy
@@ -3915,6 +4191,8 @@ sensor:
     type: sum
     name: "Water Heater (30A) (P2B2-4) Current"
     id: water_heater_30a_p2b2_4_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_23_current
       - source: ct_53_current
@@ -3923,6 +4201,8 @@ sensor:
     type: sum
     name: "Water Heater (30A) (P2B2-4) Power"
     id: water_heater_30a_p2b2_4_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_23_power
       - source: ct_53_power
@@ -3931,7 +4211,7 @@ sensor:
     type: sum
     name: "Water Heater (30A) (P2B2-4) Energy"
     id: water_heater_30a_p2b2_4_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_23_energy
@@ -3943,6 +4223,8 @@ sensor:
     type: sum
     name: "Primary Bath Outlets (P2B6) Current"
     id: primary_bath_outlets_p2b6_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_24_current
 
@@ -3950,6 +4232,8 @@ sensor:
     type: sum
     name: "Primary Bath Outlets (P2B6) Power"
     id: primary_bath_outlets_p2b6_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_24_power
 
@@ -3957,7 +4241,7 @@ sensor:
     type: sum
     name: "Primary Bath Outlets (P2B6) Energy"
     id: primary_bath_outlets_p2b6_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_24_energy
@@ -3968,6 +4252,8 @@ sensor:
     type: sum
     name: "Data (P2B8) Current"
     id: data_p2b8_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_54_current
 
@@ -3975,6 +4261,8 @@ sensor:
     type: sum
     name: "Data (P2B8) Power"
     id: data_p2b8_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_54_power
 
@@ -3982,7 +4270,7 @@ sensor:
     type: sum
     name: "Data (P2B8) Energy"
     id: data_p2b8_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_54_energy
@@ -3993,6 +4281,8 @@ sensor:
     type: sum
     name: "Laundry Outlets (P2B10) Current"
     id: laundry_outlets_p2b10_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_25_current
 
@@ -4000,6 +4290,8 @@ sensor:
     type: sum
     name: "Laundry Outlets (P2B10) Power"
     id: laundry_outlets_p2b10_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_25_power
 
@@ -4007,7 +4299,7 @@ sensor:
     type: sum
     name: "Laundry Outlets (P2B10) Energy"
     id: laundry_outlets_p2b10_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_25_energy
@@ -4018,6 +4310,8 @@ sensor:
     type: sum
     name: "Washer Outlet (P2B12) Current"
     id: washer_outlet_p2b12_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_55_current
 
@@ -4025,6 +4319,8 @@ sensor:
     type: sum
     name: "Washer Outlet (P2B12) Power"
     id: washer_outlet_p2b12_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_55_power
 
@@ -4032,7 +4328,7 @@ sensor:
     type: sum
     name: "Washer Outlet (P2B12) Energy"
     id: washer_outlet_p2b12_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_55_energy
@@ -4043,6 +4339,8 @@ sensor:
     type: sum
     name: "Hallway Bath Outlets (P2B14) Current"
     id: hallway_bath_outlets_p2b14_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_26_current
 
@@ -4050,6 +4348,8 @@ sensor:
     type: sum
     name: "Hallway Bath Outlets (P2B14) Power"
     id: hallway_bath_outlets_p2b14_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_26_power
 
@@ -4057,7 +4357,7 @@ sensor:
     type: sum
     name: "Hallway Bath Outlets (P2B14) Energy"
     id: hallway_bath_outlets_p2b14_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_26_energy
@@ -4068,6 +4368,8 @@ sensor:
     type: sum
     name: "Shower Valves (MOEN; in wall) (P2B16) Current"
     id: shower_valves_moen_in_wall_p2b16_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_56_current
 
@@ -4075,6 +4377,8 @@ sensor:
     type: sum
     name: "Shower Valves (MOEN; in wall) (P2B16) Power"
     id: shower_valves_moen_in_wall_p2b16_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_56_power
 
@@ -4082,7 +4386,7 @@ sensor:
     type: sum
     name: "Shower Valves (MOEN; in wall) (P2B16) Energy"
     id: shower_valves_moen_in_wall_p2b16_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_56_energy
@@ -4093,6 +4397,8 @@ sensor:
     type: sum
     name: "Fire Alarm (P2B18) Current"
     id: fire_alarm_p2b18_current
+    device_class: current
+    state_class: measurement
     sources:
       - source: ct_27_current
 
@@ -4100,6 +4406,8 @@ sensor:
     type: sum
     name: "Fire Alarm (P2B18) Power"
     id: fire_alarm_p2b18_power
+    device_class: power
+    state_class: measurement
     sources:
       - source: ct_27_power
 
@@ -4107,7 +4415,7 @@ sensor:
     type: sum
     name: "Fire Alarm (P2B18) Energy"
     id: fire_alarm_p2b18_energy
-    # this specific stateclasss must be defined
+    device_class: energy
     state_class: total_increasing
     sources:
       - source: ct_27_energy
@@ -4126,6 +4434,9 @@ sensor:
     - source: bank_2_voltage
     - source: bank_3_voltage
     accuracy_decimals: 2
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
 
   - platform: combination
     type: mean
@@ -4136,6 +4447,9 @@ sensor:
     - source: bank_2_frequency
     - source: bank_3_frequency
     accuracy_decimals: 2
+    unit_of_measurement: Hz
+    device_class: frequency
+    state_class: measurement
 
   - platform: combination
     type: mean
@@ -4146,6 +4460,9 @@ sensor:
     - source: bank_5_voltage
     - source: bank_6_voltage
     accuracy_decimals: 2
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
 
   - platform: combination
     type: mean
@@ -4156,6 +4473,9 @@ sensor:
     - source: bank_5_frequency
     - source: bank_6_frequency
     accuracy_decimals: 2
+    unit_of_measurement: Hz
+    device_class: frequency
+    state_class: measurement
 
 
 

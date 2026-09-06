@@ -210,8 +210,15 @@ print('''
             opening_direction: auto
           - type: energy-sankey
             layout: horizontal
-            group_by_floor: true
-            group_by_area: true
+            group_by_floor: false
+            group_by_area: false
+            grid_options:
+              columns: full
+              rows: 12
+          - type: power-sankey
+            layout: auto
+            group_by_floor: false
+            group_by_area: false
             grid_options:
               columns: full
               rows: 12
