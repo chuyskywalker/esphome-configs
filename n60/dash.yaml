@@ -1,0 +1,2125 @@
+
+views:
+
+
+  - type: sections
+    max_columns: 4
+    title: Loads
+    path: loads
+    sections:
+
+      - type: grid
+        cards:
+          - type: heading
+            icon: ''
+            heading: "Panel 1, Left"
+            heading_style: title
+          - type: entities
+            entities:
+
+              - entity: sensor.energy_meter_microwave_p1b1_energy
+                name: "Microwave (P1B1)"
+                state_header: "kWh"
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_microwave_p1b1_current
+                    name: "Amps"
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_microwave_p1b1_power
+                    name: "Watts"
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_fridge_hood_p1b3_energy
+                name: "Fridge & Hood (P1B3)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_fridge_hood_p1b3_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_fridge_hood_p1b3_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_kitchen_outlets_p1b5_energy
+                name: "Kitchen Outlets (P1B5)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_kitchen_outlets_p1b5_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_kitchen_outlets_p1b5_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_disposal_p1b7_energy
+                name: "Disposal (P1B7)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_disposal_p1b7_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_disposal_p1b7_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_garage_outlets_1_p1b9_energy
+                name: "Garage Outlets 1 (P1B9)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_garage_outlets_1_p1b9_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_garage_outlets_1_p1b9_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_garage_outlets_2_p1b11_energy
+                name: "Garage Outlets 2 (P1B11)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_garage_outlets_2_p1b11_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_garage_outlets_2_p1b11_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_outside_outlets_p1b13_energy
+                name: "Outside Outlets (P1B13)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_outside_outlets_p1b13_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_outside_outlets_p1b13_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_erv_p1b15_energy
+                name: "ERV (P1B15)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_erv_p1b15_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_erv_p1b15_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_crawl_dehum_led_cond_pump_moen_flo_p1b17_energy
+                name: "Crawl: Dehum, LED, Cond.Pump, Moen Flo (P1B17)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_crawl_dehum_led_cond_pump_moen_flo_p1b17_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_crawl_dehum_led_cond_pump_moen_flo_p1b17_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_oven_30a_p1b19_21_energy
+                name: "Oven (30A) (P1B19-21)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_oven_30a_p1b19_21_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_oven_30a_p1b19_21_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_cooktop_50a_p1b23_25_energy
+                name: "Cooktop (50A) (P1B23-25)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_cooktop_50a_p1b23_25_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_cooktop_50a_p1b23_25_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+      - type: grid
+        cards:
+          - type: heading
+            icon: ''
+            heading: "Panel 1, Right"
+            heading_style: title
+          - type: entities
+            entities:
+
+              - entity: sensor.energy_meter_smoke_alarms_p1b2_energy
+                name: "Smoke Alarms (P1B2)"
+                state_header: "kWh"
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_smoke_alarms_p1b2_current
+                    name: "Amps"
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_smoke_alarms_p1b2_power
+                    name: "Watts"
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_garage_int_ext_lights_p1b4_energy
+                name: "Garage Int&Ext Lights (P1B4)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_garage_int_ext_lights_p1b4_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_garage_int_ext_lights_p1b4_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_old_tv_nook_lights_p1b6_energy
+                name: "(Old) TV Nook Lights (P1B6)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_old_tv_nook_lights_p1b6_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_old_tv_nook_lights_p1b6_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_living_outlets_p1b8_energy
+                name: "Living Outlets (P1B8)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_living_outlets_p1b8_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_living_outlets_p1b8_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_primary_bed_lights_p1b10_energy
+                name: "Primary Bed Lights (P1B10)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_primary_bed_lights_p1b10_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_primary_bed_lights_p1b10_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_hallway_lights_p1b12_energy
+                name: "Hallway Lights (P1B12)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_hallway_lights_p1b12_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_hallway_lights_p1b12_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_big_room_lights_p1b14_energy
+                name: "Big Room Lights (P1B14)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_big_room_lights_p1b14_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_big_room_lights_p1b14_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_lights_entrance_porch_front_p1b16_energy
+                name: "Lights: Entrance, Porch, Front  (P1B16)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_lights_entrance_porch_front_p1b16_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_lights_entrance_porch_front_p1b16_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_primary_bath_lights_p1b18_energy
+                name: "Primary Bath Lights (P1B18)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_primary_bath_lights_p1b18_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_primary_bath_lights_p1b18_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_kitchen_island_oulets_p1b20_energy
+                name: "Kitchen Island Oulets (P1B20)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_kitchen_island_oulets_p1b20_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_kitchen_island_oulets_p1b20_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ac_40a_p1b22_24_energy
+                name: "AC (40A) (P1B22-24)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ac_40a_p1b22_24_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ac_40a_p1b22_24_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+      - type: grid
+        cards:
+          - type: heading
+            icon: ''
+            heading: "Panel 2, Left"
+            heading_style: title
+          - type: entities
+            entities:
+
+              - entity: sensor.energy_meter_ev_charger_1_40a_p2b1_3_energy
+                name: "EV Charger 1 (40A) (P2B1-3)"
+                state_header: "kWh"
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ev_charger_1_40a_p2b1_3_current
+                    name: "Amps"
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ev_charger_1_40a_p2b1_3_power
+                    name: "Watts"
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ev_charger_2_40a_p2b5_7_energy
+                name: "EV Charger 2 (40A) (P2B5-7)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ev_charger_2_40a_p2b5_7_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ev_charger_2_40a_p2b5_7_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_back_yard_porch_lights_p2b9_energy
+                name: "Back Yard Porch Lights (P2B9)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_back_yard_porch_lights_p2b9_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_back_yard_porch_lights_p2b9_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_desk_outlets_p2b11_energy
+                name: "Desk Outlets (P2B11)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_desk_outlets_p2b11_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_desk_outlets_p2b11_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_laundry_lights_p2b13_energy
+                name: "Laundry Lights (P2B13)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_laundry_lights_p2b13_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_laundry_lights_p2b13_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_bedroom_1_lights_p2b15_energy
+                name: "Bedroom 1 Lights (P2B15)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_bedroom_1_lights_p2b15_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_bedroom_1_lights_p2b15_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_hallway_bath_lights_p2b17_energy
+                name: "Hallway Bath Lights (P2B17)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_hallway_bath_lights_p2b17_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_hallway_bath_lights_p2b17_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_bedroom_1_outlets_p2b19_energy
+                name: "Bedroom 1 Outlets (P2B19)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_bedroom_1_outlets_p2b19_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_bedroom_1_outlets_p2b19_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_primary_bed_outlets_p2b21_energy
+                name: "Primary Bed Outlets (P2B21)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_primary_bed_outlets_p2b21_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_primary_bed_outlets_p2b21_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_bedroom_2_lights_p2b23_energy
+                name: "Bedroom 2 Lights (P2B23)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_bedroom_2_lights_p2b23_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_bedroom_2_lights_p2b23_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_bedroom_2_outlets_p2b25_energy
+                name: "Bedroom 2 Outlets (P2B25)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_bedroom_2_outlets_p2b25_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_bedroom_2_outlets_p2b25_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+      - type: grid
+        cards:
+          - type: heading
+            icon: ''
+            heading: "Panel 2, Right"
+            heading_style: title
+          - type: entities
+            entities:
+
+              - entity: sensor.energy_meter_water_heater_30a_p2b2_4_energy
+                name: "Water Heater (30A) (P2B2-4)"
+                state_header: "kWh"
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_water_heater_30a_p2b2_4_current
+                    name: "Amps"
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_water_heater_30a_p2b2_4_power
+                    name: "Watts"
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_primary_bath_outlets_p2b6_energy
+                name: "Primary Bath Outlets (P2B6)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_primary_bath_outlets_p2b6_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_primary_bath_outlets_p2b6_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_data_p2b8_energy
+                name: "Data (P2B8)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_data_p2b8_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_data_p2b8_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_laundry_outlets_p2b10_energy
+                name: "Laundry Outlets (P2B10)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_laundry_outlets_p2b10_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_laundry_outlets_p2b10_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_washer_outlet_p2b12_energy
+                name: "Washer Outlet (P2B12)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_washer_outlet_p2b12_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_washer_outlet_p2b12_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_hallway_bath_outlets_p2b14_energy
+                name: "Hallway Bath Outlets (P2B14)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_hallway_bath_outlets_p2b14_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_hallway_bath_outlets_p2b14_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_shower_valves_moen_in_wall_p2b16_energy
+                name: "Shower Valves (MOEN; in wall) (P2B16)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_shower_valves_moen_in_wall_p2b16_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_shower_valves_moen_in_wall_p2b16_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_fire_alarm_p2b18_energy
+                name: "Fire Alarm (P2B18)"
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_fire_alarm_p2b18_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_fire_alarm_p2b18_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+  - type: sections
+    max_columns: 3
+    title: Raw CT Vals
+    path: raw-ct
+    sections:
+
+      - type: grid
+        cards:
+          - type: heading
+            icon: ''
+            heading: BANK1
+            heading_style: title
+          - type: entities
+            entities:
+
+              - entity: sensor.energy_meter_ct_01_energy
+                name: CT01
+                state_header: "kWh"
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_01_current
+                    name: "Amps"
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_01_power
+                    name: "Watts"
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_02_energy
+                name: CT02
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_02_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_02_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_03_energy
+                name: CT03
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_03_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_03_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_04_energy
+                name: CT04
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_04_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_04_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_05_energy
+                name: CT05
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_05_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_05_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_06_energy
+                name: CT06
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_06_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_06_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_07_energy
+                name: CT07
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_07_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_07_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_08_energy
+                name: CT08
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_08_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_08_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_09_energy
+                name: CT09
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_09_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_09_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_10_energy
+                name: CT10
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_10_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_10_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+      - type: grid
+        cards:
+          - type: heading
+            icon: ''
+            heading: BANK2
+            heading_style: title
+          - type: entities
+            entities:
+
+              - entity: sensor.energy_meter_ct_11_energy
+                name: CT11
+                state_header: "kWh"
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_11_current
+                    name: "Amps"
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_11_power
+                    name: "Watts"
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_12_energy
+                name: CT12
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_12_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_12_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_13_energy
+                name: CT13
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_13_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_13_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_14_energy
+                name: CT14
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_14_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_14_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_15_energy
+                name: CT15
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_15_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_15_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_16_energy
+                name: CT16
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_16_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_16_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_17_energy
+                name: CT17
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_17_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_17_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_18_energy
+                name: CT18
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_18_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_18_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_19_energy
+                name: CT19
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_19_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_19_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_20_energy
+                name: CT20
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_20_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_20_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+      - type: grid
+        cards:
+          - type: heading
+            icon: ''
+            heading: BANK3
+            heading_style: title
+          - type: entities
+            entities:
+
+              - entity: sensor.energy_meter_ct_21_energy
+                name: CT21
+                state_header: "kWh"
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_21_current
+                    name: "Amps"
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_21_power
+                    name: "Watts"
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_22_energy
+                name: CT22
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_22_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_22_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_23_energy
+                name: CT23
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_23_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_23_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_24_energy
+                name: CT24
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_24_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_24_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_25_energy
+                name: CT25
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_25_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_25_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_26_energy
+                name: CT26
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_26_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_26_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_27_energy
+                name: CT27
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_27_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_27_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_28_energy
+                name: CT28
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_28_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_28_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_29_energy
+                name: CT29
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_29_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_29_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_30_energy
+                name: CT30
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_30_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_30_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+      - type: grid
+        cards:
+          - type: heading
+            icon: ''
+            heading: BANK4
+            heading_style: title
+          - type: entities
+            entities:
+
+              - entity: sensor.energy_meter_ct_31_energy
+                name: CT31
+                state_header: "kWh"
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_31_current
+                    name: "Amps"
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_31_power
+                    name: "Watts"
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_32_energy
+                name: CT32
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_32_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_32_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_33_energy
+                name: CT33
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_33_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_33_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_34_energy
+                name: CT34
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_34_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_34_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_35_energy
+                name: CT35
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_35_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_35_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_36_energy
+                name: CT36
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_36_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_36_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_37_energy
+                name: CT37
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_37_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_37_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_38_energy
+                name: CT38
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_38_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_38_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_39_energy
+                name: CT39
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_39_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_39_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_40_energy
+                name: CT40
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_40_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_40_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+      - type: grid
+        cards:
+          - type: heading
+            icon: ''
+            heading: BANK5
+            heading_style: title
+          - type: entities
+            entities:
+
+              - entity: sensor.energy_meter_ct_41_energy
+                name: CT41
+                state_header: "kWh"
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_41_current
+                    name: "Amps"
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_41_power
+                    name: "Watts"
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_42_energy
+                name: CT42
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_42_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_42_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_43_energy
+                name: CT43
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_43_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_43_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_44_energy
+                name: CT44
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_44_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_44_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_45_energy
+                name: CT45
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_45_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_45_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_46_energy
+                name: CT46
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_46_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_46_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_47_energy
+                name: CT47
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_47_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_47_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_48_energy
+                name: CT48
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_48_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_48_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_49_energy
+                name: CT49
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_49_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_49_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_50_energy
+                name: CT50
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_50_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_50_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+      - type: grid
+        cards:
+          - type: heading
+            icon: ''
+            heading: BANK6
+            heading_style: title
+          - type: entities
+            entities:
+
+              - entity: sensor.energy_meter_ct_51_energy
+                name: CT51
+                state_header: "kWh"
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_51_current
+                    name: "Amps"
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_51_power
+                    name: "Watts"
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_52_energy
+                name: CT52
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_52_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_52_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_53_energy
+                name: CT53
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_53_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_53_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_54_energy
+                name: CT54
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_54_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_54_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_55_energy
+                name: CT55
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_55_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_55_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_56_energy
+                name: CT56
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_56_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_56_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_57_energy
+                name: CT57
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_57_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_57_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_58_energy
+                name: CT58
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_58_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_58_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_59_energy
+                name: CT59
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_59_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_59_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+
+              - entity: sensor.energy_meter_ct_60_energy
+                name: CT60
+                state_header: " "
+                type: custom:multiple-entity-row
+                styles:
+                  width: 40px
+                hide: true
+                unit: false
+                entities:
+                  - entity: sensor.energy_meter_ct_60_current
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
+                  - entity: sensor.energy_meter_ct_60_power
+                    name: " "
+                    unit: false
+                    styles:
+                      width: 40px
