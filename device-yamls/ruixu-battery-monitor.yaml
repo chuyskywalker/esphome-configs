@@ -432,6 +432,9 @@ sensor:
     state_of_charge:
       name: "${batt_1} state of charge"
       filters: *sliding_filter
+      unit_of_measurement: "%"
+      device_class: "battery"
+      state_class: "measurement"
     charging_cycles:
       name: "${batt_1} charging cycles"
       # no averaging this, lol
@@ -589,6 +592,9 @@ sensor:
     state_of_charge:
       name: "${batt_2} state of charge"
       filters: *sliding_filter
+      unit_of_measurement: "%"
+      device_class: "battery"
+      state_class: "measurement"
     charging_cycles:
       name: "${batt_2} charging cycles"
       # no averaging this, lol
