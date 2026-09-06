@@ -197,6 +197,25 @@ for bank in range(1, 7):
 
 
 
+print('''
+  - type: sections
+    path: sankey
+    title: Sankey
+    cards: []
+    sections:
+      - type: grid
+        cards:
+          - type: energy-date-selection
+            vertical_opening_direction: auto
+            opening_direction: auto
+          - type: energy-sankey
+            layout: horizontal
+            group_by_floor: true
+            group_by_area: true
+            grid_options:
+              columns: full
+              rows: 12
+        column_span: 4''')
 
 
 
