@@ -43,8 +43,9 @@ logger:
 api:
 
 ## will be remote, no OTA required
-ota:
-  safe_mode: False
+#ota:
+#  # "safe_mode" is not a thing (anymore?)
+#  safe_mode: False
 
 wifi:
 #  ssid: !secret wifi_ssid
