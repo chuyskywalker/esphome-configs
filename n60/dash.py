@@ -225,6 +225,107 @@ print('''
         column_span: 4''')
 
 
+## And now an exportable graph thing
+
+
+p1 = {
+
+    # Panel 1; Left
+    "Microwave (P1B1)": [1],
+    "Fridge & Hood (P1B3)": [31],
+    "Kitchen Outlets (P1B5)": [2],
+    "Disposal (P1B7)": [32],
+    "Garage Outlets 1 (P1B9)": [3],
+    "Garage Outlets 2 (P1B11)": [33],
+    "Outside Outlets (P1B13)": [4],
+    # "ERV (P1B15)": [34],
+    # "Crawl: Dehum, LED, Cond.Pump, Moen Flo (P1B17)": [5],
+    # "Oven (30A) (P1B19-21)": [6, 35],
+    # "Cooktop (50A) (P1B23-25)": [7, 36],
+
+    # Panel 1; Right
+    "Smoke Alarms (P1B2)": [9],
+    "Garage Int&Ext Lights (P1B4)": [39],
+    "(Old) TV Nook Lights (P1B6)": [10],
+    "Living Outlets (P1B8)": [40],
+    "Primary Bed Lights (P1B10)": [11],
+    "Hallway Lights (P1B12)": [41],
+    "Big Room Lights (P1B14)": [12],
+    "Lights: Entrance, Porch, Front  (P1B16)": [42],
+    "Primary Bath Lights (P1B18)": [13],
+    "Kitchen Island Oulets (P1B20)": [43],
+    # "AC (40A) (P1B22-24)": [14, 44],
+}
+
+p2 = {
+    # Panel 2; Left
+    # "EV Charger 1 (40A) (P2B1-3)": [15, 45],
+    # "EV Charger 2 (40A) (P2B5-7)": [16, 46],
+    "Back Yard Porch Lights (P2B9)": [17],
+    "Desk Outlets (P2B11)": [47],
+    "Laundry Lights (P2B13)": [18],
+    "Bedroom 1 Lights (P2B15)": [48],
+    "Hallway Bath Lights (P2B17)": [19],
+    "Bedroom 1 Outlets (P2B19)": [49],
+    "Primary Bed Outlets (P2B21)": [20],
+    "Bedroom 2 Lights (P2B23)": [50],
+    "Bedroom 2 Outlets (P2B25)": [21],
+
+    # Panel 2; Right
+    "Water Heater (30A) (P2B2-4)": [23, 53],
+    "Primary Bath Outlets (P2B6)": [24],
+    "Data (P2B8)": [54],
+    "Laundry Outlets (P2B10)": [25],
+    "Washer Outlet (P2B12)": [55],
+    "Hallway Bath Outlets (P2B14)": [26],
+    "Shower Valves (MOEN; in wall) (P2B16)": [56],
+    "Fire Alarm (P2B18)": [27],
+    # 26, 55, 56 -- not connected
+
+}
+
+print('''
+  - type: sections
+    max_columns: 4
+    title: Max Amps By Panel
+    path: panel-usage
+    sections:
+      - type: grid
+        cards:
+''')
+
+for panel_name, panel_set in {'Panel 1': p1, 'Panel 2': p2}.items():
+  print(f'''
+          - type: custom:statistics-graph-chart-card
+            show_legend: true
+            hours_to_show: 48
+            points_per_hour: 1
+            tooltip_match_axis: false
+            tooltip_order: default
+            height: auto
+            show_export: true
+            gauge_value_position: below
+            x_grid_style: dashed
+            y_grid_style: dashed
+            show_date_picker: true
+            group_by: date
+            entities:
+''')
+
+  ct = 0
+  for mapping_name in panel_set.keys():
+    energy_key = slugify(mapping_name)
+    ct += 1
+    print(f'''
+              - entity: sensor.energy_meter_{energy_key}_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+''')
 
   # - type: sections
   #   max_columns: 4

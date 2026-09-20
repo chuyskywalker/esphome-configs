@@ -2149,3 +2149,384 @@ views:
               columns: full
               rows: 12
         column_span: 4
+
+  - type: sections
+    max_columns: 4
+    title: Max Amps By Panel
+    path: panel-usage
+    sections:
+      - type: grid
+        cards:
+
+
+          - type: custom:statistics-graph-chart-card
+            show_legend: true
+            hours_to_show: 48
+            points_per_hour: 1
+            tooltip_match_axis: false
+            tooltip_order: default
+            height: auto
+            show_export: true
+            gauge_value_position: below
+            x_grid_style: dashed
+            y_grid_style: dashed
+            show_date_picker: true
+            group_by: date
+            entities:
+
+
+              - entity: sensor.energy_meter_microwave_p1b1_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_fridge_hood_p1b3_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_kitchen_outlets_p1b5_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_disposal_p1b7_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_garage_outlets_1_p1b9_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_garage_outlets_2_p1b11_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_outside_outlets_p1b13_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_smoke_alarms_p1b2_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_garage_int_ext_lights_p1b4_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_old_tv_nook_lights_p1b6_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_living_outlets_p1b8_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_primary_bed_lights_p1b10_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_hallway_lights_p1b12_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_big_room_lights_p1b14_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_lights_entrance_porch_front_p1b16_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_primary_bath_lights_p1b18_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_kitchen_island_oulets_p1b20_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+          - type: custom:statistics-graph-chart-card
+            show_legend: true
+            hours_to_show: 48
+            points_per_hour: 1
+            tooltip_match_axis: false
+            tooltip_order: default
+            height: auto
+            show_export: true
+            gauge_value_position: below
+            x_grid_style: dashed
+            y_grid_style: dashed
+            show_date_picker: true
+            group_by: date
+            entities:
+
+
+              - entity: sensor.energy_meter_back_yard_porch_lights_p2b9_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_desk_outlets_p2b11_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_laundry_lights_p2b13_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_bedroom_1_lights_p2b15_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_hallway_bath_lights_p2b17_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_bedroom_1_outlets_p2b19_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_primary_bed_outlets_p2b21_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_bedroom_2_lights_p2b23_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_bedroom_2_outlets_p2b25_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_water_heater_30a_p2b2_4_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_primary_bath_outlets_p2b6_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_data_p2b8_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_laundry_outlets_p2b10_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_washer_outlet_p2b12_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_hallway_bath_outlets_p2b14_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_shower_valves_moen_in_wall_p2b16_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
+
+              - entity: sensor.energy_meter_fire_alarm_p2b18_current
+                statistic_id: null
+                name: null
+                graph_type: bar
+                show_extrema: never
+                show_extrema_min: false
+                extrema_show_timestamp: false
+                aggregate_func: max
+
