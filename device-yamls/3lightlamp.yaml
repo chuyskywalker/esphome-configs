@@ -1,0 +1,683 @@
+# https://www.rbdimmer.com/docs/dimmerlink-esphome/lambda-examples#table_of_content_heading_74-multi-device
+# https://www.rbdimmer.com/docs/dimmerlink-overview
+# https://github.com/robotdyn-dimmer/DimmerLink/blob/main/components/README.md
+
+esphome:
+  name: three-light-lamp
+  friendly_name: Three Light Lamp
+#  platformio_options:
+#    build_flags: -DBOARD_HAS_PSRAM
+#    board_build.arduino.memory_type: qio_opi
+#    board_build.f_flash: 80000000L
+#    board_build.flash_mode: qio
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+
+logger:
+  level: DEBUG
+  logs:
+    sensor: WARN
+
+api:
+  encryption:
+    key: !secret threelightlamp_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret threelightlamp_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "threelightlamp-system"
+    password: !secret fallback_ap_pass
+
+web_server:
+  port: 80
+  ota: False
+  version: 3
+  local: True
+
+## Define the hardware or software UART bus connected to DimmerLink
+#uart:
+#  - id: dimmer_bus
+#    tx_pin: GPIO08   # Connect to DimmerLink RX (SCL/RX)
+#    rx_pin: GPIO07   # Connect to DimmerLink TX (SDA/TX)
+#    baud_rate: 115200
+#    debug:
+#      direction: BOTH
+#      dummy_receiver: true
+##      debug_prefix: "[UART] "
+##      after:
+##        delimiter: "\n"
+##      sequence:
+##        - lambda: UARTDebug::log_string(direction, bytes, debug_prefix);
+
+# Example template light or number component using lambda to send commands
+#button:
+#  - platform: uart
+#    name: "Get Bright"
+#    data: [0x02, 0x47, 0x00]
+#
+#  - platform: uart
+#    name: "Set Bright 000"
+#    data: [0x02, 0x53, 0x00, 0x00]
+#  - platform: uart
+#    name: "Set Bright 010"
+#    data: [0x02, 0x53, 0x00, 0x0A]
+#  - platform: uart
+#    name: "Set Bright 020"
+#    data: [0x02, 0x53, 0x00, 0x14]
+#  - platform: uart
+#    name: "Set Bright 030"
+#    data: [0x02, 0x53, 0x00, 0x1E]
+#  - platform: uart
+#    name: "Set Bright 040"
+#    data: [0x02, 0x53, 0x00, 0x28]
+#  - platform: uart
+#    name: "Set Bright 050"
+#    data: [0x02, 0x53, 0x00, 0x32]
+#  - platform: uart
+#    name: "Set Bright 060"
+#    data: [0x02, 0x53, 0x00, 0x3C]
+#  - platform: uart
+#    name: "Set Bright 070"
+#    data: [0x02, 0x53, 0x00, 0x46]
+#  - platform: uart
+#    name: "Set Bright 080"
+#    data: [0x02, 0x53, 0x00, 0x50]
+#  - platform: uart
+#    name: "Set Bright 090"
+#    data: [0x02, 0x53, 0x00, 0x5A]
+#  - platform: uart
+#    name: "Set Bright 100"
+#    data: [0x02, 0x53, 0x00, 0x64]
+#
+##0 	LINEAR 	Universal
+##1 	RMS 	Incandescent, halogen
+##2 	LOG 	LED (matches eye perception)
+#  - platform: uart
+#    name: "Set Curve 0 Linear"
+#    data: [ 0x02, 0x43, 0x00, 0x00 ]
+#  - platform: uart
+#    name: "Set Curve 1 RMS"
+#    data: [ 0x02, 0x43, 0x00, 0x01 ]
+#  - platform: uart
+#    name: "Set Curve 2 Log"
+#    data: [ 0x02, 0x43, 0x00, 0x02 ]
+#
+#
+#  - platform: uart
+#    name: "RESET"
+#    data: [ 0x02, 0x58 ]
+#
+#  - platform: uart
+#    name: "Switch to i2c (only works once!)"
+#    data: [ 0x02, 0x5B ]
+
+#  - platform: template
+#    name: "Query Dimmer 0 Brightness"
+#    icon: "mdi:refresh"
+#    on_press:
+#      # Step 1: Send the command
+#      - lambda: |-
+#          uint8_t query_cmd[] = {0x02, 0x47, 0x00};
+#          id(dimmer_bus).write_array(query_cmd, 3);
+#          ESP_LOGD("DimmerLink", "Sent brightness query...");
+#
+#      # Step 2: Wait for the hardware to process and send data back
+#      - delay: 50ms
+#
+#      # Step 3: Check the buffer and log the result
+#      - lambda: |-
+#          if (id(dimmer_bus).available() >= 2) {
+#            uint8_t res_code = id(dimmer_bus).read();
+#            uint8_t res_val  = id(dimmer_bus).read();
+#
+#            if (res_code == 0x00) {
+#              ESP_LOGD("DimmerLink", "Success! Level: %d%%", res_val);
+#            } else {
+#              ESP_LOGE("DimmerLink", "Error code received: 0x%02X", res_code);
+#            }
+#          } else {
+#            ESP_LOGW("DimmerLink", "No response data available yet.");
+#          }
+          
+
+external_components:
+  - source: github://robotdyn-dimmer/DimmerLink@main
+    components: [dimmerlink]
+
+i2c:
+  id: dimmer_bus
+  sda: GPIO07 # D8
+  scl: GPIO08 # D9
+  frequency: 100kHz
+
+dimmerlink:
+  - id: dimmer_top
+    address: 0x50
+  - id: dimmer_middle
+    address: 0x51
+  - id: dimmer_bottom
+    address: 0x52
+
+light:
+
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_top
+    id: top_light
+    internal: true
+    gamma_correct: 1.0
+    default_transition_length: 0s
+    restore_mode: ALWAYS_OFF
+
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_middle
+    id: middle_light
+    internal: true
+    gamma_correct: 1.0
+    default_transition_length: 0s
+    restore_mode: ALWAYS_OFF
+
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_bottom
+    id: bottom_light
+    internal: true
+    gamma_correct: 1.0
+    default_transition_length: 0s
+    restore_mode: ALWAYS_OFF
+
+
+  - platform: monochromatic
+    name: "Top Light"
+    id: top_light_mono
+    output: top_scale_output
+    gamma_correct: 1.0
+    default_transition_length: 1s
+    restore_mode: ALWAYS_OFF
+
+  - platform: monochromatic
+    name: "Middle Light"
+    id: middle_light_mono
+    output: middle_scale_output
+    gamma_correct: 1.0
+    default_transition_length: 1s
+    restore_mode: ALWAYS_OFF
+
+  - platform: monochromatic
+    name: "Bottom Light"
+    id: bottom_light_mono
+    output: bottom_scale_output
+    gamma_correct: 1.0
+    default_transition_length: 1s
+    restore_mode: ALWAYS_OFF
+
+
+output:
+  - platform: template
+    id: top_scale_output
+    type: float
+    write_action:
+      - lambda: |-
+          if (state == 0.0f) {
+            id(top_light).turn_off().set_brightness(0.0f).perform();
+          } else {
+            // Map 0.0 -> 1.0 down to a safe range of min -> max
+            // Math: Base offset (min) + (slider * remaining available span)
+            float lower_bound = id(top_light_min).state;
+            float upper_bound = id(top_light_max).state;
+            float safe_span = upper_bound - lower_bound;
+            float scaled_brightness = lower_bound + (state * safe_span);
+            //float scaled_brightness = state;
+            
+            ESP_LOGD("DimmerLink", "top output set to: %d%%", (int)(scaled_brightness * 100));
+          
+            // Forward the safely adjusted percentage to the DimmerLink component
+            id(top_light).turn_on().set_brightness(scaled_brightness).perform();
+          }
+  - platform: template
+    id: middle_scale_output
+    type: float
+    write_action:
+      - lambda: |-
+          if (state == 0.0f) {
+            id(middle_light).turn_off().set_brightness(0.0f).perform();
+          } else {
+            // Map 0.0 -> 1.0 down to a safe range of min -> max
+            // Math: Base offset (min) + (slider * remaining available span)
+            float lower_bound = id(middle_light_min).state;
+            float upper_bound = id(middle_light_max).state;
+            float safe_span = upper_bound - lower_bound;
+            float scaled_brightness = lower_bound + (state * safe_span);
+            //float scaled_brightness = state;
+            
+            ESP_LOGD("DimmerLink", "middle output set to: %d%%", (int)(scaled_brightness * 100));
+          
+            // Forward the safely adjusted percentage to the DimmerLink component
+            id(middle_light).turn_on().set_brightness(scaled_brightness).perform();
+          }
+  - platform: template
+    id: bottom_scale_output
+    type: float
+    write_action:
+      - lambda: |-
+          if (state == 0.0f) {
+            id(bottom_light).turn_off().set_brightness(0.0f).perform();
+          } else {
+            // Map 0.0 -> 1.0 down to a safe range of min -> max
+            // Math: Base offset (min) + (slider * remaining available span)
+            float lower_bound = id(bottom_light_min).state;
+            float upper_bound = id(bottom_light_max).state;
+            float safe_span = upper_bound - lower_bound;
+            float scaled_brightness = lower_bound + (state * safe_span);
+            //float scaled_brightness = state;
+            
+            ESP_LOGD("DimmerLink", "bottom output set to: %d%%", (int)(scaled_brightness * 100));
+          
+            // Forward the safely adjusted percentage to the DimmerLink component
+            id(bottom_light).turn_on().set_brightness(scaled_brightness).perform();
+          }
+
+number:
+  - platform: template
+    name: "Top Light Min Dimmer"
+    id: top_light_min
+    optimistic: true
+    min_value: 0.0
+    max_value: 1.0
+    step: 0.01
+    initial_value: 0.0
+    restore_value: true
+  - platform: template
+    name: "Top Light Max Dimmer"
+    id: top_light_max
+    optimistic: true
+    min_value: 0.0
+    max_value: 1.0
+    step: 0.01
+    initial_value: 1.0
+    restore_value: true
+
+  - platform: template
+    name: "Middle Light Min Dimmer"
+    id: middle_light_min
+    optimistic: true
+    min_value: 0.0
+    max_value: 1.0
+    step: 0.01
+    initial_value: 0.0
+    restore_value: true
+  - platform: template
+    name: "Middle Light Max Dimmer"
+    id: middle_light_max
+    optimistic: true
+    min_value: 0.0
+    max_value: 1.0
+    step: 0.01
+    initial_value: 1.0
+    restore_value: true
+
+  - platform: template
+    name: "Bottom Light Min Dimmer"
+    id: bottom_light_min
+    optimistic: true
+    min_value: 0.0
+    max_value: 1.0
+    step: 0.01
+    initial_value: 0.0
+    restore_value: true
+  - platform: template
+    name: "Bottom Light Max Dimmer"
+    id: bottom_light_max
+    optimistic: true
+    min_value: 0.0
+    max_value: 1.0
+    step: 0.01
+    initial_value: 1.0
+    restore_value: true
+
+#button:
+#  - platform: template
+#    name: "Reprogram Dimmer Address to 0x51"
+#    on_press:
+#      - lambda: |-
+#          // Register 0x30 tells the chip to expect a new hardware I2C address value
+#          // 0x51 is the new chosen hex address location for this unit
+#          uint8_t data[] = {0x30, 0x51};
+#
+#          // Fire the packet command over to the default 0x50 target register
+#          id(dimmer_bus).write(0x50, data, 2, true);
+#          ESP_LOGW("DimmerLink", "Address reprogram command fired to 0x51. Power cycle module!");
+#
+#  - platform: template
+#    name: "Reprogram Dimmer Address to 0x52"
+#    on_press:
+#      - lambda: |-
+#          // Register 0x02 tells the chip to expect a new hardware I2C address value
+#          // 0x51 is the new chosen hex address location for this unit
+#          uint8_t data[] = {0x30, 0x52};
+#
+#          // Fire the packet command over to the default 0x50 target register
+#          id(dimmer_bus).write(0x50, data, 2, true);
+#          ESP_LOGW("DimmerLink", "Address reprogram command fired to 0x52. Power cycle module!");
+
+
+button:
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_top
+    reset:
+      name: "Top Reset"
+    recalibrate:
+      name: "Top Recalibrate"
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_middle
+    reset:
+      name: "Middle Reset"
+    recalibrate:
+      name: "Middle Recalibrate"
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_bottom
+    reset:
+      name: "Bottom Reset"
+    recalibrate:
+      name: "Bottom Recalibrate"
+
+# Two switch that turns on the middle, bottom, or middle+bottom
+# activates ground -> [ gpio, gpio ]. It's a 4 mode switch:
+#                 Off/Off
+#           On/On         Off/On
+#                  On/Off
+# 0/0 -> 0/1 -> 1/0 -> 1/1; loop
+# One input, two outputs
+# bottom_light_state == off + middle turned on -> state+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO05 # D5
+      mode: INPUT_PULLUP
+      inverted: true
+    id: four_way_output_1
+    name: four_way_output_1
+    filters:
+      - delayed_on_off: 250ms
+    on_state:
+      - script.execute: set_mid_lights
+
+  - platform: gpio
+    pin:
+      number: GPIO06 # D6
+      mode: INPUT_PULLUP
+      inverted: true
+    id: four_way_output_2
+    name: four_way_output_2
+    filters:
+      - delayed_on_off: 250ms
+    on_state:
+      script.execute: set_mid_lights
+
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_top
+    update_interval: 5s
+    ready:
+      name: "Top Ready"
+    error:
+      name: "Top Error"
+    calibration_done:
+      name: "Top Calibration Done"
+
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_middle
+    update_interval: 5s
+    ready:
+      name: "Middle Ready"
+    error:
+      name: "Middle Error"
+    calibration_done:
+      name: "Middle Calibration Done"
+
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_bottom
+    update_interval: 5s
+    ready:
+      name: "Bottom Ready"
+    error:
+      name: "Bottom Error"
+    calibration_done:
+      name: "Bottom Calibration Done"
+
+select:
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_top
+    curve:
+      name: "Top Dimming Curve"
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_middle
+    curve:
+      name: "Middle Dimming Curve"
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_bottom
+    curve:
+      name: "Bottom Dimming Curve"
+
+# The rotary AC dial is different. States are:
+# Off, Medium, High
+# With an AC input, medium has a diode that chops off the lower half of the AC voltage, tada, half power
+# We just need to read it and send the 0/50/100 to the dimmer light
+sensor:
+
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_top
+    update_interval: 60s
+    ac_frequency:
+      name: "Top AC Frequency"
+    level:
+      name: "Top Brightness Level"
+    firmware_version:
+      name: "Top Firmware"
+    ac_period:
+      name: "Top AC Period"
+
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_middle
+    update_interval: 60s
+    ac_frequency:
+      name: "Middle AC Frequency"
+    level:
+      name: "Middle Brightness Level"
+    firmware_version:
+      name: "Middle Firmware"
+    ac_period:
+      name: "Middle AC Period"
+
+  - platform: dimmerlink
+    dimmerlink_id: dimmer_bottom
+    update_interval: 60s
+    ac_frequency:
+      name: "Bottom AC Frequency"
+    level:
+      name: "Bottom Brightness Level"
+    firmware_version:
+      name: "Bottom Firmware"
+    ac_period:
+      name: "Bottom AC Period"
+
+  - platform: adc
+    pin: GPIO04 # D3
+    name: "Rotary Dial Voltage"
+    id: rotary_dial_voltage
+    update_interval: 50ms # Kept relatively fast so it catches quick turns
+    filters:
+      - median:
+          window_size: 5
+          send_every: 5
+      - delta: 0.2
+      - debounce: 150ms
+    on_value:
+      then:
+        - lambda: |-
+            
+            // WHAT the voltage is doesn't really matter; we've debounced to get a single click, now we act based
+            // on the state of the light.
+
+            static bool is_first_run = true;
+            if (is_first_run) {
+              ESP_LOGI("main", "First invocation of top light; skipping");
+              is_first_run = false;
+              return;
+            }
+            
+            float b = id(top_light_mono).remote_values.get_brightness();
+            float target = 0.0f;
+            
+            // The light dial only rotates clockwise, and we assume off->100%->50%->off
+            // as the cycle. However, since the brightness can be set via homeassistant as well
+            // we have to check ranges and best-guess what a clockwise rotation might mean
+            if (b <= 0.2f) {
+              // off or low, next step would be full bright:
+              target = 1.0f;
+            } else if (b > 0.2f && b <= 0.6f) {
+              // somewhere in a medium state, turn off 
+              target = 0.0f;
+            } else {
+              // in a bright state, go medium
+              target = 0.25f;
+            }
+            
+            ESP_LOGD("light", "Light is at %.2f, setting to next state 'down' %.2f", b, target);
+            
+            if (target > 0.0f) {
+                id(top_light_mono).turn_on().set_transition_length(0).set_brightness(target).perform();
+            } else {
+                id(top_light_mono).turn_off().set_transition_length(0).set_brightness(0.0f).perform();
+            }
+
+script:
+#  - id: set_top_light
+#
+#    # available states:
+#    # 0, 1, 2
+#    # LOL NO; physical switch can only go one way (0>1>2>0)
+#    # it's got a clutch that stops backwards movement
+#    # so any change is a "clockwise" basically
+#
+#    then:
+#      # literlaly only triggers when there's a clockwise click
+#      - lambda: |-
+#          static bool is_first_run = true;
+#          if (is_first_run) {
+#            ESP_LOGI("main", "First invocation of top light; skipping");
+#            is_first_run = false;
+#            return;
+#          }
+#
+#          float b = id(top_light_mono).remote_values.get_brightness();
+#          float target = 0.0f;
+#
+#          // The light dial only rotates clockwise, and we assume off->100%->50%->off
+#          // as the cycle. However, since the brightness can be set via homeassistant as well
+#          // we have to check ranges and best-guess what a clockwise rotation might mean
+#          if (b <= 0.2f) {
+#            // off or low, next step would be full bright:
+#            target = 1.0f;
+#          } else if (b > 0.2f && b <= 0.6f) {
+#            // somewhere in a medium state, turn off
+#            target = 0.0f;
+#          } else {
+#            // in a bright state, go medium
+#            target = 0.25f;
+#          }
+#
+#          ESP_LOGD("light", "Light is at %.2f, setting to next state 'down' %.2f", b, target);
+#
+#          if (target > 0.0f) {
+#              id(top_light_mono).turn_on().set_transition_length(0).set_brightness(target).perform();
+#          } else {
+#              id(top_light_mono).turn_off().set_transition_length(0).set_brightness(0.0f).perform();
+#          }
+          
+
+  - id: set_mid_lights
+    then:
+      - lambda: |-
+
+          if (!id(four_way_output_1).has_state()) {
+            ESP_LOGD("main", "The four_way_output_1 is currently UNKNOWN / Uninitialized!");
+            return;
+          }
+          if (!id(four_way_output_2).has_state()) {
+            ESP_LOGD("main", "The four_way_output_2 is currently UNKNOWN / Uninitialized!");
+            return;
+          }
+
+          // Now, figure out what state the LIGHTS are in
+          float b1 = id(middle_light_mono).remote_values.get_brightness();
+          float b2 = id(bottom_light_mono).remote_values.get_brightness();
+
+          // in case of weird "is off, but brightness is != 0"          
+          if (!id(middle_light_mono).remote_values.is_on()) {
+            b1 = 0.0f;
+          }
+          if (!id(bottom_light_mono).remote_values.is_on()) {
+            b2 = 0.0f;
+          }
+
+          // For this interaction, the switch is just pure on/off, so we map that out
+          // regardless of what the dimmer may have been set to externally
+          bool b1lit = (b1 <= 0.5f) ? false : true;
+          bool b2lit = (b2 <= 0.5f) ? false : true;
+
+          // determine the current mode based on the state of the two lights
+          int current_mode = 0;
+          if        (!b1lit && !b2lit) {
+            current_mode = 0;
+          } else if ( b1lit && !b2lit) {
+            current_mode = 1;
+          } else if (!b1lit &&  b2lit) {
+            current_mode = 2;
+          } else if ( b1lit &&  b2lit) {
+            current_mode = 3;
+          }
+
+          // now that we know the current mode of the lights and which way the dial was turned,
+          // we can determine the target mode.
+          int target_mode = current_mode + 1;
+
+          // handle the cases of rollover/under
+          if (target_mode > 3) {
+            target_mode = 0;
+          }
+
+          ESP_LOGD("light", "Current brightness is: %.2f/%.2f considered lit %d:%d, current mode: %d, target mode: %d", b1, b2, (int)b1lit, (int)b2lit, current_mode, target_mode);
+
+          // now that we have a target mode, we can set the desired light on/off booleans to match
+          // mode 0 == off / off
+          // mode 1 ==  on / off
+          // mode 2 == off /  on
+          // mode 3 ==  on /  on
+          bool b1_on = (target_mode == 1 || target_mode == 3);
+          bool b2_on = (target_mode == 2 || target_mode == 3);
+
+          ESP_LOGD("light", "Setting lights to: %d/%d", (int)b1_on, (int)b2_on);
+
+          // LIGHT 'EM UP BOYS
+          if (b1_on) {
+              id(middle_light_mono).turn_on().set_transition_length(0).set_brightness(1.0f).perform();
+          } else {
+              id(middle_light_mono).turn_off().set_transition_length(0).set_brightness(0.0f).perform();
+          }
+
+          if (b2_on) {
+              id(bottom_light_mono).turn_on().set_transition_length(0).set_brightness(1.0f).perform();
+          } else {
+              id(bottom_light_mono).turn_off().set_transition_length(0).set_brightness(0.0f).perform();
+          }
+
+
+      # add this delay so that if one of the pins changes right after the other (like when going 0/1 to 1/0)
+      # it will hit the "single script execution denial" instead of running twice
+      - delay: 500ms
