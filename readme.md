@@ -17,6 +17,6 @@ docker exec -ti esphome bash
 
 Generate key/pass like this:
 ```bash
-openssl rand -base64 32
+openssl rand -base64 32 && \
 openssl rand -hex 16
 ```
