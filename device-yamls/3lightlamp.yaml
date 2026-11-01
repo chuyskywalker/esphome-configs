@@ -154,8 +154,8 @@ external_components:
 
 i2c:
   id: dimmer_bus
-  sda: GPIO07 # D8
-  scl: GPIO08 # D9
+  sda: GPIO08 # D9
+  scl: GPIO07 # D8
   frequency: 100kHz
 
 dimmerlink:
