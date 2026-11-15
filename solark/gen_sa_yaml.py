@@ -187,11 +187,14 @@ text_sensor:
 # Both relay registers are turned into text. The register arrives big-endian, so with raw_encode: HEXBYTES
 # the 2 byte hex string (ie "0002") has the HIGH byte at index 0 and the LOW byte at index 1.
 #
-# The firmware has been quirky, so for each register:
-#   - the state "code" comes from the low bits (194: the low byte; 195: the low 4 bits, per the docs)
-#   - the full 16 bit value is always read, and if ANYTHING outside the code bits is set (or the code isn't
-#     one we know) the state also carries the raw value, ie "Closed (raw 0x0102)" / "Unknown (raw 0x0005)".
-#     A clean value is just plain "Closed". That way odd firmware behavior shows up without breaking the state.
+# The firmware has been quirky (ie the generator relay register has been seen reading 0x0010, where the docs only
+# define the low 4 bits), so each relay gets TWO text sensors reading the same register:
+#   - "<name> relay status"       the plain, documented state ("Open", "Closed", ...) taken from the code bits
+#                                 (194: the low byte; 195: the low 4 bits, per the docs), so it's safe to automate on.
+#                                 A code the docs don't define is just "Unknown".
+#   - "<name> relay status (raw)" a diagnostic entity with the whole 16 bit register value (ie "0x0010"), so any
+#                                 undocumented/extra bits stay visible (and show up in the history) without
+#                                 muddying the state above.
 #
 # grid side relay; a text sensor (rather than a binary one) so an unexpected/unsupported value (ie 0)
 # is reported as such instead of being shown as "Open".
@@ -206,27 +209,28 @@ print('''
     raw_encode: HEXBYTES
     response_size: 2
     lambda: |-
-      // Full 16 bit register value; the code is the low byte, anything in the high byte is "extra"
+      // The code is the low byte
+      switch (modbus::helpers::byte_from_hex_str(x, 1)) {
+        case 1: return std::string("Open");
+        case 2: return std::string("Closed");
+        default: return std::string("Unknown");
+      }
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
+    name: "Grid side relay status (raw)"
+    id: "sensor_194_raw"
+    entity_category: "diagnostic"
+    register_type: holding
+    address: 194
+    raw_encode: HEXBYTES
+    response_size: 2
+    lambda: |-
+      // The whole 16 bit register
       unsigned int value = (modbus::helpers::byte_from_hex_str(x, 0) << 8) | modbus::helpers::byte_from_hex_str(x, 1);
-      unsigned int code = value & 0x00FF;
-      bool extra = (value & 0xFF00) != 0;
-
-      const char *label = nullptr;
-      switch (code) {
-        case 1: label = "Open"; break;
-        case 2: label = "Closed"; break;
-      }
-
-      char buf[48];
-      if (label == nullptr) {
-        snprintf(buf, sizeof(buf), "Unknown (raw 0x%04X)", value);
-        return std::string(buf);
-      }
-      if (extra) {
-        snprintf(buf, sizeof(buf), "%s (raw 0x%04X)", label, value);
-        return std::string(buf);
-      }
-      return std::string(label);
+      char buf[8];
+      snprintf(buf, sizeof(buf), "0x%04X", value);
+      return std::string(buf);
 ''')
 
 # gen side relay has a number of options; turn them into text
