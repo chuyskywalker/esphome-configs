@@ -26,7 +26,6 @@ substitutions:
   gateway: 192.168.0.1
   subnet: 255.255.255.0
   api_key: !secret sa1_api_encryption_key
-  ota_pass: !secret sa1_ota_password
     ''')
 
 else:
@@ -38,7 +37,6 @@ substitutions:
   gateway: 192.168.0.1
   subnet: 255.255.255.0
   api_key: !secret sa2_api_encryption_key
-  ota_pass: !secret sa2_ota_password
     ''')
 
 ## All my rig-a-ma-roll for the WESP32 device I'll be using
@@ -81,7 +79,7 @@ api:
 
 ota:
   - platform: esphome
-    password: ${ota_pass}
+    encryption:
 
 ## Disabled since this is ETHERNET based
 #improv_serial:
@@ -144,7 +142,6 @@ modbus_controller:
                  #   the “Parallel” tab does not affect the Slave ID for this map and is only relevant
                  #   to parallel configurations
                  #
-  command_throttle: 150ms
   on_online:
     then:
       - logger.log: "Controller back online!"
