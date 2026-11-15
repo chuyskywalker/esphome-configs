@@ -196,9 +196,14 @@ text_sensor:
 #                                 undocumented/extra bits stay visible (and show up in the history) without
 #                                 muddying the state above.
 #
-# grid side relay; a text sensor (rather than a binary one) so an unexpected/unsupported value (ie 0)
-# is reported as such instead of being shown as "Open".
+# grid side relay.
+#
+# !! The Sol-Ark PDF is WRONG for this register. It says:
 # | 194            | Grid side relay status                      | R              |                 |                | 1 is Open (Disconnect) 2 is Closed                                                                              |
+# but on real hardware it's the same encoding the Deye/Sunsynk platform uses: 0 is Open (the grid is
+# disconnected) and 1 is Closed (the grid is connected). Verified by pulling the incoming grid power on a live
+# unit: the raw register went 0x0001 (grid connected, power flowing) -> 0x0000 (grid disconnected).
+# Anything else (including the 2 the PDF describes) is reported as "Unknown"; the raw sensor will show it.
 print('''
   - platform: modbus_controller
     modbus_controller_id: modbus_client_sa
@@ -209,10 +214,11 @@ print('''
     raw_encode: HEXBYTES
     response_size: 2
     lambda: |-
-      // The code is the low byte
+      // The code is the low byte. The PDF says 1=Open/2=Closed, but real hardware is 0=Open (grid disconnected)
+      // and 1=Closed (grid connected); see the note in the generator script.
       switch (modbus::helpers::byte_from_hex_str(x, 1)) {
-        case 1: return std::string("Open");
-        case 2: return std::string("Closed");
+        case 0: return std::string("Open");
+        case 1: return std::string("Closed");
         default: return std::string("Unknown");
       }
 
@@ -676,6 +682,23 @@ for word in range(4):
 
 print('''
 binary_sensor:
+''')
+
+# A simple on/off "is the grid connected" derived from the same register as the "Grid side relay status" text
+# sensors (194). The low byte is 1 when the grid relay is closed (grid connected) and 0 when it's open; see the
+# note on the text sensor, the Sol-Ark PDF has this encoding wrong. Only an explicit 1 counts as connected; the
+# modbus binary sensor always publishes whatever the lambda returns, so anything else (0, or an unexpected
+# value) is "not connected". The text sensors / raw sensor are where you'd see an unexpected value.
+print('''
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
+    name: "Grid connected"
+    id: "grid_connected"
+    device_class: connectivity
+    register_type: holding
+    address: 194
+    lambda: |-
+      return data[item->offset + 1] == 1;
 ''')
 
 print(f'''
