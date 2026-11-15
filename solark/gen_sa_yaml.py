@@ -350,8 +350,16 @@ print('''
   # "Total Grid Buy Power" where it's low word is in register 78 and its high word is in 80, while register
   # 79 (right in the middle) is Grid Hertz. Cool!
   #
-  # Therefor, you must pull 3 registers and run a lambda to recombine the register 78 and 80 back
-  # into the sensible 32bit int it's supposed to be.
+  # ESPHome (2026.9+) no longer lets one sensor span a bunch of registers via `register_count` /
+  # `force_new_range`; a sensor's width now always comes from its value_type. So we "over request": declare this
+  # as a U_QWORD (4 registers: 78, 79, 80, 81) purely for its WIDTH. ESPHome will never split a single sensor's
+  # registers across read ranges, so no matter how other sensors are grouped/added/changed in the future, the
+  # raw response (`data`) handed to this lambda is guaranteed to contain 78 through 81 starting at
+  # `item->offset`. The lambda ignores the QWORD interpretation entirely and picks out only what it needs:
+  # the low word (78) and the high word (80).
+  #
+  # (Having a plain U_WORD at 78 plus a helper sensor at 80 also works today, but it relies on ESPHome happening
+  # to merge those neighbors into one range; e.g. `reuse_previous_range: false` on 79 or 80 would silently break it.)
   #
   # UGH
   #
@@ -364,15 +372,19 @@ print('''
     device_class: "energy"
     state_class: "total_increasing"
     register_type: holding
-    register_count: 3
+    value_type: U_QWORD  # only for the width, see above. Registers 78, 79, 80, 81
     accuracy_decimals: 1
-    force_new_range: true  # this one is quirky; force it to be fetched on its own
     lambda: |-
-      uint64_t return_data = data[item->offset + 4] << 24
-                           | data[item->offset + 5] << 16
-                           | data[item->offset + 0] << 8
-                           | data[item->offset + 1];
-      return return_data;
+      // Belt and braces; the QWORD width makes this impossible, but never index past the response.
+      if (data.size() < (size_t) item->offset + 6) {
+        return NAN;  // the sanity filter below logs + discards this
+      }
+      // low word = register 78 (+0,+1); register 79 (+2,+3) is Grid Frequency and ignored; high word = register 80 (+4,+5)
+      uint32_t combined = ((uint32_t) data[item->offset + 4] << 24)
+                        | ((uint32_t) data[item->offset + 5] << 16)
+                        | ((uint32_t) data[item->offset + 0] << 8)
+                        |  (uint32_t) data[item->offset + 1];
+      return (float) combined;
     filters:
     - multiply: 0.1
     - lambda: |-
@@ -647,8 +659,6 @@ for (address, name) in otheramps:
 # is set. Instead, fetch each 16 bit word as its own (internal, so not exposed to HA) sensor; a
 # uint16 fits in a float exactly. 103-106 are contiguous so ESPHome merges them into a single read.
 for word in range(4):
-    # only the first word needs to start a new range; the rest are contiguous and join it
-    force_new_range = "\n    force_new_range: true" if word == 0 else ""
     print(f'''
   - platform: modbus_controller
     modbus_controller_id: modbus_client_sa
@@ -658,7 +668,7 @@ for word in range(4):
     register_type: holding
     value_type: U_WORD
     accuracy_decimals: 0
-    internal: true{force_new_range}
+    internal: true
 ''')
 
 print('''
