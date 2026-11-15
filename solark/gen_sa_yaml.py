@@ -672,22 +672,6 @@ print(f'''
     device_class: connectivity
 ''')
 
-# relay on/off binary
-# | 194            | Grid side relay status                      | R              |                 |                | 1 is Open (Disconnect) 2 is Closed                                                                              |
-print(f'''
-  - platform: modbus_controller
-    modbus_controller_id: modbus_client_sa
-    name: "Grid side relay status"
-    id: "sensor_194"
-    address: 194
-    register_type: holding
-    lambda: |-
-        if (static_cast<int>(data[1]) == 2) {{
-            return true;
-        }}
-        return false;
-''')
-
 # The MODBUS docs and latest manual don't agree on all the error codes :/
 alarms = {
     0: "DC_Inversed_Failure",
