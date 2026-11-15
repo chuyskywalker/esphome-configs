@@ -239,34 +239,36 @@ print('''
   - platform: modbus_controller
     modbus_controller_id: modbus_client_sa
     name: "Generator side relay status"
+    id: "sensor_195"
     register_type: holding
     address: 195
     raw_encode: HEXBYTES
     response_size: 2
     lambda: |-
-      // Full 16 bit register value; the code is the low 4 bits, any other bit set is "extra"
+      // The code is the low 4 bits of the low byte; any other bits are not defined by the docs, see the raw sensor
+      switch (modbus::helpers::byte_from_hex_str(x, 1) & 0x0F) {
+        case 0: return std::string("Open");
+        case 1: return std::string("Closed");
+        case 2: return std::string("No Connection");
+        case 3: return std::string("Closed, Generator is on");
+        default: return std::string("Unknown");
+      }
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
+    name: "Generator side relay status (raw)"
+    id: "sensor_195_raw"
+    entity_category: "diagnostic"
+    register_type: holding
+    address: 195
+    raw_encode: HEXBYTES
+    response_size: 2
+    lambda: |-
+      // The whole 16 bit register
       unsigned int value = (modbus::helpers::byte_from_hex_str(x, 0) << 8) | modbus::helpers::byte_from_hex_str(x, 1);
-      unsigned int code = value & 0x000F;
-      bool extra = (value & 0xFFF0) != 0;
-
-      const char *label = nullptr;
-      switch (code) {
-        case 0: label = "Open"; break;
-        case 1: label = "Closed"; break;
-        case 2: label = "No Connection"; break;
-        case 3: label = "Closed, Generator is on"; break;
-      }
-
-      char buf[64];
-      if (label == nullptr) {
-        snprintf(buf, sizeof(buf), "Unknown (raw 0x%04X)", value);
-        return std::string(buf);
-      }
-      if (extra) {
-        snprintf(buf, sizeof(buf), "%s (raw 0x%04X)", label, value);
-        return std::string(buf);
-      }
-      return std::string(label);
+      char buf[8];
+      snprintf(buf, sizeof(buf), "0x%04X", value);
+      return std::string(buf);
 ''')
 
 print('''
