@@ -586,21 +586,25 @@ for (address, name) in otheramps:
     - multiply: 0.01
 ''')
 
-# Read the entire bitmask 64bit int into this field
-print(f'''
+# The fault data is 64 bits spread across four consecutive 16 bit registers (103-106), low word first.
+# ESPHome sensor states are 32 bit floats, which can only hold integers exactly up to 2^24, so reading
+# this as one U_QWORD_R sensor and bitmasking its `.state` silently drops low bits whenever a high bit
+# is set. Instead, fetch each 16 bit word as its own (internal, so not exposed to HA) sensor; a
+# uint16 fits in a float exactly. 103-106 are contiguous so ESPHome merges them into a single read.
+for word in range(4):
+    # only the first word needs to start a new range; the rest are contiguous and join it
+    force_new_range = "\n    force_new_range: true" if word == 0 else ""
+    print(f'''
   - platform: modbus_controller
     modbus_controller_id: modbus_client_sa
-    name: "Error Code Bitmask"
-    id: "error_code_bitmask"
-    address: 103
+    name: "Fault Word {word + 1}"
+    id: "fault_word_{word}"
+    address: {103 + word}
     register_type: holding
-    value_type: U_QWORD_R
+    value_type: U_WORD
     accuracy_decimals: 0
-    force_new_range: true
+    internal: true{force_new_range}
 ''')
-
-
-
 
 print('''
 binary_sensor:
@@ -631,8 +635,8 @@ print(f'''
 
 # The MODBUS docs and latest manual don't agree on all the error codes :/
 alarms = {
-     0: "DC_Inversed_Failure",
-     7: "GFDI_Relay_Failure",
+    0: "DC_Inversed_Failure",
+    7: "GFDI_Relay_Failure",
     12: "Grid_Mode_changed",
     13: "DC_OverCurr_Fault",
     14: "AC_OverCurr_Failure",
@@ -652,15 +656,18 @@ alarms = {
     36: "DCLLC_Soft_Over_Cur",
     38: "DCLLC_Over_Current",
     39: "Batt_Over_Current",
-    40: "AC_WU_OverVolt_Fault", # F41 Parallel_System_Stop_Fault - If one system faults in parallel, this normal fault will register on the other units as they disconnect fromthe grid.
+    40: "AC_WU_OverVolt_Fault",
+    # F41 Parallel_System_Stop_Fault - If one system faults in parallel, this normal fault will register on the other units as they disconnect fromthe grid.
     42: "AC_VW_OverVolt_Fault",
     44: "AC_UV_OverVolt_Fault",
-    45: "Parallel_Aux_Fault",  # F46 Battery_Backup_Fault - Cannot communicate with other parallel systems. Check Master = 1, Slaves = 2-9 and that ethernet are connected.
+    45: "Parallel_Aux_Fault",
+    # F46 Battery_Backup_Fault - Cannot communicate with other parallel systems. Check Master = 1, Slaves = 2-9 and that ethernet are connected.
     46: "AC_OverFreq_Fault",
     47: "AC_UnderFreq_Fault",
     54: "DC_VoltHigh_Fault",
     55: "DC_VoltLow_Fault",
-    57: "AC_U_GridCurr_High_Fault", # F58 BMS_Communication_Fault - Sol-Ark is programmed to BMS Lithium Battery Mode but cannot communicate with a BMS. BMS_Err_Stop is enabled, but cannot communicate with a battery BMS
+    57: "AC_U_GridCurr_High_Fault",
+    # F58 BMS_Communication_Fault - Sol-Ark is programmed to BMS Lithium Battery Mode but cannot communicate with a BMS. BMS_Err_Stop is enabled, but cannot communicate with a battery BMS
     59: "Gen_Volt_or_Fre_Fault",
     60: "Button_Manual_OFF",
     61: "AC_B_InductCurr_High_Fault",
@@ -668,10 +675,8 @@ alarms = {
     63: "Heatsink_HighTemp_Fault",
 }
 
-
-# the modbus binarysensor only fetches a single word so we can't read 4 registers,
-# get a single 64bit value and bitmath against that. Instead, we've fetched the entire bitmask int
-# above in `error_code_bitmask` and can just bitmask our way into all the data
+# Each fault bit lives in one of four 16 bit words (`fault_word_0`..`fault_word_3`, registers 103-106),
+# low word first: overall bit N is bit (N % 16) of word (N // 16).
 #
 # I have also confirmed that the data is stored low word first; ie:
 #   combinedl = data['106'][2:].zfill(16) \
@@ -680,18 +685,20 @@ alarms = {
 #             + data['103'][2:].zfill(16)
 # is how you put together the data (if it's all strings of the binary data; see explore.py)
 
-for original_bitmask in range(64): # the original bit ranges
+for original_bitmask in range(64):  # the original bit ranges
 
     name = f'Alarm: F{original_bitmask + 1:02} ' + (alarms[original_bitmask] if original_bitmask in alarms else "UNDOCUMENTED")
+    word = original_bitmask // 16
+    bit = original_bitmask % 16
 
     print(f'''
   - platform: template
     device_class: "safety"
     name: "{name}"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << {original_bitmask})) != 0;''')
-
+      float raw = id(fault_word_{word}).state;
+      if (std::isnan(raw)) return {{}}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> {bit}) & 1) != 0;''')
 
 print(f'''
 
