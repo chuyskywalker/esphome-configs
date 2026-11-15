@@ -187,6 +187,51 @@ text_sensor:
     response_size: 10
 ''')
 
+# Both relay registers are turned into text. The register arrives big-endian, so with raw_encode: HEXBYTES
+# the 2 byte hex string (ie "0002") has the HIGH byte at index 0 and the LOW byte at index 1.
+#
+# The firmware has been quirky, so for each register:
+#   - the state "code" comes from the low bits (194: the low byte; 195: the low 4 bits, per the docs)
+#   - the full 16 bit value is always read, and if ANYTHING outside the code bits is set (or the code isn't
+#     one we know) the state also carries the raw value, ie "Closed (raw 0x0102)" / "Unknown (raw 0x0005)".
+#     A clean value is just plain "Closed". That way odd firmware behavior shows up without breaking the state.
+#
+# grid side relay; a text sensor (rather than a binary one) so an unexpected/unsupported value (ie 0)
+# is reported as such instead of being shown as "Open".
+# | 194            | Grid side relay status                      | R              |                 |                | 1 is Open (Disconnect) 2 is Closed                                                                              |
+print('''
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
+    name: "Grid side relay status"
+    id: "sensor_194"
+    register_type: holding
+    address: 194
+    raw_encode: HEXBYTES
+    response_size: 2
+    lambda: |-
+      // Full 16 bit register value; the code is the low byte, anything in the high byte is "extra"
+      unsigned int value = (modbus::helpers::byte_from_hex_str(x, 0) << 8) | modbus::helpers::byte_from_hex_str(x, 1);
+      unsigned int code = value & 0x00FF;
+      bool extra = (value & 0xFF00) != 0;
+
+      const char *label = nullptr;
+      switch (code) {
+        case 1: label = "Open"; break;
+        case 2: label = "Closed"; break;
+      }
+
+      char buf[48];
+      if (label == nullptr) {
+        snprintf(buf, sizeof(buf), "Unknown (raw 0x%04X)", value);
+        return std::string(buf);
+      }
+      if (extra) {
+        snprintf(buf, sizeof(buf), "%s (raw 0x%04X)", label, value);
+        return std::string(buf);
+      }
+      return std::string(label);
+''')
+
 # gen side relay has a number of options; turn them into text
 # | 195            | Generator side relay status                 | R              |                 |                | Low 4 indicates the state of generator relay 0 Open 1 Closed  2 No Connection 3 Closed when Generator is on.    |
 print('''
@@ -198,19 +243,29 @@ print('''
     raw_encode: HEXBYTES
     response_size: 2
     lambda: |-
-      // Extract the FIRST byte (index 0) from the hex string payload
-      uint8_t raw_byte = modbus::helpers::byte_from_hex_str(x, 0);
-      
-      // Isolate the low 4 bits by masking with 0x0F (binary 00001111)
-      uint8_t state = raw_byte & 0x0F;
-      
-      switch (state) {
-        case 0: return {"Open"};
-        case 1: return {"Closed"};
-        case 2: return {"No Connection"};
-        case 3: return {"Closed, Generator is on"};
-        default: return {"Unknown State"};
+      // Full 16 bit register value; the code is the low 4 bits, any other bit set is "extra"
+      unsigned int value = (modbus::helpers::byte_from_hex_str(x, 0) << 8) | modbus::helpers::byte_from_hex_str(x, 1);
+      unsigned int code = value & 0x000F;
+      bool extra = (value & 0xFFF0) != 0;
+
+      const char *label = nullptr;
+      switch (code) {
+        case 0: label = "Open"; break;
+        case 1: label = "Closed"; break;
+        case 2: label = "No Connection"; break;
+        case 3: label = "Closed, Generator is on"; break;
       }
+
+      char buf[64];
+      if (label == nullptr) {
+        snprintf(buf, sizeof(buf), "Unknown (raw 0x%04X)", value);
+        return std::string(buf);
+      }
+      if (extra) {
+        snprintf(buf, sizeof(buf), "%s (raw 0x%04X)", label, value);
+        return std::string(buf);
+      }
+      return std::string(label);
 ''')
 
 print('''
