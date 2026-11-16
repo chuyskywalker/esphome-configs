@@ -6,7 +6,6 @@ substitutions:
   gateway: 192.168.0.1
   subnet: 255.255.254.0
   api_key: !secret energy_monitor_api_encryption_key
-  ota_pass: !secret energy_monitor_ota_password
 
 esphome:
   name: ${name}
@@ -44,7 +43,7 @@ api:
 # allow for remote updates
 ota:
   - platform: esphome
-    password: ${ota_pass}
+    encryption:
 
 ethernet:
   type: W5500
@@ -3505,6 +3504,13 @@ sensor:
     sources:
       - source: ct_06_energy
       - source: ct_35_energy
+    filters:
+      # hold back until every CT has reported (see the note in gen.py); after that the sum is always complete
+      - lambda: |-
+          if (std::isfinite(id(ct_06_energy).state) && std::isfinite(id(ct_35_energy).state)) {
+            return x;
+          }
+          return {};
 
   ##############   Cooktop (50A) (P1B23-25)   ##############
  
@@ -3537,6 +3543,13 @@ sensor:
     sources:
       - source: ct_07_energy
       - source: ct_36_energy
+    filters:
+      # hold back until every CT has reported (see the note in gen.py); after that the sum is always complete
+      - lambda: |-
+          if (std::isfinite(id(ct_07_energy).state) && std::isfinite(id(ct_36_energy).state)) {
+            return x;
+          }
+          return {};
 
   ##############   Smoke Alarms (P1B2)   ##############
  
@@ -3859,6 +3872,13 @@ sensor:
     sources:
       - source: ct_14_energy
       - source: ct_44_energy
+    filters:
+      # hold back until every CT has reported (see the note in gen.py); after that the sum is always complete
+      - lambda: |-
+          if (std::isfinite(id(ct_14_energy).state) && std::isfinite(id(ct_44_energy).state)) {
+            return x;
+          }
+          return {};
 
   ##############   EV Charger 1 (40A) (P2B1-3)   ##############
  
@@ -3891,6 +3911,13 @@ sensor:
     sources:
       - source: ct_15_energy
       - source: ct_45_energy
+    filters:
+      # hold back until every CT has reported (see the note in gen.py); after that the sum is always complete
+      - lambda: |-
+          if (std::isfinite(id(ct_15_energy).state) && std::isfinite(id(ct_45_energy).state)) {
+            return x;
+          }
+          return {};
 
   ##############   EV Charger 2 (40A) (P2B5-7)   ##############
  
@@ -3923,6 +3950,13 @@ sensor:
     sources:
       - source: ct_16_energy
       - source: ct_46_energy
+    filters:
+      # hold back until every CT has reported (see the note in gen.py); after that the sum is always complete
+      - lambda: |-
+          if (std::isfinite(id(ct_16_energy).state) && std::isfinite(id(ct_46_energy).state)) {
+            return x;
+          }
+          return {};
 
   ##############   Back Yard Porch Lights (P2B9)   ##############
  
@@ -4216,6 +4250,13 @@ sensor:
     sources:
       - source: ct_23_energy
       - source: ct_53_energy
+    filters:
+      # hold back until every CT has reported (see the note in gen.py); after that the sum is always complete
+      - lambda: |-
+          if (std::isfinite(id(ct_23_energy).state) && std::isfinite(id(ct_53_energy).state)) {
+            return x;
+          }
+          return {};
 
   ##############   Primary Bath Outlets (P2B6)   ##############
  
