@@ -37,7 +37,6 @@ substitutions:
   gateway: 192.168.0.1
   subnet: 255.255.254.0
   api_key: !secret energy_monitor_api_encryption_key
-  ota_pass: !secret energy_monitor_ota_password
 
 esphome:
   name: ${name}
@@ -75,7 +74,7 @@ api:
 # allow for remote updates
 ota:
   - platform: esphome
-    password: ${ota_pass}
+    encryption:
 
 ethernet:
   type: W5500
@@ -409,6 +408,24 @@ for (power_name, ct_ids) in mapping.items():
     power_sources   = "\n".join(f"      - source: ct_{num:02d}_power"   for num in ct_ids)
     energy_sources  = "\n".join(f"      - source: ct_{num:02d}_energy"  for num in ct_ids)
 
+    # A `sum` combination silently skips any source that hasn't reported a value yet. That's harmless for
+    # current/power, but after a boot the first Energy value for a multi-CT circuit would be ONE leg's total
+    # alone (roughly half of the real value) until the other leg's bank is polled a moment later. Home
+    # Assistant sees a `total_increasing` sensor suddenly drop by a lot and treats it as a meter reset, which
+    # can book phantom consumption. So for multi-CT circuits, publish nothing until EVERY source has a real value.
+    if len(ct_ids) > 1:
+        energy_not_ready = " && ".join(f"std::isfinite(id(ct_{num:02d}_energy).state)" for num in ct_ids)
+        energy_filters = f"""
+    filters:
+      # hold back until every CT has reported (see the note in gen.py); after that the sum is always complete
+      - lambda: |-
+          if ({energy_not_ready}) {{
+            return x;
+          }}
+          return {{}};"""
+    else:
+        energy_filters = ""
+
     print(f'''
   ##############   {power_name}   ##############
  
@@ -437,7 +454,7 @@ for (power_name, ct_ids) in mapping.items():
     device_class: energy
     state_class: total_increasing
     sources:
-{energy_sources}''')
+{energy_sources}{energy_filters}''')
 
 print('''
 
