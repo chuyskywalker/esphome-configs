@@ -6,7 +6,6 @@ substitutions:
   gateway: 192.168.0.1
   subnet: 255.255.255.0
   api_key: !secret sa2_api_encryption_key
-  ota_pass: !secret sa2_ota_password
     
 
 #
@@ -47,7 +46,7 @@ api:
 
 ota:
   - platform: esphome
-    password: ${ota_pass}
+    encryption:
 
 ## Disabled since this is ETHERNET based
 #improv_serial:
@@ -110,7 +109,6 @@ modbus_controller:
                  #   the “Parallel” tab does not affect the Slave ID for this map and is only relevant
                  #   to parallel configurations
                  #
-  command_throttle: 150ms
   on_online:
     then:
       - logger.log: "Controller back online!"
@@ -152,25 +150,71 @@ text_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: modbus_client_sa
+    name: "Grid side relay status"
+    id: "sensor_194"
+    register_type: holding
+    address: 194
+    raw_encode: HEXBYTES
+    response_size: 2
+    lambda: |-
+      // The code is the low byte. The PDF says 1=Open/2=Closed, but real hardware is 0=Open (grid disconnected)
+      // and 1=Closed (grid connected); see the note in the generator script.
+      switch (modbus::helpers::byte_from_hex_str(x, 1)) {
+        case 0: return std::string("Open");
+        case 1: return std::string("Closed");
+        default: return std::string("Unknown");
+      }
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
+    name: "Grid side relay status (raw)"
+    id: "sensor_194_raw"
+    entity_category: "diagnostic"
+    register_type: holding
+    address: 194
+    raw_encode: HEXBYTES
+    response_size: 2
+    lambda: |-
+      // The whole 16 bit register
+      unsigned int value = (modbus::helpers::byte_from_hex_str(x, 0) << 8) | modbus::helpers::byte_from_hex_str(x, 1);
+      char buf[8];
+      snprintf(buf, sizeof(buf), "0x%04X", value);
+      return std::string(buf);
+
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
     name: "Generator side relay status"
+    id: "sensor_195"
     register_type: holding
     address: 195
     raw_encode: HEXBYTES
     response_size: 2
     lambda: |-
-      // Extract the FIRST byte (index 0) from the hex string payload
-      uint8_t raw_byte = modbus::helpers::byte_from_hex_str(x, 0);
-      
-      // Isolate the low 4 bits by masking with 0x0F (binary 00001111)
-      uint8_t state = raw_byte & 0x0F;
-      
-      switch (state) {
-        case 0: return {"Open"};
-        case 1: return {"Closed"};
-        case 2: return {"No Connection"};
-        case 3: return {"Closed, Generator is on"};
-        default: return {"Unknown State"};
+      // The code is the low 4 bits of the low byte; any other bits are not defined by the docs, see the raw sensor
+      switch (modbus::helpers::byte_from_hex_str(x, 1) & 0x0F) {
+        case 0: return std::string("Open");
+        case 1: return std::string("Closed");
+        case 2: return std::string("No Connection");
+        case 3: return std::string("Closed, Generator is on");
+        default: return std::string("Unknown");
       }
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
+    name: "Generator side relay status (raw)"
+    id: "sensor_195_raw"
+    entity_category: "diagnostic"
+    register_type: holding
+    address: 195
+    raw_encode: HEXBYTES
+    response_size: 2
+    lambda: |-
+      // The whole 16 bit register
+      unsigned int value = (modbus::helpers::byte_from_hex_str(x, 0) << 8) | modbus::helpers::byte_from_hex_str(x, 1);
+      char buf[8];
+      snprintf(buf, sizeof(buf), "0x%04X", value);
+      return std::string(buf);
 
 
 sensor:
@@ -385,8 +429,16 @@ sensor:
   # "Total Grid Buy Power" where it's low word is in register 78 and its high word is in 80, while register
   # 79 (right in the middle) is Grid Hertz. Cool!
   #
-  # Therefor, you must pull 3 registers and run a lambda to recombine the register 78 and 80 back
-  # into the sensible 32bit int it's supposed to be.
+  # ESPHome (2026.9+) no longer lets one sensor span a bunch of registers via `register_count` /
+  # `force_new_range`; a sensor's width now always comes from its value_type. So we "over request": declare this
+  # as a U_QWORD (4 registers: 78, 79, 80, 81) purely for its WIDTH. ESPHome will never split a single sensor's
+  # registers across read ranges, so no matter how other sensors are grouped/added/changed in the future, the
+  # raw response (`data`) handed to this lambda is guaranteed to contain 78 through 81 starting at
+  # `item->offset`. The lambda ignores the QWORD interpretation entirely and picks out only what it needs:
+  # the low word (78) and the high word (80).
+  #
+  # (Having a plain U_WORD at 78 plus a helper sensor at 80 also works today, but it relies on ESPHome happening
+  # to merge those neighbors into one range; e.g. `reuse_previous_range: false` on 79 or 80 would silently break it.)
   #
   # UGH
   #
@@ -399,15 +451,19 @@ sensor:
     device_class: "energy"
     state_class: "total_increasing"
     register_type: holding
-    register_count: 3
+    value_type: U_QWORD  # only for the width, see above. Registers 78, 79, 80, 81
     accuracy_decimals: 1
-    force_new_range: true  # this one is quirky; force it to be fetched on its own
     lambda: |-
-      uint64_t return_data = data[item->offset + 4] << 24
-                           | data[item->offset + 5] << 16
-                           | data[item->offset + 0] << 8
-                           | data[item->offset + 1];
-      return return_data;
+      // Belt and braces; the QWORD width makes this impossible, but never index past the response.
+      if (data.size() < (size_t) item->offset + 6) {
+        return NAN;  // the sanity filter below logs + discards this
+      }
+      // low word = register 78 (+0,+1); register 79 (+2,+3) is Grid Frequency and ignored; high word = register 80 (+4,+5)
+      uint32_t combined = ((uint32_t) data[item->offset + 4] << 24)
+                        | ((uint32_t) data[item->offset + 5] << 16)
+                        | ((uint32_t) data[item->offset + 0] << 8)
+                        |  (uint32_t) data[item->offset + 1];
+      return (float) combined;
     filters:
     - multiply: 0.1
     - lambda: |-
@@ -1143,16 +1199,60 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: modbus_client_sa
-    name: "Error Code Bitmask"
-    id: "error_code_bitmask"
+    name: "Fault Word 1"
+    id: "fault_word_0"
     address: 103
     register_type: holding
-    value_type: U_QWORD_R
+    value_type: U_WORD
     accuracy_decimals: 0
-    force_new_range: true
+    internal: true
+
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
+    name: "Fault Word 2"
+    id: "fault_word_1"
+    address: 104
+    register_type: holding
+    value_type: U_WORD
+    accuracy_decimals: 0
+    internal: true
+
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
+    name: "Fault Word 3"
+    id: "fault_word_2"
+    address: 105
+    register_type: holding
+    value_type: U_WORD
+    accuracy_decimals: 0
+    internal: true
+
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
+    name: "Fault Word 4"
+    id: "fault_word_3"
+    address: 106
+    register_type: holding
+    value_type: U_WORD
+    accuracy_decimals: 0
+    internal: true
 
 
 binary_sensor:
+
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_client_sa
+    name: "Grid connected"
+    id: "grid_connected"
+    device_class: connectivity
+    register_type: holding
+    address: 194
+    lambda: |-
+      return data[item->offset + 1] == 1;
 
 
   - platform: template
@@ -1161,466 +1261,517 @@ binary_sensor:
     device_class: connectivity
 
 
-  - platform: modbus_controller
-    modbus_controller_id: modbus_client_sa
-    name: "Grid side relay status"
-    id: "sensor_194"
-    address: 194
-    register_type: holding
-    lambda: |-
-        if (static_cast<int>(data[1]) == 2) {
-            return true;
-        }
-        return false;
-
-
   - platform: template
     device_class: "safety"
     name: "Alarm: F01 DC_Inversed_Failure"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 0)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 0) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F02 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 1)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 1) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F03 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 2)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 2) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F04 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 3)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 3) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F05 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 4)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 4) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F06 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 5)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 5) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F07 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 6)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 6) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F08 GFDI_Relay_Failure"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 7)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 7) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F09 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 8)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 8) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F10 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 9)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 9) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F11 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 10)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 10) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F12 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 11)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 11) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F13 Grid_Mode_changed"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 12)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 12) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F14 DC_OverCurr_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 13)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 13) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F15 AC_OverCurr_Failure"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 14)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 14) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F16 GFCI_Failure"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 15)) != 0;
+      float raw = id(fault_word_0).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 15) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F17 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 16)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 0) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F18 HW_Ac_OverCurr_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 17)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 1) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F19 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 18)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 2) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F20 Tz_Dc_OverCurr_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 19)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 3) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F21 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 20)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 4) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F22 Tz_EmergStop_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 21)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 5) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F23 Tz_GFCI_OC_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 22)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 6) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F24 DC_Insulation_ISO_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 23)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 7) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F25 DC_Feedback_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 24)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 8) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F26 BusUnbalance_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 25)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 9) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F27 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 26)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 10) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F28 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 27)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 11) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F29 Parallel_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 28)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 12) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F30 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 29)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 13) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F31 Soft_Start_Failed"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 30)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 14) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F32 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 31)) != 0;
+      float raw = id(fault_word_1).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 15) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F33 AC_OverCurr_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 32)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 0) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F34 AC_Overload_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 33)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 1) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F35 AC_NoUtility_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 34)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 2) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F36 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 35)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 3) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F37 DCLLC_Soft_Over_Cur"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 36)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 4) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F38 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 37)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 5) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F39 DCLLC_Over_Current"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 38)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 6) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F40 Batt_Over_Current"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 39)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 7) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F41 AC_WU_OverVolt_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 40)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 8) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F42 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 41)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 9) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F43 AC_VW_OverVolt_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 42)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 10) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F44 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 43)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 11) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F45 AC_UV_OverVolt_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 44)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 12) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F46 Parallel_Aux_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 45)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 13) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F47 AC_OverFreq_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 46)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 14) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F48 AC_UnderFreq_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 47)) != 0;
+      float raw = id(fault_word_2).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 15) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F49 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 48)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 0) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F50 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 49)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 1) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F51 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 50)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 2) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F52 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 51)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 3) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F53 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 52)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 4) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F54 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 53)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 5) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F55 DC_VoltHigh_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 54)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 6) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F56 DC_VoltLow_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 55)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 7) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F57 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 56)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 8) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F58 AC_U_GridCurr_High_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 57)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 9) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F59 UNDOCUMENTED"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 58)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 10) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F60 Gen_Volt_or_Fre_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 59)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 11) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F61 Button_Manual_OFF"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 60)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 12) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F62 AC_B_InductCurr_High_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 61)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 13) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F63 Arc_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 62)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 14) & 1) != 0;
 
   - platform: template
     device_class: "safety"
     name: "Alarm: F64 Heatsink_HighTemp_Fault"
     lambda: |-
-      uint64_t mask = id(error_code_bitmask).state;
-      return (mask & (1ULL << 63)) != 0;
+      float raw = id(fault_word_3).state;
+      if (std::isnan(raw)) return {}; // no valid read yet; publish nothing
+      return (((uint16_t) raw >> 15) & 1) != 0;
 
 
 script:
