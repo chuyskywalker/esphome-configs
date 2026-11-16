@@ -379,7 +379,31 @@ for bank_id in range(1,7):
 # Now that the raw modbus values are being collected, let's setup the "combination"
 # helpers which will show up. Sometimes the combination is, uh, just a single source
 # other times, we're combining sources that have mupltiple power legs
+#
+# Power and energy are always additive across CTs, so those are always a `sum`.
+#
+# Current is different. A two-pole (240v) circuit has one CT on each leg (L1 = banks 1-3, L2 = banks 4-6),
+# but it's ONE load in series between the legs: the same current flows through both, so summing the two CTs
+# would report double the real amps. For those circuits use `max` instead of `sum`; the higher leg is the
+# current the wiring/breaker is actually carrying (the legs only differ if the circuit also feeds 120v
+# loads on a neutral, like an oven's lights/controls). Anything else (single CTs, or a deliberate group of
+# separate circuits) stays a `sum`.
+L1_BANKS = (1, 2, 3)
+
+def leg_of(ct_num_):
+    bank_id_ = internal_maps[ct_num_][0]
+    return 'L1' if bank_id_ in L1_BANKS else 'L2'
+
+def is_two_pole(ct_ids_):
+    # exactly two CTs, one on each leg
+    return len(ct_ids_) == 2 and len({leg_of(n) for n in ct_ids_}) == 2
+
+two_pole_names = [name for name, ids in mapping.items() if is_two_pole(ids)]
+print(f"Two-pole circuits (current = max of the legs): {', '.join(two_pole_names)}", file=sys.stderr)
+
 for (power_name, ct_ids) in mapping.items():
+
+    current_type = "max" if is_two_pole(ct_ids) else "sum"
 
     current_sources = "\n".join(f"      - source: ct_{num:02d}_current" for num in ct_ids)
     power_sources   = "\n".join(f"      - source: ct_{num:02d}_power"   for num in ct_ids)
@@ -389,7 +413,7 @@ for (power_name, ct_ids) in mapping.items():
   ##############   {power_name}   ##############
  
   - platform: combination
-    type: sum
+    type: {current_type}
     name: "{power_name} Current"
     id: {to_esphome_id(power_name)}_current
     device_class: current

@@ -3477,7 +3477,7 @@ sensor:
   ##############   Oven (30A) (P1B19-21)   ##############
  
   - platform: combination
-    type: sum
+    type: max
     name: "Oven (30A) (P1B19-21) Current"
     id: oven_30a_p1b19_21_current
     device_class: current
@@ -3509,7 +3509,7 @@ sensor:
   ##############   Cooktop (50A) (P1B23-25)   ##############
  
   - platform: combination
-    type: sum
+    type: max
     name: "Cooktop (50A) (P1B23-25) Current"
     id: cooktop_50a_p1b23_25_current
     device_class: current
@@ -3831,7 +3831,7 @@ sensor:
   ##############   AC (40A) (P1B22-24)   ##############
  
   - platform: combination
-    type: sum
+    type: max
     name: "AC (40A) (P1B22-24) Current"
     id: ac_40a_p1b22_24_current
     device_class: current
@@ -3863,7 +3863,7 @@ sensor:
   ##############   EV Charger 1 (40A) (P2B1-3)   ##############
  
   - platform: combination
-    type: sum
+    type: max
     name: "EV Charger 1 (40A) (P2B1-3) Current"
     id: ev_charger_1_40a_p2b1_3_current
     device_class: current
@@ -3895,7 +3895,7 @@ sensor:
   ##############   EV Charger 2 (40A) (P2B5-7)   ##############
  
   - platform: combination
-    type: sum
+    type: max
     name: "EV Charger 2 (40A) (P2B5-7) Current"
     id: ev_charger_2_40a_p2b5_7_current
     device_class: current
@@ -4188,7 +4188,7 @@ sensor:
   ##############   Water Heater (30A) (P2B2-4)   ##############
  
   - platform: combination
-    type: sum
+    type: max
     name: "Water Heater (30A) (P2B2-4) Current"
     id: water_heater_30a_p2b2_4_current
     device_class: current
